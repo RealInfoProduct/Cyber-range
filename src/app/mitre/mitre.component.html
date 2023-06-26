@@ -1,0 +1,202 @@
+<app-candidateheader #head (setting)="get_setting($event)" (added_basket)="get_added_basket($event)" ></app-candidateheader>
+
+<!-- Sub Header-->
+<app-breadcrumbs [side]="'front'" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<div class="col-md-12 page-min-height padding-all padding-tb">
+<ng-container *ngIf="mitre.length != 0" >
+<div class="overflow-x-auto-1 table-responsive p-3 content-box-shadow">
+
+   <div class="dk-table">
+      <div class="min80">
+         <span class="Actives"></span> Exercise Exist
+      </div>
+      </div>
+
+    <table class="matrix side mt-2">
+       <thead>
+          <tr>
+             <ng-container *ngFor="let m of mitre; let i=index" >
+             <td class="tactic name"><a routerLink="/mitre/{{m.id}}" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{m.m_title}}">{{m.m_title}}</a></td>
+             </ng-container> 
+            </tr>
+          <tr>
+            <ng-container *ngFor="let m of mitre; let i=index" >
+             <td class="tactic count">
+                {{m.total}}&nbsp;techniques
+             </td>
+            </ng-container> 
+          </tr>
+       </thead>
+       <tbody>
+          <tr>
+
+            <ng-container *ngFor="let cate of mitre; let i=index" >
+
+             <td class="tactic">
+
+               <table class="techniques-table">
+                  <!-- tour technique is scheduled task under privilege escalation -->
+                  <tbody>
+
+               <ng-container *ngFor="let tech of cate.child; let t=index" >
+
+
+                      <tr class="technique-row">
+                         <td>
+                            <table class="supertechnique">
+                               <tbody>
+                                  <tr>
+                                     <td class="technique">
+                                        <div class="technique-cell  supertechniquecell">
+                                           <a routerLink="/mitre/{{tech.id}}" [ngClass]="{'exe-exsit':tech?.ex_total != 0 }" data-toggle="tooltip" data-placement="top" title="" data-original-title="T1595">{{tech.m_title}}&nbsp;<sub>({{tech.total}})</sub></a>
+                                        </div>
+                                     </td>
+                                  </tr>
+                               </tbody>
+                            </table>
+                         </td>
+                         <ng-container *ngIf="tech?.child != undefined">
+                         <td class="sidebar sidebar--x-mitre-tactic--{{cate.id}}{{tech.id}}--attack-pattern--{{cate.id}}{{tech.id}}" (click)="matrix_toggle_technique('x-mitre-tactic--'+cate.id+tech.id,'attack-pattern--'+cate.id+tech.id);">
+                            <div class="angle top">
+                               <svg width="12px" height="12px">
+                                  <path d="M0 12H12V0Z"></path>
+                               </svg>
+                            </div>
+                            <div class="handle"> = </div>
+                            <div class="angle bottom">
+                               <svg width="12px" height="12px">
+                                  <path d="M0 0H12V12Z"></path>
+                               </svg>
+                            </div>
+                         </td>
+                         <td class="subtechniques-td">
+                            <div class="subtechniques subtechniques-container subtechniques--x-mitre-tactic--{{cate.id}}{{tech.id}}--attack-pattern--{{cate.id}}{{tech.id}} hidden">
+                              <ng-container *ngFor="let subtech of tech.child; let st=index" >
+                              <div class="subtechnique">
+                                  <div class="technique-cell ">
+                                     <a routerLink="/mitre/{{subtech.id}}" [ngClass]="{'exe-exsit':subtech?.ex_total != 0 }" data-toggle="tooltip" data-placement="top" title="" data-original-title="T1595.001">{{subtech.m_title}}</a>
+                                  </div>
+                               </div>
+                           </ng-container>
+                            </div>
+                         </td>
+                        </ng-container>
+                      </tr>
+                 
+               </ng-container>
+
+            </tbody>
+         </table>
+
+             </td>
+
+             </ng-container>
+          </tr>
+       </tbody>
+    </table>
+ </div>
+</ng-container>
+
+<ng-container *ngIf="exercise.length != 0">
+   <div class="col-md-12 report-page maxf-width">
+         <div class="row padding-report-right pt-0">
+
+   <div *ngFor="let ex of exercise; let i = index" class="col-lg-4 col-md-6">					
+      <div class="bgwhite">
+         <div class="ex_relative">
+            <a routerLink="/exercise-description/{{ex.alias}}">
+               <div class="eimg">
+                  <img *ngIf="ex.thumb_image!=null" src="{{server_url}}media/exercise-image/{{ex.thumb_image}}" class="img-fluid">										
+                  <img *ngIf="ex.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">
+               </div>				
+                    </a>
+             <div class="ex_absolute">
+               <div class="row ratting cursor-menu">
+                  <div class="col-sm-3 col-3">
+                     <span placement="right" ngbTooltip="Rating: {{ex.rating}}" ><fa-icon [icon]="faStar" class="starc"></fa-icon> {{ex.rating}}</span>
+                  </div>
+                  <!-- <div class="col-sm-4 col-4 text-right">
+                     <span placement="right" ngbTooltip="Subscribers: 10/100" ><fa-icon [icon]="faStar" class="starc"></fa-icon> sasas</span>
+                  </div> -->
+                  <div class="col-sm-9 col-9 text-right">
+                     <span>
+                        <fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: {{ex.total_running}}/{{ex.total_exercise}}" class="usercircle mr-1"></fa-icon>
+                        <span placement="top" ngbTooltip="Running Subscribers: {{ex.total_running}}">{{ex.total_running}}/</span>
+                        <span placement="top" ngbTooltip="Total Subscribers: {{ex.total_exercise}}" class="mr-2">{{ex.total_exercise}}</span> 
+                     </span> 
+
+                     <span placement="left" ngbTooltip="Difficulty Level: {{ex.difficulty_level}}" ><fa-icon [icon]="faCircle" class="{{ex.difficulty_level}}"></fa-icon> {{ex.difficulty_level}}</span>
+                  </div>
+               </div>
+            </div>
+         </div>						
+         <div class="bgwhite_padding text-center">
+            <a routerLink="/exercise-description/{{ex.alias}}" class="sra"><h5 class="heading">{{ex.name}}</h5></a>
+            <div class="btn-box text-center">
+               <p class="authorby">By: {{ex.F_Name}} {{ex.L_Name}}</p>
+               
+                  <ng-container *ngIf="ex.credits!=null;else nullcreditshow">
+                     <p><span *ngIf="credit_system=='Active';" class="ercredit">
+                     Cr. {{ex.credits}}
+                     </span></p>
+                   </ng-container>
+                  <ng-template #nullcreditshow>
+                     <ng-container *ngIf="credit_system=='Active';" >
+                     <p><span class="ercredit">
+                        Cr. 0
+                     </span></p>
+                     <div class="theme-btn">
+                        <span class="txt"><a class="btn_blueas senariobtn disable-cls"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span> 
+                      </div>
+                     </ng-container>
+                  </ng-template>	
+               
+               
+               <ng-container *ngIf="credit_system=='Active'; else free" >
+                  <ng-container *ngIf="ex.credits!=null">
+                     <div *ngIf="added_basket | filterPipe : ex.id; else added" class="theme-btn ">
+                        <span class="txt"><a (click)="head.addToBasket(ex.id,ex.credits);" class="btn_blueas senariobtn"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span> 
+                     </div>
+                     <ng-template #added>
+                        <div class="theme-btn">
+                        <span class="txt"><a class="btn_blueas senariobtn"><fa-icon [icon]="faCartPlus"></fa-icon> Added To Basket</a></span> 
+                        </div>
+                     </ng-template>
+                   </ng-container>
+               </ng-container>
+               <ng-template #free>
+                  <div *ngIf="added_basket | filterPipe : ex.id; else added" class="theme-btn ">
+                     <span class="txt"><a (click)="head.addToBasket(ex.id,ex.credits);" class="btn_blueas senariobtn"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span> 
+                  </div>
+                  <ng-template #added>
+                     <div class="theme-btn">
+                        <span class="txt"><a class="btn_blueas senariobtn"><fa-icon [icon]="faCartPlus"></fa-icon> Added To Basket</a></span> 
+                     </div>
+                  </ng-template>
+               </ng-template>
+
+               <fa-icon *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" class="questionc" placement="top" ngbTooltip="{{ex.key_words}}" ></fa-icon>
+            </div>								
+         </div>					
+      </div>					
+   </div>
+
+   </div>					
+   </div>					
+
+</ng-container>
+
+<ng-container *ngIf="exercise.length == 0 && m_id != null">
+  <h5 class="text-center mt-3">Exercise not found</h5>
+</ng-container>
+
+</div>   
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>
+    </div>
+</div>
+ <!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

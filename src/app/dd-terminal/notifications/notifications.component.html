@@ -1,0 +1,81 @@
+<div class="clearfix"></div>
+<div *ngIf="notification == true">
+    <p class="alert alert-{{status}}">{{message}}</p>
+</div>
+<div class="clearfix"></div>
+<div class="col-lg-2 col-6 p-0 mb-1 mb-md-3 float-left">
+    <input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />
+</div>
+<div class="col-lg-9 form_lable form-group tpm ml-lg-3 pl-0 float-left">
+    <div *ngIf="group_id=='1'" [formGroup]="formdata" class="col-md-12 pl-0 pr-0">
+        <div class="col-md-1 pl-0 pr-0 float-left pt-2">
+            From
+        </div>
+        <div class="col-md-3 pl-0 pr-0 float-left">
+            <input [disabled]="readonly_start_date" (onSelect)="setDatetime($event,'from');" class="form-control tinbg" id="valid_start_date" formControlName="valid_start_date" [dpDayPicker]="config" [theme]="'dp-material'" [mode]="'daytime'"  />
+        </div>
+        <div class="col-md-1 pl-0 pr-0 float-left pt-2 text-md-center">
+            To
+        </div>
+        <div class="col-md-3 pl-0 pr-0 float-left">
+            <input [disabled]="readonly_start_date" (onSelect)="setDatetime($event,'to');" class="form-control tinbg" id="valid_end_date" formControlName="valid_end_date" [dpDayPicker]="config" [theme]="'dp-material'" [mode]="'daytime'"  />
+        </div>
+        <div class="col-md-1 float-left mt-lg-0 mt-3 pl-md-4 pl-0">
+            <div class="btn-box">
+                <div class="theme-btn">
+                    <span class="txt">
+                        <button class = "forsubmit btn_blueas btn" placement="top" ngbTooltip="Delete Notification" (click)="deleteSelected()">Delete</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-md-12 pl-0 pr-0 table-responsive main-tabl-height dk-table">
+
+    <table datatable [dtOptions]="dtOptions" class="row-border table hover table-striped">
+        <thead>
+            <tr>
+                <th width="40px" class="tidcenter tidc">S. No.</th>
+                <th class="ttnc" width="100px" *ngIf="loginGroupId =='1'">User's Name</th>
+                <th class="ttnc" width="450px">Notifications</th>
+              
+                <th class="tluc">Narration Created on</th>
+                <!-- <th class="tluc">Email</th>
+                <th class="tttc">Mobile</th>
+                <th class="tluc">Registration Date</th> -->
+                <th class="tac" *ngIf="loginGroupId =='1'">Action</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="persons?.length != 0">
+            <tr *ngFor="let person of persons" [class.highlighted]="clicked === person.s_no" (click)="clicked = person.s_no">
+                <td class="tidcenter">{{ person.s_no}}</td>
+                <td *ngIf="loginGroupId == '1'">
+                    <a href="javascript:void(0);" (click)="viewUserProfile(person.user_id);" class="tablelinkc cap" title="{{ person.candidate_name }} profile" >{{ person.candidate_name }}</a>
+                </td>
+                <td>
+                        {{ person.notifiaction }}
+                </td>
+                
+              
+                <td><span class="role-{{person.role}}">{{ person.date_time }}</span></td>
+                <!-- <td>{{ person.email }}</td>
+                <td>{{ person.mobile }}</td> -->
+                <!-- <td><span class="datetime">{{ person.regDateTime }}</span></td> -->
+                <td *ngIf="loginGroupId =='1'">
+                    <!-- <a routerLink="{{dashboard_url}}manual/{{person.id}}" class="btn-default btn-sm btn-danger" class="edit" placement="top" ngbTooltip="Edit"><fa-icon [icon]="faEdit"></fa-icon></a> -->
+                    
+                   <button  class="btn btn-sm btn-delete" (click) = "deleteNotification(person.id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="persons?.length == 0">
+            <tr>
+                <td colspan="8" class="no-data-available">No data!</td>
+            </tr>
+        <tbody>
+    </table>
+</div>
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

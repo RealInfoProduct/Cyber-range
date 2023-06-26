@@ -1,0 +1,757 @@
+         <div class="col-md-12 content dashboard-body">
+            <app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+            <ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-3" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+            <div class="padding-body myform dk-table">
+               <div class=""> <!--content-box-shadow-->
+                  <div class="row">
+                     <div [formGroup]="userfrm" class="col-md-12">
+
+                  <div [ngClass]="{'col-lg-6 col-md-12 form-group ipp100  content-box-shadow float-left':true, 'd-none': step1 == false}"> 
+                     <!-- max500 -->
+
+							<div class="row mb-2">						
+								<div class="col-lg-4 col-md-12 col_lable">
+									<label>Allocation:</label>
+								</div> 
+								<div class="col-lg-8 col-md-12 pt-2" >
+									<label for="radio_exercise" class="ml-1"><input type="radio" checked="true" formControlName="allocation" name="allocation" value="Exercise" id="radio_exercise" (change)="AllocationChange($event)" > Exercise</label>
+                           <label *ngIf="exe_bundle=='Allowed'" for="radio_training_group" class="ml-1"><input class="ml-4" type="radio" formControlName="allocation" name="allocation" value="Training_Group" id="radio_training_group"  (change)="AllocationChange($event)" > Exercise Bundle</label> 
+								</div>							
+							</div>	
+
+							<div *ngIf="exercise_dropdown_area == true" class="row form-group">	
+								<div class="col-lg-4 col-md-12 col_lable">
+									<label>Exercise:</label>
+								</div>
+								<div class="col-lg-8 col-md-12" >
+									<ng-multiselect-dropdown #exercise_dropdown [ngModelOptions]="{standalone: true}"
+									[placeholder]="'Select Exercise'"
+									[settings]="exercise_dropdownSettings"
+									[maxHeight]="10"
+									[data]="exercise_dropdownList"
+									[(ngModel)]="exercise_selectedItems"
+									(onSelect)="onItemSelect($event,'Exercise')"
+									(onDeSelect)="onItemDeSelect($event,'Exercise')"
+									>
+									<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+										{{option}}
+									</ng-template>
+									<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+										{{option}}
+									</ng-template>
+									</ng-multiselect-dropdown>
+								</div>							
+							</div>
+ 
+                           <!--start step 1-->
+                           
+                           <div *ngIf="train_gp_dropdown_area == true" class="row form-group">	
+							         <div class="col-lg-5 col-md-12 col_lable">
+                                 Exercise Bundle : 
+                              </div>
+                              <div class="col-lg-7 col-md-12" >
+                                 <ng-multiselect-dropdown #train_gp_dropdown [ngModelOptions]="{standalone: true}"
+                                 [placeholder]="'Select Exercise Bundle'"
+                                 [settings]="train_gp_dropdownSettings"
+                                 [maxHeight]="10"
+                                 [data]="train_gp_dropdownList"
+                                 [(ngModel)]="selectedItems"
+                                 (onSelect)="onItemSelect($event,'Train_Gp')"
+                                 (onDeSelect)="onItemDeSelect($event,'Train_Gp')"
+                                 >
+                                 <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+                                    {{option}}
+                                 </ng-template>
+                                 <ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+                                    {{option}}
+                                 </ng-template>
+                                 </ng-multiselect-dropdown>
+                              </div>
+                           </div>
+
+                           <div class="row">
+                              <div class="col-lg-4 col-md-12 col_lable "></div>
+                              <div class="col-lg-8 col-md-12 mb-2 btn_align">
+                                 <div class="btn-box">
+                                    <div class="theme-btn">
+                                       <span class="txt">
+                                          <button class = "forsubmit btn_blueas btn" (click)="change_step('2')">Next</button>
+                                       </span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <!--end step 1-->
+
+                        <!--start step 2-->
+                        <div [ngClass]="{'col-md-12 content-box-shadow float-left':true, 'd-none': step2 == false}">
+
+                           <div class="row form-group ">				
+                              <div class="fsearch">
+                                 <div>
+                                    <label>Allocation Type:</label>
+                                 </div>
+                                 <div class="pt-2" >
+                                    <input type="radio" checked="true" formControlName="allocation_type" name="allocation_type" value="Individual" id="radio_individual" (change)="AllocationTypeChange($event)" > <label for="radio_individual" class="ml-1">Individual</label>
+                                    <input class="ml-4" type="radio" formControlName="allocation_type" name="allocation_type" value="Team" id="radio_team"  (change)="AllocationTypeChange($event)" > <label for="radio_team" class="ml-1">Team</label>	
+                                 </div>
+                              </div>
+
+                              <div [ngClass]="{'fsearch':true, 'd-none': individual_allot_area == false}" >
+                                 <div class="">
+                                    <label for="search" class="mrl">Search:</label>
+                                 </div>
+                                 <div class="">
+                                    <input id="search" type="text" placeholder="Enter Value..." class="form-control" (keyup)="datatableSearch($event,'user')" />
+                                 </div>
+                              </div>
+
+                              <div [ngClass]="{'fsearch':true, 'd-none': team_allot_area == false}" >
+                                 <div class="">
+                                    <label for="search" class="mrl">Search:</label>
+                                 </div>
+                                 <div class="">
+                                    <input id="search" type="text" placeholder="Enter Value..." class="form-control" (keyup)="datatableSearch($event,'team')" />
+                                 </div>
+                              </div>
+                           </div>
+
+                           
+								
+
+                           <div [ngClass]="{'col-md-12 float-left pr-0 pl-0 table-responsive main-tabl-height dk-table':true, 'd-none': individual_allot_area == false}" >                              
+                              <table id="user-table" datatable [dtOptions]="dtOptions[2]" dt-instance="dtUserInstance" [dtTrigger]="dtUserTrigger" class="row-border table hover table-striped">
+                                 <thead>
+                                    <tr>
+                                       <th class="tidcenter tidc">ID</th>
+                                       <th class="tuidc">Unique ID</th>
+                                       <th class="ttnc">Name</th>
+                                       <th class="tluc">Email</th>
+                                       <th class="tttc">Mobile</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody *ngIf="persons?.length != 0" >
+                                    <tr *ngFor="let person of persons">
+                                       <td class="tidcenter s_no">{{ person.s_no }} 
+                                          <input (change)="UserCheckboxChange(person.user_id, $event.target.checked)"  type="checkbox" name="user[]" value="{{person.user_id}}" id="user_id_{{person.s_no}}">
+                                       </td>
+                                       <td  ><span class="{{person.user_status}}"></span>  {{ person.User_Unique_ID }}</td>
+                                       <td *ngIf="group_id==1" >
+                                          <a routerLink="/dd-terminal/user-profile/{{person.user_id}}" class="tablelinkc">
+                                          {{ person.firstName }} {{ person.lastName }}
+                                          </a>
+                                       </td>
+                                       <td *ngIf="group_id==2" >
+                                          {{ person.firstName }} {{ person.lastName }}
+                                       </td>
+                                       <td>{{ person.email }}</td>
+                                       <td>{{ person.mobile }}</td>
+                                    </tr>
+                                 </tbody>
+                                 <tbody *ngIf="persons?.length == 0">
+                                    <tr>
+                                       <td colspan="5" class="no-data-available">No data!</td>
+                                    </tr>
+                                 <tbody>
+                              </table>
+                           </div>
+
+                           <div  [ngClass]="{'col-md-12 float-left pr-0 pl-0  table-responsive main-tabl-height dk-table':true, 'd-none': team_allot_area == false}" >
+                              
+                              <table id="team-table" datatable [dtOptions]="dtOptions[3]" dt-instance="dtTeamInstance" [dtTrigger]="dtTeamTrigger" class="row-border table hover table-striped">
+                                 <thead>
+                                    <tr>
+                                       <th class="tidcenter tidc">S.No</th>
+                                       <th class="tuidc">Unique ID</th>
+                                       <th class="ttnc">Team Name</th>
+                                       <th class="tttc">Team Type</th>
+                                    </tr>
+                                 </thead>
+                                 <tbody *ngIf="teams?.length != 0">
+                                    <tr *ngFor="let team of teams">
+                                       <td class="tidcenter s_no">
+                                          {{ team.s_no }}
+                                          <input (change)="TeamCheckboxChange(team.id, $event.target.checked)"  type="checkbox" name="team[]" value="{{team.id}}" id="team_id_{{team.s_no}}" >
+                                       </td>
+                                       <td class="tuidc"><span class="status-{{team.team_status}}">{{ team.total_team_member }}</span> {{ team.team_unique_id }}</td>
+                                       <td class="ttnc">
+                                          <a routerLink="{{dashboard_url}}team/{{team.id}}" class="edit tablelinkc">
+                                          {{ team.team_name }}
+                                          </a>
+                                       </td>
+                                       <td class="tttc">{{ team.team_type }}</td>
+                                    </tr>
+                                 </tbody>
+                                 <tbody *ngIf="teams?.length == 0">
+                                    <tr>
+                                       <td colspan="7" class="no-data-available">No data!</td>
+                                    </tr>
+                                 </tbody>
+                              </table>
+                           </div>
+
+							<div class="clearfix"></div>
+							<div class="mt-2 mb-2">
+								<div class="btn-box">
+									<div class="theme-btn float-left">
+										<span class="txt">
+											<button type="button" class="btn btn_blueas man-btn" (click)="change_step('1')">
+												<fa-icon [icon]="faArrowCircleLeft"></fa-icon> Previous
+											</button>
+										</span>
+									</div> 
+									
+									<div class="theme-btn float-right">
+										<span class="txt">
+											<button type="button" class="btn btn_blueas man-btn" (click)="change_step('3')">
+												Next <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+											</button>
+										</span>
+									</div>
+								</div>							
+								<div class="clearfix"></div>
+							</div>
+                        </div>
+		<!--end step 2-->
+
+
+                        <!--start step 3-->
+                        <div [ngClass]="{'col-md-12 float-left pr-0 pl-0':true, 'd-none': step3 == false}">
+                           <div *ngIf="credit_system=='Active'" class="col-md-12 pl-0 pr-0 text-right">Total Credit : {{total_credit}}</div>
+                           <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" activeIds="toggle-0" class="exe-allot-tab">
+                           <ngb-panel *ngFor="let ex of exercise_data; let i = index" id="toggle-{{i}}" title="{{ex.name}}">
+                              <ng-template ngbPanelContent>
+                                 <div class="table-responsive">
+                                    <!-- table-responsive -->
+                                    <table class="table table-bordered table-responsive-1 mb-0">
+                                       <tr class="eath">
+                                          <th class=""><b>Instructor</b></th>
+                                          <th class="mdw"><b>Start Date</b></th>
+                                          <th class="mdw"><b>End Date</b></th>
+                                          <th class=""><b>Duration (In Hrs)</b></th>
+                                          <th *ngIf="credit_system=='Active'" ><b>Credit</b></th>
+                                          <th *ngIf="ex?.allotment_status=='Expired'" ><b>Extend</b></th>
+                                       </tr>
+                                       <tbody>
+                                          <tr>
+                                             <td>{{ex.F_Name}} {{ex.L_Name}}</td>
+                                             <td>
+                                                <div class="aicdf"><input [disabled]="readonly_start_date" (onSelect)="setDatetime($event,'start_date',ex.id);" class="form-control tinbg" name="valid_start_date[]" id="valid_start_date_{{ex.id}}" [(ngModel)]="ex.valid_start" [dpDayPicker]="config" [theme]="'dp-material'" [mode]="'daytime'" [ngModelOptions]="{standalone: true}"  /></div>
+                                             </td>
+                                             <td>
+                                                <div class="aicdf"><input (onSelect)="setDatetime($event,'end_date',ex.id);" class="form-control tinbg" name="valid_end_date[]" id="valid_end_date_{{ex.id}}" [(ngModel)]="ex.valid_end" [dpDayPicker]="config" [theme]="'dp-material'" [mode]="'daytime'" [ngModelOptions]="{standalone: true}"  /></div>
+                                             </td>
+                                             <td>
+                                                <input type="number" class="form-control tinbg eadih" name="duration[]" id="duration_{{ex.id}}" [(ngModel)]="ex.duration" [ngModelOptions]="{standalone: true}"
+                                                pattern="^[1-9][0-9]*$" required oninput="if(!this.value.match('^[1-9][0-9]*$'))this.value='';
+                                                ">
+                                             </td>
+
+                                             <td *ngIf="credit_system=='Active'" >{{ex.cal_credits}}</td>
+
+                                             <td *ngIf="ex?.allotment_status=='Expired'" >
+                                                <div class="aicdf"><input value="Yes" (change)="ExtendChange($event)" type="checkbox" id="extend_{{i}}" [(ngModel)]="extend_req" [ngModelOptions]="{standalone: true}"  /> <label class="ml-1 mt-2" for="extend_{{i}}"> Extend</label></div>
+                                             </td>
+
+
+                                          </tr>
+                                       </tbody>
+                                    </table>
+                                 </div>
+
+                                 <div class="table-responsive">
+                                    <table *ngIf="user_data?.length!=0" class="table table-bordered table-striped table-responsive-1 mt-3 mb-0" >
+                                       <tr class="eath">
+                                          <th class="tidcenter">S.No.</th>
+                                          <th>User Name</th>
+                                          <th>VM Permission</th>
+                                          <th>Manual</th>
+                                          <th>Control</th>
+                                          <th>Action</th>
+                                       </tr>
+                                       <tbody>
+                                          <!--start *ngFor 1-->
+                                          <ng-container *ngFor="let user of user_data; let k = index">
+                                             <!--start *ngIf 1-->
+                                             <ng-container *ngIf="user?.vm_control == undefined" >
+                                                <tr>
+                                                   <td class="tidcenter">{{k+1}}</td>
+                                                   <td>{{user.F_Name}} {{user.L_Name}} <span class="email">({{user.eMail}})</span></td>
+                                                   <td class="text-center">-</td>
+                                                   <td class="text-center">-</td>
+                                                   <td class="text-center">-</td>
+                                                   <td class="td-sm">
+                                                      <button class="btn btn-primary btn-sm" type="button"  placement="top" ngbTooltip="Configure Vm access"  (click)="openVmPopUp(ex.id,user.U_ID,user.team_id,vmpopup)" >
+                                                         <fa-icon [icon]="faCog"></fa-icon>
+                                                      </button>
+                                                      <!--<button class="btn btn-primary btn-sm" type="button"  placement="top" ngbTooltip="Manual"  (click)="openManual(ex.id,user.U_ID,user.team_id,vmpopup)" >
+                                                         <fa-icon [icon]="faFileM"></fa-icon>
+                                                      </button>-->
+                                                   </td>
+                                                </tr>
+                                             </ng-container>
+                                             <!--end *ngIf 1-->
+                                             <!--start *ngIf 2-->
+                                             <ng-container *ngIf="user?.vm_control != undefined && user.vm_control.length!=0" >
+                                                <!--start *ngIf 3-->
+                                                <ng-container *ngIf="(user.vm_control | exercisefilter : [ex.id,user.team_id])==false" >
+                                                   <tr>
+                                                      <td class="tidcenter">{{k+1}}</td>
+                                                      <td>{{user.F_Name}} {{user.L_Name}} <span class="email">({{user.eMail}})</span></td>
+                                                      <td class="text-center">-</td>
+                                                      <td class="text-center">-</td>
+                                                      <td>
+                                                         <button class="btn btn-primary btn-sm" type="button" placement="top" ngbTooltip="Configure Vm access" (click)="openVmPopUp(ex.id,user.U_ID,user.team_id,vmpopup)" >
+                                                            <fa-icon [icon]="faCog"></fa-icon>
+                                                         </button>
+                                                      </td>
+                                                   </tr>
+                                                </ng-container>
+                                                <!--end *ngIf 3-->
+                                                <!--start *ngIf 4-->
+                                                <ng-container *ngIf="(user.vm_control | exercisefilter : [ex.id,user.team_id])==true" >
+                                                   <ng-container *ngFor="let uvm of (user.vm_control | vmcontrolfilter : ex.id) as vmcontrol; let i_uvm = index" >
+                                                      <tr>
+                                                         <ng-container *ngIf="i_uvm==0">
+                                                            <td class="tidcenter" [attr.rowspan]="(vmcontrol | vmrowscountfilter : [ex.id,user.team_id])" >{{k+1}}</td>
+                                                         </ng-container>
+                                                         <ng-container *ngIf="i_uvm==0">
+                                                            <td [attr.rowspan]="(vmcontrol | vmrowscountfilter : [ex.id,user.team_id])" >{{user.F_Name}} {{user.L_Name}} <span class="email">({{user.eMail}})</span></td>
+                                                         </ng-container>
+                                                         <ng-container *ngIf="uvm.ex_id==ex.id">
+                                                            <td class="td-sm"><span *ngFor="let vd of ex.vm_dropdown;" > <span *ngIf="vd.unique_id==uvm.unique_id" >{{vd.asset_name}}</span> </span></td>
+                                                            <td class="td-sm">
+                                                               <span *ngIf="uvm?.manual != undefined && uvm?.manual!='' " [innerHTML]="manual_list | manualfilter : uvm.manual" ></span>
+                                                            </td>
+                                                            <td class="td-sm">
+                                                               <span *ngFor="let vctrl of uvm.control;" class="control-btn" >
+                                                                  <button *ngIf="vctrl=='1'" placement="top" ngbTooltip="Power on/off" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-success': true}" >
+                                                                  <fa-icon [icon]="faPowerOff"></fa-icon>
+                                                                  </button> 
+                                                                  <button *ngIf="vctrl=='2'" placement="top" ngbTooltip="Local Console" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-primary': true}" >
+                                                                  <fa-icon [icon]="faDesktop"></fa-icon>
+                                                                  </button> 
+                                                                  <button *ngIf="vctrl=='3'" placement="top" ngbTooltip="Web Console" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-warning': true}" >
+                                                                  <fa-icon [icon]="faLaptop"></fa-icon>
+                                                                  </button> 
+                                                                  <!--<button *ngIf="vctrl=='4'" placement="top" ngbTooltip="USB" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-danger': true}" >
+                                                                  <fa-icon [icon]="faRandom"></fa-icon>
+                                                                  </button>--> 
+                                                                  <button *ngIf="vctrl=='5'" placement="top" ngbTooltip="Snapshot" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-secondary': true}" >
+                                                                  <fa-icon [icon]="faFile"></fa-icon>
+                                                                  </button> 
+                                                                  <button *ngIf="vctrl=='6'" placement="top" ngbTooltip="Restore" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-info': true}" >
+                                                                     <fa-icon [icon]="faRedoAlt"></fa-icon>
+                                                                  </button> 
+                                                               </span>
+                                                               <button *ngIf="uvm.control.length!=0" class="btn btn-sm btn-delete" (click) = "deleteVmControl(user.U_ID,ex.id,user.team_id,uvm.unique_id)" placement="top" ngbTooltip="Remove VM">
+                                                               <fa-icon [icon]="faTrash"></fa-icon>
+                                                               </button>
+                                                            </td>
+                                                         </ng-container>
+                                                         <ng-container *ngIf="i_uvm==0">
+                                                            <td [attr.rowspan]="(vmcontrol | vmrowscountfilter : [ex.id,user.team_id])" class="td-sm" >
+                                                               <button class="btn btn-primary btn-sm" type="button" placement="top" ngbTooltip="Configure Vm access" (click)="openVmPopUp(ex.id,user.U_ID,user.team_id,vmpopup)" >
+                                                                  <fa-icon [icon]="faCog"></fa-icon>
+                                                               </button>
+                                                            </td>
+                                                         </ng-container>
+                                                      </tr>
+                                                   </ng-container>
+                                                </ng-container>
+                                                <!--end *ngIf 4-->
+                                             </ng-container>
+                                             <!--end *ngIf 2-->
+                                          </ng-container>
+                                          <!--end *ngFor 1-->
+                                       </tbody>
+                                    </table>
+                                 </div>
+
+                                 <!-- Team Table -->
+                                 <div *ngFor="let team of team_data; let t = index" class="col-md-12 pl-0 pr-0 exe-allot-tab">
+                                    <div class="col-md-12 pl-0 pr-0 mt-3 mb-3"><b>Team Name :</b> {{team.team_name}} 
+                                       <button class="btn btn-primary btn-sm" type="button" placement="top" ngbTooltip="Configure Vm access" (click)="openVmPopUp(ex.id,'',team.id,vmpopup,'teamBulkAssign')" >
+                                          <fa-icon [icon]="faCog"></fa-icon>
+                                       </button>
+                                    </div>
+                                    <div class="table-responsive team-brdb">
+                                       <table *ngIf="team_data[t].user_data?.length!=0" class="table table-bordered table-responsive-1 table-striped mb-0" >
+                                          <tr class="eath">
+                                             <th class="tidcenter">S.No.</th>
+                                             <th>User Name</th>
+                                             <th>VM Permission</th>
+                                             <th>Manual</th>
+                                             <th>Control</th>
+                                             <th>Action</th>
+                                          </tr>
+                                          <tbody>
+                                             <!--start *ngFor 1-->
+                                             <ng-container *ngFor="let user of team_data[t].user_data; let k = index">
+                                                <!--start *ngIf 1-->
+                                                <ng-container *ngIf="user?.vm_control == undefined" >
+                                                   <tr>
+                                                      <td class="tidcenter">{{k+1}}
+                                                         <input type="checkbox" [checked]="checkedUser(team.id,user.U_ID)" (change)="selectUser($event,team.id,user.U_ID,k)" value="{{user.id}}" id="user_{{ex.id}}_{{k+1}}" />
+                                                      </td>
+                                                      <td>{{user.F_Name}} {{user.L_Name}} <span class="email">({{user.eMail}})</span></td>
+                                                      <td class="text-center">-</td>
+                                                      <td class="text-center">-</td>
+                                                      <td class="text-center">-</td>
+                                                      <td class="td-sm">
+                                                         <button class="btn btn-primary btn-sm" type="button" placement="top" ngbTooltip="Configure Vm access" (click)="openVmPopUp(ex.id,user.U_ID,user.team_id,vmpopup)" >
+                                                            <fa-icon [icon]="faCog"></fa-icon>
+                                                         </button>
+                                                      </td>
+                                                   </tr>
+                                                </ng-container>
+                                                <!--end *ngIf 1-->
+                                                <!--start *ngIf 2-->
+                                                <ng-container *ngIf="user?.vm_control != undefined && user.vm_control.length!=0" >
+                                                   <!--start *ngIf 3-->
+                                                   <ng-container *ngIf="(user.vm_control | exercisefilter : [ex.id,user.team_id])==false" >
+                                                      <tr>
+                                                         <td class="tidcenter">{{k+1}}
+                                                            <input type="checkbox" [checked]="checkedUser(team.id,user.U_ID)" (change)="selectUser($event,team.id,user.U_ID,k)" value="{{user.id}}" id="user_{{ex.id}}_{{k+1}}" />
+                                                         </td>
+                                                         <td>{{user.F_Name}} {{user.L_Name}} <span class="email">({{user.eMail}})</span></td>
+                                                         <td class="text-center">-</td>
+                                                         <td class="text-center">-</td>
+                                                         <td class="text-center">-</td>
+                                                         <td>
+                                                            <button class="btn btn-primary btn-sm" type="button" placement="top" ngbTooltip="Configure Vm access" (click)="openVmPopUp(ex.id,user.U_ID,user.team_id,vmpopup)" >
+                                                               <fa-icon [icon]="faCog"></fa-icon>
+                                                            </button>
+                                                         </td>
+                                                      </tr>
+                                                   </ng-container>
+                                                   <!--end *ngIf 3-->
+                                                   <!--start *ngIf 4-->
+                                                   <ng-container *ngIf="(user.vm_control | exercisefilter : [ex.id,user.team_id])==true" >
+                                                      <ng-container *ngFor="let uvm of (user.vm_control | vmcontrolfilter : ex.id) as vmcontrol; let i_uvm = index" >
+                                                         <tr>
+                                                            <ng-container *ngIf="i_uvm==0">
+                                                               <td [attr.rowspan]="(vmcontrol | vmrowscountfilter : [ex.id,user.team_id])"  class="tidcenter">{{k+1}}
+                                                                  <input type="checkbox" [checked]="checkedUser(team.id,user.U_ID)" (change)="selectUser($event,team.id,user.U_ID,k)" value="{{user.id}}" id="user_{{ex.id}}_{{k+1}}" />
+                                                               </td>
+                                                            </ng-container>
+                                                            <ng-container *ngIf="i_uvm==0">
+                                                               <td [attr.rowspan]="(vmcontrol | vmrowscountfilter : [ex.id,user.team_id])" >{{user.F_Name}} {{user.L_Name}} <span class="email">({{user.eMail}})</span></td>
+                                                            </ng-container>
+                                                            <ng-container *ngIf="uvm.ex_id==ex.id">
+                                                               <td class="td-sm"><span *ngFor="let vd of ex.vm_dropdown;" > <span *ngIf="vd.unique_id==uvm.unique_id" >{{vd.asset_name}}</span> </span></td>
+                                                               <td class="td-sm">
+                                                                  <span *ngIf="uvm?.manual != undefined && uvm?.manual!='' " [innerHTML]="manual_list | manualfilter : uvm.manual" ></span>
+                                                               </td>
+                                                               <td class="td-sm">
+                                                                  <span *ngFor="let vctrl of uvm.control;" class="control-btn" >
+                                                                     <button *ngIf="vctrl=='1'" placement="top" ngbTooltip="Power on/off" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-success': true}" >
+                                                                     <fa-icon [icon]="faPowerOff"></fa-icon>
+                                                                     </button> 
+                                                                     <button *ngIf="vctrl=='2'" placement="top" ngbTooltip="Local Console" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-primary': true}" >
+                                                                     <fa-icon [icon]="faDesktop"></fa-icon>
+                                                                     </button> 
+                                                                     <button *ngIf="vctrl=='3'" placement="top" ngbTooltip="Web Console" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-warning': true}" >
+                                                                     <fa-icon [icon]="faLaptop"></fa-icon>
+                                                                     </button> 
+                                                                     <!--<button *ngIf="vctrl=='4'" placement="top" ngbTooltip="USB" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-danger': true}" >
+                                                                     <fa-icon [icon]="faRandom"></fa-icon>
+                                                                     </button>--> 
+                                                                     <button *ngIf="vctrl=='5'" placement="top" ngbTooltip="Snapshot" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-success': true,'btn-outline-secondary': 'true'}" >
+                                                                     <fa-icon [icon]="faFile"></fa-icon>
+                                                                     </button> 
+                                                                     <button *ngIf="vctrl=='6'" placement="top" ngbTooltip="Restore" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-info': true}" >
+                                                                        <fa-icon [icon]="faRedoAlt"></fa-icon>
+                                                                     </button> 
+                                                                  </span>
+                                                                  <button *ngIf="uvm.control.length!=0" class="btn btn-sm btn-delete" (click) = "deleteVmControl(user.U_ID,ex.id,user.team_id,uvm.unique_id)" placement="top" ngbTooltip="Remove VM">
+                                                                  <fa-icon [icon]="faTrash"></fa-icon>
+                                                                  </button>
+                                                               </td>
+                                                            </ng-container>
+                                                            <ng-container *ngIf="i_uvm==0">
+                                                               <td [attr.rowspan]="(vmcontrol | vmrowscountfilter : [ex.id,user.team_id])" class="td-sm" >
+                                                                  <button class="btn btn-primary btn-sm" type="button" placement="top" ngbTooltip="Configure Vm access" (click)="openVmPopUp(ex.id,user.U_ID,user.team_id,vmpopup)" >
+                                                                     <fa-icon [icon]="faCog"></fa-icon>
+                                                                  </button>
+                                                               </td>
+                                                            </ng-container>
+                                                         </tr>
+                                                      </ng-container>
+                                                   </ng-container>
+                                                   <!--end *ngIf 4-->
+                                                </ng-container>
+                                                <!--end *ngIf 2-->
+                                             </ng-container>
+                                             <!--end *ngFor 1-->
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                    <!-- <div class="col-md-12 pl-0 pr-0 separater"></div> -->
+                                 </div>
+							    
+                              </ng-template>
+                           </ngb-panel>
+                           </ngb-accordion>
+                           <div class="clearfix"></div>
+                           <!--
+						   <div class="col-md-12 pl-0 pr-0 mt-3 mb-3">
+                              <button class="btn btn-primary" type="button" (click)="change_step('2')" >Previous</button>
+                              <button class="btn btn-primary ml-5" type="button" (click)="SubmitAllotment(tpinpopup)" >Submit</button>
+                           </div>
+						   -->
+						   
+						   
+						   <div class="clearfix"></div>
+							<div class="mt-3 mb-3">
+								<div *ngIf="allotment_id==null;else other_content" class="btn-box">
+									<div class="theme-btn float-left">
+										<span class="txt">
+											<button type="button" class="btn btn_blueas man-btn" (click)="change_step('2')">
+												<fa-icon [icon]="faArrowCircleLeft"></fa-icon> Previous
+											</button>
+										</span>
+									</div> 
+									
+									<div class="float-right">
+										<!-- <span class="txt">
+											<button type="button" class="btn btn_blueas man-btn" (click)="SubmitAllotment(tpinpopup)">
+												Submit
+											</button>
+										</span> -->
+
+                              <div class="btn-box">
+                                 <div class="theme-btn mr-2">
+                                    <span class="txt">
+                                       <button type="button" class="btn btn_blueas man-btn" (click)="SubmitAllotment(tpinpopup)">
+                                          Submit
+                                       </button>
+                                    </span>
+                                 </div>
+                                 
+                                 <div class="theme-btn">
+                                    <span class="txt"><a class = "btn btn_blueas man-btn" routerLink="{{dashboard_url}}allotment-list" >Cancel</a></span>
+                                 </div>
+                              </div>
+
+									</div>
+								</div>	
+                        
+                        <ng-template #other_content>
+                           <div class="btn-box">
+                              <div class="float-right">
+                                 <div class="btn-box">
+                                    <div class="theme-btn mr-2">
+                                       <span class="txt">
+                                          <button type="button" class="btn btn_blueas man-btn" (click)="update_allotted_exercise(tpinpopup)">
+                                             Update
+                                          </button>
+                                       </span>
+                                    </div>
+                                    
+                                    <div class="theme-btn">
+                                       <span class="txt"><a class = "btn btn_blueas man-btn" routerLink="{{dashboard_url}}allotment-list" >Cancel</a></span>
+                                    </div>
+                                 </div>
+
+                              </div>
+                           </div>
+                        </ng-template>
+
+								<div class="clearfix"></div>
+							</div>
+							
+							
+                        </div>
+                        <!--end step 3-->
+                     </div>
+
+                     <div class="col-lg-12 col-md-12 admin_ex-allot">                     
+                          
+                        <div *ngFor="let ex of ex_detail; let i = index" class=" basketbox content-box-shadow">
+
+                           <div class="row">
+                              
+                              <div class="col-md-5">
+                                 <div class="ed_center">
+                                    <img *ngIf="ex.thumb_image!=null" src="{{server_url}}media/exercise-image/{{ex.thumb_image}}" class="img-fluid">										
+                                    <img *ngIf="ex.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">										
+                                 </div>
+                                 
+                                 <div class="boxshad" [innerHTML]="ex.short_desc" >			
+                                 </div>
+                              </div>
+                              
+                              <div class="col-md-7">
+                                 <div class="boxshad">
+                                    <h3 class="heading">{{ex.name}}</h3>
+                                    
+                                    <div class="row">
+                                       <div class="col-lg-5 col-md-12">
+                                          <p class="authorby">By: {{ex.F_Name}} {{ex.L_Name}}</p>
+                                       </div>
+                        
+                                       <div class="col-lg-7 col-md-12 text-lg-right ratting cursor-menu">				
+                                          <fa-icon [icon]="faStar" class="starc" placement="top" ngbTooltip="Rating: {{ex.rating}}"></fa-icon> {{ex.rating}} 
+                        
+                                          <fa-icon [icon]="faCircle" class="lowc" placement="top" ngbTooltip="Difficulty Level: {{ex.difficulty_level}}" class="{{ex.difficulty_level}}c"></fa-icon> {{ex.difficulty_level}}
+                        
+                                          <span class="subscriber">
+                                             <fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: 7/10" class="usercircle mr-1"></fa-icon>
+                                             <span placement="top" ngbTooltip="Running Subscribers: {{ex.total_running}}">{{ex.total_running}}/</span>
+                                             <span placement="top" ngbTooltip="Total Subscribers: {{ex.total_allotment}}">{{ex.total_allotment}}</span> 
+                                          </span>
+                        
+                                          <fa-icon *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" class="questionc" placement="top" ngbTooltip="{{ex.key_words}}" ></fa-icon>
+                                          <span *ngIf="credit_system=='Active'" class="ercredit">Cr. {{ex.credits}}</span>
+                                       </div>
+                                    </div>					
+                                    <hr> 
+                                       
+                                    <div class="" [innerHTML]="ex.long_desc" >	<!-- boxshad -->							 
+                                    </div>							 
+                                    <hr>
+                                 
+                                 </div>
+                              </div>		
+                           </div>  
+                        </div>                         
+                       
+                     </div>
+
+
+                  </div>
+               </div>
+            </div>
+         
+      <!-- End Page content -->
+      <ng-template #vmpopup let-modal >
+         <div class="dk-model-box">
+            <div class="modal-header dk-model-header">
+               <h4 class="modal-title" id="modal-basic-title">Access Configuration</h4>
+               <button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="mtable-height1">
+               <div class="modal-body">
+                  <div class="col-lg-12 col-md-12 float-left form-group" >
+                     <div class="col-lg-12 col-md-12 col-12 p-0 pt-2 float-left">
+                        <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                           Virtual Machine : 
+                        </div>
+                        <div class="col-lg-9 col-md-12 col-12 p-0 pt-2 float-left">
+                           <ng-multiselect-dropdown [ngModelOptions]="{standalone: true}"
+                           [placeholder]="'Select VM'"
+                           [settings]="vm_dropdownSettings"
+                           [maxHeight]="10"
+                           [data]="current_vm_dropdown"
+                           [(ngModel)]="selectedVmItems"
+                           (onSelect)="onVMSelect($event,'Vm')"
+                           (onDeSelect)="onVMDeSelect($event,'Vm')"
+                           >
+                           <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+                              {{option}}
+                           </ng-template>
+                           <ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+                              {{option}}
+                           </ng-template>
+                           </ng-multiselect-dropdown>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                           Control : 
+                        </div>
+                        <div class="col-lg-9 col-md-12 col-12 p-0 pt-2 float-left">
+                           <ng-multiselect-dropdown [ngModelOptions]="{standalone: true}"
+                           [placeholder]="'Select Control'"
+                           [settings]="vm_access_dropdownSettings"
+                           [maxHeight]="10"
+                           [data]="vm_access_dropdown"
+                           [(ngModel)]="selectedControlItems"
+                           (onSelect)="onVMSelect($event,'Control')"
+                           (onDeSelect)="onVMDeSelect($event,'Control')"
+                           >
+                           <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+                              {{option}}
+                           </ng-template>
+                           <ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+                              {{option}}
+                           </ng-template>
+                           </ng-multiselect-dropdown>
+                        </div>
+                        <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                           Manual : 
+                        </div>
+                        <div class="col-lg-9 col-md-12 col-12 p-0 pt-2 float-left">
+                           <ng-multiselect-dropdown [ngModelOptions]="{standalone: true}"
+                           [placeholder]="'Select Manual'"
+                           [settings]="manual_dp_set"
+                           [maxHeight]="10"
+                           [data]="manual_list"
+                           [(ngModel)]="manual_sel_items"
+                           (onSelect)="onVMSelect($event,'Manual')"
+                           (onDeSelect)="onVMDeSelect($event,'Manual')"
+                           >
+                           <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+                              {{option}}
+                           </ng-template>
+                           <ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+                              {{option}}
+                           </ng-template>
+                           </ng-multiselect-dropdown>
+                        </div>
+                        <div class="clearfix"></div>
+                     </div>
+                     <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-12 float-left text-center pb-3">
+                     <div class="btn-box text-center">
+                        <div class="theme-btn">
+                           <span class="txt">												
+                           <button type="button" (click)="SubmitUserConfig();" class="btn btn_blueas tpin">Submit</button>
+                           </span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </ng-template>
+      <ng-template #tpinpopup let-modal >
+         <div class="dk-model-box">
+            <div class="modal-header dk-model-header">
+               <h4 class="modal-title" id="modal-basic-title">Transaction PIN</h4>
+               <button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <div class="mtable-height">
+               <div class="modal-body">
+                  <form [formGroup]="tpinfrm">
+                     <div class="col-lg-12 col-md-12 float-left form-group" >
+                        <div class="col-lg-12 col-md-12 col-12 p-0 pt-2 float-left">
+                           <input type = "text" class = "form-control fortextbox" id="t_pin" name = "t_pin" formControlName="t_pin" placeholder="Enter TPIN">
+                        </div>
+                        <div class="clearfix"></div>
+                        <ng-container *ngFor="let error of error_messages.t_pin">
+                           <div class="error-message col-md-12 pl-0" *ngIf="tpinfrm.get('t_pin').hasError(error.type) && (tpinfrm.get('t_pin').dirty || tpinfrm.get('t_pin').touched)">
+                              {{ error.message }}
+                           </div>
+                        </ng-container>
+                     </div>
+                     <div class="col-md-12 float-left text-center pb-3">
+                        <div class="btn-box text-center">
+                           <div class="theme-btn">
+                              <span class="txt">												
+                              <button type="button" (click)="submit_tpin(tpinfrm.value)" class="btn btn_blueas tpin">Submit</button>
+                              </span>
+                           </div>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </ng-template>

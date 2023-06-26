@@ -1,0 +1,501 @@
+	
+		<div class="col-md-12 content dashboard-body"> 
+
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			
+			<ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+			
+			<div class="myform padding-body">
+				<div class="content-box-shadow">
+					<form [formGroup] = "formdata"> 
+						<div class="row">							
+							<div class="col-lg-3 col-md-12 mb-2 text-center"> 	
+								<div class="profile_bg"> 
+									<div class="row"> 
+										<div class="col-md-12 mb-2 ">										
+											<div class="pimg_relative">	
+												<img *ngIf="croppedImage!=''" class="crop-image" [src]="croppedImage" />
+												<img *ngIf="croppedImage==''" class="crop-image" src="{{server_url}}media/profile/profile-img.jpg">
+												
+												<div class="pimg_absolute">
+													<a href="javascript:void(0);" (click)="openmodal()" class="">		
+														<fa-icon [icon]="faCamera" class="iconcmr"></fa-icon>
+													</a>
+												</div>											
+											</div>
+										</div>
+										
+										<div class="col-md-12">
+											<a href="javascript:void(0);" (click)="openmodal()" class="upload_profile">Upload Profile</a>
+										</div>
+										
+										<div *ngIf="last_login_date!=''" class="col-md-12">
+											<p class="upload_profile">Last Login: {{last_login_date}}</p>
+										</div>
+
+										<div *ngIf="credit_system=='Active'" class="col-md-12">
+											<p class="upload_profile" placement="top" ngbTooltip="View & Generate TPIN" ><a (click)="viewTPin(tpinpopup)" >Transaction PIN</a></p>
+											<p *ngIf="(update_by_group=='1' && (current_gp_id=='2' || current_gp_id=='1'))" class="upload_profile" placement="top" ngbTooltip="Edit Commission" ><a (click)="viewCommission(tpinpopup)" >Edit Commission</a></p>
+										</div>
+
+									</div>
+								</div>							
+							</div>							
+							
+							<div class="col-lg-9 col-md-12"> 
+								<div class="row">
+									<div class="col-lg-12 col-md-12"> 
+										<div class="row">
+											<div class="col-md-12">
+												<h4>Personal Details</h4>
+												<label class=" mb-0">All fields are mandatory<span class="red-astr">*</span></label>
+												<hr>
+											</div>	
+										</div>
+									</div>
+									
+									<div class="col-lg-6 col-md-6 min-width-col6"> 
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>User Role</label>
+											</div>
+											<div *ngIf="update_by_group!='2'" class="col-md-8 col_input form-group" >
+												<select class="form-control fortextbox" id="group" name = "group" formControlName="group" >
+												  <option  value="null">Select Role</option>
+												  <option *ngFor="let group of groupList; let i = index" [value]="groupList[i].id">
+													{{group.role}}
+												  </option>
+												</select>	
+												<ng-container *ngFor="let error of error_messages.group">
+													<div class="error-message" *ngIf="formdata.get('group').hasError(error.type) && (formdata.get('group').dirty || formdata.get('group').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>																
+											</div>
+											<div *ngIf="update_by_group=='2'" class="col-md-8 col_input form-group" >
+												 <span *ngFor="let group of groupList; let i = index" > <span style="background: #e9ecef;" class="form-control" *ngIf="groupList[i].id==update_by_group" >{{group.role}}</span> </span>
+                                            </div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Status</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<select class="form-control fortextbox" id="user_status" name = "user_status" formControlName="user_status" >
+												  <option  value="null">Select Status</option>
+												  <option *ngFor="let userStatus of userStatusList; let i = index" [value]="userStatusList[i]">
+													{{userStatusList[i]}}
+												  </option>
+												</select>	
+												<ng-container *ngFor="let error of error_messages.user_status">
+													<div class="error-message" *ngIf="formdata.get('user_status').hasError(error.type) && (formdata.get('user_status').dirty || formdata.get('user_status').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>																
+											</div>
+										</div>
+										
+										<div class="row"> 
+											<div class="col-md-4 col_lable form_lable  form-group">
+												<label for="f_name">First Name</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "text" class = "form-control fortextbox" id="f_name" name = "f_name" placeholder = "First Name" formControlName="f_name" >  
+												<ng-container *ngFor="let error of error_messages.f_name">
+													<div class="error-message" *ngIf="formdata.get('f_name').hasError(error.type) && (formdata.get('f_name').dirty || formdata.get('f_name').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>
+												
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable  form-group">
+												<label>Middle Name</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "text" class = "form-control fortextbox" name = "m_name" placeholder = "Middle Name" formControlName="m_name"  >                           
+											</div>
+										</div>
+										
+										<div class="row"> 
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Last Name</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "text" class = "form-control fortextbox" name = "l_name" placeholder = "Last Name"  formControlName="l_name"    >   
+												<ng-container *ngFor="let error of error_messages.l_name">
+													<div class="error-message" *ngIf="formdata.get('l_name').hasError(error.type) && (formdata.get('l_name').dirty || formdata.get('l_name').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>	
+											</div>
+										</div>
+										
+										<div class="row"> 
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Mobile</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "text" class = "form-control fortextbox" name = "mobile" placeholder = "Mobile" formControlName="mobile" >
+												<ng-container *ngFor="let error of error_messages.mobile">
+													<div class="error-message" *ngIf="formdata.get('mobile').hasError(error.type) && (formdata.get('mobile').dirty || formdata.get('mobile').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>								
+											</div>
+										</div>
+										
+										<div class="row"> 
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Language</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >															
+												<select class="form-control fortextbox" name = "language" formControlName="language" >
+												  <option value="null">Select Language</option>
+												  <option value="1">Hindi</option>
+												  <option value="2">English</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.language">
+													<div class="error-message" *ngIf="formdata.get('language').hasError(error.type) && (formdata.get('language').dirty || formdata.get('language').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>									
+											</div>
+										</div>										
+									</div>
+									
+									<div class="col-md-6 min-width-col6"> 										
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Address</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<textarea class = "form-control fortextbox" name = "address" rows="1" placeholder = "Address" formControlName="address" ></textarea>
+												<ng-container *ngFor="let error of error_messages.address">
+													<div class="error-message" *ngIf="formdata.get('address').hasError(error.type) && (formdata.get('address').dirty || formdata.get('address').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>							
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Country</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<select class="form-control fortextbox" name = "country" (change) = "changeCountry($event)"  formControlName="country" >
+												  <option  value="null">Select Country</option>
+												  <option *ngFor="let country of countryList; let i = index" [value]="countryList[i].id">
+													{{country.country_name}}
+												  </option>
+												</select>	
+												<ng-container *ngFor="let error of error_messages.country">
+													<div class="error-message" *ngIf="formdata.get('country').hasError(error.type) && (formdata.get('country').dirty || formdata.get('country').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>																
+											</div>
+										</div>
+										
+										<div class="row"> 
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>State</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<select class="form-control fortextbox" name = "state" formControlName="state" >
+												  <option value="null">Select State</option>
+												  <option *ngFor="let state of stateList; let i = index" [value]="stateList[i].id">
+													{{state.state_name}}
+												  </option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.state">
+													<div class="error-message" *ngIf="formdata.get('state').hasError(error.type) && (formdata.get('state').dirty || formdata.get('state').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>									
+											</div>
+										</div>
+										
+										<div class="row"> 
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>City</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "text" class = "form-control fortextbox" name = "city" placeholder = "City" formControlName="city" >
+												<ng-container *ngFor="let error of error_messages.city">
+													<div class="error-message" *ngIf="formdata.get('city').hasError(error.type) && (formdata.get('city').dirty || formdata.get('city').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>								
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Pin</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "text" class = "form-control fortextbox" name = "pin" placeholder = "Pin" formControlName="pin" >
+												<ng-container *ngFor="let error of error_messages.pin">
+													<div class="error-message" *ngIf="formdata.get('pin').hasError(error.type) && (formdata.get('pin').dirty || formdata.get('pin').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>								
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Gender</label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<select class="form-control fortextbox" name = "sex" formControlName="sex"  >
+												  <option value="null">Select Gender</option>
+												  <option value="1" >Male</option>
+												  <option value="2" >Female</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.sex">
+													<div class="error-message" *ngIf="formdata.get('sex').hasError(error.type) && (formdata.get('sex').dirty || formdata.get('sex').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>									
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-lg-12 col-md-12 mt-4"> 
+										<div class="row">
+											<div class="col-md-12">
+												<h4>Credential Details</h4><hr>
+											</div>	
+										</div>
+									</div>									
+									
+									
+									<div class="col-md-6 min-width-col6">
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>New Password<span class="red-astr">*</span></label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "password" class = "form-control fortextbox" name = "password" placeholder = "Password" formControlName="password" autocomplete="new-password" >
+												<ng-container *ngFor="let error of error_messages.password">
+													<div class="error-message" *ngIf="formdata.get('password').hasError(error.type) && (formdata.get('password').dirty || formdata.get('password').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>								
+											</div>
+										</div>
+									
+										<div class="row">
+											<div class="col-md-4 col_lable form_lable form-group pr-lg-0">
+												<label>Confirm Password<span class="red-astr">*</span></label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "password" class = "form-control fortextbox" name = "confirm_password" placeholder = "Confirm Password" formControlName="confirm_password" >
+												<ng-container *ngFor="let error of error_messages.confirm_password">
+													<div class="error-message" *ngIf="formdata.get('confirm_password').hasError(error.type) && (formdata.get('confirm_password').dirty || formdata.get('confirm_password').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>		
+												<div class="error-message" *ngIf="f.confirm_password.errors?.mustMatch">Passwords must match</div>
+											</div>
+										</div>
+									</div>
+									
+									
+									<div class="col-md-6 min-width-col6">
+										<div class="row" *ngIf="user_id != null">
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Email<span class="red-astr">*</span></label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "email" class = "form-control fortextbox" name = "email" readonly placeholder = "Email" formControlName="email"  >
+												<ng-container *ngFor="let error of error_messages.email">
+													<div class="error-message" *ngIf="formdata.get('email').hasError(error.type) && (formdata.get('email').dirty || formdata.get('email').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>								
+											</div>
+										</div>										
+										<div class="row" *ngIf="user_id == null" >
+											<div class="col-md-4 col_lable form_lable form-group">
+												<label>Email<span class="red-astr">*</span></label>
+											</div>
+											<div class="col-md-8 col_input form-group" >
+												<input type = "email" class = "form-control fortextbox" name = "email" placeholder = "Email" formControlName="email"  >
+												<ng-container *ngFor="let error of error_messages.email">
+													<div class="error-message" *ngIf="formdata.get('email').hasError(error.type) && (formdata.get('email').dirty || formdata.get('email').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>								
+											</div>
+										</div>
+										
+										<div class="row">
+											<div *ngIf="update_by_group == '1'" class="col-md-12 form-group">
+												<label for="force_passwd_change" placement="top" ngbTooltip="Click checkbox, if you want user to change password when login next time"><input value="true" type = "checkbox" class = "" id="force_passwd_change" name = "force_passwd_change" formControlName="force_passwd_change"> Forcefully Password Update</label>
+											</div>
+										</div>
+									</div>
+									
+									
+									<div class="col-md-6 min-width-col6">
+									</div>								
+									<div class="col-lg-6 col-md-12 min-width-col6 ipp100 mb-2">
+										<div class="row">
+											<div class="col-lg-4 col_lable form_lable form-group d-none d-xl-block d-lg-block d-sm-block d-md-none">												
+											</div>
+											<div class="col-lg-8 col-md-12 col_input btn_align">
+												<div class="btn-box">
+													<div class="theme-btn mr-2">
+														<span class="txt">
+															<button class = "forsubmit btn_blueas btn" (click)="onSubmit(formdata.value)">Submit</button>
+														</span>
+													</div>
+													
+													<div class="theme-btn">
+														<span class="txt">
+															<a class = "btn_blueas btn" routerLink="{{dashboard_url}}users-list" >Cancel</a>
+														</span>
+													</div>
+												</div>							
+											</div>
+										</div>
+									</div>
+									
+								</div>										
+							</div>
+						</div>
+					</form> 
+				</div>
+			</div>
+			
+			
+			<div class="modal {{modalfadeclass}} {{modalshow}} dk-model-box" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header dk-model-header">
+							<h5 class="modal-title" id="exampleModalLabel">Upload Profile Photo</h5>
+							<button type="button" (click)="closemodal()" class="close mclose" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+
+						<div *ngIf="croppedImage!=''" class="col-md-12 mt-3 text-center float-left">
+							<img class="crop-image" [src]="croppedImage" />  
+							<p class="previewimg">Preview</p>
+						</div>
+
+						<div class="modal-body">
+							<image-cropper
+								[imageChangedEvent]="imageChangedEvent"
+								[maintainAspectRatio]="true"
+								[containWithinAspectRatio]="containWithinAspectRatio"
+								[aspectRatio]="1/1"
+								[resizeToWidth]="100"
+								[resizeToHeight]="100"
+								[cropperMinWidth]="100"
+								[cropperMinHeight]="100"
+								[cropperStaticWidth]="100"
+								[cropperStaticHeight]="100"
+								[onlyScaleDown]="true"
+								[roundCropper]="true"
+								[initialStepSize] ="3"
+								[canvasRotation]="canvasRotation"
+								[transform]="transform"
+								[style.display]="showCropper ? null : 'none'"
+								format="png"
+								(imageCropped)="imageCropped($event)"
+								(imageLoaded)="imageLoaded()"
+								(cropperReady)="cropperReady($event)"
+								(loadImageFailed)="loadImageFailed()"
+							></image-cropper>
+									
+							<div class="col-md-12 mt-3 mb-2 float-left">	
+								<div class="mautobtn">	
+									<div class="floatleft">
+										<input name="profile_photo" class="choosimg" type="file" (change)="fileChangeEvent($event)" />
+									</div>
+									<div class="btn-box text-center">
+										<div class="theme-btn">
+											<span class="txt">												
+												<button class="btn btn-sm btn_blueas" (click)="zoomOut()">Zoom -</button>
+											</span>
+										</div>
+									</div>
+									
+									<div class="btn-box text-center">
+										<div class="theme-btn">
+											<span class="txt">												
+												<button class="btn btn-sm btn_blueas" (click)="zoomIn()">Zoom +</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div> 
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<ng-template #tpinpopup let-modal >
+				<div class="dk-model-box">
+					<div class="modal-header dk-model-header">
+						<h4 *ngIf="modal_type=='tpin'" class="modal-title" id="modal-basic-title">Transaction PIN</h4>
+						<h4 *ngIf="modal_type=='commission'" class="modal-title" id="modal-basic-title">Edit Commission</h4>
+
+						<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					
+					<div class="mtable-height">
+						<div *ngIf="modal_type=='tpin'" class="modal-body">
+							<div class="col-lg-12 col-md-12 col-12 p-0 float-left mt-2 mb-3 text-center">
+								<b>{{t_pin}}</b>
+							</div> 
+							<div class="clearfix"></div>
+							<div class="col-md-12 float-left text-center pb-3">
+								<div class="btn-box text-center">
+									<div class="theme-btn">
+										<span class="txt">												
+											<button type="button" (click)="GeneratePin()" class="btn btn_blueas tpin">Generate</button>
+										</span>
+									</div>
+								</div>
+							</div>	
+						</div>
+							<div *ngIf="modal_type=='commission'" class="modal-body">
+								<div class="clearfix"></div>
+								<form [formGroup] = "frmcommission"> 
+								<div class="col-md-12 float-left pb-3">
+									<div class="row" >
+										<div class="col-md-12 col_input form-group" >
+											<input min="1" max="100" type = "number" class = "form-control fortextbox" id = "commission" name = "commission" placeholder = "Commission" formControlName="commission"  >
+											<ng-container *ngFor="let error of error_messages.commission">
+												<div class="error-message" *ngIf="frmcommission.get('commission').hasError(error.type) && (frmcommission.get('commission').dirty || frmcommission.get('commission').touched)">
+													{{ error.message }}
+												</div>
+											</ng-container>								
+										</div>
+									</div>
+									<div class="btn-box text-center">
+										<div class="theme-btn">
+											<span class="txt">												
+												<button type="button" (click)="EditCommission(frmcommission.value)" class="btn btn_blueas tpin">Edit</button>
+											</span>
+										</div>
+									</div>
+								</div>
+								</form>	
+							</div>
+					</div>
+				</div>
+			</ng-template>
+		</div>

@@ -1,0 +1,387 @@
+	<div class="col-md-12 content dashboard-body"> 
+			
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			
+			<ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-5" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+			
+			<div class="myform padding-body">
+				<div class="content-box-shadow">
+					<form [formGroup] = "packagefrm"> 
+
+						<div class="row">
+							<div class="col-md-12 mb-2">
+								<label class="fw-500">All fields are mandatory<span class="red-astr">*</span></label>
+							</div>
+							<div class="col-md-4 col_lable form_lable form-group">
+								<label>Instructor:</label>              
+								<img *ngIf="spinner==true" class="float-right" width="25" src="{{site_url}}/assets/images/spinner-green.svg" />
+							</div>
+							<div class="col-lg-6 col-md-10 col_input-1 form-group resourcedd" >
+								<div *ngIf="disabled_dropdown == true" class="col-md-12 pl-0 pr-0 float-left " >
+									<input type="text" class = "form-control fortextbox"  value="{{initial_value}}" disabled="disabled" >
+								</div>
+
+								<div *ngIf="disabled_dropdown == false" class="ng-autocomplete">
+									<ng-autocomplete #auto
+									  [data]="instructor_list"
+									  [searchKeyword]="keyword"
+									  [debounceTime] = "200"
+									  [minQueryLength] = "2" 
+									  placeHolder="Selected Assign Instructor"
+									  name="instructor"
+									  (selected)='selectEvent($event)'
+									  (inputFocused)='onFocused($event)'
+									  [itemTemplate]="itemTemplate"
+									  (scrolledToEnd)='scrolledToEnd($event)'
+									  (inputChanged)='inputChanged($event)'
+									  (inputCleared)='inputCleared($event)'
+									  [notFoundTemplate]="notFoundTemplate">
+									</ng-autocomplete>
+								  
+									<ng-template #itemTemplate let-item>
+									  <a [innerHTML]="item.name"></a>
+									</ng-template>
+								  
+									<ng-template #notFoundTemplate let-notFound>
+									  <div [innerHTML]="notFound"></div>
+									</ng-template>
+								</div>
+
+								<div *ngIf="instructor_selected == true" class="error-message col-md-12 pl-0 pr-0" >
+									Instructor required
+								</div>
+							</div> 
+						</div>						
+						<div class="clearfix"></div>
+
+						<div *ngIf="credit_system == 'Active'" class="row">
+							<div class="col-md-12 mt-1 mb-2">
+								<h5>Credit</h5> 
+							</div>
+
+							<div class="col-md-4 col_lable form_lable form-group">
+								<label for="credit">Credit:</label>
+							</div>
+
+							<div class="col-md-2 form-group pl-0" >
+									<input type = "number" class = "form-control" id="credit" value="{{this.credit}}" min="0" name = "credit" formControlName="credit" >
+								<ng-container *ngFor="let error of error_messages.credit">
+									<div class="error-message col-md-12 mb-4 pl-0" *ngIf="packagefrm.get('credit').hasError(error.type) && (packagefrm.get('credit').dirty || packagefrm.get('credit').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>		
+							</div>
+
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12 mt-1 mb-2">
+								<h5>Resource Allocation (Allocated / Used)</h5> 
+							</div>
+						</div>
+						
+						<div class="row"> 				   
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable form-group">
+										<label for="exercise">Exercise:</label> {{req_exercise}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="exercise" min="0" name = "exercise" formControlName="exercise" >
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_exercise}}
+										</div>												
+									</div>
+									<ng-container *ngFor="let error of error_messages.exercise">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('exercise').hasError(error.type) && (packagefrm.get('exercise').dirty || packagefrm.get('exercise').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>	
+								</div>	
+							</div>
+						
+						
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable form-group">
+										<label for="team">Team:</label> {{req_team}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="team" min="0" name = "team" formControlName="team" > 
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_team}} 	 		
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.team">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('team').hasError(error.type) && (packagefrm.get('team').dirty || packagefrm.get('team').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>	
+								</div>	
+							</div>				
+							
+						</div>
+
+						<div class="row"> 
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable form-group">
+										<label for="users">Users:</label> {{req_users}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="users" min="0" name = "users" formControlName="users" >
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_users}} 	  						
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.users">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('users').hasError(error.type) && (packagefrm.get('users').dirty || packagefrm.get('users').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>	
+								</div>	
+							</div>
+							
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable form-group">
+										<label for="vm">Virtual Machine:</label> {{req_vm}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="vm" min="0" name = "vm" formControlName="vm"> 
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_vm}} 	 
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.vm">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('vm').hasError(error.type) && (packagefrm.get('vm').dirty || packagefrm.get('vm').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+						</div>	
+								
+						<div class="row"> 
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable form-group">
+										<label for="network">Network:</label> {{req_network}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="network" min="0" name = "network" formControlName="network" > 
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_network}} 	  
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.network">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('network').hasError(error.type) && (packagefrm.get('network').dirty || packagefrm.get('network').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable  form-group">
+										<label for="template">Template:</label> {{req_template}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="template" min="0" name = "template" formControlName="template" >
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_template}} 	
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.template">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('template').hasError(error.type) && (packagefrm.get('template').dirty || packagefrm.get('template').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+						</div>
+					
+						<div class="row"> 	
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable  form-group">
+										<label for="disk">Disk:</label> {{req_disk}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class="form-control fortextbox" id="disk" min="0" name="disk" formControlName="disk" > 
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_disk}} 
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.disk">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('disk').hasError(error.type) && (packagefrm.get('disk').dirty || packagefrm.get('disk').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>	
+								</div>	
+							</div>
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable  form-group">
+										<label for="storage">Storage (in GB):</label> {{req_storage}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="storage" min="0" name = "storage" formControlName="storage" >
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_storage}}  							
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.storage">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('storage').hasError(error.type) && (packagefrm.get('storage').dirty || packagefrm.get('storage').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+						</div>
+						
+						
+						
+						<div class="row"> 
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable  form-group">
+										<label for="vcpu">Virtual CPU:</label> {{req_vcpu}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="vcpu" min="0" name = "vcpu" formControlName="vcpu" >
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_vcpu}}  							
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.vcpu">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('vcpu').hasError(error.type) && (packagefrm.get('vcpu').dirty || packagefrm.get('vcpu').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable  form-group">
+										<label for="vram_capacity">Virtual RAM (in GB):</label> {{req_vram}}
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="vram" min="0" name = "vram" formControlName="vram" >
+										</div> 
+										<div class="col-md-5 col-6 tbp float-left">
+											/ {{urs_vram}}  							
+										</div>
+									</div>
+									<ng-container *ngFor="let error of error_messages.vram">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('vram').hasError(error.type) && (packagefrm.get('vram').dirty || packagefrm.get('vram').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+						</div>
+						
+						
+						<div class="row">
+							<div class="col-md-12 mt-2 mb-2">
+								<h5>Maximum Resource Limit Allocation</h5> 
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable  form-group">
+										<label for="max_storage">Max Storage (in GB):</label>
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="max_storage" min="0" name = "max_storage" formControlName="max_storage" >
+										</div> 
+									</div>
+									<ng-container *ngFor="let error of error_messages.max_storage">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('max_storage').hasError(error.type) && (packagefrm.get('max_storage').dirty || packagefrm.get('max_storage').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable  form-group">
+										<label for="max_vcpu">Max Virtual CPU:</label>
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="max_vcpu" min="0" name = "max_vcpu"  formControlName="max_vcpu" >
+										</div> 
+									</div>
+									<ng-container *ngFor="let error of error_messages.max_vcpu">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('max_vcpu').hasError(error.type) && (packagefrm.get('max_vcpu').dirty || packagefrm.get('max_vcpu').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+						</div>
+					
+						<div class="row">
+							<div class="col-lg-4 col-md-6 onecell"> 
+								<div class="row"> 
+									<div class="col-md-8 col_lable form_lable  form-group">
+										<label for="max_vram">Max Virtual RAM (in GB):</label>
+									</div>
+									<div class="col-md-4 col_input form-group" >
+										<div class="col-md-7 col-6 plg0 float-left">
+											<input type = "number" class = "form-control fortextbox" id="max_vram" min="0" name = "max_vram"  formControlName="max_vram" >
+										</div> 
+									</div>
+									<ng-container *ngFor="let error of error_messages.max_vram">
+										<div class="error-message col-md-12 mb-4" *ngIf="packagefrm.get('max_vram').hasError(error.type) && (packagefrm.get('max_vram').dirty || packagefrm.get('max_vram').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+								</div>	
+							</div>
+						</div>	
+						
+						<div class="row">
+							<div class="col-md-12 form_lable form-group mt-3 btn_align">
+								<div class="btn-box">
+									<div class="theme-btn mr-2">
+										<span class="txt">
+											<button class = "forsubmit btn_blueas btn" (click)="onSubmit(packagefrm.value)">Submit</button>
+										</span>
+									</div>
+									
+									<div class="theme-btn">
+										<span class="txt">
+											<a class = "btn_blueas btn" routerLink="{{dashboard_url}}resource-list" >Cancel</a>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+			   </div>
+			</div>
+		</div>

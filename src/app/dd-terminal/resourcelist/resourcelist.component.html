@@ -1,0 +1,205 @@
+
+		<div class="col-md-12 content dashboard-body"> 
+		
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+			<div class="padding-body">
+				<div class="content-box-shadow">
+					<div class="row">
+						<div class="col-lg-2 col-md-4 form-group ippd50">
+							<input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />					
+						</div>
+
+						<div class="col-lg-10 col-md-8 form-group ippd50">
+							<div class="btn-box btn_align">
+								<div class="theme-btn theme-btn-dd">
+									<span class="txt">
+										<a class="btn btn_blueas" (click)="redirect(dashboard_url+'resource')"><fa-icon [icon]="faUser"></fa-icon> &nbsp;Allocate Resource</a>
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+							<ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-3" type="{{alertClass}}" (close)="closed = true"><strong innerHTML="{{alertMessage}}">{{ alertMessage }}</strong></ngb-alert>
+
+							<table id="team-table" datatable [dtOptions]="dtOptions[1]" dt-instance="dtInstance" [dtTrigger]="dtTrigger" class="row-border hover table-striped">
+								<thead>
+									<tr>
+										<th class="tidcenter tidc">S.No.</th>
+										<th class="tuidc">User Id</th>
+										<th class="taic">Instructor Name</th>
+										<th class="tluc">Email</th>
+										<th class="tcbc">Allocated By</th>
+										<th class="tcbc">Allocation Date</th>
+										<th class="tluc">Last Update</th>
+										<th class="tac">Action</th>
+									</tr>
+								</thead>
+								<tbody *ngIf="packages?.length != 0">
+									<tr *ngFor="let pack of packages"
+									[class.highlighted]="clicked === pack.no" (click)="clicked = pack.no"
+									>
+										<td class="tidcenter">{{pack.no}}</td>
+										<td>{{ pack.User_Unique_ID }}</td>
+										<td><a href="javascript:void(0);" (click)="viewUserProfile(pack.assign_instructor);" title="{{ pack.instructor_name }} profile" class="tablelinkc">{{ pack.instructor_name }}</a></td>
+										<td>{{ pack.instructor_email }}</td>
+										<td><a href="javascript:void(0);" (click)="viewUserProfile(pack.created_by);" class="tablelinkc" title="{{ pack.admin_name }} profile" >{{ pack.admin_name }}</a></td>
+										<td>{{ pack.create_datetime }}</td>
+										<td><span class="datetime">{{ pack.last_datetime }}</span></td>
+										<td>
+											<a routerLink="{{dashboard_url}}resource/{{pack.id}}" class="btn-default btn-sm btn-danger" class="edit" placement="top" ngbTooltip="Edit Resource"><fa-icon [icon]="faEdit"></fa-icon></a>
+											<button class="btn btn-sm btn-delete" (click)="deleteResource(pack.id)" placement="top" ngbTooltip="Delete Resource"><fa-icon [icon]="faTrash"></fa-icon></button>
+											<button type="button" class="btn btn-sm btn-view" placement="top" ngbTooltip="View Resource" (click)="viewPackageModelOpen(pack.id,viewpackage)"><fa-icon [icon]="faEye"></fa-icon></button>
+										</td>
+									</tr>
+								</tbody>
+								<tbody *ngIf="packages?.length == 0">
+									<tr>
+										<td colspan="4" class="no-data-available">No data!</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div><!--content-box-->
+			</div><!--padding-body-->
+			
+			<ng-template #viewpackage let-modal>
+				<div class="dk-model-box">
+					<div class="modal-header dk-model-header">
+						<h4 class="modal-title" id="modal-basic-title">Resource Details</h4>
+						<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="table-responsive mtable-height">
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th scope="row" colspan="4"><h5 class="mb-0">Resource Allocation (Used / Allocated)</h5></th>
+									</tr>
+									<tr>
+										<th scope="row"><b>Exercise</b></th>
+										<td>{{urs_exercise}} / {{rs_exercise}}</td>
+										<th scope="row"><b>Team</b></th>
+										<td>{{urs_team}} / {{rs_team}}</td>
+									</tr>
+									<tr>
+										<th scope="row"><b>Users</b></th>
+										<td>{{urs_users}} / {{rs_users}}</td>
+										<th scope="row"><b>VM</b></th>
+										<td>{{urs_vm}} / {{rs_vm}}</td>
+									</tr>
+									<tr>
+										<th scope="row"><b>Network</b></th>
+										<td>{{urs_network}} / {{rs_network}}</td>
+										<th scope="row"><b>Template</b></th>
+										<td>{{urs_template}} / {{rs_template}}</td>
+									</tr>
+									<tr>
+										<th scope="row"><b>Disk</b></th>
+										<td>{{urs_disk}} / {{rs_disk}}</td>
+										<th scope="row"><b>Storage (in GB)</b></th>
+										<td>{{urs_storage}} / {{rs_storage}}</td>
+									</tr>									
+									<tr>
+										<th scope="row"><b>VCPU</b></th>
+										<td>{{urs_vcpu}} / {{rs_vcpu}}</td>
+										<th scope="row"><b>VRAM (in GB)</b></th>
+										<td>{{urs_vram}} / {{rs_vram}}</td>
+									</tr>
+									<tr>
+										<th scope="row" colspan="4"><h5 class="mb-0">Maximum Resource Limit Allocation</h5></th>
+									</tr>
+									<tr>
+										<th scope="row"><b>Max Storage (in GB)</b></th>
+										<td>{{rs_max_storage}}</td>										
+										<th scope="row"><b>Max VCPU</b></th>
+										<td>{{rs_max_vcpu}}</td>	 
+									</tr>
+									<tr>
+										<th scope="row"><b>Max VRAM (in GB)</b></th>
+										<td colspan="3">{{rs_max_vram}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</ng-template>
+
+
+			<div class="modal {{modalshow}} dk-model-box" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-xl">
+				 <div class="modal-content dk-model-scroller">
+					 <div class="modal-header dk-model-header">
+						 <h5 class="modal-title" id="exampleModalLabel">Assgin Package To Instructor</h5>
+						 <button type="button" (click)="closemodal()" class="close mclose" data-dismiss="modal" aria-label="Close">
+							 <span aria-hidden="true">&times;</span>
+						 </button>
+					  </div>
+					  <div class="modal-body mbody mtable-height">
+
+						<form>
+
+
+						<div class="col-md-4 col_lable form_lable form-group float-left">
+							<label>Package Unique Id:</label>
+
+						</div>
+						<div class="col-md-8 col_input form-group float-left" >
+							{{assign_pk_unique_id}} <button type="button" class="btn btn-sm btn-view" title="View Package" (click)="viewPackageModelOpen(assign_package_id,viewpackage)"><fa-icon [icon]="faEye"></fa-icon></button>
+
+						</div>    
+						<div class="clearfix"></div>
+						
+						<div class="col-md-4 col_lable form_lable form-group float-left">
+							<label>Instructor:</label>              <img *ngIf="spinner==true" width="25" src="{{site_url}}/assets/images/spinner-green.svg" />
+
+						</div>
+						<div class="col-md-8 col_input form-group float-left" >
+
+						<div class="ng-autocomplete">
+							<ng-autocomplete #auto
+							  [data]="instructor_list"
+							  [searchKeyword]="keyword"
+							  [debounceTime] = "800"
+							  [minQueryLength] = "5"               
+							  placeHolder="Selected Assign Instructor"
+							  name="instructor"
+							  (selected)='selectEvent($event)'
+							  (inputFocused)='onFocused($event)'
+							  [itemTemplate]="itemTemplate"
+							  (scrolledToEnd)='scrolledToEnd($event)'
+							  (inputChanged)='inputChanged($event)'
+							  (inputCleared)='inputCleared($event)'
+							  [notFoundTemplate]="notFoundTemplate">
+							</ng-autocomplete>
+						  
+							<ng-template #itemTemplate let-item>
+							  <a [innerHTML]="item.name"></a>
+							</ng-template>
+						  
+							<ng-template #notFoundTemplate let-notFound>
+							  <div [innerHTML]="notFound"></div>
+							</ng-template>
+						  </div>
+
+						  <div *ngIf="instructor_selected == true" class="error-message" >
+							Instructor required
+						 </div>
+
+						</div> 
+
+						<div class="col-md-12 col_input form-group float-left" >
+
+						</div>
+						</form>
+					  </div>
+				   </div>
+				</div>
+			 </div>
+		</div>		
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

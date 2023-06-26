@@ -1,0 +1,93 @@
+<!-- header -->
+<app-header></app-header>
+
+<div class="ngsidebarcontainer">
+<ng-sidebar-container> 
+	
+	<!-- Sidebar -->
+	<ng-sidebar [(opened)]="_opened" position="left" mode="push" dock="true" >
+		<app-asidebar></app-asidebar>			
+	</ng-sidebar>
+	
+	<!-- Page content -->
+	<div ng-sidebar-content class="ngbodycontent">	
+		<div class="col-md-12 content dashboard-body"> 
+
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			
+			<div class="myform team padding-body">	
+				<form>
+					<div class="row">
+						<div class="col-lg-7 col-md-12"> 													
+							<div class="content-box-shadow content-box-shadow-sec"> 
+								<div class="col-lg-6 col-md-12 float-left pl-0">
+									<label>Documentation:</label><br>
+                                    <select class="form-control" id="a_doc" name="a_doc"> 
+                                        <!-- formControlName="a_doc" -->
+                                        <option >Select Documentation</option>
+                                        <option value="">Documentation 1</option>
+                                        <option value="">Documentation 2</option>
+                                        <option value="">Documentation 3</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-12 float-left pr-0 pl-0 mt-3 mt-md-3 mt-sm-0 mt-lg-0">
+									<label>Topic:</label><br>
+									<select class="form-control" id="a_topic" name="a_topic">
+                                        <!-- formControlName="a_topic" -->
+                                        <option >Select Topic</option>
+                                        <option value="">Topic 1</option>
+                                        <option value="">Topic 2</option>
+                                        <option value="">Topic 3</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="clearfix"></div>
+                                
+                                <div class="mt-3">
+									<label>Title:</label><br>
+									<input type="text" class="form-control fortextbox" id="a_title" name="a_title" placeholder="Title" formControlName="a_title">
+                                </div>
+                                
+								<div class="mt-3">
+									<label>Description:</label><br>
+									<angular-editor [placeholder]="a_desc_placeholder" formControlName="a_desc" id="a_desc" [(ngModel)]="a_desc" [config]="config" ></angular-editor>
+									<div class="html">{{ a_desc }}</div>
+								</div>
+                                
+                                <div class="btn-box btn_align mt-3">
+                                    <div class="theme-btn mr-2">
+                                        <span class="txt">
+                                            <button class="forsubmit btn_blueas btn">Submit</button>
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="theme-btn">
+                                        <span class="txt">
+                                            <a class = "btn_blueas btn" routerLink="{{dashboard_url}}article-list" >Cancel</a>
+                                        </span>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+
+                    </div>
+				</form>
+			</div>
+
+			
+			<!--
+			<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+				<div class="inner-area col-md-6 text-center">
+					<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+					<p class="text-center loaderc" >Please Wait ...</p>
+				</div>
+			</div>
+			-->
+			
+		</div>		
+	</div>
+	<!-- End Page content -->
+</ng-sidebar-container>
+</div>
+<!-- Footer -->
+<app-footer></app-footer>

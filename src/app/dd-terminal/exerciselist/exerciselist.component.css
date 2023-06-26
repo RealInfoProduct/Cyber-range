@@ -1,0 +1,13 @@
+.min80 {
+    min-width: 95px !important;
+}
+.Private {
+    color: #132144;
+    font-family: 'OpenSans-SemiBold', sans-serif;
+    background: #346eff7a;
+    padding: 4px 10px;
+    border-radius: 8px;
+    min-width: 100px;
+    display: inline-block;
+    text-align: center;
+}

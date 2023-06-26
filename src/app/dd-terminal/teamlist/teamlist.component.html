@@ -1,0 +1,264 @@
+<div class="col-md-12 content dashboard-body">
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-3" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+<div class="padding-body dk-table">
+	<div class="content-box-shadow">		
+	   <form [formGroup] = "formdata" >
+		   <div class="row">
+			<div class="col-md-12 pl-0 pr-0">
+				
+				<div class="col-lg-2 col-md-6 ippd50 form-group  float-left">
+						<select class="form-control fortextbox" id="status" name = "status" (change) = "changeStatus($event)" formControlName="status" >
+							<option  value="null">Select Status</option>
+							<option *ngFor="let status of statusList; let i = index" [value]="statusList[i]">
+							{{statusList[i]}}
+							</option>
+						</select>					
+				</div>				
+				
+				<div class="col-lg-2 col-md-6 ippd50 form-group  float-left">
+						<select class="form-control fortextbox" id="team_type" name = "team_type" (change) = "changeTeamType($event)" formControlName="team_type" >
+							<option  value="null">Team Type</option>
+							<option *ngFor="let teamType of teamTypeList; let i = index" [value]="teamType.id">
+							{{teamType.team_type}}
+							</option>
+						</select>					
+				</div>
+				
+				<div *ngIf="group_id == '2'" class="col-lg-2 col-md-6 ippd50 form-group  float-left">
+						<select class="form-control fortextbox" id="my_team" name = "my_team" (change) = "changeMyTeam($event)" >
+							<option  value="">All Team</option>
+							<option  value="my-team">My Team</option>
+						</select>					
+				</div>
+				
+				<div class="col-lg-2 col-md-6 ippd50 form-group  float-left">
+						<input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />
+				</div>
+
+				<div class="col-lg-2 col-md-6 ippd50 mb-2 mt-2  float-left">
+					<div class="mtain">
+						<div class="min80"><span class="Actives"></span> Active</div>
+						<div class="min80"><span class="Inactives"></span> Inactive</div>	
+					</div>
+				</div>	
+				
+				<!-- <div *ngIf="group_id != '2'" class="col-lg-2 col-md-6 ippd50 form-group  float-left">
+				</div> -->
+				
+				<div *ngIf=" inst_create_team == true " class="col-lg-3 col-md-6 ippd50 form-group btn_align  float-right">
+					<div class="btn-box">
+						<div class="theme-btn theme-btn-dd">
+							<span class="txt">									
+								<a class="btn btn_blueas" (click) = "redirect(dashboard_url+'team')" > <fa-icon [icon]="faUsers"></fa-icon> &nbsp;Add New Team</a>
+							</span>
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+					<table id="team-table" datatable [dtOptions]="dtOptions[1]" dt-instance="dtInstance" [dtTrigger]="dtTrigger" class="row-border table hover table-striped">
+						<thead>
+						  <tr>
+								<th class="tidcenter tidc">S.No.</th>
+								<th class="tuidc">Unique ID</th>
+								<th class="ttnc">Team Name</th>
+								<th class="tttc">Team Type</th>									
+								<th class="taic">Assigned Instructor</th>
+								<th class="tcbc">Created By</th>
+								<th class="tluc">Create Date</th>
+								<th class="tluc">Last Update</th>
+								<th class="tac">Action</th>
+							</tr>
+						</thead>
+						<tbody *ngIf="teams?.length != 0">
+							<tr *ngFor="let team of teams"
+							[class.highlighted]="clicked === team.s_no" (click)="clicked = team.s_no"
+							>
+								<td class="tidcenter">{{ team.s_no }}</td>
+								<td class="tuidc"><span class="status-{{team.team_status}}">{{ team.total_team_member }}</span> {{ team.team_unique_id }}</td>									
+								<td class="ttnc">
+									<a *ngIf="inst_create_team == true" routerLink="{{dashboard_url}}team/{{team.id}}" class="edit tablelinkc">
+										{{ team.team_name }}
+									</a>
+								</td>									
+								<td class="tttc">{{ team.team_type }}</td>									
+								<td class="taic"><span>
+									<a href="javascript:void(0);" (click)="viewUserProfile(team.team_assign_instructor);" class="tablelinkc cap" title="{{ team.team_instructor_name }} profile" >{{ team.team_instructor_name }}</a>
+								</span></td>
+								<td class="tcbc"><span>
+									<a href="javascript:void(0);" (click)="viewUserProfile(team.team_created_by_id);" class="tablelinkc cap" title="{{ team.team_created_by }} profile" >{{ team.team_created_by }}</a>
+								</span></td>
+								
+								<td class="tcbc">{{ team.team_create_datetime }}</td>
+
+								
+								<td class="tluc"><span class="datetime">{{ team.team_datetime }}</span></td>									
+								<td class="tac" *ngIf="group_id == '1'" >
+									<a routerLink="{{dashboard_url}}team/{{team.id}}" class="edit btn-default btn-sm btn-edit" placement="top" ngbTooltip="Edit"><fa-icon [icon]="faEdit"></fa-icon></a>
+									<button class="btn btn-sm btn-delete" (click) = "deleteTeam(team.id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+									<button type="button" title="Assign Team Member" (click)="openmodal(team.id,team.team_name,team.team_assign_instructor,team.team_instructor_name,team.team_created_by,team.team_create_datetime,team.team_datetime)" class="btn  btn-tean" placement="left" ngbTooltip="Assign Team Member"><fa-icon [icon]="faUsers"></fa-icon></button>
+									<!--(click)="open(team.id,team.team_name,content)"-->
+								</td>
+								<td class="tac" *ngIf="group_id == '2'" >
+								  <div *ngIf="update_by == team.team_assign_instructor" >	
+									<a *ngIf="inst_create_team == true" routerLink="{{dashboard_url}}team/{{team.id}}" class="edit btn-default btn-sm btn-edit" placement="top" ngbTooltip="Edit"><fa-icon [icon]="faEdit"></fa-icon></a>
+									<button *ngIf="inst_create_team == true" class="btn btn-sm btn-delete" (click) = "deleteTeam(team.id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+									<button type="button" title="Assign Team Member" (click)="openmodal(team.id,team.team_name,team.team_assign_instructor,team.team_instructor_name,team.team_created_by,team.team_create_datetime,team.team_datetime)" class="btn  btn-tean" placement="left" ngbTooltip="Assign Team Member"><fa-icon [icon]="faUsers"></fa-icon></button>
+								  </div>
+
+								  <div *ngIf="update_by != team.team_assign_instructor" >
+									<button type="button" title="View Team Member" (click)="openmodal(team.id,team.team_name,team.team_assign_instructor,team.team_instructor_name,team.team_created_by,team.team_create_datetime,team.team_datetime)" class="btn  btn-tean" placement="top" ngbTooltip="View Team Member"><fa-icon [icon]="faUsers"></fa-icon></button>
+								  </div>
+								</td>
+							</tr>
+						</tbody>
+						<tbody *ngIf="teams?.length == 0">
+							<tr>
+								<td colspan="7" class="no-data-available">No data!</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		</form>
+		
+		<!-- Modal -->
+		<div class="modal {{modalfadeclass}} {{modalshow}} dk-model-box" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		   <div class="modal-dialog modal-xl">
+			<div class="modal-content dk-model-scroller">
+				<div class="modal-header dk-model-header">
+					<h5 class="modal-title" id="exampleModalLabel">Assign Team Member</h5>
+					<button type="button" (click)="closemodal()" class="close mclose" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				 </div>
+				 <div class="modal-body mbody">
+					<form [formGroup] = "assginTeamFrm" >
+					   <div class="modal-body">
+							<div class="row ">
+								<div class="col-lg-6 col-sm-6 col-md-12 form_lable form-group minwidht100p">										
+									<div class="assginteamt">						
+										<div class="assgin_teamt">Team Name</div>
+										<div>{{assign_team_name}}</div>						
+										<div class="clearfix"></div>
+										
+										<div class="assgin_teamt">Instructor Name</div>
+										<div>{{assign_team_instr_name}}</div>						
+										<div class="clearfix"></div>
+										
+										<div class="assgin_teamt">Created By</div>
+										<div>{{assign_team_create_by}}</div>					
+										<div class="clearfix"></div>
+										
+										<div class="assgin_teamt">Create Date</div>
+										<div>{{assign_team_create_datetime}}</div>						
+										<div class="clearfix"></div>
+										
+										<div class="assgin_teamt">Last Update</div>
+										<div>{{assign_team_datetime}}</div>
+										<div class="clearfix"></div>						
+									</div>
+									
+									<div class="mtat">
+										<div class="min80"><span class="Actives"></span> Active</div>
+										<div class="min80"><span class="Inactives"></span> Inactive</div>
+									</div>							
+								</div>	
+								
+								<div class="col-lg-6 col-sm-6 col-md-12 form_lable form-group minwidht50p text-md-right" *ngIf="group_id == '1' || (group_id == '2' && update_by==assign_instructor_id && inst_allocate_exercise_user==true)">									
+									<div class="btn-box">
+										<div class="theme-btn theme-btn-dd mr-2">
+											<span class="txt">
+												<button type = "button" (click)="onSubmit(assginTeamFrm.value)" class="btn btn_blueas" >Assign Team</button>
+											</span>
+										</div>											
+										<div class="theme-btn theme-btn-dd">
+											<span class="txt">
+												<button type = "button" (click)="onUnassignCandidate(assginTeamFrm.value)" class="btn btn_blueas" >Unassign Team</button>
+											</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							
+							<ngb-alert *ngIf="!closedpopop" class="animate-show animate-hide mb-0" type="{{alertClass}}" (close)="closedpopop = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+						  <div class="table-responsive dkuser-table mb-3">
+							  <table *ngIf="responseTableArray?.length != 0" class="table table-bordered hover table-striped">
+								 <thead>
+									<tr class="dkutr">
+									   <th scope="col" class="dkutrth">User Name</th>
+									   <th scope="col" class="dkutrth">Message</th>
+									</tr>
+								 </thead>
+								 <tbody>
+									<tr class="table-{{response.type}}" *ngFor="let response of responseTableArray" 
+									[class.highlighted]="clicked === response.user_name" (click)="clicked = response.user_name"
+									> <!-- class="table-{{response.type}}" -->
+									   <td scope="col" class="dkutrth">{{response.user_name}}</td>
+									   <td scope="col" class="dkutrth">{{response.message}}</td>
+									</tr>
+								 </tbody>
+							  </table>
+						  </div>
+						  
+						  <div class="row ">
+							<div class="col-lg-3 col-md-6 form-group mb-2 ippd50">
+								<input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatable_candiSearch($event)" />
+							</div>
+						</div>
+
+						  <div class="table-responsive mtable-height">							
+							  	<table id="team-member-table" datatable [dtOptions]="dtOptions[2]" [dtTrigger]="dtCandidateTrigger"  dt-instance="dtCandidateInstance"  class="row-border hover table-striped">
+								  <thead>
+									 <tr>
+										<th>Select</th>
+										<th>First name</th>
+										<th>Last name</th>
+										<th>Team Status</th>
+										<th>Email</th>
+										<th>Mobile</th>
+										<th>Action</th>
+									 </tr>
+								  </thead>
+								  <tbody *ngIf="candidates?.length != 0">
+									 <tr *ngFor="let candidate of candidates"
+									 [class.highlighted]="clicked === candidate.user_id" (click)="clicked = candidate.user_id"
+									 >
+										<td><!--{{ candidate.s_no }} -->
+										   <input type="checkbox" [value]="candidate.user_id" (change)="onCheckboxChange($event)" />
+										   <span class="{{candidate.user_status}} ml-2"></span> 
+										</td>
+										<td><span>{{ candidate.firstName }}</span></td>
+										<td><span>{{ candidate.lastName }}</span></td>
+										<td *ngIf="candidate.team_name"><span class="team-assign" >{{candidate.team_name}}</span></td>
+										<td *ngIf="!candidate.team_name"><span class="team-not-assign" >Not Assign</span></td>
+										<td>{{ candidate.email }}</td>
+										<td>{{ candidate.mobile }}</td>
+										<td class="text-cener">
+											<button type="button" class="btn btn-sm btn-view" placement="top" ngbTooltip="View Profile" title=""  (click)="viewUserProfile(candidate.user_id)"><fa-icon [icon]="faEye"></fa-icon></button>
+										</td>
+									 </tr>
+								  </tbody>
+								  <tbody *ngIf="candidates?.length == 0">
+									 <tr>
+										<td colspan="8" class="no-data-available">No data!</td>
+									 </tr>
+								  </tbody>
+							  	</table>
+							</div>
+					   </div>
+					</form>
+				 </div>
+			  </div>
+		   </div>
+		</div>
+	</div>
+</div>
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

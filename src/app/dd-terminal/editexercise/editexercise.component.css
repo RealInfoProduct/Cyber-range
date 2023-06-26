@@ -1,0 +1,148 @@
+.tag-container a.close {
+    margin-left: 5px !important;
+}
+.tag-container span.tag {
+    margin-bottom: 5px;
+}
+.max200 {
+	max-width: 190px;
+	min-width: 190px;
+}
+.angular-editor-toolbar-set {
+    float: left;
+}
+/* Choose Exercise Image */
+.pimg_relative{
+    position: relative;
+    height: 100px;
+    width: 100px;
+	margin-bottom: 10px;
+}
+.pimg_absolute{
+    bottom: 5px;
+    position: absolute;
+    left: 4px;
+    background: #ffffff;
+    padding: 0px 4px;
+    border: 2px solid #b9b9b9;
+    border-radius: 20px;
+    color: #132144;
+}
+.pimg_absolute .iconcmr{
+	color: #525252 !important;
+}
+.pimg_absolute:hover{
+	background: #f5f5f5 !important;
+}
+.profile_bg {
+	background: #f5f5f5;
+    padding: 25px 10px 20px;
+}
+.crop-image {
+    border: 2px solid #d8d8d8;
+	height: 100px;
+}
+.upload_profile {
+    color: #132144;
+    font-family: 'OpenSans-SemiBold', sans-serif;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 20px;
+    padding: 3px 22px;
+    margin-top: 1px;
+    display: inline-block;
+    font-size: 14px;
+}
+.upload_profile:hover {
+	background: #e8e8e8;
+}
+@media only screen and (min-device-width : 1300px) and (max-device-width : 1400px) 
+{
+	.upload_profile {
+		font-size: 12px;
+	}
+}
+
+.mautobtn .btn-box {
+	/*display: inline-block;*/
+	margin-right: 15px;
+	float: left;
+}
+
+@media only screen and (min-width: 768px) 
+{
+	.mautobtn {
+		margin: auto;
+		text-align: center;
+		display: table;
+	}
+	.mautobtn .floatleft{
+		float: left;
+	}	
+	.mautobtn .floatleft .choosimg{
+		width: 215px;
+	}
+	.mautobtn .theme-btn {
+		padding: 2px 10px !important;
+	}
+	.plr0 {
+		padding-left: 0;
+	}
+}
+
+.add-manual {
+	margin-bottom: 20px;
+}
+.table td, .table th {
+    padding: 4px 10px;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+@media only screen and (min-width: 1025px) 
+{	
+	.add-manual {
+		display: flex;
+    	align-items: center;
+    	min-height: 90px;
+		margin-bottom: 0px;
+	}
+	.initial-manual {
+		max-width: 403px !important;
+		min-width: 403px !important;
+	}
+	.fldesk {
+		float: left;
+	}
+}
+@media only screen and (min-width: 767px) 
+{
+	.mautobtn .floatleft .choosimg{
+		float: none;
+	}
+}
+@media only screen and (max-width: 767px) 
+{
+	.mautobtn .floatleft{
+		margin-bottom: 25px;
+	}
+}
+/* End Choose Exercise Image */
+@media only screen and (max-width: 768px) 
+{
+	.plr0 {
+		padding: 0;
+	}
+}
+@media only screen and (min-device-width: 1024px) and  (max-device-width: 1100px)
+{
+	.plr0 {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+
+
+

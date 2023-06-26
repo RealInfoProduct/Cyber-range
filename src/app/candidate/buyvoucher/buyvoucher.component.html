@@ -1,0 +1,74 @@
+<!-- Header -->
+<app-candidateheader (setting)="get_setting($event)" ></app-candidateheader>
+
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script> 
+<div class="col-md-12 page-min-height padding-all padding-tb maxf-width">
+	<div class="row grid">
+        <div *ngFor="let v of voucher; let i = index" class="col-lg-12 col-md-12 ueipp ">	
+		
+			<div class="basketbox v-box">
+                <div class="col-md-4 float-left">	
+					<div class="ed_center">
+						<img *ngIf="v.image==null" src="{{server_url}}media/voucher-image/default-exe.jpg" class="img-fluid">
+						<img *ngIf="v.image!=null" src="{{server_url}}media/voucher-image/{{v.image}}" class="img-fluid">
+					</div>
+				</div>
+				
+                <div class="col-md-8 float-left">
+					<h3 class="heading text-left mt-3 mb-4">{{v.name}}</h3>	
+					<div class="row">
+						<div class="col-lg-3 col-md-6 ippd50 mb-md-0 mb-3">
+							<div class="price-content">
+								<h3><fa-icon [icon]="cur_icon" class="pricei"></fa-icon> {{v.price}}</h3>
+								<div class="pricetext">Price</div>
+							</div>
+						</div>						
+						<div class="col-lg-3 col-md-6 ippd50">
+							<div class="price-content">
+								<h3><fa-icon [icon]="faMoneyBill" class="priceit"></fa-icon> {{v.credit}}</h3>
+								<div class="pricetext">Credit</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				
+                <div class="clearfix"></div>	
+			</div>
+
+			<div class="col-md-4 float-right mt-4 pl-0 pr-0">
+				<table class="table table-bordered">
+					  <tr>
+						  <th>Voucher:</th>
+						  <td><fa-icon [icon]="cur_icon" class="pricei"></fa-icon> {{calculate.voucher_amount}}</td>
+					  </tr>	  
+					  <tr>
+						<th>GST({{calculate.tax_rate}}%):</th>
+						<td><fa-icon [icon]="cur_icon" class="pricei"></fa-icon> {{calculate.tax_amount}}</td>
+					  </tr>	
+					  <tr>
+						<th>Total Amount:</th>
+						<td><fa-icon [icon]="cur_icon" class="pricei"></fa-icon> {{calculate.total_amount}}</td>
+					  </tr>	
+				  </table>
+			</div>	
+			<div class="clearfix"></div>
+			
+			<div class="btn-box mt-3">
+				<div class="theme-btn float-right">
+					<span class="txt">
+						<a (click)="paynow();" class="btn_blueas">
+							<fa-icon [icon]="faPaperPlane" class="mr-1"></fa-icon> Pay Now
+						</a>
+					</span>
+				</div>				
+			</div>
+			
+		</div>
+	</div>
+</div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>       

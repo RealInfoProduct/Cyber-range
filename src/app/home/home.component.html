@@ -1,0 +1,585 @@
+<!-- Header -->
+<app-candidateheader></app-candidateheader>
+
+<div class="col-md-12"> 
+
+<!-- Banner  -->
+<div class="row banner-bg ">
+    <div class="col-md-12 max-width slider-centers">  
+        
+        <owl-carousel-o [options]="banner_slider">
+            <!-- Slider 1 -->
+            <ng-template carouselSlide>
+                <div class="row slider-center">
+                    <div class="col-md-12"> 
+                        <div class="row ">       
+                            <div class="col-md-5">
+                                <img src="{{server_url}}media/images/banner-access.png" class="img-fluid">       
+                            </div>  
+                            <div class="col-md-6 bnr-text d-md-flex align-items-center justify-content-end"> 
+                                <div>
+                                    <h1 class="bheaading mt-4 mt-md-0">
+                                        <span>Access</span>
+                                        Anywhere & Anytime
+                                    </h1> 
+                                    <div class="clearfix"></div>
+                                    <div class="text-center text-md-right ">
+                                        <a (click)="openmodal()" class="btn-red d-inline-block">request demo</a>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div> 
+                        <p class="bnr-tagline text-center mt-2 mb-0">Totally Browser Based · No Additional Software Required · 24*7 Availability</p> 
+                     </div> 
+                </div>
+            </ng-template>
+
+            <!-- Slider 2 -->
+            <ng-template carouselSlide>
+                <div class="row slider-center">
+                    <div class="col-md-12"> 
+                        <div class="row ">       
+                            <div class="col-md-5">
+                                <img src="{{server_url}}media/images/banner-real.png" class="img-fluid">         
+                            </div>  
+                            <div class="col-md-6 bnr-text d-md-flex align-items-center justify-content-end"> 
+                                <div>
+                                    <h1 class="bheaading mt-4 mt-md-0"><span class="">Real</span>
+                                    World Cyber Attacks</h1> 
+                                    <div class="clearfix"></div>
+                                    <div class="text-center text-md-right ">
+                                        <a (click)="openmodal()"  class="btn-red d-inline-block">request demo</a>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div> 
+                        <p class="bnr-tagline text-center mt-2 mb-0">
+                            Take Cyber Security in your hands · Launch Real Cyber Attacks · Develop an Understanding of Cyber Threat and Defences
+                        </p> 
+                     </div> 
+                </div>
+            </ng-template>
+
+            <!-- Slider 3 -->
+            <ng-template carouselSlide>
+                <div class="row slider-center">
+                    <div class="col-md-12"> 
+                        <div class="row ">       
+                            <div class="col-md-5">
+                                <img src="{{server_url}}media/images/banner-multiple.png" class="img-fluid">            
+                            </div>  
+                            <div class="col-md-6 bnr-text d-md-flex align-items-center justify-content-end">
+                                <div>
+                                    <h1 class="bheaading mt-4 mt-md-0"><span class="">Multiple</span>
+                                    Roles and Scenarios</h1> 
+                                    <div class="clearfix"></div>
+                                    <div class="text-center text-md-right ">
+                                        <a (click)="openmodal()"  class="btn-red d-inline-block">request demo</a>
+                                    </div>
+                                </div> 
+                            </div> 
+                        </div> 
+                        <p class="bnr-tagline text-center mt-2 mb-0">
+                            Multiple Real World Scenarios in a single platform
+                        </p> 
+                     </div> 
+                </div>
+            </ng-template>
+            
+            <!-- Slider 4 -->
+            <ng-template carouselSlide>
+                <div class="row slider-center">
+                    <div class="col-md-12"> 
+                        <div class="row ">       
+                            <div class="col-md-5">
+                                <img src="{{server_url}}media/images/banner-get.png" class="img-fluid">             
+                            </div>  
+                            <div class="col-md-6 bnr-text d-md-flex align-items-center justify-content-md-end"> 
+                                <div>
+                                    <h1 class="bheaading mt-4 mt-md-0"><span class="">Get</span>
+                                    Industry Ready</h1> 
+                                    <div class="clearfix"></div>
+                                    <div class="text-center text-md-right ">
+                                        <a (click)="openmodal()"  class="btn-red d-inline-block" (click)="popup = true">request demo</a>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div> 
+                        <p class="bnr-tagline text-center mt-2 mb-0">
+                            Skyvirt helps in learning and building various Information Security skills
+                        </p> 
+                     </div> 
+                </div>
+            </ng-template>
+
+            
+        </owl-carousel-o>
+        
+    </div>
+</div>
+
+
+
+<div class="overlay" *ngIf="popup">
+    <div class="popup">
+        <h2>Here i am</h2>
+        <a class="close" (click)="popup = false">&times;</a>
+        <div class="content">
+        you have selected this event
+        </div>
+    </div>
+</div>
+<!-- Services  -->
+<div class="row home bg-blue text-center text-white sideh-padding">   
+    <div class="col-md-12 max-width">  
+        <div class="row">
+            <div class="col-md-4 htsec"> 
+                <img src="{{server_url}}media/images/icon1.png" class="img-fluid"> 
+                <h5 class="sech">MODERN DESIGN</h5>  
+                <p class="secp">
+                    The graphic content of the software corresponds to the modern level of quality in the field of computer graphics and visualization               
+                </p>    
+            </div>  
+            <div class="col-md-4 htsec"> 
+                <img src="{{server_url}}media/images/icon2.png" class="img-fluid">
+                <h5 class="sech">HIGH INTERACTIVITY</h5>  
+                <p class="secp">A high interactivity combined with visual demonstration of physical experiments ificantly increases the effectiveness of the learning process</p>        
+            </div>  
+            <div class="col-md-4 htsec"> 
+                <img src="{{server_url}}media/images/icon3.png" class="img-fluid"> 
+                <h5 class="sech">SIMPLICITY & MINIMALISM</h5>  
+                <p class="secp">Unobtrusive interface of software products and intuitive management of virtual laboratory space</p>        
+            </div>  
+
+            <div class="col-md-4 htsec"> 
+                <img src="{{server_url}}media/images/icon4.png" class="img-fluid">  
+                <h5 class="sech">COMPLIANCE WITH EDUCATIONAL STANDARDS</h5>  
+                <p class="secp">Virtual laboratories meet modern educational standards and are an effective complement to the real laboratory base of educational institutions</p>    
+            </div>  
+            <div class="col-md-4 htsec"> 
+                <img src="{{server_url}}media/images/icon5.png" class="img-fluid"> 
+                <h5 class="sech">REALISTIC EXPERIMENTS</h5>  
+                <p class="secp">Execution of simulation experiments is as close as possible to reality. The software simulates process of working with the real equipment and repeats all  sequence of actions of the laboratory assistant</p>   
+            </div>  
+            <div class="col-md-4 htsec"> 
+                <img src="{{server_url}}media/images/icon6.png" class="img-fluid"> 
+                <h5 class="sech">CROSS PLATFORM</h5>  
+                <p class="secp">The software is supplied under the main modern platforms: Windows, MacOS, Linux, Android, iOS, HTML5, which allows for more flexible use of virtual laboratories in the educational process</p>    
+            </div>
+        </div>    
+    </div>  
+</div>
+
+<!-- Content Zig Zack -->
+<div class="row home sideh-paddingt max-widths">          
+    <div class="col-md-12 text-center"> 
+        <h2 class="text-upper text-red">The Only Cybersecurity Skill Development Platform</h2>  
+        <h4 class="text-upper text-blue">Covering the Entire Training Spectrum</h4>
+    </div> 
+
+    
+    <div class="col-md-6 mt-5 htsec position-relative"> 
+        <div class="hboxshado-1">
+            <video width="100%" height="229" controls="" name="media"><source src="{{site_url}}/assets/videos/cyber-range.mp4" type="video/mp4"></video>
+        </div>
+    </div>
+    <div class="col-md-6 mt-5 htsec text-center d-flex align-items-center justify-content-center"> 
+        <div>
+            <h5 class="text-blue">SkyVirt<sup>®</sup> CyberRange</h5>
+            <p class="pb-1">Register, Subscribe and Launch Steps.</p>
+            <a href="{{site_url}}/assets/videos/cyber-range.mp4" target="_blank" class="btn-red">Watch</a>
+        </div>
+    </div>
+
+
+
+
+</div> 
+
+<!-- clients -->
+<!-- Our Clients  text-center max-width -->
+<div class="row home bg-grayh mt-4 pb-5 sideh-paddingt">  
+    <div class="col-md-12 text-center max-width">
+        <h2 class="text-upper text-red pb-4">Our Clients</h2>                
+        <owl-carousel-o [options]="clients">
+            <ng-template carouselSlide>
+                <img src="{{server_url}}media/images/eagles.png" class="img-fluid">
+            </ng-template>  
+            <ng-template carouselSlide>
+                <img src="{{server_url}}media/images/mlsu.png" class="img-fluid">
+            </ng-template>
+        </owl-carousel-o>
+        <!-- <img src="{{server_url}}media/images/eagles.png" class="img-fluid">
+        <img src="{{server_url}}media/images/mlsu.png" class="img-fluid"> -->
+    </div>        
+</div>
+
+<!-- Our PARTNERS  -->
+<div class="row home mt-4 pb-5 sideh-paddingt">   
+    <div class="col-md-12 text-center max-width">       
+        <h2 class="text-upper text-red pb-4">Our PARTNERS</h2>  
+        <owl-carousel-o [options]="partners">
+            <ng-template carouselSlide>
+                <img src="{{server_url}}media/images/ti-corporation.png" class="img-fluid">
+            </ng-template>  
+            <ng-template carouselSlide>
+                <img src="{{server_url}}media/images/synergy-system.png" class="img-fluid">
+            </ng-template>
+            <ng-template carouselSlide>
+                <img src="{{server_url}}media/images/arne.png" class="img-fluid">
+            </ng-template>
+        </owl-carousel-o>
+        <!-- <img src="{{server_url}}media/images/ti-corporation.png" class="img-fluid">
+        <img src="{{server_url}}media/images/synergy-system.png" class="img-fluid">
+        <img src="{{server_url}}media/images/arne.png" class="img-fluid">  -->            
+    </div>
+</div>
+
+<!-- Testimonials  -->
+<div class="row home bg-blue-dot mb-4 pb-4 sideh-paddingt">   
+    <div class="col-md-12 max-width">  
+        <div class="row">
+            <div class="col-md-12 text-center"> 
+                <h2 class="text-upper text-red">Testimonials</h2> 
+                <p class="text-white w--g-75 align-items-center m-auto">We have trained many interns and we always like to hear they come out from the cooperation happy and satisfied. Have a look at what our interns said about us.</p>   
+            </div> 
+            <div class="col-md-12">
+                <owl-carousel-o [options]="testimonials">
+                    <ng-template carouselSlide>
+                        <div class="testimonial-box text-white text-justify">
+                            <div class="testimonial-profile">
+                                <img src="{{server_url}}media/images/rishi-kumar.jpg" class="img-fluid">
+                            </div>
+                            The internship at SkyVirt® CyberRange is the best decision that I have took regarding my career. SkyVirt® CyberRange is helping me to grow in every manner possible. It has the perfect architecture that is required for enhancing the skills of one in this field. The work environment is also very nice and everyone is always up for help. Overall it is turning out to be a great experience of HOL at SkyVirt® CyberRange .
+                            <div class="mt-3"><b>- <i>Rishi Kumar</i></b></div>
+                        </div>
+                    </ng-template>
+                    <ng-template carouselSlide>
+                        <div class="testimonial-box text-white text-justify">
+                            <div class="testimonial-profile">
+                                <img src="{{server_url}}media/images/aman-pandey.jpg" class="img-fluid">
+                            </div>
+                            As a whole I believe that this internship was successful in furthering my knowledge of a career in the field of Cyber Security. While being immersed in a company I saw the pressure of deadlines, importance of appearance, the value of being a self-motivator and the joy of loving IT job.
+                            <div class="mt-3"><b>- <i>Aman Pandey</i></b></div>
+                        </div>
+                    </ng-template>
+                    <ng-template carouselSlide>
+                        <div class="testimonial-box text-white text-justify">
+                            <div class="testimonial-profile">
+                                <img src="{{server_url}}media/images/devesh-singh.jpg" class="img-fluid">
+                            </div>
+                            I thoroughly enjoyed my internship this summer and now have very valuable experience under my belt. I know this will help when looking for jobs and needing references. I was dreading it in the beginning, but now I am so happy it was required. As much as the curriculum changes, I hope that class remains constant. 
+                            <div class="mt-3"><b>- <i>Devesh Singh</i></b></div>
+                        </div>
+                    </ng-template>
+                    <ng-template carouselSlide>
+                        <div class="testimonial-box text-white text-justify">
+                            <div class="testimonial-profile">
+                                <img src="{{server_url}}media/images/akshita-jain.jpg" class="img-fluid">
+                            </div>
+                            I've had a great work experience at SkyVirt® CyberRange . It has friendly work environment which motivates an individual working in the firm to work hard in order to bring success to the firm. They also offer the best platform to learn new technologies. SkyVirt® CyberRange  helped me in learning the work ethics and grow in every aspect.
+                            <div class="mt-3"><b>- <i>Akshita Jain</i></b></div>
+                        </div>
+                    </ng-template>
+                </owl-carousel-o>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row home max-widths mt-4 mb-4">
+    <div class="col-xl-2"> </div>         
+    <div class="col-xl-8 text-center">  
+        <!-- <h3 class="text-upper text-blue real-word">"THERE'S NOT A VIABLE ALTERNATIVE FOR <br><span>REAL-WORLD</span> EXPERIENCE"</h3>
+        <p class="ptext-blue mb-0">
+            THAT IS THE REASON WE MADE THE SKYVIRT® CYBERRANGE- REAL TIME EMULATION TRAINING PLATFORM<br>
+            FOR <b>ACADEMIA, INDUSTRIES AND GOVERNMENT - Tarun Kumar Kushwaha</b>
+        </p> -->
+        <p class="ptext-blue mb-0">
+            "THERE'S NOT A VIABLE ALTERNATIVE FOR <b>REAL-WORLD</b> EXPERIENCE THAT IS THE REASON WE MADE THE SKYVIRT® CYBERRANGE- REAL TIME EMULATION TRAINING PLATFORM<br>
+            FOR <b>ACADEMIA, INDUSTRIES AND GOVERNMENT" - Tarun Kumar Kushwaha</b>
+        </p>
+        <div class="text-center d-none">
+            <a href="#" class="btn-red mb-1 d-inline-block">REQUEST DEMO</a>
+        </div>
+    </div> 
+</div> 
+</div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>
+
+
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="section">
+            <nav class="navbar navbar-expand-lg nav-collapse">
+                <a class="navbar-brand logo" href="#"><img src="../../assets/images/home/logo.svg" /></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <i class="bi bi-text-center"></i>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    
+                    <li class="nav-item active">
+                      <a class="nav-link" href="#">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">EXERCISE REPOSITORY</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">VOUCHER</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">MITRE</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">DEMO REQUEST</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">CONTACT US</a>
+                    </li>
+                  </ul>
+                    <div class="credit">
+                        <div class="wallet">
+                            <img src="../../assets/images/home/wallet.svg" />
+                            <span><b>00</b> Credit</span>
+                        </div>
+                        <button class="sign-btn">SIGN IN</button>
+                    </div>
+                </div>
+              </nav>
+        </div>
+
+        <div class="banner">
+            <img src="../../assets/images/home/left-circle-hero.png.svg" class="pattern" />
+            <div class="row banner-details">
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="banner-text">
+                        <label>Secure Skills:</label><br>
+                        <span>Your One-Stop Cybersecurity<br/>Skill Development Platform</span>
+                        <p>we offers a range of courses and training programs designed to cater to every skill level, from novice to expert. With CyberRange, you can gain practical knowledge and hands-on  experience in the field of cybersecurity, ensuring that you stay up-to-date with the latest  trends and technologies.</p>
+                        <div class="features-option">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="features-1">
+                                        <img src="../../assets/images/home/check.svg" />
+                                        <span class="features-title">Access anywhere, anytime</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="features-1">
+                                        <img src="../../assets/images/home/check.svg" />
+                                        <span class="features-title">Multiple roles & scenarios</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="features-1">
+                                        <img src="../../assets/images/home/check.svg" />
+                                        <span class="features-title">Real world cyber attacks</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="features-1">
+                                        <img src="../../assets/images/home/check.svg" />
+                                        <span class="features-title">Get industry ready</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="show-demo">SHOW DEMO</button>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="vector-image">
+                        <img src="../../assets/images/home/banner-image.svg" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="our-industry">
+                <span>Our Industry Partners & Clients</span>
+                <div class="row">
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="partner">
+                            <span>Partners</span>
+
+                            <div class="our-partner">
+                                <img src="../../assets/images/home/our-partner-3.svg" />
+                                <img src="../../assets/images/home/our-partner-2.svg" />
+                                <img src="../../assets/images/home/our-partner-1.svg" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <div class="client">
+                            <span>Clients</span>
+                            <div class="our-partner">
+                                <img src="../../assets/images/home/client-2.svg" />
+                                <img src="../../assets/images/home/client-1.svg" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="row cybersecurity">
+                <div class="col-md-6">
+                    <div class="cyber-range">
+                        <img src="../../assets/images/home/cyber-range.svg" />
+                    </div>
+                </div>
+                <div class="col-md-6 cyber-text">
+                    <div class="about-cyberRange">
+                        <label>About CyberRange</label><br />
+                        <span>CyberRange: Empowering You with Cybersecurity Skills</span>
+                        <p>we empower you with the cybersecurity skills needed to protect yourself and your organization from cyber threats. Our platform offers a comprehensive range of courses and training programs, designed to cater to individuals and organizations of all skill levels. Our expert instructors provide in-depth knowledge and practical experience in the field of cybersecurity, covering topics such as threat intelligence, risk management, incident response, and much more.</p>
+                        <p>Our platform also offers hands-on training through simulations and real-world scenarios to help you develop practical skills that are in high demand by today's employers. With CyberRange Academy, you can be assured of building a robust and reliable cybersecurity skillset that will help you secure your organization's critical assets and stay ahead in your career.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="our-client">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-xs-12 total-clients" *ngFor="let item of ourclient">
+                        <div class="client-icon">
+                            <img src="{{item.ourclientPic}}" />
+                        </div>
+                        <div class="cyber-project">
+                            <span>{{item.ourclientNumber}}</span>
+                            <p>{{item.ourclientDetails}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section category">
+            <div class="row">
+                <div class="col-md-4" *ngFor="let item of category">
+                    <div class="company-category">
+                        <div class="category-icon">
+                            <img src="{{item.categoryPic}}" />
+                        </div>
+                        <div class="category-details">
+                            <span>{{item.categoryName}}</span>
+                            <p>{{item.categoryDetails}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category-bg-image">
+                <img src="../../assets/images/home/category-bg-image.png.png" />
+            </div>
+        </div>
+
+        <div class="section shillDevelopment">
+            <div class="video_section">
+                <div class="video_section_header">
+                    <label>THE ONLY CYBERSECURITY SKILL DEVELOPMENT PLATFORM</label>
+                </div>
+                <div class="video_section_register">
+                    <label>Register, Subscribe and Launch Steps.</label>
+                </div>
+                <div class="video_box container">
+                    <div class="video">
+                        <video class="video_player" controls="" name="media"><source src="{{site_url}}/assets/videos/cyber-range.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="about_us">
+                <div class="about_us_header">
+                    <label>What our students say about us</label>
+                </div>
+                <div class="about_us_item">
+                    <label>We have trained many interns and we always like to hear they come out from the cooperation happy and satisfied. 
+                        Have a look at what our interns said about us.</label>
+                </div>
+                <div class="about_card">
+                    <owl-carousel-o [options]="banner_slider">
+                        <!-- Slider 1 -->
+                        <ng-template carouselSlide *ngFor="let item of ourStudents">
+                                <p class="about_card_text">{{item.studentsDetails}}</p>
+                                <div class="about_card_user">
+                                    <div class="user_img">
+                                        <div class="about_card_user_name">
+                                            <img class="userpic" src="{{server_url}}{{item.studentsPic}}" alt="">
+                                            <span>-{{item.studentsName}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="about_card_bg">
+                                        <img src="../../assets/images/home/about_cardbg.png.svg" alt="">
+                                    </div>
+                                </div>
+                        </ng-template>
+                    </owl-carousel-o>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="section footer-all-section">
+        <div class="container">
+            <div class="footer">
+                <div class="row">
+                    <div class="col-md-3 col-sm-12 col-xs-12 pt-5">
+                        <img class="footer-logo" src="../../assets/images/home/footer-logo.svg" />
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 pt-5">
+                        <div class="footer-header-title">
+                            <span>ABOUT US</span>
+                        </div>
+                        <div class="footer-option">
+                            <p>SkyVirt® CyberRange is designed as a real-time emulation platform for conducting the training for full spectrum IT Infrastructure, Cyber Security & Digital Forensics</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 pt-5 footer-menu">
+                        <ul>
+                            <li>FAQ’s</li>
+                            <li>TEAM</li>
+                            <li>DISCLAIMER</li>
+                            <li>KNOLEDGE BASE</li>
+                            <li>HOW TO USE</li>
+                            <li>WHAT USERS SAY ABOUT US</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12 pt-5">
+                        <div class="footer-social-icon">
+                            <div class="social-icon">
+                                <i class="bi bi-twitter"></i>
+                            </div>
+                            <div class="social-icon">
+                                <i class="bi bi-facebook"></i>
+                            </div>
+                            <div class="social-icon">
+                                <i class="bi bi-instagram"></i>
+                            </div>
+                            <div class="social-icon">
+                                <i class="bi bi-linkedin"></i>
+                            </div>
+                        </div>
+                        <img src="../../assets/images/home/made-in-india-image.svg" class="made-in-india" />
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="copyright">Copyright © 2023 SkyVirt® CyberRange | Privacy Policy</div>
+                    <div class="copyright pt-2">
+                        <span>Made with <i class="bi bi-suit-heart-fill"></i> in India</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

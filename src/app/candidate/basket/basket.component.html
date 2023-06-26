@@ -1,0 +1,109 @@
+<!-- Header -->
+<app-candidateheader #head (setting)="get_setting($event)" (added_basket)="get_added_basket($event)" [resetHeaderBasket]="resetBasket" ></app-candidateheader>
+
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+
+<div class="col-md-12 pagebg padding-all page-min-height padding32 maxf-width">
+	
+	<div *ngIf="credit_system=='Active'" class="row"> 
+		<div class="col-md-12 text-lg-right text-md-right  mb-3">
+			<span class="ercredit">Total Credits : {{total_credits}}</span>
+		</div>
+	</div>
+	
+	<div *ngFor="let bs of added_basket; let i = index" class="row basketbox m-0 mb-4">
+		<div class="col-md-4">
+			<div class="ed_center">
+				<img *ngIf="bs.thumb_image!=null" src="{{server_url}}media/exercise-image/{{bs.thumb_image}}" class="img-fluid">
+				<img *ngIf="bs.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">
+			</div>
+		</div>
+		<div class="col-md-7">
+			<h4 class="heading">{{bs.name}}</h4> 
+			<p class="authorby">By: {{bs.F_Name}} {{bs.L_Name}}</p>
+					
+			<p [innerHTML]="bs.short_desc"></p>
+
+			<div class="ratting cursor-menu">				
+				<fa-icon [icon]="faStar" class="starc"></fa-icon> {{bs.rating}} 
+				<fa-icon [icon]="faCircle" class="{{bs.difficulty_level}}"></fa-icon> {{bs.difficulty_level}}
+
+				<span class="subscriber">
+					<fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: 7/10" class="usercircle mr-1"></fa-icon>
+					<span placement="top" ngbTooltip="Running Subscribers: 7">7/</span>
+					<span placement="top" ngbTooltip="Total Subscribers: 10">10</span> 
+				</span>
+
+				<fa-icon [icon]="faQuestionCircle" class="questionc" placement="top" ngbTooltip="{{bs.key_words}}" ></fa-icon>
+				<span *ngIf="credit_system=='Active'" class="ercredit">Cr. {{bs.credits}}</span>
+			</div>
+		</div>
+		<div class="col-md-1 text-center">
+			<button (click)="head.removeBasket(bs.id);" class="removed" placement="top" ngbTooltip="Click to remove">X</button>
+		</div>			
+	</div>	
+	
+	<div *ngIf="added_basket.length!=0" class=" pr-0">
+		<div class="btn-box btn_align float-lg-right float-md-right">
+			<div *ngIf="checkout_option=='Active'" class="theme-btn ">
+				<span class="txt"><button (click)="enroll_now('checkout',checkoutpopup);" class="btn_blueas">Checkout With Wallet</button></span>
+			</div>
+			
+			<div *ngIf="req_to_inst_option=='Active'" class="theme-btn ml-lg-2 ml-md-2">
+				<span class="txt"><button (click)="enroll_now('request_to_instructor',checkoutpopup);" class="btn_blueas">Request To Instructor</button></span>
+			</div>
+		</div>
+		<div class="clearfix"></div>							
+	</div>
+</div>
+
+<ng-template #checkoutpopup let-modal >
+	<div class="dk-model-box">
+		<div class="modal-header dk-model-header">
+			<h4 class="modal-title" id="modal-basic-title">Transaction PIN</h4>
+			<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		
+		<div class="mtable-height">
+			<div class="modal-body">
+				<form [formGroup]="checkoutfrm">
+                    <div class="col-lg-12 col-md-12 float-left form-group" >
+                        <div class="col-lg-12 col-md-12 col-12 p-0 pt-2 float-left">
+                            <input type = "text" class = "form-control fortextbox" id="t_pin" name = "t_pin" formControlName="t_pin" placeholder="Enter TPIN">
+                        </div> 
+                        <div class="clearfix"></div>
+                        <ng-container *ngFor="let error of error_messages.t_pin">
+                            <div class="error-message col-md-12 pl-0" *ngIf="checkoutfrm.get('t_pin').hasError(error.type) && (checkoutfrm.get('t_pin').dirty || checkoutfrm.get('t_pin').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>	
+                    </div>
+
+					<div class="col-md-12 float-left text-center pb-3">
+						<div class="btn-box text-center">
+							<div class="theme-btn">
+								<span class="txt">												
+									<button type="button" (click)="submit(checkoutfrm.value)" class="btn btn_blueas tpin">Submit</button>
+								</span>
+							</div>
+						</div>
+                    </div>
+				</form>			
+			</div>
+		</div>
+	</div>
+</ng-template>
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>
+   </div>
+</div>
+	
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

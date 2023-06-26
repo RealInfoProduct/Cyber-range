@@ -1,0 +1,25 @@
+.basketbox {
+    box-shadow: 0 2px 9px 2px rgb(0 0 0 / 14%);
+}
+.table th {
+    font-size: 16px !important;
+	font-family: 'Ubuntu-Medium', sans-serif;
+	padding: 0.75rem 0.60rem;
+}
+.table td {
+    font-size: 14px !important;
+    font-family: 'Open Sans', sans-serif;
+	padding: 8px 10px !important;
+	vertical-align: middle;
+}
+.table .thead-dark th {
+    color: #fff;
+    background-color: #141d38;
+    border-color: #141d38;
+}
+@media only screen and (min-width: 1600px)
+{
+	.dk-table table.dataTable .tluc, .dk-table .tluc {
+		min-width: 185px !important;
+	}
+}

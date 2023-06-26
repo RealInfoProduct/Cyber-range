@@ -1,0 +1,345 @@
+<!-- Header -->
+<app-candidateheader #head (setting)="get_setting($event)" ></app-candidateheader>
+
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+
+<div class="loginbg loginbgimg padding-all"> 
+    <div class="loginpage"> 
+       <div class="loginform">
+
+          <h3 class="heading">Registration<div class="heading_brd_blue"></div></h3>
+		  
+			<form [formGroup] = "formdata" > 
+                 <!-- <div class="row"> 
+					<div class="col-md-6"> 
+						<div class="row"> 
+							<div class="col-md-4 col4 form_lable  form-group">
+								<label for="f_name">First Name<span class="red-astr">*</span></label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<input type = "text" class = "form-control fortextbox" id="f_name" name = "f_name" placeholder = "First Name" formControlName="f_name" (keypress)="keyPressAlphanumeric($event)"  >  
+								<ng-container *ngFor="let error of error_messages.f_name">
+									<div class="error-message" *ngIf="formdata.get('f_name').hasError(error.type) && (formdata.get('f_name').dirty || formdata.get('f_name').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>
+								
+							</div>
+						</div>	
+                    </div>	
+					<div class="col-md-6"> 
+						<div class="row">
+							<div class="col-md-4 col4 form_lable  form-group">
+								<label>Middle Name</label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<input type = "text" class = "form-control fortextbox" name = "m_name" placeholder = "Middle Name" formControlName="m_name" (keypress)="keyPressAlphanumeric($event)"  >                           
+							</div>
+						</div>
+                    </div>
+				</div> -->
+				
+				
+				<div class="row"> 
+					<!-- <div class="col-md-6"> 
+						<div class="row"> 
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>Last Name<span class="red-astr">*</span></label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<input type = "text" class = "form-control fortextbox" name = "l_name" placeholder = "Last Name"  formControlName="l_name" (keypress)="keyPressAlphanumeric($event)" >   
+								<ng-container *ngFor="let error of error_messages.l_name">
+									<div class="error-message" *ngIf="formdata.get('l_name').hasError(error.type) && (formdata.get('l_name').dirty || formdata.get('l_name').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>	
+							</div>
+						</div>	
+                    </div>	 -->
+					<div class="col-md-12 block-center"> 
+						<div class="row">
+							<!-- <div class="col-md-4 col4 form_lable form-group">
+								<label>Email<span class="red-astr">*</span></label>
+							</div> -->
+							<div class="col-md-12 form-group" >
+								<input type = "email" class = "form-control fortextbox" name = "email" placeholder = "Email" formControlName="email"  >
+								<ng-container *ngFor="let error of error_messages.email">
+									<div class="error-message" *ngIf="formdata.get('email').hasError(error.type) && (formdata.get('email').dirty || formdata.get('email').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>								
+							</div>
+						</div>
+                    </div>
+				</div>
+				
+				<!-- <div class="row"> 
+					<div class="col-md-6"> 
+						<div class="row"> 
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>Mobile<span class="red-astr">*</span></label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<input type = "text" class = "form-control fortextbox" name = "mobile" placeholder = "Mobile" formControlName="mobile" >
+								<ng-container *ngFor="let error of error_messages.mobile">
+									<div class="error-message" *ngIf="formdata.get('mobile').hasError(error.type) && (formdata.get('mobile').dirty || formdata.get('mobile').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>								
+							</div>
+						</div>	
+                    </div>	
+					<div class="col-md-6 "> 
+						<div class="row"> 
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>Language<span class="red-astr">*</span></label>
+							</div>
+							<div class="col-md-8 form-group" >															
+								<select class="form-control fortextbox" name = "language" formControlName="language" >
+								  <option value="">Select Language</option>
+								  <option value="1">Hindi</option>
+								  <option value="2">English</option>
+								</select>
+								<ng-container *ngFor="let error of error_messages.language">
+									<div class="error-message" *ngIf="formdata.get('language').hasError(error.type) && (formdata.get('language').dirty || formdata.get('language').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>									
+							</div>
+						</div>
+                    </div>
+				</div>	 -->
+				
+<!-- 				
+				<div class="row">
+					<div class="col-md-6 "> 
+						<div class="row">
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>Address</label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<textarea class = "form-control fortextbox" name = "address" rows="1" placeholder = "Address" formControlName="address" ></textarea>
+							</div>
+						</div>
+                    </div>
+					<div class="col-md-6 "> 
+						<div class="row">
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>Country<span class="red-astr">*</span></label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<select class="form-control fortextbox" name = "country" (change) = "changeCountry($event)"  formControlName="country" >
+								  <option  value="">Select Country</option>
+								  <option *ngFor="let country of countryList; let i = index" [value]="countryList[i].id">
+									{{country.country_name}}
+								  </option>
+								</select>	
+								<ng-container *ngFor="let error of error_messages.country">
+									<div class="error-message" *ngIf="formdata.get('country').hasError(error.type) && (formdata.get('country').dirty || formdata.get('country').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>																
+							</div>
+						</div>
+                    </div>
+				</div> -->
+
+				
+				<!-- <div class="row">
+					<div class="col-md-6"> 
+						<div class="row"> 
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>State</label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<select class="form-control fortextbox" name = "state" formControlName="state" >
+								  <option  value="">Select State</option>
+								  <option *ngFor="let state of stateList; let i = index" [value]="stateList[i].id">
+									{{state.state_name}}
+								  </option>
+								</select>
+							</div>
+						</div>	
+                    </div>	
+					<div class="col-md-6"> 
+						<div class="row"> 
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>City</label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<input type = "text" class = "form-control fortextbox" name = "city" placeholder = "City" formControlName="city" >
+							</div>
+						</div>	
+                    </div>
+				</div>
+				 -->
+				<!-- <div class="row">
+						
+					<div class="col-md-6 "> 
+						<div class="row">
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>Pin</label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<input type = "text" class = "form-control fortextbox" name = "pin" placeholder = "Pin" formControlName="pin" >
+							</div>
+						</div>
+                    </div>
+					<div class="col-md-6"> 
+						<div class="row">
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>Gender</label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<select class="form-control fortextbox" name = "sex" formControlName="sex"  >
+								  <option value="">Select Gender</option>
+								  <option value="1" >Male</option>
+								  <option value="2" >Female</option>
+								</select>
+							</div>
+						</div>	
+                    </div>
+				</div> -->
+				
+				<div class="row"> 
+					<!-- <div class="col-md-6"> 
+						<div class="row"> 
+							<div class="col-md-4 col4 form_lable form-group">
+								<label>Password<span class="red-astr">*</span></label>
+							</div>
+							<div class="col-md-8 form-group" >
+								<input type = "password" class = "form-control fortextbox" name = "password" placeholder = "Password" formControlName="password" >  
+								<ng-container *ngFor="let error of error_messages.password">
+									<div class="error-message" *ngIf="formdata.get('password').hasError(error.type) && (formdata.get('password').dirty || formdata.get('password').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>	
+							</div>
+						</div>	
+                    </div>	 -->
+					<div class="col-md-6 block-center"> 
+						<div class="row">
+							<!-- <div class="col-md-4 col4 form_lable  form-group">
+								<label>Confirm Password<span class="red-astr">*</span></label>
+							</div> -->
+							<div class="col-md-8 form-group" >
+								<!-- <input type = "password" class = "form-control fortextbox" name = "conf_password" placeholder = "Confirm Password"  formControlName="conf_password"  >                           
+								<ng-container *ngFor="let error of error_messages.conf_password">
+									<div class="error-message" *ngIf="formdata.get('conf_password').hasError(error.type) && (formdata.get('conf_password').dirty || formdata.get('conf_password').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>	
+								<div class="error-message" *ngIf="f.conf_password.errors?.mustMatch">Passwords must match</div>
+								 -->
+
+							  <div *ngIf="captchaError==true" class="col-md-12 mt-2 pl-0 pr-0 text-right error-message">
+								  Invalid recaptcha.Refresh page and try again.
+							  </div>
+								<div class="btn-box text_right mt-4">
+									<div class="theme-btn">
+										<span *ngIf="recaptch=='Active'" class="txt">
+										 <re-captcha #captchaRef="reCaptcha" (resolved)="resolved($event)" siteKey="6Le-6-MZAAAAACff_ZUyMGTdnl5xh0abz9_Zr5h6" size="invisible"></re-captcha>
+										 <input type = "submit" class = "forsubmit btn_blueas" (click)="captchaRef.execute()" value="Register Now" >
+										</span>
+										<span *ngIf="recaptch=='Inactive'" class="txt">
+											 <input type = "submit" class = "forsubmit btn_blueas" (click)="onSubmit(formdata.value)" value="Register Now" >
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+                    </div>
+				</div>				
+		  </form> 
+		  <ngb-alert class="animate-show animate-hide mb-5" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+	   </div>	   
+    </div>
+</div>
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>
+    </div>
+</div>
+
+<app-candidatefooter></app-candidatefooter>
+
+
+<div class="section forgot-section">
+	<div class="forgot-card">
+		<div class="forgot_screen">
+			<div class="forgot_item_box container">
+				<div class="container">
+					<div class="forgot_logo">
+						<img src="../../assets/images/home/login-logo.svg" alt="">
+					</div>
+					<div class="forgot_header">
+						<span>Registration</span>
+					</div>
+					<form [formGroup]="formdata" (ngSubmit)="onSubmit(formdata.value)">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="forgot_input_text">
+									<input class="input" [ngClass]="this.formdata.value.email?.length > 0 || (formdata.get('email').dirty || formdata.get('email').touched) ? invalidMessage(error_messages.email) : '' "
+										type="email" placeholder="Email id" formControlName = "email">
+								</div>
+								<ng-container *ngFor="let error of error_messages.email">
+									<div class="error-message" *ngIf="formdata.get('email').hasError(error.type) && (formdata.get('email').dirty || formdata.get('email').touched)">
+										<ng-container>
+											<div class="error_mess">
+												<div class="img">
+													<img src="../../assets/images/home/error-vector.svg" alt="">
+												</div>
+												<div class="error-text">
+													{{ error.message }}
+												</div>
+											</div>
+										</ng-container>
+									</div>
+								</ng-container>	
+							</div>
+						</div>
+						<div class="sign_in">
+							<button type="submit" class="button" (click)="onSubmit(formdata.value)">SUBMIT</button>
+						</div>
+						<ng-container>
+							<div class="success-message" *ngIf="!closed">
+								<div class="success_mess">
+									<div class="img">
+										<img src="../../assets/images/home/success-vector.svg" alt="">
+									</div>
+									<div class="success-text">
+										<span>
+											Registration has been completed successfully. Please check your registered email for verify registration
+										</span>
+									</div>
+								</div>
+							</div>
+							
+
+							<div class="error_mess" *ngIf="captchaError==true">
+								<div class="img">
+									<img src="../../assets/images/home/error-vector.svg" alt="">
+								</div>
+								<div class="error-text">
+									Invalid recaptcha.Refresh page and try again.
+								</div>
+							</div>
+						</ng-container>	
+					</form>
+					<div class="have_an_account">
+						<span>Don’t have an account? <label><a routerLink="/registration">Register
+									now</a></label></span>
+					</div>
+				</div>
+			</div>
+			<div class="cyberrange">
+				<span>© 2023 SkyVirt® CyberRange</span>
+			</div>
+		</div>
+	</div>
+</div>

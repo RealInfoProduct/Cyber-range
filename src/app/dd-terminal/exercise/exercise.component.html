@@ -1,0 +1,477 @@
+<div class="col-lg-12 col-md-12">
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+		</div>
+			<div class="myform padding-body">
+				<form [formGroup] = "exercisefrm">
+					<div class="content-box-shadow">
+						<div class="stepwizard">
+							<ul class="setup-panel">
+								<li class="stepwizard-step btnbgn" [ngClass]="{'bg-success': step_first === 'step1', 'bg-secondary':step_first === ''}">
+									<a (click)="open_step_form(1)" href="javascript:void(0);" type="button" [ngClass]="{'btn btn-circle': true, 'bg-success': step_first === 'step1', 'bg-secondary':step_first === ''}" class="btnbgn">1<br>Add Resources</a>
+								</li>
+								<li class="stepwizard-step btnbgn" [ngClass]="{'bg-success': step_second === 'step2', 'bg-secondary':step_second === '' && step_second_disable === false, 'btn-disabled':step_second === '' && step_second_disable === true}">
+									<a (click)="open_step_form(2)" href="javascript:void(0);" type="button" [ngClass]="{'btn btn-circle': true, 'bg-success': step_second === 'step2', 'bg-secondary':step_second === '' && step_second_disable === false, 'btn-disabled':step_second === '' && step_second_disable === true}" class="btnbgn">2<br>Configure Resources</a>
+								</li>
+								<li class="stepwizard-step btnbgn" [ngClass]="{'bg-success': step_third === 'step3', 'bg-secondary':step_third === '' && step_third_disable === false, 'btn-disabled':step_second === '' && step_third_disable === true }">
+									<a (click)="open_step_form(3)" href="javascript:void(0);" type="button"  [ngClass]="{'btn btn-circle': true, 'bg-success': step_third === 'step3', 'bg-secondary':step_third === '' && step_third_disable === false, 'btn-disabled':step_second === '' && step_third_disable === true }" class="btnbgn">3<br>Final Submit
+									</a>
+								</li>
+							</ul>
+						</div>						
+
+						
+						<!--  Step - 1  -->
+						<div class="boxbrd">	
+							<ngb-alert *ngIf="!closed" class="animate-show animate-hide mt-4 mb-1" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+						
+							<div *ngIf="step_first" >	
+
+							<div class="col-lg-6 col-md-12 ipp100 float-left resource-1"> 
+
+								<div class="col-md-12 pl-0 pr-0 "> 
+									<div class="row">
+										<div class="col-md-12 pl-0">
+											<h4 class="mb-3 mt-4">Add Resources</h4>		
+										</div>									
+									</div>
+
+									<div *ngIf="internet_disable" class="row">
+										<div class="col-md-4 col_lable form_lable form-group pl-0">
+											<label>Internet(WAN):</label>
+										</div>
+										<div class="col-md-8 form-group">
+											<input type="hidden" class="form-control fortextbox" id="internet" name="internet" value="MyWAN" formControlName="internet" >
+											<button placement="top" ngbTooltip="Click here for add internet." type="button" (click)="add_internet(exercisefrm.value);" class="btn btn-sm btn-primary"><fa-icon [icon]="faPlus"></fa-icon></button>
+										</div>
+									</div>								
+
+									<div class="row">
+										<div class="col-md-4 col_lable form_lable form-group pl-0">
+											<label>Network (Switch):</label>
+										</div>
+										<div class="col-lg-3 col-md-6 form-group p-0" >
+											<input placement="top" ngbTooltip="Enter network name using alphanumeric without blank space or any special character. Max 20 alphanumeric character allow."  type="text" class="form-control fortextbox" id="network" name="network" formControlName="network" maxlength="20" (focus)="clear_network_error()" (keypress)="keyPressAlphaNumeric($event)"  placeholder="Network Name" >
+											<div *ngIf="network_error_msg!=''" class="col-md-12 error-message pl-0 pr-0">{{network_error_msg}}</div>
+										</div>
+										<div class="col-md-4  form-group pl-0 pl-md-3" >
+											<button [disabled]="" placement="top" ngbTooltip="Click here for add network." type="button" (click)="add_network(exercisefrm.value);" class="btn btn-sm btn-primary exbtnpls"><fa-icon [icon]="faPlus"></fa-icon></button>
+										</div>
+									</div>
+									
+									<div class="row">
+										<div class="col-md-4 col_lable form_lable form-group pl-0">
+											<label>Template (VM):</label>
+										</div>
+										<div class="col-lg-4 col-md-5 form-group minwidth p-0 pr-md-3" >
+
+												<ng-multiselect-dropdown #template_dropdown [ngModelOptions]="{standalone: true}"
+												[placeholder]="'Select Template'"
+												[settings]="exercise_dropdownSettings"
+												[maxHeight]="10"
+												[data]="templateList"
+												[(ngModel)]="exercise_selectedItems"
+												(onSelect)="changeTemplate($event)"
+												(onDeSelect)="templateDeSelect($event)"
+												>
+												<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+													{{option}}
+												</ng-template>
+												<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+													{{option}}
+												</ng-template>
+												</ng-multiselect-dropdown>
+											<div *ngIf="temp_error_msg!=''" class="col-md-12 error-message pl-0 pr-0">{{temp_error_msg}}</div>
+											
+										</div>	
+										<div class="col-lg-3 col-md-5 form-group minwidth p-0 pr-md-3" >
+											<input placement="top" ngbTooltip="Enter template name using alphanumeric without blank space or any special character. Max 20 alphanumeric character allow."  type="text" class="form-control fortextbox" id="template_name" name="template_name" formControlName="template_name" maxlength="20" (focus)="clear_temp_name_error()" (keypress)="keyPressAlphaNumeric($event)" placeholder="Virtual Machine" >
+											<div *ngIf="temp_name_error_msg!=''" class="col-md-12 error-message pl-0 pr-0">{{temp_name_error_msg}}</div>
+										</div>
+										<div class="col-md-2 form-group pl-0" >
+											<button [disabled]="" placement="top" ngbTooltip="Click here for add template." type="button" (click)="add_templates(exercisefrm.value);" class="btn btn-sm btn-primary exbtnpls"><fa-icon [icon]="faPlus"></fa-icon></button>
+										</div>
+									</div>
+									<ng-container *ngIf="template_description!=''" >
+									<div class="row">
+										<div class="col-md-4 col_lable form_lable form-group pl-0">
+											<label>Description:</label>
+										</div>
+										<div class="col-md-8 pt-2 pl-0 float-left" >{{template_description}}</div>
+									</div>
+									</ng-container>
+
+								</div>								
+								
+								<div class="col-md-12 mt-4 pl-0 pr-0">
+									<div *ngIf="resource_added.length!=0" class="row">				
+										<div class="col-md-12 pl-0">
+											<h4 class="mt-2 mb-4">Resources</h4>													
+										</div>
+
+										<div class="col-lg-12 col-md-12 minwidthresources form-group table-responsive pl-0 mb-2">
+											<table class="table-responsive table-sm table-bordered">
+												<thead class="thead-dark">
+													<tr>
+														<th class="text-center">Operating System</th>
+														<th class="text-center">Description</th>
+														<th class="text-center">Asset Type</th>
+														<th class="text-center">Asset Name</th>
+														<th class="text-center">Template</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr  *ngFor="let res of resource_added; let i = index" >
+														<td class="text-center"><img *ngIf="res.image!=''" [src] = "resource_img_url+'resource-image/'+res.image" class="res-img" ></td>
+														<td *ngIf="res?.description!=''" class="text-center">{{res?.description}}</td>
+														<td *ngIf="res?.description==''" class="text-center">-</td>
+														<td class="text-center">{{res.asset_type}}</td>
+														<td class="text-center">{{res.asset_name}}</td>
+														<td class="text-center">{{res.template_name}}</td>
+														<td class="restbl">
+															<button [disabled]="((disable_control==true))? true:false" *ngIf="(res.asset_type == 'VM' || res.asset_type == 'Gateway')" placement="left" ngbTooltip="Click here for resource configure" type="button" (click)="config_modelbox(res.asset_unique_id,configpopup,res?.created)" [ngClass]="{'btn btn-sm actionbtnp resabtn': true, 'btn-primary': true}" ><fa-icon [icon]="faCog"></fa-icon></button> 
+															<button [disabled]="((disable_control==true))? true:false"  placement="left" ngbTooltip="Click here for remove resource"  type="button" (click)="remove_resource(res.asset_type,res.asset_unique_id,i);" class="btn btn-sm btn-danger actionbtnd resabtn"><fa-icon [icon]="faMinus"></fa-icon></button> 
+														</td>
+													</tr>
+												</tbody>
+											 </table>
+										</div>
+									</div>	
+								</div>	
+								
+							</div>
+
+							<div class="col-lg-6 col-md-12 ipp100 float-left resource-2 pnt network-demo pr-0">
+								<h4 class="mb-3 mt-4">Preview Network Topology</h4>
+								<div class="netshadow">
+									<app-viewnetwork [config_popup]="configpopup" [demo_view]="topology_demo_view" [resource_img_url]="resource_img_url" [resources]="demo_resource" (perform_action)="network_toplogy_action($event);" [draw_net_topology]="redraw_net_topology" ></app-viewnetwork>
+								</div>
+							</div>
+															
+								<div class="col-md-12 mt-1 mb-2 pl-0 pr-0 float-left">	
+									<div class="mautobtn">	
+										<div *ngIf="disable_delete_btn" class="btn-box text-md-center">
+											<div class="theme-btn theme-btnw">
+												<span class="txt">												
+													<button type="button" class="btn btn-sm btn_blueas" (click)="deleteComplateInfra();" >Delete</button>
+												</span>
+											</div>
+										</div>
+										
+										<div class="btn_align float-lg-right float-md-right">
+											<div class="btn-box">
+												<div *ngIf="delete_infra_btn" class="theme-btn mr-1">
+													<span class="txt">
+														<button [disabled]="((bg_process_array.length!=0 || disable_control==true))? true:false" type="button" class="forsubmit btn_blueas btn" (click)="deleteInfra();" >Delete Infra</button>
+													</span>
+												</div>
+												
+												<div *ngIf="prepare_infra_btn" class="theme-btn ml-lg-2 ml-md-2">
+													<span class="txt">
+														<button [disabled]="((infra_create_status=='success' || disable_control==true))? true:false" type="button" class="forsubmit btn_blueas btn" (click)="create_infrastructure();" >Prepare Infra</button>
+													</span>
+												</div>
+											</div>							
+										</div>
+										
+									</div>
+								</div>							
+								<div class="clearfix"></div>							
+							</div>
+							
+							<!--  Step - 2  -->
+							<div *ngIf="step_second" >							
+								<div class="row">
+									<div class="col-md-12">
+										<h4 class="mb-3 mt-4">Configure Resource</h4>		
+									</div>									
+								</div>
+
+								<ul ngbNav #nav="ngbNav" class="nav-tabs col-md-12 pl-0 pr-0 mb-3">
+									<li ngbNavItem>
+										<a ngbNavLink><fa-icon [icon]="faList" class=""></fa-icon> Grid</a>
+										<ng-template ngbNavContent>
+											<div class="col-md-12 text-center pl-0 pr-0 table-responsive"> 													
+												<table class="table table-sm table-bordered">
+													<thead class="thead-dark">
+														<tr>
+															<th class="text-center">Operating System</th>
+															<th class="text-center">Description</th>
+															<th class="text-center">Name</th>
+															<th class="text-center">Template</th>
+															<th style="width:100px;" >Status</th>
+															<th class="text-left">Action</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let res of resource_added; let i = index" >
+															<td *ngIf="res.asset_type=='VM'" class="text-center"><img *ngIf="res.image!=''" [src] = "resource_img_url+'resource-image/'+res.image" class="res-img" ></td>
+															<td *ngIf="res.asset_type=='VM' && res?.description!=''" class="text-center">{{res?.description}}</td>
+															<td *ngIf="res.asset_type=='VM' && res?.description==''" class="text-center">-</td>
+															<td *ngIf="res.asset_type=='VM'" class="text-center">{{res.asset_name}}</td>
+															<td *ngIf="res.asset_type=='VM'"  class="text-center">{{res.template_name}}</td>
+															
+															<td *ngIf="res.asset_type=='VM'" >
+																<div *ngIf="bg_process_array.length!=0; else ok_status">
+																	<div *ngFor="let pro of bg_process_array; let bgi = bgindex" class="notify process-{{bgi}} bg-process pl-2 pr-2">
+																		<div *ngIf="pro.res_status=='' && res.asset_unique_id==pro?.asset_unique_id" class="">
+																			<!--<span class="pull-left text-left label">{{pro.label}}</span>-->
+																			<div placement="top" ngbTooltip="{{pro.label}}" [ngClass]="{'progress': true, 'mt-2': true }" >
+																				<div [ngClass]="{'progress-bar progress-bar-striped': true, 'progress-bar-animated': pro.status!='success', 'bg-success': pro.status=='success', 'bg-danger': pro.status=='fail'}"  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+																			</div>
+																		</div>
+																		
+																		<span *ngIf="pro.res_status=='OK' && res.asset_unique_id==pro?.asset_unique_id">OK</span>
+																	</div>
+																</div>
+																<ng-template #ok_status>OK</ng-template>
+															</td>	
+															
+															<td *ngIf="res.asset_type=='VM'"  class="text-left">
+																<button *ngIf="res.power_on_status=='up'" [disabled]="bg_process_array.length!=0 || res?.locked_vm" placement="top" ngbTooltip="Power off" type="button" (click)="power(res.vm_id,'down',res.asset_unique_id,'Powering off '+res.asset_name); power_down = true; " [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-success': true,'btn-outline-secondary': power_down === 'true'}" ><fa-icon [icon]="faPowerOff"></fa-icon></button> 
+																<button *ngIf="res.power_on_status=='down'" [disabled]="bg_process_array.length!=0 || res?.locked_vm || disable_step2_ctrl==true" placement="top" ngbTooltip="Power on" type="button" (click)="power(res.vm_id,'up',res.asset_unique_id,'Powering on '+res.asset_name); power_up = true; " [ngClass]="{'btn actionbtnp btn-sm ': true, 'btn-danger': true,'btn-outline-secondary': power_up === 'true'}" ><fa-icon [icon]="faPowerOff"></fa-icon></button> 
+																<button *ngIf="res.power_on_status==true" [disabled]="bg_process_array.length!=0 || res?.locked_vm || res.power_on_status==true" placement="top" ngbTooltip="{{res?.power_on_label}}" type="button" [ngClass]="{'btn actionbtnp btn-sm ': true, 'btn-primary': true}" ><fa-icon [icon]="faPowerOff"></fa-icon></button> 
+
+																<button *ngIf="!res.snapshot" placement="top" ngbTooltip="Create snapshot" [disabled]="bg_process_array.length!=0 || res?.locked_vm==true || res.power_on_status==true || disable_step2_ctrl==true" type="button" (click)="snapshot(res.vm_id,'create_snapshot',res.snapshot_id,res.asset_unique_id,'Creating snapshot of '+res.asset_name,res.power_on_status);" class="btn actionbtnp btn-sm btn-secondary"><fa-icon [icon]="faFile"></fa-icon></button> 
+																<button *ngIf="res.snapshot==1" placement="top" ngbTooltip="Restore snapshot" [disabled]="bg_process_array.length!=0 || res?.locked_vm==true || res.power_on_status==true || disable_step2_ctrl==true" type="button" (click)="snapshot(res.vm_id,'restore_snapshot',res.snapshot_id,res.asset_unique_id,'Restoring snapshot of '+res.asset_name,res.power_on_status);" class="btn actionbtnp btn-sm btn-secondary"><fa-icon [icon]="faRedo"></fa-icon></button> 
+																<button *ngIf="res.snapshot==1" placement="top" ngbTooltip="Delete snapshot" [disabled]="bg_process_array.length!=0 || res?.locked_vm==true || res.power_on_status==true || disable_step2_ctrl==true" type="button" (click)="snapshot(res.vm_id,'delete_snapshot',res.snapshot_id,res.asset_unique_id,'Deleting snapshot of '+res.asset_name,res.power_on_status);" class="btn actionbtnp btn-sm btn-secondary"><fa-icon [icon]="faTrash"></fa-icon></button> 
+																<button placement="top" ngbTooltip="Download console file"  type="button" (click)="get_console(res.vm_id);"  [disabled]="bg_process_array.length!=0 || res?.locked_vm==true || res.power_on_status==true || res.power_on_status=='down' || disable_step2_ctrl==true"  class="btn actionbtnp btn-sm btn-primary"><fa-icon [icon]="faDesktop"></fa-icon></button> 
+																<button placement="top" ngbTooltip="Update network" [disabled]="bg_process_array.length!=0 || res?.locked_vm==true || res.power_on_status==true || disable_step2_ctrl==true" type="button" (click)="config_modelbox(res.asset_unique_id,configpopup,'step2');" class="btn actionbtnp btn-sm btn-warning"><fa-icon [icon]="faCog"></fa-icon></button> 
+															</td>
+														</tr>
+													</tbody>
+												</table>										
+											</div>
+										</ng-template>
+									</li>
+									<li ngbNavItem>
+										<a ngbNavLink><fa-icon [icon]="faNetworkWired" class=""></fa-icon> Network Topology</a>
+										<ng-template ngbNavContent><app-viewnetwork [disable_step2_ctrl]="disable_step2_ctrl" [config_popup]="configpopup" [resource_img_url]="resource_img_url" [resources]="resource_added" (perform_action)="network_toplogy_action($event);" [draw_net_topology]="redraw_net_topology" ></app-viewnetwork></ng-template>
+									</li>
+								</ul>
+								<div [ngbNavOutlet]="nav" class="col-md-12 pl-0 pr-0 mt-3"></div>
+							</div>
+							<!--  End Step - 2  -->
+							
+							<!--  Step - 3  -->						
+							<div *ngIf="step_third" >
+								<form [formGroup] = "finalfrm">
+								<div *ngIf="delete_template_btn==false" class="col-md-8 float-left pl-0">
+									<h4 class="mb-3 mt-4">Final Submit</h4>	
+										<div class="col-md-4 col_lable form_lable form-group pl-0 float-left">
+											<label>Exercise Name</label>
+										</div>
+										<div class="col-md-8 form-group  float-left">
+											<input type="text" class="form-control fortextbox" id="exercise_name" name="exercise_name" value="" formControlName="exercise_name" >
+											<ng-container *ngFor="let error of error_messages.exercise_name">
+												<div class="error-message" *ngIf="finalfrm.get('exercise_name').hasError(error.type) && (finalfrm.get('exercise_name').dirty || finalfrm.get('exercise_name').touched)">
+													{{ error.message }}
+												</div>
+											</ng-container>
+										</div>
+										<div class="clearfix"></div>
+									    <p><b>Note:</b> Once exercise will final submit you can't reconfigure this exercise</p>
+								</div>
+								<div class="clearfix"></div>
+
+								<div *ngIf="delete_template_btn" class="col-md-4 float-left  form_lable form-group mt-md-4 pl-0">								
+									<div class="btn-box text-md-right">
+										<div class="theme-btn">
+											<span class="txt">
+												<button (click)="delete_template();" class = "forsubmit btn btn_blueas" [disabled]="bg_process_array.length!=0" >Delete Infra</button>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div *ngIf="disable_step3_ctrl!=true" class="col-md-12 float-left  form_lable form-group mt-md-4 pl-0">								
+									<div class="btn-box text-md-right">
+										<div class="theme-btn">
+											<span class="txt">
+												<button [disabled]="bg_process_array.length!=0 || disable_step3_ctrl" (click)="final_submit(finalfrm.value);" class = "forsubmit btn btn_blueas" >Submit</button>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</form>
+							</div>		
+							<!-- End Step - 3  text-lg-center -->							
+						</div>						
+										
+					</div>										
+				</form>				
+			</div>
+	
+
+<ng-template #configpopup let-modal >
+	<div class="dk-model-box">
+		<div class="modal-header dk-model-header">
+			<h4 class="modal-title" id="modal-basic-title">Resource Configuration - {{current_vm_name}}</h4>
+			<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		
+		<div class="mtable-height">
+			<div class="modal-body">
+				<form [formGroup] = "configfrm"  > 
+					<div class="row">					
+						<div class="col-md-12">						
+							<div class="col-md-12 pl-0 pr-0">
+								<div class="col-lg-2 col-md-4 float-left form_lable form-group fpt8 mb-0">
+									<label for="max_vcpu">vCPU:</label>
+								</div>
+								<div class="col-lg-9 col-md-8 float-left form-group" >
+									<div class="col-lg-2 col-md-4 col-6 p-0 float-left">
+										<input placement="right" ngbTooltip="Processing Power" (input)="checkMaxVcpu($event);" type = "number" class = "form-control fortextbox" id="config_vcpu" min="1" name = "config_vcpu"  formControlName="config_vcpu" >
+									</div> 
+									<div *ngIf="group_id=='2'" class="col-md-5 col-6 tbp float-left">
+										/ {{rs_vcpu}}						
+									</div>
+									<div class="clearfix"></div>
+									<ng-container *ngFor="let error of error_messages.config_vcpu">
+										<div class="error-message col-md-12" *ngIf="configfrm.get('config_vcpu').hasError(error.type) && (configfrm.get('config_vcpu').dirty || configfrm.get('config_vcpu').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>	
+								</div>
+
+								<div class="clearfix"></div>
+
+								<div class="col-lg-2 col-md-4 float-left form_lable form-group pr-lg-0 fpt8 mb-0">
+									<label for="max_vcpu">vRAM(in GB):</label>
+								</div>
+								<div class="col-lg-9 col-md-8 float-left form-group" >
+									<div class="col-lg-2 col-md-4 col-6 p-0 float-left">
+										<input placement="right" ngbTooltip="Processing Power" (input)="checkMaxVram($event);" type = "number" class = "form-control fortextbox" id="config_vram" min="1" name = "config_vram"  formControlName="config_vram" >
+									</div> 
+									<div *ngIf="group_id=='2'" class="col-md-5 col-6 tbp float-left">
+										/ {{rs_vram}} 							
+									</div>
+									<div class="clearfix"></div>
+									<ng-container *ngFor="let error of error_messages.config_vram">
+										<div class="error-message col-md-12" *ngIf="configfrm.get('config_vram').hasError(error.type) && (configfrm.get('config_vram').dirty || configfrm.get('config_vram').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>	
+								</div>
+							</div>
+							
+							<div class="clearfix"></div>
+
+							<div class="col-md-12 float-left  form-group" >
+								
+								<div class="clearfix"></div>
+
+								<div class="col-md-12 col-12 tbp float-left mt-2 pl-0 pr-0 ">
+									<table class="table table-bordered tbl-tvn mb-0" formArrayName="disk_array">
+										<tr>
+											<td colspan="5"><b>Secondary Storage:</b>(Optional)</td>
+										</tr>
+										<tr *ngIf="getDiskControls().length!=0" >
+											<td>Disk Name</td>
+											<td>Disk Size (in GB)</td>
+											<td>Action</td>
+									    <tr>
+										<tr *ngFor="let desk of getDiskControls(); let i = index;" [formGroupName]="i">
+											<td>
+												<input placement="top" ngbTooltip="Enter disk name using alphanumeric without blank space or any special character. Max 20 alphanumeric character allow." maxlength="20" type="text" formControlName="disk_name" (keyup)="check_disk_name($event,i)" (keypress)="keyPressAlphaNumeric($event)" class="form-control tnvtxt">
+												<!--<span *ngIf="desk.get('disk_name')?.valid==false" class="error-message" >{{disk_name_error}}</span>-->
+												
+												<ng-container *ngFor="let error of error_messages.disk_name">
+													<div class="error-message col-md-12 mb-4" *ngIf="desk.get('disk_name').hasError(error.type) && (desk.get('disk_name').dirty || desk.get('disk_name').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>	
+											
+											</td>
+											<td>
+												<input placement="top" ngbTooltip="Enter disk size in GB." (input)="checkMaxStorage($event,i);" type="number" min="1" formControlName="disk_size" class="form-control tnvtxt" >
+												<input type="hidden" formControlName="exist_disk_id" class="form-control tnvtxt" >
+												<ng-container *ngFor="let error of error_messages.disk_size">
+													<div class="error-message col-md-12 pl-0 pr-0 mb-4" *ngIf="desk.get('disk_size').hasError(error.type) && (desk.get('disk_size').dirty || desk.get('disk_size').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>												
+											</td>
+											<td width="98px">
+												<button *ngIf="getDiskControls().length == i+1"  placement="left" ngbTooltip="Click here for add disk."  type="button" class="btn btn-sm btn-primary actionbtnp" (click) = "add_disk_row('','','Yes')" ><fa-icon [icon]="faPlus"></fa-icon></button>
+												<button  placement="left" ngbTooltip="Click here for remove disk."  type="button" (click)="deleteDiskRow(i)" class="btn btn-sm btn-danger"><fa-icon [icon]="faMinus"></fa-icon></button>
+											</td>
+										</tr>
+									</table>						
+								</div>
+							</div>	
+
+							<div class="clearfix"></div>
+
+							<div class="col-md-12 float-left  form-group" >
+								<div class="clearfix"></div>
+
+								<div class="col-md-12 col-12 tbp float-left mt-0 pl-0 pr-0 ">
+									<table class="table table-bordered tbl-tvn" formArrayName="nic_array">
+										<tr>
+										  <td colspan="4"><b>Network:</b></td>
+										</tr>
+										<tr *ngIf="getNetworkControls().length!=0" >
+											<td>Nic</td>
+											<td>Model</td>
+											<td>Network</td>
+											<td>Action</td>
+									    <tr>		
+										<tr *ngFor="let nic of getNetworkControls(); let i=index" [formGroupName]="i">
+											<td>
+												<input  placement="top" ngbTooltip="" readonly="readonly" type="text" formControlName="nic_name" class="form-control tnvtxt">
+												<ng-container *ngFor="let error of error_messages.nic_name">
+													<div class="error-message col-md-12 mb-4" *ngIf="nic.get('nic_name').hasError(error.type) && (nic.get('nic_name').dirty || nic.get('nic_name').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>
+											</td>
+											<td>
+												<select placement="top" ngbTooltip="Select Interface" (change)="selectNetInterface($event,i);" formControlName="nic_interface" class="form-control tnvtxt" >
+													<option *ngFor="let net of netInterfaceList; let ind=index"  value="{{net.id}}">{{net.name}}</option>
+												</select>
+											</td>
+
+											<td>
+												<select placement="top" ngbTooltip="Select Network" (change)="selectNet($event,i);" formControlName="nic_network" class="form-control tnvtxt" >
+													<option value="">Select Network</option>
+													<option *ngFor="let net of network_dropdown; let ind=index"  value="{{net}}">{{net}}</option>
+												</select>
+												<input type="hidden" formControlName="exist_nic_id" class="form-control tnvtxt" >
+
+												 <!--<span *ngIf="nic.get('nic_network')?.valid==false" class="error-message" >{{nic_network_error}}</span>-->
+												 <ng-container *ngFor="let error of error_messages.nic_network">
+													<div class="error-message col-md-12 mb-4" *ngIf="nic.get('nic_network').hasError(error.type) && (nic.get('nic_network').dirty || nic.get('nic_network').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>	
+											</td>
+											<td width="98px">
+												<button *ngIf="getNetworkControls().length == i+1"  placement="left" ngbTooltip="Click here for add network nic."  type="button" class="btn btn-sm btn-primary actionbtnp" (click) = "add_network_row('','')" ><fa-icon [icon]="faPlus"></fa-icon></button>
+												<button placement="left" ngbTooltip="Click here for remove network nic."  type="button" (click)="deleteNetworkRow(i)" class="btn btn-sm btn-danger"><fa-icon [icon]="faMinus"></fa-icon></button>
+											</td>
+										</tr>
+									</table>							
+								</div>
+							</div>
+						</div>
+					</div>
+										
+					<div class="col-md-12 float-left text-center pb-4">
+						<div class="btn-box text-center">
+							<div class="theme-btn">
+								<span class="txt">												
+									<button *ngIf="config_step=='save'" type="button" (click)="config_resource(configfrm.value)" class="btn btn-sm btn_blueas">Save</button>
+									<button *ngIf="config_step=='update'" type="button" (click)="update_network(configfrm.value)" class="btn btn-sm btn_blueas">Update</button>
+								</span>
+							</div>
+						</div>
+					</div>		  
+				</form>			
+			</div>
+		</div>
+	</div>
+</ng-template>
+

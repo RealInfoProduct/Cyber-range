@@ -1,0 +1,216 @@
+/* Top Bar */
+.dadhboard-header {   
+    /*background-color: #141d38;*/
+	padding: 0px 35px 1px;
+	background-image: linear-gradient(to right, rgb(251 251 251), rgb(20 29 56) 52%);
+}
+.dadhboard-header .top-left {
+    color: #fff;
+    float: left;
+	margin-top: 5px;
+}
+.dadhboard-header .top-left a{
+    color: #fff !important;
+	text-decoration: none !important;
+}
+.dadhboard-header .info-list {
+    margin-bottom: 0;
+	padding-left: 0;
+}
+.dadhboard-header .info-list li {
+    color: #ffffff;
+    font-size: 16px;
+    margin-right: 30px;
+    display: inline-block;
+}
+.dadhboard-header .info-list li:last-child {
+    margin-right: 0px;
+}
+.dadhboard-header .info-list li a.notification-heading {
+    color: #ffffff;
+    transition: all 300ms ease;
+	text-decoration: none;
+}
+.dadhboard-header .info-list li a.notification-heading:hover {
+	color: #0060ff;
+}
+.dadhboard-header .top-right {
+    margin-bottom: 0;
+}
+.pull-right {
+    float: right;
+}
+.dadhboard-header .top-rside{
+	display: inline-block;
+	color: #fff;
+}
+
+.dadhboard-header .user-note .user-note-btn {
+	background: none;
+    color: #fff;
+    border: 0;
+	padding-left: 0;
+	padding-right: 0;
+}
+.dadhboard-header .user-note .user-note-btn:focus {
+	box-shadow: none !important;
+}
+.dadhboard-header .user_dropdown_box {
+	border-radius: 3px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.10);
+	padding: 5px 5px 7px;
+	border: 1px solid #bbb !important;
+}
+.dropdown-item {
+    border-bottom: 1px solid #dedede;
+}
+.dropdown-item:last-child {
+    border-bottom: 0px;
+}
+.dadhboard-header .user_dropdown_box a.notification-heading{
+    color: #222222 !important;
+    padding: 6px 14px;
+	display: block;
+    line-height: 15px;
+	border-bottom: 1px solid #dedede;
+}
+.dadhboard-header .user_dropdown_box  a.notification {
+	font-size: 14px;
+}
+.dadhboard-header .user_dropdown_box a.notification-heading:last-child {
+	border-bottom: 0px;
+}
+.dadhboard-header .user_dropdown_box a.notification-heading:hover { 
+    color: #0060ff !important;
+}
+.dadhboard-header .user_dropdown_box a.notification-heading:focus {
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+.notification-time .label{
+	float:left !important;
+}
+
+/* Right Left  */
+.rightside .logoicon {
+    float: left;
+}
+.rightside .user-notification {
+    float: right;
+}
+.rightside .rside{
+	display: inline-block;
+	color: #fff;
+}
+.rightside .rside:first-child:after{
+	content:"";
+	border-right: 1px solid #363636;
+	margin: 0 10px;
+}
+
+/*.ball-counter {
+	background: #d68d0f;
+    padding: 0px 5px;
+    border-radius: 50px;
+    color: #fff;
+}*/
+.ball-counter {
+    background: #d68d0f;
+    padding: 7px 5px;
+    border-radius: 50px;
+    color: #fff;
+    position: absolute;
+    margin-top: 4px;
+    right: -5px;
+    font-size: 11px;
+}
+.discontents {
+	display: contents;
+    font-size: 21px;
+}
+
+@media only screen and (max-width: 768px)
+{	
+    .dadhboard-header {
+		padding: 1px 15px 0px;  
+    }
+    .sidebarbg {
+        padding: 20px 0px 15px;
+    }
+    .dadhboard-header .info-list {
+		margin-right: 2px;
+	}
+	.discontents {
+		font-size: 16px;
+	}
+	.dadhboard-header .info-list li {
+		margin-right: 5px;
+	}
+	.dadhboard-header .top-right {
+		display: inherit;
+	}
+	.pull-right {
+		float: none;
+	}
+	.dadhboard-header .info-list li a.notification-heading{
+		font-size: 15px;
+	}
+	.dadhboard-header .top-rside {
+		font-size: 12px;
+	}
+	.dadhboard-header .user-note .user-note-btn {
+		font-size: 13px;
+	}
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)   
+{
+    .pull-right {
+		float: right;
+	}
+	.ball-counter {
+		padding: 6px 5px;
+		margin-top: 2px;
+		font-size: 10px;
+	}
+}
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1200px)   
+{
+	.ball-counter {
+		margin-top: 5px;
+	}
+}
+@media only screen and (min-width: 768px)
+{	
+	.dadhboard-header .top-right {
+		align-items: center;
+		display: flex;
+		min-height: 50px;
+	}
+}
+@media only screen and (max-width: 767px)
+{	
+	.dadhboard-header .top-left {
+		margin-top: 2px;
+	}
+	.ball-counter {
+		font-size: 7px;
+		padding: 6px 3px 4px;
+		margin-top: 5px;
+		right: -2px;
+	}
+	.pull-right {
+		float: right !important;
+	}
+	.uball {
+		margin-left: -115px !important;;
+	}
+}
+/* top Bar End*/
+
+@media only screen and (min-width: 1024px)
+{	
+	.dadhboard-header .user-note .dmlm{
+		margin-left: -5px !important;
+	} 
+}

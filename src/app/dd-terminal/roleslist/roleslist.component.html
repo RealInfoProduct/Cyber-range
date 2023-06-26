@@ -1,0 +1,103 @@
+
+		<div class="col-md-12 content dashboard-body">
+			
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+			<div class="padding-body">
+				<div class="content-box-shadow">
+					<div class="row">
+						<div class="col-lg-2 col-md-6 form-group ippd50">
+							<input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />					
+						</div>						
+						<div class="col-lg-10 col-md-6 form-group ippd50">
+							<div class="btn-box btn_align">
+								<div class="theme-btn theme-btn-dd">
+									<span class="txt">
+										<a class="btn btn_blueas" (click)="redirect(dashboard_url+'roles')"><fa-icon [icon]="faUser"></fa-icon> &nbsp;Allocate Roles</a>
+									</span>
+								</div>
+							</div>
+						</div> 						
+
+						<div class="col-md-12 form_lable form-group table-responsive main-tabl-height tpm dk-table">
+                            <ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-3" type="{{alertClass}}" (close)="closed = true"><strong innerHTML="{{alertMessage}}">{{ alertMessage }}</strong></ngb-alert>
+
+                            <table id="team-table" datatable [dtOptions]="dtOptions[1]" dt-instance="dtInstance" [dtTrigger]="dtTrigger" class="row-border hover table-striped">
+								<thead>
+									<tr>
+										<th class="tidcenter tidc">S.No.</th>
+										<th class="tuidc">User Id</th>
+										<th class="taic">Instructor Name</th>
+										<th class="tluc">Email</th>
+										<th class="tcbc">Allocated By</th>
+										<th class="tcbc">Allocation Date</th>
+										<th class="tluc">Last Update</th>
+										<th class="tac">Action</th>										
+									</tr>
+								</thead>
+								<tbody *ngIf="packages?.length != 0">
+									<tr *ngFor="let pack of packages"
+										[class.highlighted]="clicked === pack.no" (click)="clicked = pack.no"
+									>
+										<td class="tidcenter">{{pack.no}}</td>
+										<td>{{ pack.User_Unique_ID }}</td>
+										<td><a  href="javascript:void(0);" (click)="viewUserProfile(pack.instructor_id);" class="tablelinkc cap" title="{{ pack.instructor_name }} profile" >{{ pack.instructor_name }}</a></td>
+										<td>{{ pack.instructor_email }}</td>
+										<td><a href="javascript:void(0);" (click)="viewUserProfile(pack.created_by);" class="tablelinkc cap" title="{{ pack.admin_name }} profile" >{{ pack.admin_name }}</a></td>
+										
+										<td>{{ pack.create_datetime }}</td>
+										
+										<td><span class="datetime">{{ pack.last_datetime }}</span></td>
+										<td>
+											<a routerLink="{{dashboard_url}}roles/{{pack.id}}" class="btn-default btn-sm btn-danger" class="edit" placement="top" ngbTooltip="Edit Role"><fa-icon [icon]="faEdit"></fa-icon></a>
+											<button class="btn btn-sm btn-delete" (click)="deleteRoles(pack.id)" placement="top" ngbTooltip="Delete Role"><fa-icon [icon]="faTrash"></fa-icon></button>
+											<button type="button" class="btn btn-sm btn-view" placement="top" ngbTooltip="View Role" (click)="viewPackageModelOpen(pack.id,pack.instructor_name,viewpackage)"><fa-icon [icon]="faEye"></fa-icon></button>
+										</td>
+									</tr>
+								</tbody>
+								<tbody *ngIf="packages?.length == 0">
+									<tr>
+										<td colspan="4" class="no-data-available">No data!</td>
+									</tr>
+								</tbody>
+							</table>
+                        </div>
+					</div>
+				</div>
+			</div>
+			
+			<ng-template #viewpackage let-modal>
+				<div class="dk-model-box">
+					<div class="modal-header dk-model-header">
+						<h4 class="modal-title" id="modal-basic-title">Allocated Roles Details</h4>
+						<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="table-responsive mtable-height dk-table">
+                            <p><b>Instructor Name</b> : <span class="cap">{{instructor_name}}</span></p>
+							
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<td><input type = "checkbox" id="create_team" name = "create_team" [checked]="ro_create_team" > Can Create Team</td>
+										<td><input type = "checkbox" id="create_exercise" name = "create_exercise" [checked]="ro_create_exercise" > Can Create Exercise</td>
+										<td><input type = "checkbox" id="allocate_exercise_user" name = "allocate_exercise_user" [checked]="ro_allocate_exercise_user" > Can Allocate Exercise To User</td>
+									</tr>
+																		
+								</tbody>
+                            </table>							
+						</div>
+					</div>
+				</div>
+			</ng-template>
+
+			<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+				<div class="inner-area col-md-6 text-center">
+					<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+					<p class="text-center loaderc" >Please Wait ...</p>
+				</div>
+			</div>
+		
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

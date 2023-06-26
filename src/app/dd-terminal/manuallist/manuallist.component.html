@@ -1,0 +1,75 @@
+		<div class="col-md-12 content dashboard-body"> 
+					
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			<div class="padding-body">
+				<ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+				<div class="content-box-shadow">
+					<form [formGroup] = "formdata">
+						<div class="row">							
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+								<div class="">
+									<input id="search" type="text" placeholder="Search..." class="form-control"  (keyup)="datatableSearch($event)" />
+								</div>
+							</div>
+							
+							<div class="col-lg-3 col-md-12 form-group ipp100 btn_align">
+								<div class="btn-box">
+									<div class="theme-btn theme-btn-dd">
+										<span class="txt">									
+											<a class="btn btn_blueas" routerLink="{{dashboard_url}}manual"  ><fa-icon [icon]="faUser"></fa-icon> &nbsp;Add New Manual</a>
+										</span>
+									</div>
+								</div>
+							</div>
+							
+								<div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+								<table datatable [dtOptions]="dtOptions" class="row-border table hover table-striped">
+									<thead>
+										<tr>
+											<th class="tidcenter tidc">S. No.</th>
+											
+											<th class="tluc">Manual Name</th>
+											<th class="tluc">User Name</th>
+											<th class="tluc text-center">Total Contents</th>
+											<th class="tluc">Last Modified</th>
+											<th class="tac">Action</th>
+										</tr>
+									</thead>
+									<tbody *ngIf="persons?.length != 0">
+										<tr *ngFor="let person of persons"
+											[class.highlighted]="clicked === person.s_no" (click)="clicked = person.s_no"
+										>
+											<td class="tidcenter">{{ person.s_no }}</td>
+											
+											<td>
+												<a routerLink="{{dashboard_url}}manual/{{person.id}}" class="tablelinkc">
+													{{ person.menual_title }}
+												</a>
+											</td>
+											
+											<td><span class="role-{{person.role}}"><a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ person.user_name }}" (click)="viewUserProfile(person.user_id)" >{{ person.user_name }}</a></span></td>
+											<td class="text-center"><span class="role-{{person.role}}">{{ person.topics }}</span></td>
+											<td><span class="role-{{person.role}}">{{ person.last_modified }}</span></td>
+											<td>
+											   <a routerLink="{{dashboard_url}}manual/{{person.id}}" class="edit" placement="top" ngbTooltip="Edit"><fa-icon [icon]="faEdit"></fa-icon></a>
+											   <button class="btn btn-sm btn-delete" type="button" (click) = "delete_Manual(person.id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+											   <a routerLink="/exercise-console/preview/{{person.id}}" class="edit" placement="top" ngbTooltip="Preview" target="_blank"><fa-icon [icon]="faEye"></fa-icon></a>
+											   <a href="javascript:void(0);" class="edit ml-2" type="button" (click) = "copy_Manual(person.id)" placement="top" ngbTooltip="Copy Manual"><fa-icon [icon]="faCopy"></fa-icon></a>
+											</td>
+											
+										</tr>
+									</tbody>
+									<tbody *ngIf="persons?.length == 0">
+										<tr>
+											<td colspan="8" class="no-data-available">No data!</td>
+										</tr>
+									<tbody>
+								</table>
+							</div>
+						</div>
+				  </form> 				  
+				</div>
+			</div>			
+		</div>	
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

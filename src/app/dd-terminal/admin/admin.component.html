@@ -1,0 +1,28 @@
+<!-- header -->
+<app-header *ngIf="showheader" ></app-header>
+
+<app-common></app-common>
+
+<div class="ngsidebarcontainer">
+<ng-sidebar-container>
+	
+	<!-- Sidebar -->
+		<ng-sidebar [(opened)]="_opened" position="left" mode="push" dock="true">
+			<app-asidebar></app-asidebar>			
+		</ng-sidebar> 
+
+	<!-- Page content -->
+	<div ng-sidebar-content class="ngbodycontent">
+        <router-outlet (activate)='onActivate($event)' ></router-outlet>
+    </div> 
+
+</ng-sidebar-container>
+<app-footer *ngIf="showheader" ></app-footer>
+
+</div>        	
+
+<!-- Footer -->
+
+
+
+

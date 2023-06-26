@@ -1,0 +1,74 @@
+.multiselect-dropdown .dropdown-list {
+    max-height: 200px;
+    overflow: scroll;
+}
+.control-btn button{
+    color:#fff;
+}
+.td-sm{
+    padding: 5px 10px !important;
+}
+.separater{
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+    margin-top: 25px;
+}
+.dk-table table.dataTable .tidc, .dk-table .tidc {
+    width: 40px !important;
+}
+.man-btn {
+    padding: 6px 19px 6px 10px !important;
+}
+.fsearch {
+    padding-left: 20px;
+}
+.s_no {
+    letter-spacing: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mdw {
+    min-width: 200px;
+}
+
+@media only screen and (min-width: 1025px)  
+{
+    .max500 {
+        max-width: 500px;
+    }
+}
+@media only screen and (max-width: 767px)  
+{
+    .fsearch {
+        margin-bottom: 15px;
+    }
+    .man-btn {
+        padding: 6px 12px 6px 7px !important;
+    }
+}
+
+table td {
+	vertical-align: middle;
+	background: #fff;
+}
+.tinbg{
+    background-color: #ffffff;
+}
+
+/* .team-brdb {
+    border-bottom: 1px solid #d2d2d2;
+    padding: 0 0 22px;
+} */
+.team-brdblast-child {
+    border-bottom: 0;
+}
+/* td.brdn {
+    border: 0 !important; 
+}
+.dk-table .table-bordered td, .table-bordered th {
+    border: 0; 
+} */
+
+
+

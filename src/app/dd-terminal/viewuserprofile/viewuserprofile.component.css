@@ -1,0 +1,20 @@
+.crop-image {
+    border-radius: 100%;
+    border: 2px solid #d8d8d8;
+}
+.modal-show {
+    display: block;
+    background-color: rgba(0,0,0,.5);
+}
+.dk-model-header {
+    background: #141d38;
+    color: #fff;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+}
+.close{
+    color: #fff;
+}
+#user-modal{
+    z-index: 999999 !important;
+}

@@ -1,0 +1,102 @@
+		<div class="col-md-12 content dashboard-body"> 
+			
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+			<ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-3" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+			<div class="padding-body dk-table">
+				<div class="content-box-shadow">		
+						<div class="row">				
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+								<select class="form-control fortextbox cap" id="status" name = "status" (change) = "changeStatus($event,'status')"  >
+									<option  value="">Select Status</option>
+									<option *ngFor="let status of status_array; let i = index" [value]="status_array[i]">
+									{{status_array[i]}}
+									</option>
+								</select>				
+							</div>
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+								<select class="form-control fortextbox cap" id="status" name = "status" (change) = "changeStatus($event,'visiability')"  >
+									<option  value="">Select Visibility</option>
+									<option *ngFor="let vslty of visiability_array; let i = index" [value]="visiability_array[i]">
+									{{visiability_array[i]}}
+									</option>
+								</select>				
+							</div>
+							<div class="col-lg-2 form-group ippd50">
+								<input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />
+							</div>
+							<div class="col-lg-2 col-md-6 ippd50 pl-0 pr-0">
+								<div class="mtain">
+									<div class="min80"><span class="Actives"></span> Active</div>
+									<div class="min80"><span class="Inactives"></span> Inactive</div>	
+								</div>
+							</div>	
+							<div class="col-lg-1 pr-0 mt-2">
+								<a href="javascript:void(0);" (click) = "exportCsv();" placement="top" ngbTooltip="Export Exercise CSV" >Export CSV</a>
+							</div>	
+			
+							<div class="col-lg-3 col-md-6 ippd50 btn_align">
+								<div class="btn-box">
+									<div class="theme-btn theme-btn-dd">
+										<span class="txt">									
+											<a class="btn btn_blueas" (click) = "redirect(dashboard_url+'exercise')" > <fa-icon [icon]="faUsers"></fa-icon> &nbsp;Add New Exercise</a>
+										</span>
+									</div>
+								</div>
+							</div>				
+							
+							<div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+								<table id="team-table" datatable [dtOptions]="dtOptions[1]" dt-instance="dtInstance" [dtTrigger]="dtTrigger" class="row-border table hover table-striped">
+									<thead>
+									<tr>
+											<th class="tidcenter tidc">S.No.</th>
+											<th class="tuidc">Unique ID</th>
+											<th class="ttnc">Exercise Name</th>
+											<th class="ttnc">Visibility</th>
+											<th class="tcbc">Created By</th>
+											<th class="tluc">Create Date</th>
+											<th class="tluc">Last Update</th>
+											<th class="tac">Action</th>
+										</tr>
+									</thead>
+									<tbody *ngIf="exercise?.length != 0">
+										<tr *ngFor="let ex of exercise" [class.highlighted]="clicked === ex.s_no" 
+										(click)="clicked = ex.s_no">
+											<td class="tidcenter">{{ ex.s_no }}</td>
+											<td class="tuidc"><span class="status-{{ex.status}}">{{ ex.total_exercise }}</span> {{ ex.unique_id }}</td>									
+											<td class="ttnc">
+												{{ ex.name }}
+											</td>
+											<td class="taic"><span class="{{ ex.visibility }}">{{ ex.visibility }}</span></td>
+											<td class="taic">
+												<span><a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ ex.created_by }}" (click)="viewUserProfile(ex.created_by_id)" >{{ ex.created_by }}</a></span>
+											</td>
+											<td class="tcbc"><span class="datetime d-block">{{ ex.created_datetime }}</span></td>
+											<td class="tluc"><span class="datetime d-block">{{ ex.last_datetime }}</span></td>									
+											<td class="tac" >
+												<a *ngIf="(bg_process | filterbgprocess : ex.unique_id : bg_task) == true ? false : true" routerLink="{{dashboard_url}}/edit-exercise/{{ex.id}}" title="Edit Exercise" class="btn btn-tean" placement="top" ngbTooltip="Edit Exercise"><fa-icon [icon]="faEdit"></fa-icon></a>
+												<ng-container *ngIf="ex.total_exercise=='0' && ex.delete_status=='1'" >
+												<button [disabled]="(bg_process | filterbgprocess : ex.unique_id : bg_task) == true ? true : false" class="btn btn-sm btn-delete" (click) = "deleteExercise(ex.id,ex.unique_id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+											    </ng-container>
+												<ng-container *ngIf="ex.delete_status==null" >
+													<button [disabled]="(bg_process | filterbgprocess : ex.unique_id : bg_task) == true ? true : false" class="btn btn-sm btn-delete" (click) = "deleteExercise(ex.id,ex.unique_id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+												</ng-container>	
+												<a href="javascript:void(0);" class="edit ml-2" type="button" (click) = "copyExercise(ex.id)" placement="top" ngbTooltip="Copy Exercise"><fa-icon [icon]="faCopy"></fa-icon></a>
+											</td>
+										</tr>
+									</tbody>
+									<tbody *ngIf="exercise?.length == 0">
+										<tr>
+											<td colspan="7" class="no-data-available">No data!</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+				</div>
+			</div>
+
+			</div>		
+	
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

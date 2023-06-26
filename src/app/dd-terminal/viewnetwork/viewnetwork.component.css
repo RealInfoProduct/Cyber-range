@@ -1,0 +1,33 @@
+.net-topology {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.action-menu{
+    display: none;
+    z-index: 1000;
+    position: absolute;
+}
+.custom-menu {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+#mynetwork {
+    width: 100%;
+    height: 500px;
+   /* border: 1px solid lightgray;*/
+}
+.frontend.mynetwork {
+    width: 100%;
+    height: 700px !important;
+}
+img.img-profile {
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+}
+.custom-menu.frontend {
+    text-align: center;
+}

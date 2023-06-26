@@ -1,0 +1,16 @@
+.multiselect-dropdown .dropdown-list {
+    max-height: 200px;
+    overflow: scroll;
+}
+.s_action {
+	min-width: 85px;
+}
+.s_action select {
+	font-size: 14px;
+}
+.back_rv {
+	background-color: rgb(0 0 0 / 0%) !important;
+}
+span.datetime.d-block {
+    width: 150px;
+}

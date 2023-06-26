@@ -1,0 +1,213 @@
+<app-candidateheader></app-candidateheader>
+
+<!-- Sub Header-->
+<app-breadcrumbs [side]="'front'" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<!-- Sub Header End -->
+<div class="loginbg loginbgimg padding-all"> 
+	<div class="loginpage"> 
+		<div class="loginform">
+			<h3 class="heading">Login <div class="heading_brd_white"></div></h3>
+			<form [formGroup] = "formdata" (ngSubmit) = "onClickSubmit(formdata.value)"> 
+				
+				<div class="row form-group"> 
+					<div class="col-md-12">
+						<input type = "text" class = "form-control fortextbox" name = "emailid" placeholder = "Email Id" formControlName = "emailid"> 
+					</div>
+				</div>
+				   
+				<div class="row form-group"> 
+					<div class="col-md-12">
+						<input type = "password" class = "form-control fortextbox" name = "passwd" placeholder = "Password" formControlName = "passwd">
+					</div>
+				</div>
+
+				<div class="row form-group"> 
+					<div class="col-md-8">
+						<p class="lbmt">
+							<a routerLink="/registration" class="linka linksep">Register Now</a>
+							<a routerLink="/forgot-password" class="linka">Forgot Password</a>
+						</p>
+					</div>
+					
+					<div class="col-md-4 lbtnr">
+						<!-- <input type="submit" [disabled]="!formdata.valid" class="form-control forsubmit btn btn-dark btn-black" value="Log In"> -->
+						<div class="btn-box">
+							<div class="theme-btn">
+								<span class="txt">
+									<input type="submit" [disabled]="!formdata.valid" class="forsubmit btn_blueas" value="Login">
+								</span>
+							</div>
+						</div>						 
+					</div>
+					
+					<!-- <div class="mt-5"><p class="text-center">OR</p></div> -->
+					<!-- <div class="social-media ml-3" *ngIf="google_login_status"> <a (click)="signInWithGoogle()"><img class="so_image" src="/assets/images/google.png"></a></div> -->
+					<div class="col-md-12 text-center">
+						<ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-2" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+						
+						<button *ngIf="logoutEveryBtn" type="button" class="button  forsubmit btn btn-dark btn-black" (click) = "logout_Every_Where($event)">Log off</button>
+						<button *ngIf="active_btn==true" type="button" class="button  forsubmit btn btn-dark btn-black" (click) = "send_activation_req(formdata.value)">Send Activation Request</button>
+
+				
+					</div>
+
+				</div>
+				<div class="or-container" *ngIf="google_login_status">
+					<div class="line-separator"></div>
+					<div class="or-label">or</div>
+					<div class="line-separator"></div>
+				</div>
+				<div class="row" *ngIf="google_login_status">
+					<div class="col-md-6 mt-1 float-none block-center"> <a class="btn btn-sm btn-google  text-uppercase btn-outline" style="font-size:13px" (click)="signInWithGoogle()"><img src="/assets/images/google.png"> Signup Using Google</a> </div>
+					<!-- <div class="col-md-6 mt-1"> <a class="btn btn-sm btn-linkedin  text-uppercase btn-outline" style="font-size:13px" (click)="signInWithLinkedin()"><img src="/assets/images/linkedin.png" style="height:16px;width:16px"> Signup Using Linkdin</a> </div> -->
+				</div> <br>
+
+
+			 </form> 
+			 
+
+		</div>
+	</div>
+</div>
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<!--
+			<p class="text-center">Processing...</p>
+			<ngbd-progressbar-config></ngbd-progressbar-config>
+		-->		
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>		
+   </div>
+</div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>
+
+
+
+
+
+
+<div class="section login-section">
+	<div class="login-card">
+		<div class="login_screen">
+			<div class="login_item_box container">
+				<div class="container">
+					<div class="login_logo">
+						<img src="../../assets/images/home/login-logo.svg" alt="">
+					</div>
+					<div class="login_header">
+						<span>login</span>
+					</div>
+					<form [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)">
+						<div class="row">
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="login_input_text">
+									<input class="input" [ngClass]="this.formdata.value.emailid?.length > 0 || (formdata.get('emailid').dirty || formdata.get('emailid').touched) ? invalidMessage(error_messages.email) : '' "
+										type="email" placeholder="Email id" formControlName = "emailid">
+								</div>
+								<ng-container *ngFor="let error of error_messages.email">
+									<div class="error-message" *ngIf="formdata.get('emailid').hasError(error.type) && (formdata.get('emailid').dirty || formdata.get('emailid').touched)">
+										<div class="error_mess">
+											<div class="img">
+												<img src="../../assets/images/home/error-vector.svg" alt="">
+											</div>
+											<div class="error-text">
+												{{ error.message }}
+											</div>
+										</div>
+									</div>
+								</ng-container>	
+							</div>
+							<div class="col-md-12 col-sm-12 col-xs-12">
+								<div class="login_input_text">
+									<input class="input" [type]="showPassword ? 'text' : 'password'"
+										[ngClass]="this.formdata.value.passwd?.length > 0 ? 'border-blue' : ''"
+										placeholder="Password" formControlName = "passwd">
+                           		<div class="icon">
+                           		    <i class="bi bi-eye-slash-fill" (click)="showPassword = !showPassword" [class.hide]="showPassword"></i>
+                           		    <i class="bi bi-eye-fill" (click)="showPassword = !showPassword" [class.hide]="!showPassword"></i>
+                           		</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="login_rem_forgot">
+							<div class="remember-me">
+								<!-- <div class="customcheck_check">
+									<label class="customcheck">Remember me
+										<input type="checkbox">
+										<span class="checkmark"></span>
+									  </label>
+								</div> -->
+								<div class="form-check">
+									<input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+									<label class="form-check-label" for="flexCheckChecked">
+										Remember me
+									</label>
+								  </div>
+							</div>
+							<div class="forgot-password">
+								<span><a routerLink="/forgot-password">Forgot password</a></span>
+							</div>
+						</div>
+					
+						<div class="sign_in">
+							<button type="submit" class="button">SIGN IN</button>
+						</div>
+					</form>
+					<div class="have_an_account">
+						<span>Don’t have an account? <label><a routerLink="/registration">Register
+									now</a></label></span>
+					</div>
+					<div class="row" >
+						<div class="col-md-12 col-sm-12 col-xs-12">
+							<div class="error_mess">
+								<ngb-alert class="card" *ngIf="!closed" (close)="closed = true">
+									<span>{{ alertMessage }}</span>
+								</ngb-alert>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-12 col-sm-12 col-xs-12" *ngIf="logoutEveryBtn">
+							<button  type="button" class="button  forsubmit btn btn-dark btn-black" (click) = "logout_Every_Where()">Log off</button>
+						</div>
+						<div class="col-md-12 col-sm-12 col-xs-12 mt-3" *ngIf="active_btn==true">
+							<button type="button" class="button  forsubmit btn btn-dark btn-black" (click) = "send_activation_req(formdata.value)">Send Activation Request</button>
+						</div>
+					</div>
+					<div class="login_hr_or">
+						<div class="login_hr">
+							<hr>
+						</div>
+						<div class="login_or">
+							<span>Or</span>
+						</div>
+						<div class="login_hr">
+							<hr>
+						</div>
+					</div>
+					<div class="login_with_section ">
+						<div class="login_with_google">
+							<div class="google_item" (click)="signInWithGoogle()">
+								<div class="google_logo">
+									<img src="../../assets/images/home/google-logo.svg" alt="">
+								</div>
+								<div class="goole_text">
+									<span>Continue with Google</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cyberrange">
+				<span>© 2023 SkyVirt® CyberRange</span>
+			</div>
+		</div>
+	</div>
+</div>

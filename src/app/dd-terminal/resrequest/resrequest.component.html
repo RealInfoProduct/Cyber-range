@@ -1,0 +1,434 @@
+<div class="col-md-12 content dashboard-body">
+    <app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-3" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+<div class="padding-body dk-table">
+<div class="content-box-shadow">		
+   <div class="row">
+    <div class="col-md-12 pl-0 pr-0">
+        
+        <div class="col-lg-2 col-md-6 ippd50 form-group  float-left">
+                <select class="form-control fortextbox" id="type" (change) = "changeType($event)" >
+                    <option  value="null">Select Type</option>
+                    <option value="1">Resource</option>
+                    <option value="2">Permission</option>
+                </select>					
+        </div>	
+        
+        <div class="col-lg-2 col-md-6 ippd50 form-group  float-left">
+            <select class="form-control fortextbox" id="status" (change) = "changeStatus($event)" >
+                <option  value="null">Select Status</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+            </select>					
+    </div>	
+
+        <div class="col-lg-2 col-md-6 ippd50 form-group  float-left">
+                <input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />
+        </div>
+
+        <div class="col-lg-2 col-md-6 ippd50 mb-2 mt-0 float-left">
+            <div class="mtain">
+                <div class="min80"><span class="Actives"></span> Active</div>
+                <div class="min80"><span class="Inactives"></span> Inactive</div>	
+            </div>
+        </div>
+        
+        <div *ngIf="group_id=='2'" class="col-lg-3 col-md-3 form-group ippd50 float-right">
+            <div class="btn-box btn_align">
+                <div class="theme-btn theme-btn-dd">
+                    <span class="txt">
+                        <button class="btn btn_blueas" (click)="openReqModal('','');" ><fa-icon [icon]="faCog"></fa-icon> &nbsp;Resource Request</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+            <table id="team-table" datatable [dtOptions]="dtOptions[1]" dt-instance="dtInstance" [dtTrigger]="dtTrigger" class="row-border table hover table-striped">
+                <thead>
+                    <tr>
+                       <th>S.No.</th>
+                       <th>Name</th>
+                       <th>Type</th>
+                       <th>Status</th>
+                       <th>Last Date</th>
+                       <th>Action</th>
+                    </tr>
+                 </thead>
+                 <tbody *ngIf="teams?.length != 0">
+                    <tr *ngFor="let team of teams"
+                    [class.highlighted]="clicked === team.id" (click)="clicked = team.id"
+                    >
+                       <td>{{team.s_no}}</td>
+                       <td><span>
+                        <a href="javascript:void(0);" (click)="viewUserProfile(team.user_id);" class="tablelinkc cap" title="{{ team.name }} profile" >{{ team.name }}</a>
+                        </span></td>
+                       <td><span>{{ team.res_type }}</span></td>
+                       <td><span class="{{ team.status }}" >{{ team.status }}</span></td>
+                       <td>{{ team.last_datetime }}</td>
+                       <td>
+                        <a href="javascript:void(0);" (click) = "openReqModal(team.id,team.res_type_id)" class="edit ml-2" placement="top" ngbTooltip="View Request"><fa-icon [icon]="faEye"></fa-icon></a>
+                       </td>
+                    </tr>
+                 </tbody>
+                 <tbody *ngIf="teams?.length == 0">
+                    <tr>
+                       <td colspan="6" class="no-data-available">No data!</td>
+                    </tr>
+                 </tbody>
+                 </table>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+
+<div class="modal fade" id="reqModal" tabindex="-1" aria-labelledby="reqModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Resource/Permission Request</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+             <ul *ngIf="res_id==''" class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="home-tab" data-toggle="tab" href="#resource" role="tab" aria-controls="resource" aria-selected="true">Resource</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#permission" role="tab" aria-controls="permission" aria-selected="false">Permission</a>
+                </li>
+              </ul>
+              <div class="tab-content mt-3" id="myTabContent">
+                <div [ngClass]="{'tab-pane fade':true, 'show active': res_tab == true}" id="resource" role="tabpanel" aria-labelledby="resource-tab">
+					<form [formGroup] = "packagefrm"> 
+
+                        <div *ngIf="credit_system == 'Active' && group_id=='1' && current_status!='Approved'" class="row"> 				   
+                            <div class="col-lg-5 col-md-6 onecell"> 
+                                <div class="row"> 
+                                    <div class="col-md-7 col_lable form_lable form-group">
+                                        <label for="credit">Credit:</label>
+                                    </div>
+                                    <div class="col-md-5 col_input form-group" >
+                                        <input type="number" class="form-control" id="credit" min="0" name = "credit" (keyup)="setCredit($event,1)" formControlName="credit" >
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>
+
+                    <div class="row"> 				   
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable form-group">
+                                    <label for="exercise">Exercise:</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="exercise" min="0" name = "exercise" disabled="{{isDisabled}}" formControlName="exercise" >
+                                </div>
+                            </div>	
+                        </div>
+                    
+                    
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable form-group">
+                                    <label for="team">Team:</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="team" min="0" name = "team" [disabled]="((isDisabled==true))? true:false" formControlName="team" > 
+                                </div>
+                            </div>	
+                        </div>				
+                        
+                    </div>
+
+                    <div class="row"> 
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable form-group">
+                                    <label for="users">Users:</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="users" min="0" name = "users" [disabled]="((isDisabled==true))? true:false" formControlName="users" >
+                                </div>
+                            </div>	
+                        </div>
+                        
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable form-group">
+                                    <label for="vm">Virtual Machine:</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="vm" min="0" name = "vm" [disabled]="((isDisabled==true))? true:false" formControlName="vm"> 
+                                </div>
+                            </div>	
+                        </div>
+                    </div>	
+                            
+                    <div class="row"> 
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable form-group">
+                                    <label for="network">Network:</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="network" min="0" name = "network" [disabled]="((isDisabled==true))? true:false" formControlName="network" > 
+                                </div>
+                            </div>	
+                        </div>
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable  form-group">
+                                    <label for="template">Template:</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="template" min="0" name = "template" [disabled]="((isDisabled==true))? true:false" formControlName="template" >
+                                </div>
+                            </div>	
+                        </div>
+                    </div>
+                
+                    <div class="row"> 	
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable  form-group">
+                                    <label for="disk">Disk:</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class="form-control fortextbox" id="disk" min="0" name="disk" [disabled]="((isDisabled==true))? true:false" formControlName="disk" > 
+                                </div>
+                            </div>	
+                        </div>
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable  form-group">
+                                    <label for="storage">Storage (in GB):</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="storage" min="0" name = "storage" [disabled]="((isDisabled==true))? true:false" formControlName="storage" >
+                                </div>
+                            </div>	
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    <div class="row"> 
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable  form-group">
+                                    <label for="vcpu">Virtual CPU:</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="vcpu" min="0" name = "vcpu" [disabled]="((isDisabled==true))? true:false" formControlName="vcpu" >
+                                </div>
+                            </div>	
+                        </div>
+                        <div class="col-lg-5 col-md-6 onecell"> 
+                            <div class="row"> 
+                                <div class="col-md-7 col_lable form_lable  form-group">
+                                    <label for="vram_capacity">Virtual RAM (in GB):</label>
+                                </div>
+                                <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control fortextbox" id="vram" min="0" name = "vram" [disabled]="((isDisabled==true))? true:false" formControlName="vram" >
+                                </div>
+                            </div>	
+                        </div>
+                    </div>
+                   
+                    <div *ngIf="group_id=='2' && current_status!='Approved' && show_btn" class="row">
+                        <div class="col-md-12 form_lable form-group mt-3 btn_align">
+                            <div class="btn-box">
+                                <div class="theme-btn mr-2">
+                                    <span class="txt">
+                                        <button class = "forsubmit btn_blueas btn" (click)="onSubmit(packagefrm.value,'1')">Submit</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="claim_id!='' && current_status!='Approved'" class="text-right" >
+                        <a (click)="redirect('claim-list/'+claim_id)" class="mr-4" placement="top" ngbTooltip="Claim Resource/Permissin Here" >Claim Resource/Permissin</a>
+                    </div>    
+
+                    <div *ngIf="credit_system == 'Active' && group_id=='1' && current_status!='Approved'" class="row">
+                        <div class="col-md-12 form_lable form-group mt-3 btn_align">
+                            <div class="btn-box">
+                                <div class="theme-btn mr-2">
+                                    <span class="txt">
+                                        <button class = "forsubmit btn_blueas btn" (click)="onSubmit(packagefrm.value,'1')">Submit</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    </form>
+                </div>
+                <div [ngClass]="{'tab-pane fade':true, 'show active': per_tab == true}"  id="permission" role="tabpanel" aria-labelledby="permission-tab">
+
+						
+                    <form [formGroup] = "formdata">	
+
+                    
+                        <div *ngIf="credit_system == 'Active' && group_id=='1' && current_status!='Approved'" class="row"> 				   
+                            <div class="col-lg-5 col-md-6 onecell"> 
+                                <div class="row"> 
+                                    <div class="col-md-7 col_lable form_lable form-group">
+                                        <label for="credit">Credit:</label>
+                                    </div>
+                                    <div class="col-md-5 col_input form-group" >
+                                        <input type = "number" class = "form-control" id="credit" min="0" (keyup)="setCredit($event,1)" name = "credit" formControlName="credit" >
+                                    </div>
+                                </div>	
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th class="max33">Permission</th>
+                                        <th class="max33">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Create Team</td>
+                                        <td>
+                                            <select name="create_team" id="create_team" formControlName="create_team" class="form-control max150" placement="top" ngbTooltip="Select Status">
+                                                <option value="">Select Status</option>
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Denied">Denied</option>
+                                            </select>
+                                            <ng-container *ngFor="let error of error_messages.create_team">
+                                                <div class="error-message" *ngIf="formdata.get('create_team').hasError(error.type) && (formdata.get('create_team').dirty || formdata.get('create_team').touched)">
+                                                   {{ error.message }}
+                                                </div>
+                                             </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Create Exercise</td>
+                                        <td>
+                                            <select name="create_exercise" id="create_exercise" formControlName="create_exercise" class="form-control max150" placement="top" ngbTooltip="Select Status">
+                                                <option value="">Select Status</option>
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Denied">Denied</option>
+                                            </select>
+                                            <ng-container *ngFor="let error of error_messages.create_exercise">
+                                                <div class="error-message" *ngIf="formdata.get('create_exercise').hasError(error.type) && (formdata.get('create_exercise').dirty || formdata.get('create_exercise').touched)">
+                                                   {{ error.message }}
+                                                </div>
+                                             </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Exercise Bundle</td>
+                                        <td>
+                                            <select name="exercise_bundle" id="exercise_bundle" formControlName="exercise_bundle" class="form-control max150" placement="top" ngbTooltip="Select Status">
+                                                <option value="">Select Status</option>
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Denied">Denied</option>
+                                            </select>
+                                            <ng-container *ngFor="let error of error_messages.exercise_bundle">
+                                                <div class="error-message" *ngIf="formdata.get('exercise_bundle').hasError(error.type) && (formdata.get('exercise_bundle').dirty || formdata.get('exercise_bundle').touched)">
+                                                   {{ error.message }}
+                                                </div>
+                                             </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Allocate Exercise to User</td>
+                                        <td>
+                                            <select name="allocate_exe_user" id="allocate_exe_user" formControlName="allocate_exe_user" class="form-control max150" placement="top" ngbTooltip="Select Status">
+                                                <option value="">Select Status</option>
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Denied">Denied</option>
+                                            </select>
+                                            <ng-container *ngFor="let error of error_messages.allocate_exe_user">
+                                                <div class="error-message" *ngIf="formdata.get('allocate_exe_user').hasError(error.type) && (formdata.get('allocate_exe_user').dirty || formdata.get('allocate_exe_user').touched)">
+                                                   {{ error.message }}
+                                                </div>
+                                             </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Create Manual</td>
+                                        <td>
+                                            <select name="create_manual" id="create_manual" formControlName="create_manual" class="form-control max150" placement="top" ngbTooltip="Select Status">
+                                                <option value="">Select Status</option>
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Denied">Denied</option>
+                                            </select>
+                                            <ng-container *ngFor="let error of error_messages.create_manual">
+                                                <div class="error-message" *ngIf="formdata.get('create_manual').hasError(error.type) && (formdata.get('create_manual').dirty || formdata.get('create_manual').touched)">
+                                                   {{ error.message }}
+                                                </div>
+                                             </ng-container>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Chat</td>
+                                        <td>
+                                            <select name="chat" id="chat" formControlName="chat" class="form-control max150" placement="top" ngbTooltip="Select Status">
+                                                <option value="">Select Status</option>
+                                                <option value="Allowed">Allowed</option>
+                                                <option value="Denied">Denied</option>
+                                            </select>
+                                            <ng-container *ngFor="let error of error_messages.chat">
+                                                <div class="error-message" *ngIf="formdata.get('chat').hasError(error.type) && (formdata.get('chat').dirty || formdata.get('chat').touched)">
+                                                   {{ error.message }}
+                                                </div>
+                                             </ng-container>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="pt-3 btn_align">										
+                            <div class="btn-box">
+                                <div class="theme-btn mr-2">
+                                    <span class="txt">
+                                        <button *ngIf="group_id=='2' && current_status!='Approved' && show_btn" type="submit" name="submit" class="btn_blueas" (click)="onSubmit(formdata.value,'2')"  >Submit</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div *ngIf="claim_id!='' && current_status!='Approved'" class="text-right" >
+                            <a (click)="redirect('claim-list/'+claim_id)" class="mr-4" placement="top" ngbTooltip="Claim Resource/Permissin Here" >Claim Resource/Permissin</a>
+                        </div> 
+
+                        <div *ngIf="credit_system == 'Active' && group_id=='1' && current_status!='Approved'" class="row">
+                            <div class="col-md-12 form_lable form-group mt-3 btn_align">
+                                <div class="btn-box">
+                                    <div class="theme-btn mr-2">
+                                        <span class="txt">
+                                            <button class = "forsubmit btn_blueas btn" (click)="onSubmit(formdata.value,'2')">Submit</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      </form>
+                </div>
+              </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

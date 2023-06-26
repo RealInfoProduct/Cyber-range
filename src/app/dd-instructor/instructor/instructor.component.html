@@ -1,0 +1,415 @@
+		<div class="col-md-12 content dashboard-body"> 
+
+			<div class="row">
+				<div class="col-md-12 dashboard-breadcrumb">
+					<div class="breadcrumb-sidepadd">
+						<button type="button" class="side-menu-btn asbibtn" (click)="action_sidebar()" id="sidebarCollapse">
+							<fa-icon [icon]="faBars"></fa-icon>
+						</button>
+						<h4 class="dashboard-heading">Dashboard</h4>
+					</div>		
+				</div>
+			</div>
+
+			<div class="padding-body">				
+				<div class="row dahboard_blocksd">	
+					<div class="col-lg-2 col-md-6 exercise_box thirtytpr">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">{{total_team}}</div>
+									<div class="text-muted">Teams</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faUserTie" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+						</div>									
+					</div>	
+					<div class="col-lg-2 col-md-6 exercise_box thirtytpr">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">{{total_team_member}}</div>
+									<div class="text-muted">Team Members</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faUsers" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+						</div>									
+					</div>	
+					<div class="col-lg-2 col-md-6 exercise_box thirtytpr">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">{{total_exe}}</div>
+									<div class="text-muted">Exercises</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faBook" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+						</div>									
+					</div>	
+					<div class="col-lg-2 col-md-6 exercise_box thirtytpr">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">{{total_enroll_req}}</div>
+									<div class="text-muted">Enroll Requests</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faShare" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+						</div>									
+					</div>	
+					<div class="col-lg-2 col-md-6 exercise_box thirtytpr">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">{{total_enroll_success}}</div>
+									<div class="text-muted">Enroll Successfully</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faPaperPlane" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+						</div>										
+					</div>											
+				</div>					
+					
+				<div class="row dahboard_blocksd mt-3 mb-3">	
+					<div class="col-md-12 mb-3">
+						<h4>Maximum Resource Limit</h4>
+					</div>
+					<div class="col-lg-2 col-md-6 exercise_box thirtytpr">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">{{MaxStorageTotalResource}}</div>
+									<div class="text-muted">Storage Limit<br>(in GB)</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faDatabase" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+						</div>									
+					</div>	
+					<div class="col-lg-2 col-md-6 exercise_box thirtytpr">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">{{MaxVcpuTotalResource}}</div>
+									<div class="text-muted">vCPU Limit</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faServer" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+						</div>									
+					</div>	
+					<div class="col-lg-2 col-md-6 exercise_box thirtytpr">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">{{MaxVramTotalResource}}</div>
+									<div class="text-muted">vRAM Limit<br>(in GB)</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faMemory" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+						</div>									
+					</div>
+				</div>				
+				
+				<div class="row">	
+					<div class="col-md-12">
+						<h4 align="">Available Resources</h4><br>	
+					</div>
+				</div>
+				<div *ngIf="resource_chart == true" class="col-md-12 p-0 mb-3">
+					<div class="row">						
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faBook" class="faicn"></fa-icon> Exercises</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{ExerciseRemainingResource}}									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{ExerciseTotalResource}}
+											</div>
+										</div>
+									</div>							   
+								</div>	
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="ExerciseChartOptions.series"
+									[chart]="ExerciseChartOptions.chart"
+									[plotOptions]="ExerciseChartOptions.plotOptions"
+									[labels]="ExerciseChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faUser" class="faicn"></fa-icon> Teams</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{TeamRemainingResource}}									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{TeamTotalResource}}
+											</div>
+										</div>
+									</div>							   
+								</div>							
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="TeamChartOptions.series"
+									[chart]="TeamChartOptions.chart"
+									[plotOptions]="TeamChartOptions.plotOptions"
+									[labels]="TeamChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faUsers" class="faicn"></fa-icon> Users</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{UsersRemainingResource}}									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{UsersTotalResource}}
+											</div>
+										</div>
+									</div>							   
+								</div>
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="UsersChartOptions.series"
+									[chart]="UsersChartOptions.chart"
+									[plotOptions]="UsersChartOptions.plotOptions"
+									[labels]="UsersChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faLaptop" class="faicn"></fa-icon> Virtual Machine</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{VmRemainingResource}} 									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{VmTotalResource}}
+											</div>
+										</div>
+									</div>							   
+								</div>
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="VmChartOptions.series"
+									[chart]="VmChartOptions.chart"
+									[plotOptions]="VmChartOptions.plotOptions"
+									[labels]="VmChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faNetworkWired" class="faicn"></fa-icon> Networks</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{NetworkRemainingResource}}									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{NetworkTotalResource}}
+											</div>
+										</div>
+									</div>							   
+								</div>
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+										[series]="NetworkChartOptions.series"
+										[chart]="NetworkChartOptions.chart"
+										[plotOptions]="NetworkChartOptions.plotOptions"
+										[labels]="NetworkChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faFileAlt" class="faicn"></fa-icon> Templates</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{TemplateRemainingResource}}									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{TemplateTotalResource}}
+											</div>
+										</div>
+									</div>							   
+								</div>
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="TemplateChartOptions.series"
+									[chart]="TemplateChartOptions.chart"
+									[plotOptions]="TemplateChartOptions.plotOptions"
+									[labels]="TemplateChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">							
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faCompactDisc" class="faicn"></fa-icon> Disk</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{DiskRemainingResource}} 									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{DiskTotalResource}}
+											</div>
+										</div>
+									</div>							   
+								</div>
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="DiskChartOptions.series"
+									[chart]="DiskChartOptions.chart"
+									[plotOptions]="DiskChartOptions.plotOptions"
+									[labels]="DiskChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">							
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faServer" class="faicn"></fa-icon> vCPU</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{VcpuRemainingResource}} 									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{VcpuTotalResource}} vCPU
+											</div>
+										</div>
+									</div>							   
+								</div>
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="VcpuChartOptions.series"
+									[chart]="VcpuChartOptions.chart"
+									[plotOptions]="VcpuChartOptions.plotOptions"
+									[labels]="VcpuChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">							
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faMemory" class="faicn"></fa-icon> vRAM</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{VramRemainingResource}} 									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{VramTotalResource}} GB vRAM
+											</div>
+										</div>
+									</div>							   
+								</div>
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="VramChartOptions.series"
+									[chart]="VramChartOptions.chart"
+									[plotOptions]="VramChartOptions.plotOptions"
+									[labels]="VramChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-3 col-md-6 col3ip">
+							<div class="content-box-shadow">
+								<div class="col-md-12">
+								   <h5 class="resource_heading"><fa-icon [icon]="faDatabase" class="faicn"></fa-icon> Storage</h5>							   
+									<div class="row">
+										<div class="col-md-12">
+											<div class="resource_boxo">
+												{{StorageRemainingResource}} 									
+											</div>
+											<div class="resource_boxt">
+												Available <br>of {{StorageTotalResource}} GB
+											</div>
+										</div>
+									</div>							   
+								</div>
+								
+								<div class="col-md-12 mleftm">
+									<apx-chart
+									[series]="StorageChartOptions.series"
+									[chart]="StorageChartOptions.chart"
+									[plotOptions]="StorageChartOptions.plotOptions"
+									[labels]="StorageChartOptions.labels"
+									></apx-chart>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>			
+				<app-notifications></app-notifications>
+			</div>			
+		</div>		
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>
+	</div>
+</div>

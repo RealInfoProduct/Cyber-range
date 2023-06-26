@@ -1,0 +1,375 @@
+<div class="col-md-12 content dashboard-body"> 
+    <app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+    <ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+    <div class="myform team padding-body">
+        <div class="row">
+                <div class="col-lg-6 col-md-12"> 	
+                    <form [formGroup] = "man_frm">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12"> 
+                                <div class="content-box-shadow content-box-shadow-sec"> 
+                                    <div>
+                                    <div  *ngIf="notification ==true" >
+                                        <p  class="alert alert-success">{{message}}</p>
+                                    </div>	
+                                     <label>Challenge:</label><br>
+                                        <input type="text" class="form-control fortextbox" id="m_title" value="" name="m_title" placeholder="Challenge" formControlName="m_title"> 
+                                        <ng-container *ngFor="let error of error_messages.m_title">
+                                            <div class="error-message col-md-12 mb-4 pl-0" *ngIf="man_frm.get('m_title').hasError(error.type) && (man_frm.get('m_title').dirty || man_frm.get('m_title').touched)">
+                                                {{ error.message }}
+                                            </div>
+                                        </ng-container>	
+                                    </div>
+                                    <br>
+                                        <label>Description:</label>
+                                        <div>
+                                            <textarea class="form-control fortextbox" id="d_desc" value="" name="d_desc" placeholder="Description" formControlName="d_desc"></textarea> 
+                                        </div>
+                                        <div class="clearfix mt-2"> </div>
+                                        <label>Relevant Exercise:</label>
+                                        <ng-multiselect-dropdown #manual_dropdown  formControlName="exKeyword"
+                                            [placeholder]="'Select Relevant Exercise'"									
+                                            [settings]="exDropdownSettings"
+                                            [data]="exList"
+                                            [(ngModel)]="exItems"
+                                            (onSelect)="onItemSelect($event,'Exercise')"
+                                            (onDeSelect)="onItemDeSelect($event,'Exercise')"
+                                            >
+                                            <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+                                                {{option}}
+                                            </ng-template>
+                                            <ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+                                                {{option}}
+                                            </ng-template>
+                                            </ng-multiselect-dropdown>
+                                            <div class="clearfix mt-2"> </div>
+                                                <label>Status:</label><br>
+                                                <select class="form-control fortextbox" id="status" name = "status" formControlName="status" >
+                                                    <option  value="">Select Status</option>
+                                                    <option *ngFor="let status of statusList; let i = index" [value]="statusList[i]">
+                                                    {{statusList[i]}}
+                                                    </option>
+                                                 </select>
+                                                 <ng-container *ngFor="let error of error_messages.status">
+                                                    <div class="error-message" *ngIf="man_frm.get('status').hasError(error.type) && (man_frm.get('status').dirty || man_frm.get('status').touched)">
+                                                       {{ error.message }}
+                                                    </div>
+                                                 </ng-container>
+                                        <div class="clearfix"> </div>
+                                    <div class="btn-box btn_align mt-3">
+                                        <div class="theme-btn mr-2" >
+                                            <span class="txt">
+                                                <button class="forsubmit btn_blueas btn" (click)="onSubmit(man_frm.value)" >Save</button>
+                                            </span>
+                                        </div> 
+                                        <div class="theme-btn" *ngIf="manual_id != null" >
+                                            <span class="txt">
+                                                <a class="btn_blueas btn" (click)="addContent()">Add Task</a>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>							
+                            </div>						
+                        </div>
+                    </form>
+                </div>
+                <div class="clearfix col-md-12"></div>
+                <div class="col-lg-3 col-md-6 mb-4 ippd50 dk-table">
+                    <div class="mtain">
+                        <div class="min80"><span class="Actives"></span> Active</div>
+                        <div class="min80"><span class="Inactives"></span> Inactive</div>	
+                    </div>
+                </div>
+				<div class="col-lg-12 editex-accor dk-table">						
+                <div class="accordion" id="accordionExample">
+                                    <div class="card" *ngFor="let tval of task; let i = index;" role="tablist" aria-multiselectable="true" >
+                                        <div class="card-header" [id]="'heading'+tval.id" >
+                                        <h2 class="mb-0">
+                                            <a class="btn btn-link1 btn-block1 text-left" type="button" data-toggle="collapse"  [href]="'#collapse'+tval.id" aria-expanded="true" [attr.aria-controls]="'collapse'+tval.id"  >
+                                            {{tval.task_name}}
+                                            </a>
+                                            <span class="{{tval.status}}"></span>
+                                            <a title="Edit Exercise" (click) = "editTask(tval.id)" class="btn btn-tean btn-default mr-1" placement="top" ngbTooltip="Edit Task"><fa-icon [icon]="faEdit"></fa-icon></a>
+                                            <a title="Add Question" (click) = "addQuesModal(tval.id)" class="btn btn-tean btn-default mr-1" placement="top" ngbTooltip="Add Question"><fa-icon [icon]="faPlus"></fa-icon></a>
+                                        </h2>
+                                        </div>
+                                        <div [id]="'collapse'+tval.id" [ngClass]="{ 'collapse':true, 'show': currentTaskId==tval.id || i === 0 }" [attr.aria-labelledby]="'heading'+tval.id" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div>
+                                                    <div class="col-md-12 pl-0 pr-0 pb-2">
+                                                       {{tval.description}}
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <!-- <div class="col-md-12 pl-0 pr-0" *ngFor="let q of tval.question; let j = index;">
+                                                        {{q.question}}
+                                                    </div>  -->
+                                                    <div class="content-box-shadow content-box-shadow-sec"> 							
+                                                    <div cdkDropList
+                                                    #personList = "cdkDropList"
+                                                    [cdkDropListData] = "tval.question"
+                                                    class = "example-list"
+                                                    (cdkDropListDropped) = "onDrop($event,i)"  *ngIf="tval.question != 0  ; else elseBlock ">	
+                         <table class="table">
+                            <thead>
+                               <tr>
+                                    <th>S. No.</th>
+                                    <th>Question</th>
+                                    <th>Optional</th>
+                                    <th>Marks</th>
+                                    <th>Action</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let value of tval.question ; index as k" class = "divlayout" cdkDrag >
+                                    <td>
+                                        <fa-icon [icon]="faSort" placement="top" ngbTooltip="Set order"  ></fa-icon>
+                                         <span class="ml-2" >{{k+1}}</span> 
+                                         <span class="{{value.status}} ml-2"></span>
+                                    </td>
+                                    <td>
+                                        {{value.question}}
+                                    </td>
+                                    <td>
+                                        {{value.ques_type}}
+                                    </td>
+                                    <td>
+                                        {{value.marks}}
+                                    </td>
+                                    <td>
+                                        <a title="Edit Question" (click) = "editQuestion(i,k)" class="btn btn-tean btn-default mr-1" placement="top" ngbTooltip="Add Question"><fa-icon [icon]="faEdit"></fa-icon></a>
+                                    </td>
+                               </tr>
+                            </tbody>    
+                         </table>
+                                                    </div>
+                                                </div>
+                                                    <ng-template #elseBlock>Content Not Found.</ng-template>
+                                                </div>
+                                            </div>        
+                                        </div>
+                                    </div>    
+                      </div>   
+        </div>    
+            </div>
+        </div>	
+    </div>
+    <div [ngClass]="{'modal': true, 'modal-show': showModal === true }" id="user-modal" [style.display]="showModal ? 'block' : 'none'">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header dk-model-header">
+             <h5 class="modal-title" id="exampleModalLabel">Add Task</h5>
+             <button type="button" class="close" data-dismiss="modal" (click) = "hide()">&times;</button>
+           </div>
+            <!-- Modal body -->
+            <div class="modal-body"> 
+             <div class="table-responsive-1 mtable-height-1">
+                <form [formGroup] = "task_frm">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12"> 
+                            <div class="content-box-shadow content-box-shadow-sec"> 
+                                <div>
+                                <div *ngIf="notification ==true" >
+                                    <p  class="alert alert-success">{{message}}</p>
+                                </div>	
+                                 <label>Task:</label><br>
+                                    <input type="text" class="form-control fortextbox" id="title" value="" name="title" placeholder="Title" formControlName="title"> 
+                                    <ng-container *ngFor="let error of error_messages.title">
+                                        <div class="error-message col-md-12 mb-4 pl-0" *ngIf="task_frm.get('title').hasError(error.type) && (task_frm.get('title').dirty || task_frm.get('title').touched)">
+                                            {{ error.message }}
+                                        </div>
+                                    </ng-container>	
+                                </div>
+                                <br>
+                                    <label>Description:</label>
+                                    <div>
+                                        <textarea class="form-control fortextbox" id="desc" value="" name="desc" placeholder="Description" formControlName="desc"></textarea> 
+                                    </div>
+                                        <div class="clearfix mt-2"></div>
+                                            <label>Status:</label><br>
+                                            <select class="form-control fortextbox" id="status" name = "status" formControlName="status" >
+                                                <option  value="">Select Status</option>
+                                                <option *ngFor="let status of statusList; let i = index" [value]="statusList[i]">
+                                                {{statusList[i]}}
+                                                </option>
+                                             </select>
+                                             <ng-container *ngFor="let error of error_messages.status">
+                                                <div class="error-message" *ngIf="task_frm.get('status').hasError(error.type) && (task_frm.get('status').dirty || task_frm.get('status').touched)">
+                                                   {{ error.message }}
+                                                </div>
+                                             </ng-container>
+                                    <div class="clearfix"> </div>
+                                <div class="btn-box btn_align mt-3">
+                                    <div class="theme-btn mr-2" >
+                                        <span class="txt">
+                                            <button class="forsubmit btn_blueas btn" (click)="onTaskSubmit(task_frm.value)" >Save</button>
+                                        </span>
+                                    </div> 
+                                </div>
+                            </div>							
+                        </div>						
+                    </div>
+                </form>
+             </div>
+         </div>
+          </div>
+        </div>
+       </div>
+    <div [ngClass]="{'modal': true, 'modal-show': showQuesModal === true }" id="user-modal" [style.display]="showQuesModal ? 'block' : 'none'">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header dk-model-header">
+             <h5 class="modal-title" id="exampleModalLabel">Add Question</h5>
+             <button type="button" class="close" data-dismiss="modal" (click) = "hide()">&times;</button>
+           </div>
+            <!-- Modal body -->
+            <div class="modal-body"> 
+             <div class="table-responsive-1 mtable-height-1">
+                <form [formGroup] = "ques_frm">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12"> 
+                            <div class="content-box-shadow content-box-shadow-sec"> 
+                                <div>
+                                <div *ngIf="notification ==true" >
+                                    <p  class="alert alert-success">{{message}}</p>
+                                </div>	
+                                 <label>Optional:</label><br>
+                                 <input type = "radio" class = "mr-2" id="optional_yes" name = "ques_type" value="Yes" formControlName="ques_type" (change)="quesTypeChange($event)" >
+                                 <label for="optional_yes" class="mr-3">Yes</label>
+                                 <input type = "radio" class = "mr-2" id="optional_no" name = "ques_type" value="No" formControlName="ques_type" (change)="quesTypeChange($event)" >
+                                 <label for="optional_no" class="mr-3">No</label>
+                                 <ng-container *ngFor="let error of error_messages.ques_type">
+                                        <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('ques_type').hasError(error.type) && (ques_frm.get('ques_type').dirty || ques_frm.get('ques_type').touched)">
+                                            {{ error.message }}
+                                        </div>
+                                    </ng-container>	
+                                </div>
+                                <label>Question:</label><br>
+                                <textarea class="form-control fortextbox" id="question" value="" name="question" placeholder="Question" formControlName="question"></textarea> 
+                                <ng-container *ngFor="let error of error_messages.question">
+                                    <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('question').hasError(error.type) && (ques_frm.get('question').dirty || ques_frm.get('question').touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>	
+                                <div class="col-md-6 float-left pl-0 mt-1" *ngIf="optionShow==true" >
+                                    <label>Option A:</label><br>
+                                    <input type="text" class="form-control fortextbox" id="option_a" value="" name="option_a" placeholder="Option A" formControlName="option_a"> 
+                                    <ng-container *ngFor="let error of error_messages.option_a">
+                                        <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('option_a').hasError(error.type) && (ques_frm.get('option_a').dirty || ques_frm.get('option_a').touched)">
+                                            {{ error.message }}
+                                        </div>
+                                    </ng-container>	
+                                </div>
+                                <div class="col-md-6 float-left pr-0 mt-1" *ngIf="optionShow==true" >
+                                    <label>Option B:</label><br>
+                                    <input type="text" class="form-control fortextbox" id="option_b" value="" name="option_b" placeholder="Option B" formControlName="option_b"> 
+                                    <ng-container *ngFor="let error of error_messages.option_b">
+                                        <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('option_b').hasError(error.type) && (ques_frm.get('option_b').dirty || ques_frm.get('option_b').touched)">
+                                            {{ error.message }}
+                                        </div>
+                                    </ng-container>	
+                                </div>
+                                <div class="col-md-6 float-left pl-0 mt-1" *ngIf="optionShow==true" >
+                                    <label>Option C:</label><br>
+                                    <input type="text" class="form-control fortextbox" id="option_c" value="" name="option_c" placeholder="Option C" formControlName="option_c"> 
+                                    <ng-container *ngFor="let error of error_messages.option_c">
+                                        <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('option_c').hasError(error.type) && (ques_frm.get('option_c').dirty || ques_frm.get('option_c').touched)">
+                                            {{ error.message }}
+                                        </div>
+                                    </ng-container>	
+                                </div>
+                                <div class="col-md-6 float-left pr-0 mt-1" *ngIf="optionShow==true" >
+                                    <label>Option D:</label><br>
+                                    <input type="text" class="form-control fortextbox" id="option_d" value="" name="option_d" placeholder="Option D" formControlName="option_d"> 
+                                    <ng-container *ngFor="let error of error_messages.option_d">
+                                        <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('option_d').hasError(error.type) && (ques_frm.get('option_d').dirty || ques_frm.get('option_d').touched)">
+                                            {{ error.message }}
+                                        </div>
+                                    </ng-container>	
+                                </div>
+                                <div class="col-md-6 float-left pl-0 mt-1" *ngIf="optionShow==true" >
+                                    <label>Answer:</label><br>
+                                    <select class="form-control fortextbox max200" id="option_answer" name = "option_answer" formControlName="option_answer" >
+                                        <option value="">Answer</option>
+                                        <option *ngFor="let status of option; let i = index" [value]="option[i]">
+                                        {{option[i]}}
+                                        </option>
+                                    </select>
+                                    <ng-container *ngFor="let error of error_messages.option_answer">
+                                        <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('option_answer').hasError(error.type) && (ques_frm.get('option_answer').dirty || ques_frm.get('option_answer').touched)">
+                                            {{ error.message }}
+                                        </div>
+                                    </ng-container>
+                                </div>
+                                <div class="col-md-12 float-left pl-0 pr-0 mt-1" *ngIf="optionShow==false" >
+                                <label>Answer:</label><br>
+                                <textarea class="form-control fortextbox" id="answer" value="" name="answer" placeholder="Answer" formControlName="answer"></textarea> 
+                                <ng-container *ngFor="let error of error_messages.answer">
+                                    <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('answer').hasError(error.type) && (ques_frm.get('answer').dirty || ques_frm.get('answer').touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="clearfix"> </div>
+                            <div class="col-md-6 float-left pl-0 mt-1" >
+                                <label>Marks:</label><br>
+                                <input type="text" class="form-control fortextbox" id="marks" value="" name="marks" placeholder="Marks" formControlName="marks"> 
+                                <ng-container *ngFor="let error of error_messages.marks">
+                                    <div class="error-message col-md-12 mb-4 pl-0" *ngIf="ques_frm.get('marks').hasError(error.type) && (ques_frm.get('marks').dirty || ques_frm.get('marks').touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="col-md-6 pl-0 pr-0 mt-1 float-left">
+                                   <label>Status:</label><br>
+                                   <select class="form-control fortextbox" id="ques_status" name = "ques_status" formControlName="ques_status" >
+                                    <option value="">Select Status</option>
+                                    <option *ngFor="let status of statusList; let i = index" [value]="statusList[i]">
+                                    {{statusList[i]}}
+                                    </option>
+                                    </select>
+                                    <ng-container *ngFor="let error of error_messages.ques_status">
+                                    <div class="error-message" *ngIf="ques_frm.get('ques_status').hasError(error.type) && (ques_frm.get('ques_status').dirty || ques_frm.get('ques_status').touched)">
+                                        {{ error.message }}
+                                    </div>
+                                    </ng-container>
+                            </div>
+
+
+                            <div class="clearfix mt-2"> </div>
+                            <label>Asset:</label>
+                            <ng-multiselect-dropdown #manual_dropdown  formControlName="assetKeyword"
+                                [placeholder]="'Select Asset'"									
+                                [settings]="exDropdownSettings"
+                                [data]="assetList"
+                                [(ngModel)]="assetItems"
+                                (onSelect)="onItemSelect($event,'Asset')"
+                                (onDeSelect)="onItemDeSelect($event,'Asset')"
+                                >
+                                <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+                                    {{option}}
+                                </ng-template>
+                                <ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+                                    {{option}}
+                                </ng-template>
+                                </ng-multiselect-dropdown>
+                                <div class="clearfix mt-2"> </div>
+
+                                    <div class="clearfix"> </div>
+                                <div class="btn-box btn_align mt-3">
+                                    <div class="theme-btn mr-0" >
+                                        <span class="txt">
+                                            <button class="forsubmit btn_blueas btn" (click)="onQuesSubmit(ques_frm.value)" >Save</button>
+                                        </span>
+                                    </div> 
+                                </div>
+                            </div>							
+                        </div>						
+                    </div>
+                </form>
+             </div>
+         </div>
+          </div>
+        </div>
+       </div>

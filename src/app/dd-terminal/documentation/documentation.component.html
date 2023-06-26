@@ -1,0 +1,128 @@
+<!-- header -->
+<app-header></app-header>
+
+<div class="ngsidebarcontainer">
+<ng-sidebar-container> 
+	
+	<!-- Sidebar -->
+	<ng-sidebar [(opened)]="_opened" position="left" mode="push" dock="true" >
+		<app-asidebar></app-asidebar>			
+	</ng-sidebar>
+	
+	<!-- Page content -->
+	<div ng-sidebar-content class="ngbodycontent">	
+		<div class="col-md-12 content dashboard-body"> 
+
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			
+			<div class="myform team padding-body">	
+				<form [formGroup] = "doc_frm">
+					<div class="row">
+						<div class="col-lg-6 col-md-12"> 
+							<div class="content-box-shadow content-box-shadow-sec"> 
+								<div>
+									<label>Documentation Title:</label><br>
+									<input type="text" class="form-control fortextbox" id="d_title" name="d_title" placeholder="Documentation Title" formControlName="d_title"> 
+									<ng-container *ngFor="let error of error_messages.d_title">
+										<div class="error-message col-md-12 mb-4 pl-0" *ngIf="doc_frm.get('d_title').hasError(error.type) && (doc_frm.get('d_title').dirty || doc_frm.get('d_title').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>	
+								</div>
+								<div class="btn_align mt-3">									
+									<div class="btn-box">
+										<div class="theme-btn">
+											<span class="txt">
+												<button class="forsubmit btn_blueas btn">Submit</button>
+											</span>
+										</div>
+									</div>						
+								</div>
+							</div>
+													
+							<div class="content-box-shadow content-box-shadow-sec"> 
+								<div>
+									<label>Topic:</label><br>
+									<input type="text" class="form-control fortextbox" id="d_topic" name="d_topic" placeholder="Topic" formControlName="d_topic">
+								</div>
+								
+								<div class="mt-3">
+									<label>Description:</label><br>
+									<angular-editor [placeholder]="d_desc_placeholder" formControlName="d_desc" id="d_desc" [(ngModel)]="d_desc" [config]="config" ></angular-editor>
+									<div class="html">{{ d_desc }}</div>
+								</div>
+
+								<div class="btn_align mt-3">									
+									<div class="btn-box">
+										<div class="theme-btn">
+											<span class="txt">
+												<button class="forsubmit btn_blueas btn">Add Topic</button>
+											</span>
+										</div>
+									</div>						
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-6 col-md-12"> 
+							<div class="content-box-shadow content-box-shadow-sec"> 
+								Topic List:<hr>
+								<ol class="olpl">
+									<li><a href="#">Topic Title</a></li>
+									<li><a href="#">Topic Title</a></li>
+									<li><a href="#">Topic Title</a></li>
+									<li><a href="#">Topic Title</a></li>
+									<li><a href="#">Topic Title</a></li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+
+
+			<!-- <div class="myform team padding-body">
+				<div class="content-box-shadow content-box-shadow-sec regform"> 
+					<form>						
+						<div class="row"> 
+							<div class="col-md-12"> 
+								<div class="row"> 
+									<div class="col-md-4 col4 form-group">
+										<label for="f_name">Doc Title:</label>
+									</div>
+									<div class="col-md-5 form-group" >
+										<input type="text" class="form-control fortextbox" id="d_title" name="d_title" placeholder="Documentation Title" formControlName="d_title"> 
+									</div>
+								</div>	
+
+								<div class="btn-box btn_align">
+									<div class="theme-btn">
+										<span class="txt">
+											 <input type="submit" class="forsubmit btn_blueas" value="Submit">
+										</span>
+									</div>
+								</div>
+
+								
+							</div>
+						</div>	
+					</form>
+				</div>
+			</div> -->
+			
+			<!--
+			<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+				<div class="inner-area col-md-6 text-center">
+					<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+					<p class="text-center loaderc" >Please Wait ...</p>
+				</div>
+			</div>
+			-->
+			
+		</div>		
+	</div>
+	<!-- End Page content -->
+</ng-sidebar-container>
+</div>
+<!-- Footer -->
+<app-footer></app-footer>

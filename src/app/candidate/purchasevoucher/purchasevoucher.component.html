@@ -1,0 +1,17 @@
+<!-- Header -->
+<app-candidateheader [resetHeaderBasket]="resetBasket" ></app-candidateheader>
+
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+
+<div class="col-md-12 page-min-height padding-all padding-tb">
+	<div class="row">
+
+		<app-viewpurchasevoucherlist (resetHeader)="callResetHeader($event)" ></app-viewpurchasevoucherlist>
+
+	</div>
+</div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

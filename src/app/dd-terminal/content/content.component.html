@@ -1,0 +1,64 @@
+		<div class="col-md-12 content dashboard-body"> 
+			<div class="myform team padding-body">
+				<form  [formGroup] = "content_frm">
+					<div  *ngIf="notification ==true" style="margin-top: 5px;" >
+						<p class="alert alert-{{stausType}} alert-dismissible fade show">{{message}}</p>
+					</div>
+					<ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+					<div class="row">
+						<div class="col-lg-12 col-md-12"> 													
+							<div class="content-box-shadow content-box-shadow-sec pt-0"> 
+								<div class="col-lg-1 col-md-12 float-left pr-0 pl-0 pr-lg-2">
+									<div class=" mr-2" style="padding:3px">
+										<span>
+											<a  routerLink="{{dashboard_url}}manual/{{manual_id}}" ><img src="favicon.ico"/></a>
+										</span>
+									</div>	
+								</div>
+
+								<div class="col-lg-12 col-md-12 float-left pr-0 pl-0 pr-lg-2">
+									<input type="text" class="form-control fortextbox" id="c_title"     name="c_title" placeholder="Title" formControlName="c_title">
+									<ng-container *ngFor="let error of error_messages.c_title">
+									<div class="error-message col-md-12 mb-4 pl-0" *ngIf="content_frm.get('c_title').hasError(error.type) && (content_frm.get('c_title').dirty || content_frm.get('c_title').touched)">
+										{{ error.message}}
+									</div>
+									</ng-container>
+								</div>
+
+                                <div class="clearfix"></div>
+                                
+								<div class="mt-1">
+									<label>Description: <small class="text_red">"Please upload image size less than 1MB"</small></label><br>
+									<angular-editor [placeholder]="c_desc_placeholder"  formControlName="c_desc" id="c_desc"   [config]="config" ></angular-editor>
+								</div>
+								<ng-container *ngFor="let error of error_messages.c_desc">
+									<div class="error-message col-md-12 mb-4 pl-0" *ngIf="content_frm.get('c_desc').hasError(error.type) && (content_frm.get('c_desc').dirty || content_frm.get('c_desc').touched)">
+										{{ error.message}}
+									</div>
+									</ng-container>
+                                <div class="btn-box btn_align mt-3">
+
+                                    <div class="theme-btn mr-2"  *ngIf="content_id ==null" >
+                                        <span class="txt">
+                                            <button class="forsubmit btn_blueas btn" (click)="onSubmit(content_frm.value)" >Save</button>
+                                        </span>
+                                    </div>
+									<div class="theme-btn mr-2" *ngIf="content_id !=null">
+                                        <span class="txt">
+                                            <button class="forsubmit btn_blueas btn" (click)="updateContent(content_frm.value)">Update</button>
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="theme-btn">
+                                        <span class="txt">
+                                            <a class = "btn_blueas btn" routerLink="{{dashboard_url}}manual/{{manual_id}}"  >Cancel</a>
+                                        </span>
+                                    </div>
+                                </div>
+							</div>
+						</div>
+
+                    </div>
+				</form>
+			</div>
+		</div>		

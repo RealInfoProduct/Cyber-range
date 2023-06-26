@@ -1,0 +1,234 @@
+<ng-template #modalContent let-modal >
+    <div class="dk-model-box">
+       <div class="modal-header dk-model-header">
+          <h4 *ngIf="action_type=='EditSchedule' || action_type=='AddSchedule' || action_type=='ViewSchedule'" class="modal-title" id="modal-basic-title">Schedule</h4>
+          <h4 *ngIf="action_type=='ViewAllotment'" class="modal-title" id="modal-basic-title">Allotment Detail</h4>
+          <button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+       <div class="mtable-height schedule-box">
+          <div class="modal-body">
+            <ng-container *ngIf="action_type=='EditSchedule' || action_type=='AddSchedule'" >
+            <form [formGroup]="schedulefrm">
+  
+            <div class="col-lg-12 col-md-12 float-left form-group" >
+              <div class="col-lg-12 col-md-12 col-12 p-0 pt-2 float-left">
+  
+                <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                  Title 
+               </div>
+               <div class="col-lg-9 col-md-12 col-12 p-0 pt-2 float-left">
+                <input text="text" class="form-control tinbg" name="title" id="title"  placeholder="Title" formControlName="title" />
+  
+                              <ng-container *ngFor="let error of error_messages.title">
+                                  <div class="error-message col-md-12 mb-4 pl-0" *ngIf="schedulefrm.get('title').hasError(error.type) && (schedulefrm.get('title').dirty || schedulefrm.get('title').touched)">
+                                      {{ error.message }}
+                                  </div>
+                              </ng-container>	
+  
+               </div>
+  
+                <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                    Start Date 
+                 </div>
+                 <div class="col-lg-9 col-md-12 col-12 p-0 pt-2 float-left">
+                  <input (onSelect)="setDatetime($event,'start_date','');" class="form-control tinbg" name="start_date" id="start_date"  [dpDayPicker]="config" [theme]="'dp-material'" [mode]="'daytime'" [(ngModel)]="start_date"  [ngModelOptions]="{standalone: true}" formControlName="start_date" />
+                 </div>
+  
+                 <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                  End Date 
+               </div>
+               <div class="col-lg-9 col-md-12 col-12 p-0 pt-2 float-left">
+                <input (onSelect)="setDatetime($event,'end_date','');" class="form-control tinbg" name="end_date" id="end_date"  [dpDayPicker]="config" [theme]="'dp-material'" [mode]="'daytime'" [(ngModel)]="end_date"  [ngModelOptions]="{standalone: true}" formControlName="end_date" />
+               </div>
+  
+                 <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                  Description 
+               </div>
+               <div class="col-lg-9 col-md-12 col-12 p-0 pt-2 float-left">
+                <textarea class="form-control tinbg" name="description" id="description"  placeholder="Description"  formControlName="description" ></textarea>
+  
+                <ng-container *ngFor="let error of error_messages.description">
+                    <div class="error-message col-md-12 mb-4 pl-0" *ngIf="schedulefrm.get('description').hasError(error.type) && (schedulefrm.get('description').dirty || schedulefrm.get('description').touched)">
+                        {{ error.message }}
+                    </div>
+                </ng-container>	
+   
+               </div>
+  
+               <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                Select Invite 
+             </div>
+             <div class="col-lg-8 col-md-12 col-12 p-0 pt-2 float-left ng-autocomplete" >
+            
+              <ng-autocomplete #auto [data]="instructor_list"
+              [searchKeyword]="keyword"
+              [debounceTime] = "200"
+              [minQueryLength] = "2" 
+              placeHolder="Selected Invite"
+              name="invite_email"
+              (selected)='selectEvent($event)'
+              (inputFocused)='onFocused($event)'
+              [itemTemplate]="itemTemplate"
+              (scrolledToEnd)='scrolledToEnd($event)'
+              (inputChanged)='inputChanged($event)'
+              (inputCleared)='inputCleared($event)'
+              [notFoundTemplate]="notFoundTemplate"
+              formControlName="invite_email"
+              >
+            </ng-autocomplete>
+            
+            <ng-template #itemTemplate let-item>
+              <a [innerHTML]="item.name"></a>
+            </ng-template>
+            
+            <ng-template #notFoundTemplate let-notFound>
+              <div [innerHTML]="notFound"></div>
+            </ng-template> 
+            
+            </div>
+
+            <div class="col-lg-1 col-md-12 col-12 float-left pt-2 pl-1" >
+              <button class = "btn btn-primary" (click)="add_invite(schedulefrm.value);">Add</button>
+            </div>
+
+            <ng-container *ngIf="invite_list.length!=0" >
+              <div class="col-lg-3 col-md-12 col-12 p-0 pt-2 float-left">
+                Invite 
+            </div>
+            <div class="col-lg-9 col-md-12 col-12 p-0 pt-2 float-left" >
+              <span *ngFor="let inv of invite_list;" class="invite-email mt-1" >{{inv}}  <span class="invite-close"> <button (click)="removeInvite(inv);" class="btn btn-sm btn-danger" ><fa-icon [icon]="faTrash"></fa-icon></button></span></span>
+              </div>
+            </ng-container>
+
+            
+  
+             <div class="float-right mt-3">
+              <div class="btn-box">
+                <div class="theme-btn">
+                  <span class="txt">
+                    <button class = "forsubmit btn_blueas btn" (click)="update_schedule(schedulefrm.value);">Submit</button>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+
+
+               
+                </div>
+              </div>    
+              </form> 
+              
+            </ng-container>
+            <ng-container *ngIf="action_type=='ViewSchedule'" >
+  
+              <table class="table table-bordered">
+                <tr>
+                  <td>Title</td>
+                  <td>{{schedule.title}}</td>
+                </tr>
+                <tr>
+                  <td>Start Date</td>
+                  <td>{{schedule.start_date}}</td>
+                </tr>
+                <tr>
+                  <td>End Date</td>
+                  <td>{{schedule.end_date}}</td>
+                </tr>
+                <tr>
+                  <td>Description</td>
+                  <td> {{schedule.description}}</td>
+                </tr> 
+                <tr  *ngIf="invite_list.length!=0">
+                  <td>Invite</td>
+                  <td> <span *ngFor="let inv of invite_list; let i=index;" class="mt-1" ><span *ngIf="i > 0 && i <= invite_list.length-1">, </span>{{inv}}</span>
+                  </td>
+                </tr>                
+              </table>  
+              </ng-container>
+  
+              <ng-container *ngIf="action_type=='ViewAllotment'">
+                <table class="table table-bordered hover table-striped" >
+                  <tr>
+                     <td>Allotment ID</td>
+                     <td>{{allotment_detail.a_id}}</td>
+                    <td>Exercise</td>
+                    <td>{{allotment_detail.exercise}}</td>
+                   </tr>
+                   <tr>
+                  <td>User/Team</td>
+                  <td>
+                    <ng-container *ngIf="allotment_detail.allot_type=='Team'" >
+                      <ng-container *ngFor="let td of allotment_detail.team_detail; let i = index" >
+                          <a (click)="modal.dismiss('Cross click')" routerLink="{{dashboard_url}}/team/{{td.id}}" placement="top" ngbTooltip="Team - {{td.team_name}}" >{{td.team_name}}</a>
+                        <ng-container *ngIf="i!=allotment_detail.team_detail.length-1">, </ng-container>
+                       </ng-container>
+                    </ng-container>	
+  
+                    <ng-container *ngIf="allotment_detail.allot_type=='Individual'" >
+                      <ng-container *ngIf="group_id=='1' || group_id=='2'">
+                      <a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ allotment_detail.profile.F_Name }} {{ allotment_detail.profile.L_Name }}" (click)="viewUserProfile(allotment_detail.profile.U_ID)" >{{ allotment_detail.profile.F_Name }} {{ allotment_detail.profile.L_Name }}</a>
+                      </ng-container>
+                      <ng-container *ngIf="group_id=='3'">
+                        {{ allotment_detail.profile.F_Name }} {{ allotment_detail.profile.L_Name }}
+                      </ng-container>
+                    </ng-container>	
+  
+                  </td>
+                  <td>Duration(In Hrs)</td>
+                  <td>
+                    {{allotment_detail.total_duration}}
+                  </td>
+                     </tr>
+                  <tr>
+                  <td>Status</td>
+                  <td>
+                    {{allotment_detail.status}}
+                  </td>
+                  <td>Type</td>
+                  <td>
+                    {{allotment_detail.allot_type}}
+                  </td>
+                     </tr>
+                   <tr>
+                  <td>Start Date</td>
+                  <td>
+                    {{allotment_detail.valid_start}}
+                  </td>
+                  <td>End Date</td>
+                  <td>
+                    {{allotment_detail.valid_end}}
+                  </td>
+                     </tr>
+                   <tr>
+                  <td>Used/Remain(hrs)</td>
+                  <td>
+                    {{allotment_detail.used_time}}/{{allotment_detail.remain_time}}
+                  </td>
+                  <td>Last Update Date</td>
+                  <td>
+                    {{allotment_detail.last_datetime}}
+                  </td>
+                     </tr>
+      
+                   <tr>
+                  <td>Create Date</td>
+                  <td colspan="3">
+                    {{allotment_detail.create_datetime}}
+                  </td>
+                     </tr>
+                </table>
+              </ng-container>  
+          </div>
+       </div>
+    </div>
+  </ng-template>
+
+  <div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+    <div class="inner-area col-md-6 text-center">
+      <img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+      <p class="text-center loaderc" >Please Wait ...</p>
+     </div>
+  </div>

@@ -1,0 +1,39 @@
+<!-- header -->
+<app-header></app-header>
+
+<div class="ngsidebarcontainer">
+<ng-sidebar-container> 
+	
+	<!-- Sidebar -->
+	<ng-sidebar [(opened)]="_opened" position="left" mode="push" dock="true" >
+		<app-asidebar></app-asidebar>			
+	</ng-sidebar>
+	
+	<!-- Page content -->
+	<div ng-sidebar-content class="ngbodycontent">	
+		<div class="col-md-12 content dashboard-body"> 
+
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			
+			<div class="padding-body dk-table">
+                <div class="content-box-shadow">		
+                    <div class="row">	
+                    </div>		
+                </div>
+            </div>
+			<!--
+			<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+				<div class="inner-area col-md-6 text-center">
+					<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+					<p class="text-center loaderc" >Please Wait ...</p>
+				</div>
+			</div>
+			-->
+			
+		</div>		
+	</div>
+	<!-- End Page content -->
+</ng-sidebar-container>
+</div>
+<!-- Footer -->
+<app-footer></app-footer>

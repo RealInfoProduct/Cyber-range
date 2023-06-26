@@ -1,0 +1,132 @@
+<div class="chatdiv fc_chatdiv">
+  <a class="deactivec "  *ngFor="let user of chatListUsers"  (click)="selectedUser(user)" > {{ user.f_name}} <fa-icon [icon]="faDotCircle" [ngClass]="user.online === 'Y' ? 'active-user' : 'deactive-user'"></fa-icon></a>
+  
+  <a class="deactivec "  *ngFor="let team of alloted_team "  (click)="selectedTeam(team)" > {{ team.team_name}} <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  
+  <!-- <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a> -->
+<!----  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a>
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>
+  <a class="activec">Harshek Sir <fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a> 
+  <a class="deactivec">Kamlesh Sir <fa-icon [icon]="faDotCircle" class="deactive-user"></fa-icon></a>-->
+</div>
+<div class="chat_box_div fc_chat_box_div">
+  <div class="header">
+      <h2 *ngIf="user_form==true"  >{{selectedUser !== null && selectedUser.f_name ? selectedUser.f_name  : ' Select a User to chat.' }}</h2>
+      <h2 *ngIf="team==true"  >{{selectedTeam !== null && selectedTeam.team_name ? selectedTeam.team_name  : ' Select a Team to chat.' }}</h2>
+      <div class="closeb">
+
+          <fa-icon [icon]="faTimesCircle"></fa-icon>
+      </div>
+    </div>
+    <div class="chat-box">
+      <div class="chating">
+          <div class="message-box" #messageThread   [class.right-img]="alignMessage(msg.fromUserId)"  *ngFor="let msg of messages">
+              <div class="picture">
+                  <img src="{{server_url}}media/exercise-image/EXACB75.jpg" class="img-fluid" />
+                  <span class="time">10 mins</span>
+              </div>
+
+              <div class="message">
+                  <span>{{msg.fromUserName}}</span>
+                  <p>{{msg.message}}</p>
+              </div>
+
+              <!-- <div *ngIf="progressbar" class="progressbar-area col-md-12">
+                  <div class="inner-area col-md-6">
+                      <div *ngIf="progress_message==''" class="text-center">
+                          <img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+                          <p class="text-center loaderc">Please Wait ...</p>
+                      </div>
+                      <p *ngIf="progress_message!=''" class="text-center">
+                          {{progress_message}}<span class="spinner-grow text-light" role="status"></span><span
+                              class="spinner-grow text-light" role="status"></span><span class="spinner-grow text-light"
+                              role="status"></span>
+                      </p>
+                  </div>
+              </div> -->
+          </div>
+          <div class="message-thread start-chatting-banner" *ngIf="messages.length === 0">
+              <p class="heading">
+                  You haven't chatted with {{selectedUser.username}} in a while,
+                  <span class="sub-heading">Say Hi.</span>
+              </p>
+          </div>
+
+          
+          <!-- <div class="message-box right-img">
+              <div class="picture">
+                  <img src="{{server_url}}media/exercise-image/EXACB75.jpg" class="img-fluid" />
+                  <span class="time">2 mins</span>
+              </div>
+              <div class="message">
+                  <span>Mike Moloney</span>
+                  <p>Pretty good, Eating nutella, nommommom</p>
+              </div>
+          </div> -->
+          <!-- <div class="message-box left-img">
+              <div class="picture">
+                  <img src="{{server_url}}media/exercise-image/EXACB75.jpg" class="img-fluid" />
+                  <span class="time">10 mins</span>
+              </div>
+              <div class="message">
+                  <span>Bobby Giangeruso</span>
+                  <p>Hey Mike, how are you doing?</p>
+              </div>
+          </div>
+          <div class="message-box right-img">
+              <div class="picture">
+                  <img src="{{server_url}}media/exercise-image/EXACB75.jpg" class="img-fluid" />
+                  <span class="time">2 mins</span>
+              </div>
+              <div class="message">
+                  <span>Mike Moloney</span>
+                  <p>Pretty good, Eating nutella, nommommom</p>
+              </div>
+          </div> -->
+      </div>
+      <div class="enter-message">
+          <span *ngIf="userTyping"> {{userTyping}}  is typing</span>
+
+          
+          <form [formGroup]="messageForm"> 
+              <!-- <div *ngIf="msgNotification !=null" >{{msgNotification}}
+
+                </div>   -->
+          <textarea class="textare" formControlName="message"   placeholder="Enter your message.."></textarea>
+               <div class="btn-box float-right">
+                  <div class="theme-btn">
+                      <span class="txt">
+                          <button  *ngIf="user_form==true" (click)="sendMessageAdmin($event)"  class="forsubmit btn_blueas" >
+                          <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                           </button>
+                           <button  *ngIf="team==true" (click)="sendMessageGroup($event)"  class="forsubmit btn_blueas" >
+                              <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                               </button>
+                       </span>
+                   </div>
+              </div>
+          </form>
+          
+      </div> 
+  </div>
+</div>

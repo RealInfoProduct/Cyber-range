@@ -1,0 +1,86 @@
+<div class="col-md-12 content dashboard-body"> 
+
+<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+<div class="myform team padding-body">			
+	<form [formGroup] = "formdata"> 		
+		<div class="row">
+			<div class="col-lg-5 col-md-12 fiftypr"> 
+				<div class="content-box-shadow content-box-shadow-sec"> 										
+					<div class="row">						
+						<div class="col-md-4 col_lable  form-group">
+							<label>Instructor</label>
+						</div>
+						<div class="col-md-8 col_input form-group" >
+							<select class="form-control fortextbox" id="instructor" name = "instructor" formControlName="instructor" >
+								<option *ngIf="group_id =='1'" value="">Select Instructor</option>
+								<option *ngFor="let instructor of instructorList; let i = index" [value]="instructorList[i].id">
+									{{instructor.F_Name}} {{instructor.F_Name}} - {{instructor.user_name}}
+								</option>
+							</select>	
+							<ng-container *ngFor="let error of error_messages.instructor">
+								<div class="error-message" *ngIf="formdata.get('instructor').hasError(error.type) && (formdata.get('instructor').dirty || formdata.get('instructor').touched)">
+									{{ error.message }}
+								</div>
+							</ng-container>
+						</div>							
+					</div>					
+					
+					<div class="row">						
+						<div class="col-md-4 col_lable  form-group">
+							<label>Status<span class="red-astr">*</span></label>
+						</div>
+						<div class="col-md-8 col_input form-group" >
+							<select class="form-control fortextbox" id="status" name = "status" formControlName="status" >
+								<option  value="">Select Status</option>
+								<option *ngFor="let status of statusList; let i = index" [value]="statusList[i]">
+									{{statusList[i]}}
+								</option>
+							</select>	
+							<ng-container *ngFor="let error of error_messages.status">
+								<div class="error-message" *ngIf="formdata.get('status').hasError(error.type) && (formdata.get('status').dirty || formdata.get('status').touched)">
+									{{ error.message }}
+								</div>
+							</ng-container>
+						</div>							
+					</div>					
+					
+					<div class="row">						
+						<div class="col-md-4 col_lable  form-group">
+							<label>Team Type<span class="red-astr">*</span></label>
+						</div>
+						<div class="col-md-8 col_input form-group" >
+							<input type = "text" class = "form-control fortextbox" name = "team_type" placeholder = "Team Type" formControlName="team_type"  >                           
+							<ng-container *ngFor="let error of error_messages.team_type">
+								<div class="error-message" *ngIf="formdata.get('team_type').hasError(error.type) && (formdata.get('team_type').dirty || formdata.get('team_type').touched)">
+									{{ error.message }}
+								</div>
+							</ng-container>	
+						</div>							
+					</div>	
+
+					<div class="row">
+						<div class="col-md-12 form_lable form-group mt-2 mb-0 btn_align">
+							<div class="btn-box">
+								<div class="theme-btn mr-2">
+									<span class="txt">
+										<button class = "forsubmit btn_blueas btn" (click)="onSubmit(formdata.value)">Submit</button>
+									</span>
+								</div>
+								
+								<div class="theme-btn">
+									<span class="txt">
+										<a class = "btn_blueas btn" routerLink="{{dashboard_url}}team-type-list" >Cancel</a>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div> 
+	</form>
+</div>

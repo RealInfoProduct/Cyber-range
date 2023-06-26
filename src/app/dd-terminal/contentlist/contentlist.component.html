@@ -1,0 +1,154 @@
+<!-- header -->
+<app-header></app-header>
+
+<div class="ngsidebarcontainer">
+<ng-sidebar-container> <!-- style="height: 100vh;" -->
+	
+	<!-- Sidebar -->
+	<ng-sidebar [(opened)]="_opened" position="left" mode="push" dock="true" >
+		<app-asidebar></app-asidebar>			
+	</ng-sidebar>
+
+	<!-- Page content -->
+	<div ng-sidebar-content class="ngbodycontent dk-table">	
+		<div class="col-md-12 content dashboard-body"> 
+					
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			<!-- <ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert> -->
+			<div class="padding-body">
+				<div class="content-box-shadow">
+					<form [formGroup] = "formdata">
+						<div class="row">							
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+								<!-- <div class="">
+									<label for="search" class="mrl">Search:</label>
+								</div>						 -->
+								<div class="">
+									<input id="search" type="text" placeholder="Search.." class="form-control" (keyup)="datatableSearch($event)" />
+								</div>
+								
+								
+								
+								<!-- <div class="">
+									<label class="mrl">Role:</label>
+								</div>						 -->
+								<!-- <div class="">
+									<select class="form-control fortextbox" name = "group" (change) = "changeGroup($event)"  formControlName="group" [(ngModel)]="group_id" >
+										<option  value="">Select Role</option>
+										<option *ngFor="let group of groupList; let i = index" [value]="groupList[i].id"  >
+											{{group.role}} 
+										</option>
+									</select>
+								</div>						 -->
+							</div>
+								
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+								<!-- <div class="">
+									<label class="mrl">Status:</label>
+								</div>						
+								<div class="">
+									<select class="form-control fortextbox" id="user_status" name = "user_status" (change) = "changeUserStatus($event)" formControlName="user_status" >
+										<option  value="">Select Status</option>
+										<option *ngFor="let userStatus of userStatusList; let i = index" [value]="userStatusList[i]">
+											{{userStatusList[i]}}
+										</option>
+									</select>
+								</div>						 -->
+							</div>
+							
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+														
+							</div>
+
+							<div class="col-lg-3 col-md-6 mb-4 ippd50">
+								<!-- <div class="mtain">
+									<div class="min80"><span class="Actives"></span> Active</div>
+									<div class="min80"><span class="Inactives"></span> Inactive</div>	
+								</div> -->
+							</div>
+							
+							<div class="col-lg-3 col-md-12 form-group ipp100 btn_align">
+								<div class="btn-box">
+									<div class="theme-btn theme-btn-dd">
+										<span class="txt">									
+
+											<a class="btn btn_blueas"  routerLink="{{dashboard_url}}content"  ><fa-icon [icon]="faUser"></fa-icon> &nbsp;Add New Content</a>
+										</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-12">
+								<ngb-alert *ngIf="!closed" class="animate-show animate-hide mt-2 mb-2" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+							</div>
+
+							<div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+								
+								<div  *ngIf="notification ==true" >
+									<p class="alert alert-{{statusType}}">{{message}}</p>
+								</div>
+								<table datatable [dtOptions]="dtOptions" class="row-border table hover table-striped">
+									<thead>
+										<tr>
+											<th class="tidcenter tidc">S. No.</th>
+											<th class="ttnc">Title</th>
+											<th class="ttnc">Manual Name</th>
+											<th class="tttc">Topic Name</th>
+											<th class="tttc">Last Modified</th>
+											<!-- <th class="tluc">Email</th>
+											<th class="tttc">Mobile</th>
+											<th class="tluc">Registration Date</th> -->
+											<th class="tac">Action</th>
+										</tr>
+									</thead>
+									<tbody *ngIf="persons?.length != 0">
+										<tr *ngFor="let person of persons">
+											<td class="tidcenter">{{ person.s_no }}</td>
+											<td >
+												
+												<span>
+												<a routerLink="{{dashboard_url}}content/{{person.id}}" class="tablelinkc">
+												{{ person.title }}
+												
+											</a>
+										</span>
+											</td>
+											<td>
+												<span>
+												
+													{{ person.menual_title }}
+												</span>
+											</td>
+											<td><span class="role-{{person.role}}" >{{ person.topic_name }}</span></td>
+											<td><span class="role-{{person.role}}">{{ person.last_modified }}</span></td>
+											<!-- <td>{{ person.email }}</td>
+											<td>{{ person.mobile }}</td> -->
+											<!-- <td><span class="datetime">{{ person.regDateTime }}</span></td> -->
+											<td>
+												<a routerLink="{{dashboard_url}}content/{{person.id}}" class="btn-default btn-sm btn-danger" class="edit" placement="top" ngbTooltip="Edit"><fa-icon [icon]="faEdit"></fa-icon></a>
+												
+											   <button  class="btn btn-sm btn-delete" (click) = "deleteContent(person.id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+											</td>
+										</tr>
+									</tbody>
+									<tbody *ngIf="persons?.length == 0">
+										<tr>
+											<td colspan="8" class="no-data-available">No data!</td>
+										</tr>
+									<tbody>
+								</table>
+							</div>
+						</div>
+				  </form> 				  
+				</div>
+			</div>			
+		</div>		
+	</div>
+	<!-- End Page content -->
+
+</ng-sidebar-container>
+</div>
+
+
+<!-- Footer -->
+<app-footer></app-footer>

@@ -1,0 +1,422 @@
+
+<div class="col-lg-12 col-md-12">
+    <app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+</div>
+    <div class="myform padding-body content-box-shadow">
+        <div class="mt-2 ml-2">
+        <ngb-tabset [destroyOnHide]="false">
+  
+            <ngb-tab title="Upload Logos">
+              <ng-template ngbTabContent>
+                <div class="row mt-4">
+                        <div class="col-md-6 text-center mt-2">									
+                                <div class="edex-tbox">
+                                       <div class="pimg_relative">	
+                                            <img *ngIf="croppedImageHeader!=''" class="crop-image" [src]="croppedImageHeader" />
+                                            <img *ngIf="croppedImageHeader==''" class="crop-image" src="{{serverUrl}}media/images/header_logo.png">
+                                        </div>
+
+                                    <div>
+                                    <a href="javascript:void(0);" (click)="openmodal('header-logo')" class="upload_profile">Upload Header Logo Image</a>
+                                </div>
+                        
+                        </div>
+                </div> 
+
+                <div class="col-md-6 mt-2 text-center">									
+                             <div class="edex-tbox">
+                                    <div class="pimg_relative">	
+                                        <img *ngIf="croppedImageReport!=''" class="crop-image" [src]="croppedImageReport" />
+                                        <img *ngIf="croppedImageReport==''" class="crop-image" style="width:300px" src="https://dev.skyvirt.tech/assessment/public/images/skyvirt-header.png" >
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0);" (click)="openmodal('report-logo')" class="upload_profile">Upload Report Logo Image</a>
+                                    </div>
+                            </div>
+                  </div>  
+                  <div class="col-md-6 mt-2 text-center">									
+                             <div class="edex-tbox">
+                                    <div class="pimg_relative">	
+                                        <img *ngIf="croppedImageAdmin!=''" class="crop-image" [src]="croppedImageAdmin" />
+                                        <img *ngIf="croppedImageAdmin==''" class="crop-image" src="{{serverUrl}}media/images/logo-admin.png" >
+                                    </div>
+                                    <div>
+                                        <a href="javascript:void(0);" (click)="openmodal('admin-logo')" class="upload_profile">Upload Admin Logo Image</a>
+                                    </div>
+                            </div>
+                  </div>  
+                </div>
+                <div class=" col-md-12 form-group ipp100 btn_align"><div  class="btn-box"><div  class="theme-btn theme-btn-dd"><span  class="txt"><a  (click)="updateLogos()"  class="btn btn_blueas" ><fa-icon class="ng-fa-icon" ></fa-icon> &nbsp;Update Logos</a></span></div></div></div>
+
+              </ng-template>
+            </ngb-tab>
+             
+            
+             
+            <ngb-tab>
+              <ng-template ngbTabTitle>Email Setting</ng-template>
+              <ng-template ngbTabContent>
+                  <div class="email-form mt-4">
+                      <div class="col-lg-12">
+                        <ngb-alert *ngIf="closed==true" class="animate-show animate-hide " type="{{alertClass}}" (close)="closed = false"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+                                <form [formGroup] = "mailConfigFrm" >
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                                <div class="form-group">
+                                                <label for="exampleInputEmail1">To Email </label>
+                                                <input type="email" class="form-control" id="to_email" formControlName="to_email"  name="to_email" aria-describedby="emailHelp" placeholder="Enter email">
+                                                </div>
+                                                <ng-container *ngFor="let error of error_messages.to_email">
+                                                    <div class="error-message col-md-12 mb-4 pl-0" *ngIf="mailConfigFrm.get('to_email').hasError(error.type) && (mailConfigFrm.get('to_email').dirty || mailConfigFrm.get('to_email').touched)">
+                                                        {{ error.message}}
+                                                    </div>
+                                                </ng-container>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">To CC</label>
+                                            <input type="email" class="form-control" id="tocc"  formControlName="to_cc"name="to_cc" placeholder="To CC">
+                                            </div>
+                                           
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">To BCC</label>
+                                            <input type="email" class="form-control" formControlName="to_bcc" id="tobcc" name="to_bcc" placeholder="To CC">
+                                            
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">Mobile</label>
+                                            <input type="text" class="form-control" id="mobile" formControlName="mobile" name="mobile" placeholder="Contact Number">
+                                            </div>
+                                            <ng-container *ngFor="let error of error_messages.mobile">
+                                                <div class="error-message col-md-12 mb-4 pl-0" *ngIf="mailConfigFrm.get('mobile').hasError(error.type) && (mailConfigFrm.get('mobile').dirty || mailConfigFrm.get('mobile').touched)">
+                                                    {{ error.message}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">From Email</label>
+                                            <input type="email" class="form-control" id="from_email"  formControlName="from_email" name="from_email" placeholder="From Email">
+                                            </div>
+                                            <ng-container *ngFor="let error of error_messages.from_email">
+                                                <div class="error-message col-md-12 mb-4 pl-0" *ngIf="mailConfigFrm.get('from_email').hasError(error.type) && (mailConfigFrm.get('from_email').dirty || mailConfigFrm.get('mobile').touched)">
+                                                    {{ error.message}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">From Name</label>
+                                            <input type="text" class="form-control" id="from_name"  formControlName="from_name" name="from_name" placeholder="From Name">
+                                            </div>
+                                            <ng-container *ngFor="let error of error_messages.from_name">
+                                                <div class="error-message col-md-12 mb-4 pl-0" *ngIf="mailConfigFrm.get('from_name').hasError(error.type) && (mailConfigFrm.get('from_name').dirty || mailConfigFrm.get('from_name').touched)">
+                                                    {{ error.message}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">SMTP Host</label>
+                                            <input type="text" class="form-control" id="smtp_host" formControlName="smtp_host" name="smtp_host" placeholder="SMTP HOST">
+                                            </div>
+                                            <ng-container *ngFor="let error of error_messages.smtp_host">
+                                                <div class="error-message col-md-12 mb-4 pl-0" *ngIf="mailConfigFrm.get('smtp_host').hasError(error.type) && (mailConfigFrm.get('smtp_host').dirty || mailConfigFrm.get('from_name').touched)">
+                                                    {{ error.message}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">SMTP Port</label>
+                                            <input type="text" class="form-control" id="smtp_port" name="smtp_port" formControlName="smtp_port" placeholder="SMTP PORT">
+                                            </div>
+                                            <ng-container *ngFor="let error of error_messages.smtp_port">
+                                                <div class="error-message col-md-12 mb-4 pl-0" *ngIf="mailConfigFrm.get('smtp_port').hasError(error.type) && (mailConfigFrm.get('smtp_port').dirty || mailConfigFrm.get('smtp_port').touched)">
+                                                    {{ error.message}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                      </div>  
+                                      <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">SMTP USERNAME</label>
+                                            <input type="text" class="form-control" id="smtp_username" formControlName="smtp_username" name="smtp_username" placeholder="SMTP USERNAME">
+                                            </div>
+                                            <ng-container *ngFor="let error of error_messages.smtp_username">
+                                                <div class="error-message col-md-12 mb-4 pl-0" *ngIf="mailConfigFrm.get('smtp_username').hasError(error.type) && (mailConfigFrm.get('smtp_username').dirty || mailConfigFrm.get('smtp_username').touched)">
+                                                    {{ error.message}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">SMTP PASSWORD</label>
+                                            <input type="password" class="form-control" id="smtp_password" formControlName="smtp_password" name="smtp_password" placeholder="SMTP PASSWORD">
+                                            </div>
+                                            <ng-container *ngFor="let error of error_messages.smtp_password">
+                                                <div class="error-message col-md-12 mb-4 pl-0" *ngIf="mailConfigFrm.get('smtp_password').hasError(error.type) && (mailConfigFrm.get('smtp_password').dirty || mailConfigFrm.get('smtp_password').touched)">
+                                                    {{ error.message}}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                             <div class="col-md-12 form_lable form-group mt-2 mb-0 btn_align"><div class="btn-box"><div  class="theme-btn mr-2"><span  class="txt"><button  (click)="updateEmailConfig(mailConfigFrm.value)" class="forsubmit btn_blueas btn">Update</button></span></div></div></div>
+                                       </div> 
+                                    
+                                    
+                                </form>
+                        </div>
+
+                    </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+                <ng-template ngbTabTitle>Other Configurations </ng-template>
+                <ng-template ngbTabContent>
+                    <div class="email-form mt-4">
+                        <div class="col-lg-12">
+                          <ngb-alert *ngIf="closed==true" class="animate-show animate-hide " type="{{alertClass}}" (close)="closed = false"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+                                  <form [formGroup] = "otherConfigFrm" >
+                                      <div class="row">
+                                          
+                                         
+                                                <div class="col-lg-6">
+                                              <div class="form-group">
+                                              <label for="exampleInputPassword1">Header Email</label>
+                                              <input type="email" class="form-control" id="web_email"  formControlName="web_email" name="web_email" placeholder="Enter  Email Address">
+                                              </div>
+                                              <ng-container *ngFor="let error of error_messages_other.web_email">
+                                                  <div class="error-message col-md-12 mb-4 pl-0" *ngIf="otherConfigFrm.get('web_email').hasError(error.type) && (otherConfigFrm.get('web_email').dirty || otherConfigFrm.get('web_email').touched)">
+                                                      {{ error.message}}
+                                                  </div>
+                                              </ng-container>
+                                          </div>
+                                          <div class="col-lg-6">
+                                              <div class="form-group">
+                                              <label for="exampleInputPassword1">Header Contact Number</label>
+                                              <input type="text" class="form-control" id="web_contact"  formControlName="web_contact" name="web_contact" placeholder="Enter Contact  Number">
+                                              </div>
+                                              <ng-container *ngFor="let error of error_messages_other.web_contact">
+                                                  <div class="error-message col-md-12 mb-4 pl-0" *ngIf="otherConfigFrm.get('web_contact').hasError(error.type) && (otherConfigFrm.get('web_contact').dirty || otherConfigFrm.get('web_contact').touched)">
+                                                      {{ error.message}}
+                                                  </div>
+                                              </ng-container>
+                                          </div>
+                                          <div class="col-lg-6">
+                                                <label  for="flexRadioDefault1">Chat Status</label>
+                                                <div class="row">
+                                                     <div class="col-md-2">
+                                                             <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="chat_status" formControlName="chat_status" value="1"  id="flexRadioDefault1">
+                                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                                        Active
+                                                                    </label>
+                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="chat_status" formControlName="chat_status" value="0"  id="flexRadioDefault1">
+                                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                                            Inactive
+                                                                        </label>
+                                                                    </div>
+                                                        </div>
+                                                 </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <label  for="flexRadioDefault1"> Request To Instructor</label>
+                                                <div class="row">
+                                                     <div class="col-md-2">
+                                                             <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="request_to_instructor" formControlName="request_to_instructor" value="Active"  >
+                                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                                    Active
+                                                                    </label>
+                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="request_to_instructor" formControlName="request_to_instructor" value="Inactive"  >
+                                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                                        Inactive
+                                                                        </label>
+                                                                    </div>
+                                                        </div>
+                                                 </div>
+                                                 
+                                            </div>
+                                            <!-- <div class="col-lg-6 mt-4">
+                                                <label  for="flexRadioDefault1"> Credit System</label>
+                                                <div class="row">
+                                                     <div class="col-md-2">
+                                                             <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="credit_system" formControlName="credit_system" value="Active"  >
+                                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                                    Active
+                                                                    </label>
+                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="credit_system" formControlName="credit_system" value="Inactive"  >
+                                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                                        Inactive
+                                                                        </label>
+                                                                    </div>
+                                                        </div>
+                                                 </div>
+                                            </div> -->
+                                            <div class="col-lg-6 mt-4">
+                                                <label  for="flexRadioDefault1"> Checkout </label>
+                                                <div class="row">
+                                                     <div class="col-md-2">
+                                                             <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="checkout_status" formControlName="checkout_status" value="Active"  >
+                                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                                    Active
+                                                                    </label>
+                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="checkout_status" formControlName="checkout_status" value="Inactive"  >
+                                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                                        Inactive
+                                                                        </label>
+                                                                    </div>
+                                                        </div>
+                                                 </div>
+                                            </div>
+                                            <!-- <div class="col-lg-6 mt-4">
+                                                <label  for="flexRadioDefault1"> Google Login </label>
+                                                <div class="row">
+                                                     <div class="col-md-2">
+                                                             <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="google_login" formControlName="google_login" value="Active"  >
+                                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                                    Active
+                                                                    </label>
+                                                             </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                                    <div class="form-check">
+                                                                        <input class="form-check-input" type="radio" name="google_login" formControlName="google_login" value="Inactive"  >
+                                                                        <label class="form-check-label" for="flexRadioDefault1">
+                                                                        Inactive
+                                                                        </label>
+                                                                    </div>
+                                                        </div>
+                                                 </div>
+                                            </div> -->
+                                          
+                                               <div class="col-md-12 form_lable form-group mt-2 mb-0 btn_align"><div class="btn-box"><div  class="theme-btn mr-2"><span  class="txt"><button  (click)="updateConfig(otherConfigFrm.value)" class="forsubmit btn_blueas btn">Update</button></span></div></div></div>
+                                         </div> 
+                                      
+                                      
+                                  </form>
+                          </div>
+  
+                      </div>
+  
+  
+                  
+                </ng-template>
+              </ngb-tab>
+          
+             
+          </ngb-tabset>
+
+
+
+            					
+     			</div>	
+    </div>
+
+
+    <div class="modal {{modalfadeclass}} {{modalshow}} dk-model-box" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header dk-model-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload Header Logo</h5>
+                    <button type="button" (click)="closemodal()" class="close mclose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+    
+                <div *ngIf="is_header_logo == true && croppedImageHeader != ''" class="col-md-12 mt-3 text-center float-left">
+                    <img class="crop-image" [src]="croppedImageHeader" />  
+                    <p class="previewimg">Preview1/p>
+                </div>
+
+                <div *ngIf="is_report_logo ==true && croppedImageReport != ''" class="col-md-12 mt-3 text-center float-left">
+                    <img class="crop-image" [src]="croppedImageReport" />  
+                    <p class="previewimg">Preview</p>
+                </div>
+                <div *ngIf="is_admin_logo ==true && croppedImageAdmin != ''" class="col-md-12 mt-3 text-center float-left">
+                    <img class="crop-image" [src]="croppedImageAdmin" />  
+                    <p class="previewimg">Preview</p>
+                </div>
+    
+    
+                <div class="modal-body">
+                    <image-cropper
+                        [imageChangedEvent]="imageChangedEvent"
+                        [maintainAspectRatio]="true"
+                        [containWithinAspectRatio]="containWithinAspectRatio"
+                        [aspectRatio]="1/1"
+                        [resizeToWidth]="571"
+                        [resizeToHeight]="321"
+                        [cropperMinWidth]="571"
+                        [cropperMinHeight]="321"
+                        [cropperStaticWidth]="571"
+                        [cropperStaticHeight]="321"
+                        [onlyScaleDown]="true"
+                        [roundCropper]="false"
+                        [initialStepSize] ="3"
+                        [canvasRotation]="canvasRotation"
+                        [transform]="transform"
+                        [style.display]="showCropper ? null : 'none'"
+                        format="png"
+                        (imageCropped)="imageCropped($event,logo_type)"
+                        (imageLoaded)="imageLoaded()"
+                        (cropperReady)="cropperReady($event)"
+                        (loadImageFailed)="loadImageFailed()"
+                    ></image-cropper>
+                            
+                    <div class="col-md-12 mt-3 mb-2 float-left">	
+                        <div class="mautobtn">	
+                            <div class="floatleft">
+                                <input name="{{logo_type}}" class="choosimg" type="file" (change)="fileChangeEvent($event)" />
+                            </div>
+                            <div class="btn-box text-center">
+                                <div class="theme-btn">
+                                    <span class="txt">												
+                                        <button class="btn btn-sm btn_blueas" (click)="zoomOut()">Zoom -</button>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="btn-box text-center">
+                                <div class="theme-btn">
+                                    <span class="txt">												
+                                        <button class="btn btn-sm btn_blueas" (click)="zoomIn()">Zoom +</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                          
+                </div>
+            </div>
+        </div>
+    </div>	
+
+
+
+

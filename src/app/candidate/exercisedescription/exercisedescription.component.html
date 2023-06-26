@@ -1,0 +1,115 @@
+<!-- Header -->
+<app-candidateheader #head (setting)="get_setting($event)" (added_basket)="get_added_basket($event)" ></app-candidateheader>
+
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+
+
+<div class="col-md-12 padding-all page-min-height maxf-width">	
+	<div *ngFor="let ex of exercise; let i = index" class="row basketbox">
+		<div class="col-md-5">
+			<div class="ed_center">
+				<img *ngIf="ex.thumb_image!=null" src="{{server_url}}media/exercise-image/{{ex.thumb_image}}" class="img-fluid">										
+				<img *ngIf="ex.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">										
+			</div>
+			
+			<div class="boxshad" [innerHTML]="ex.short_desc" >			
+			</div>
+		</div>
+		
+		<div class="col-md-7">
+			<div class="boxshad">
+				<h3 class="heading">{{ex.name}}</h3>
+				
+				<div class="row">
+					<div class="col-lg-5 col-md-12">
+						<p class="authorby">By: {{ex.F_Name}} {{ex.L_Name}}</p>
+					</div>
+
+					<div class="col-lg-7 col-md-12 text-lg-right ratting cursor-menu">				
+						<fa-icon [icon]="faStar" class="starc" placement="top" ngbTooltip="Rating: {{ex.rating}}"></fa-icon> {{ex.rating}} 
+
+						<fa-icon [icon]="faCircle" class="lowc" placement="top" ngbTooltip="Difficulty Level: {{ex.difficulty_level}}" class="{{ex.difficulty_level}}c"></fa-icon> {{ex.difficulty_level}}
+
+						<span class="subscriber">
+							<fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: 7/10" class="usercircle mr-1"></fa-icon>
+							<span placement="top" ngbTooltip="Running Subscribers: 7">7/</span>
+							<span placement="top" ngbTooltip="Total Subscribers: 10">10</span> 
+						</span>
+
+						<fa-icon *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" class="questionc" placement="top" ngbTooltip="{{ex.key_words}}" ></fa-icon>
+						
+						<ng-container *ngIf="credit_system=='Active'" >
+						  <span *ngIf="ex.credits!=null;else nullcreditshow" class="ercredit">Cr. {{ex.credits}}</span>
+						  <ng-template #nullcreditshow>
+							<span class="ercredit">Cr. 0</span>
+						  </ng-template>	  
+						</ng-container>
+					
+					</div>
+				</div>					
+				<hr> 
+					
+				<div class="" [innerHTML]="ex.long_desc" >	<!-- boxshad -->							 
+				</div>							 
+				<hr>
+				
+				<div class="row">
+					<div class="col-lg-12">	
+						<ng-container *ngIf="credit_system=='Active'; else free" >
+							<ng-container *ngIf="ex.credits!=null; else nulladdbasketbtn">
+
+							<div *ngIf="added_basket | filterPipe : ex.id; else added" class="btn-box float-left mr-3">
+								<div class="theme-btn">
+									<span class="txt"><a (click)="head.addToBasket(ex.id,ex.credits);" class="btn_blueas btn"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span>
+								</div>
+							</div>			
+							<ng-template #added>
+								<div class="btn-box float-left mr-3">
+									<div class="theme-btn">
+									<span class="txt"><a class="btn_blueas senariobtn"><fa-icon [icon]="faCartPlus"></fa-icon> Added To Basket</a></span> 
+									</div>
+								</div>
+							</ng-template>
+							
+						   </ng-container>
+
+						   <ng-template #nulladdbasketbtn>
+							<div class="btn-box float-left mr-3">
+								<div class="theme-btn">
+									<span class="txt"><a class="btn_blueas senariobtn disable-cls"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span> 
+								 </div>
+							</div>
+						   </ng-template>
+						   
+
+						</ng-container>
+						<ng-template #free >
+							<div *ngIf="added_basket | filterPipe : ex.id; else added" class="btn-box float-left mr-3">
+								<div class="theme-btn">
+									<span class="txt"><a (click)="head.addToBasket(ex.id,ex.credits);" class="btn_blueas btn"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span>
+								</div>
+							</div>			
+							<ng-template #added>
+								<div class="btn-box float-left mr-3">
+									<div class="theme-btn">
+									<span class="txt"><a class="btn_blueas senariobtn"><fa-icon [icon]="faCartPlus"></fa-icon> Added To Basket</a></span> 
+									</div>
+								</div>
+							</ng-template>	
+					    </ng-template>
+					<!--	<div class="btn-box">
+							<div class="theme-btn challenge">
+								<span class="txt"><button class="btn_blueas btn"><fa-icon [icon]="faTrophy"></fa-icon> Challenge</button></span>
+							</div>
+						</div>-->
+					</div>
+				</div>				
+			</div>
+		</div>		
+	</div>
+</div>
+	
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

@@ -1,0 +1,353 @@
+
+<div class="col-lg-12 col-md-12">
+
+<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-3" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+<div class="padding-body dk-table">
+	<div class="content-box-shadow">		
+			<div class="row">				
+				<div class="col-lg-2 col-md-6 form-group ippd50">
+					<select class="form-control fortextbox" id="status" name = "status" (change) = "changeStatus($event)"  >
+						<option  value="null">Select Status</option>
+						<option *ngFor="let status of status_list; let i = index" [value]="status_list[i]" class="cap">
+						{{status_list[i]}}
+						</option>
+					</select>				
+				</div>
+
+				<div class="col-lg-2 col-md-6 form-group ippd50">
+					<input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event,'allotment')" />
+				</div>
+				<div class="col-lg-3 col-md-6 ippd50 mtain">
+					<label for="extend"><input id="extend" type="checkbox" (change)="onChange($event)" /> Extend Request</label>
+
+				</div>		
+				
+				<div class="col-lg-5 col-md-6 ippd50 btn_align">
+					<div class="btn-box">
+						<div class="theme-btn theme-btn-dd">
+							<span class="txt">									
+								<a class="btn btn_blueas" routerLink="{{dashboard_url}}exercise-allotment" > <fa-icon [icon]="faUsers"></fa-icon> &nbsp;Exercise Allotment</a>
+							</span>
+						</div>
+					</div>
+				</div>	
+
+
+				<div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+					<form [formGroup]="allotmentfrm">
+						<table id="allotment-table" datatable [dtOptions]="dtOptions[1]" dt-instance="dtInstance" [dtTrigger]="dtAllotmentTrigger" class="row-border table hover table-striped">
+							<thead>
+							<tr>
+								<th class="tidcenter tidc">S.No.</th>
+								<th class="tuidc">Allot ID</th>
+								<th class="ttnc">Ex Name</th>
+								<th class="tcbc">User/Team</th>
+								<th class="tluc">Allotted By</th>
+								<th class="tluc">Status</th>
+								<th class="tluc">Type</th>
+								<th class="">Action</th>
+							</tr>
+							</thead>
+							<tbody *ngIf="allotment?.length != 0">
+								<tr *ngFor="let alt of allotment; let i = index"
+								[class.highlighted]="clicked === alt.s_no" (click)="clicked = alt.s_no"
+								>
+									<td class="tidcenter">{{ alt.s_no }}
+										<a *ngIf="alt.roadmap_id != null" href="javascript:void(0);" (click)="ViewRoadMap(alt.pkag_gp_id,alt.id);" placement="right" ngbTooltip="Exercise RoadMap - {{alt.roadmap_status}}" ><fa-icon [icon]="faEye"></fa-icon></a>
+									</td>
+									<td class="tuidc">{{ alt.a_id }}</td>									
+									<td  class="ttnc">
+									    {{ alt.name }}
+									</td>	
+									<td *ngIf="alt.allot_type=='Individual'" class="taic"><a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ alt.user_name }}" (click)="viewUserProfile(alt.u_id)" >{{ alt.user_name }}</a></td>
+									
+									<td *ngIf="alt.allot_type=='Team'" class="ttnc">
+										<ng-container *ngFor="let na of alt.user_name; let it = index"> 
+										  <span *ngIf="it==0">
+											  <a routerLink="{{dashboard_url}}/team/{{na.id}}" title="{{na.team_name}}" class="btn btn-tean" placement="top" ngbTooltip="Team - {{na.team_name}}">{{na.team_name}}</a>
+											  
+											  <a *ngIf="alt.user_name.length > 1" placement="top" ngbTooltip="View More" type="button" data-toggle="collapse" href=".collapse-{{alt.id}}" aria-expanded="false" aria-controls="collapse-{{alt.id}}">
+												   <fa-icon [icon]="faPlusCircle"></fa-icon>
+											  </a>
+
+										  </span>
+											  <span *ngIf="it>0">
+												  <div class="collapse collapse-{{alt.id}} text-left" >
+													  <div class="text-left card card-body pt-1 pb-1 pl-1 pr-1">
+														  <a routerLink="{{dashboard_url}}/team/{{na.id}}" title="{{na.team_name}}" class="btn btn-tean text-left" placement="top" ngbTooltip="Team - {{na.team_name}}">{{na.team_name}}</a>
+													  </div>
+												  </div>
+											  </span>
+									  </ng-container> 
+								  </td>	
+									
+									<td *ngIf="alt.allocated_by!=''" class="tcbc"><a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ alt.allocated_by }}" (click)="viewUserProfile(alt.allocated_by_id)" >{{ alt.allocated_by }}</a></td>
+									<td *ngIf="alt.allocated_by==''" class="tcbc text-center">-</td>
+									<td class="tcbc">
+										<div class="{{ alt.status }} al_tbtn"><span>{{ alt.status }}</span></div>										
+									    <span *ngIf="alt.extend_req_status==1" class="Actives ml-2"></span>
+									</td>
+									<td class="tcbc"><span class="{{ alt.allot_type }} al_tbtn">{{ alt.allot_type }}</span></td>
+ 							    	<td class="tac">									
+										<table>
+											<tr class="back_rv">
+												<td class="s_action">
+													<select [disabled]="(bg_process | filterbgprocess : alt.a_id : bg_task) == true ? true : false" class="form-control" (change)="selAction($event,i);" id="sel_action_{{i}}" name="sel_action" [ngModelOptions]="{standalone: true}">
+														<option >Select</option>
+														<option *ngIf="alt.status=='Approval'" value="Allotted">Allot</option>
+														<option *ngIf="alt.status!='Rejected'" value="Rejected">Reject</option>
+														<option value="Edit">Edit</option>
+														<option value="Delete">Delete</option>
+													</select>
+												</td>
+												<td>
+													<button [disabled]="(bg_process | filterbgprocess : alt.a_id : bg_task) == true ? true : false" (click)="action(alt.a_id,i,tpinpopup);" class="btn btn-sm btn-primary">OK</button>
+												</td>
+												<td>
+													<a href="javascript:void(0);" (click)="ViewMoreDetail(alt.id,allotmentpopup);" type="button" placement="top" ngbTooltip="View More" ><fa-icon [icon]="faEye"></fa-icon></a>
+												</td>	
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+							<tbody *ngIf="allotment?.length == 0">
+								<tr>
+									<td colspan="8" class="no-data-available">No data!</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+	</div>
+</div>
+</div>
+	<!-- End Page content -->
+
+	<ng-template #tpinpopup let-modal >
+		<div class="dk-model-box">
+			<div class="modal-header dk-model-header">
+				<h4 class="modal-title" id="modal-basic-title">Transaction PIN</h4>
+				<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="mtable-height">
+				<div class="modal-body">
+					<form [formGroup]="tpinfrm">
+						<div class="col-lg-12 col-md-12 float-left form-group" >
+							<div class="col-lg-12 col-md-12 col-12 p-0 pt-2 float-left">
+								<input type = "text" class = "form-control fortextbox" id="t_pin" name = "t_pin" formControlName="t_pin" placeholder="Enter TPIN">
+							</div> 
+							<div class="clearfix"></div>
+							<ng-container *ngFor="let error of error_messages.t_pin">
+								<div class="error-message col-md-12 pl-0" *ngIf="tpinfrm.get('t_pin').hasError(error.type) && (tpinfrm.get('t_pin').dirty || tpinfrm.get('t_pin').touched)">
+									{{ error.message }}
+								</div>
+							</ng-container>	
+						</div>
+	
+						<div class="col-md-12 float-left text-center pb-3">
+							<div class="btn-box text-center">
+								<div class="theme-btn">
+									<span class="txt">												
+										<button type="button" (click)="submit_tpin(tpinfrm.value)" class="btn btn_blueas tpin">Submit</button>
+									</span>
+								</div>
+							</div>
+						</div>
+					</form>			
+				</div>
+			</div>
+		</div>
+	</ng-template>
+
+	<ng-template #allotmentpopup let-modal >
+		<div class="dk-model-box">
+			<div class="modal-header dk-model-header">
+				<h4 class="modal-title" id="modal-basic-title">Allotment Detail</h4>
+				<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			
+			<div class="mtable-height">
+				<div class="modal-body">
+					<table class="table table-bordered hover table-striped" >
+						<tr>
+							 <td>Allotment ID</td>
+							 <td>{{allotment_detail.a_id}}</td>
+							<td>Exercise</td>
+							<td>{{allotment_detail.exercise}}</td>
+					   </tr>
+					   <tr>
+						<td>User/Team</td>
+						<td>
+							<ng-container *ngIf="allotment_detail.allot_type=='Team'" >
+								<ng-container *ngFor="let td of allotment_detail.team_detail; let i = index" >
+						    	  <a (click)="modal.dismiss('Cross click')" routerLink="{{dashboard_url}}/team/{{td.id}}" placement="top" ngbTooltip="Team - {{td.team_name}}" >{{td.team_name}}</a>
+								  <ng-container *ngIf="i!=allotment_detail.team_detail.length-1">, </ng-container>
+							   </ng-container>
+							</ng-container>	
+							<ng-container *ngIf="allotment_detail.allot_type=='Individual'" >
+								<a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ allotment_detail.profile.F_Name }} {{ allotment_detail.profile.L_Name }}" (click)="viewUserProfile(allotment_detail.profile.U_ID)" >{{ allotment_detail.profile.F_Name }} {{ allotment_detail.profile.L_Name }}</a>
+							</ng-container>	
+						</td>
+						<td>Allotted By</td>
+						<td>
+							<a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ allotment_detail.allocated_by.F_Name }} {{ allotment_detail.allocated_by.L_Name }}" (click)="viewUserProfile(allotment_detail.allocated_by.U_ID)" >{{ allotment_detail.allocated_by.F_Name }} {{ allotment_detail.allocated_by.L_Name }}</a>
+						</td>
+				       </tr>
+					   <tr>
+						<td>Instructor</td>
+						<td>
+							<a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{allotment_detail.instructor.F_Name}} {{allotment_detail.instructor.L_Name}}" (click)="viewUserProfile(allotment_detail.instructor.U_ID)" >{{allotment_detail.instructor.F_Name}} {{allotment_detail.instructor.L_Name}}</a>
+						</td>
+						<td>Duration(In Hrs)</td>
+						<td>
+							{{allotment_detail.total_duration}}
+						</td>
+				       </tr>
+					   <tr>
+						<td>Status</td>
+						<td>
+							{{allotment_detail.status}}
+						</td>
+						<td>Type</td>
+						<td>
+							{{allotment_detail.allot_type}}
+						</td>
+				       </tr>
+					   <tr>
+						<td>Start Date</td>
+						<td>
+							{{allotment_detail.valid_start}}
+						</td>
+						<td>End Date</td>
+						<td>
+							{{allotment_detail.valid_end}}
+						</td>
+				       </tr>
+					   <tr>
+						<td>Used/Remain(hrs)</td>
+						<td colspan="3">
+							{{allotment_detail.used_time}}/{{allotment_detail.remain_time}}
+						</td>
+				       </tr>   
+					   <tr>
+						<td>Last Update Date</td>
+						<td>
+							{{allotment_detail.last_datetime}}
+						</td>
+						<td>Create Date</td>
+						<td>
+							{{allotment_detail.create_datetime}}
+						</td>
+				       </tr>
+					</table>		
+				</div>
+			</div>
+		</div>
+	</ng-template>
+
+
+
+<div class="modal fade" id="steeperProgress" tabindex="-1" aria-labelledby="reqModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Exercise Roadmap</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+                
+				<div id="stepper1" class="bs-stepper">
+
+					<div class="bs-stepper-header">
+
+					<ng-container *ngFor="let roadmap of allotRoadmap; let i = index" >
+					  <div class="step" [attr.data-target]="'#test-'+i"  >
+						<button class="step-trigger">
+						  <span class="bs-stepper-circle">{{i+1}}</span>
+						  <span class="bs-stepper-label">{{roadmap.exe_name}}</span>
+						</button>
+					  </div>
+					  <div *ngIf="i<allotRoadmap.length-1" class="line"></div>
+					  </ng-container>
+
+					</div>
+					<div class="bs-stepper-content text-center">
+
+						<ng-container *ngFor="let roadmap of allotRoadmap; let i = index" >
+						<div  [attr.id]="'test-'+i" class="content">
+							<div class="col-md-6 block-center">
+
+							<div class="ed_center">
+								<img *ngIf="roadmap.thumb_image!=null" src="{{server_url}}media/exercise-image/{{roadmap.thumb_image}}" class="img-fluid">										
+								<img *ngIf="roadmap.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">										
+							 </div>
+							</div>
+
+							<div class="col-md-6 block-center">
+
+						  <div class="form-group">
+							<label>{{roadmap.exe_name}}</label>
+						  </div>
+
+						  <div class="form-group">
+							<div class="col-md-6 float-left">
+
+						  <label>Roadmap Status:</label>
+						</div>
+						<div class="col-md-6 float-left">
+
+							<select [disabled]="roadmap.open_status=='close' ? true : false" class="form-control fortextbox" id="status" name = "status" (change) = "changeRoadmapStatus($event,i)"  >
+								
+								<ng-container *ngFor="let status of roadmapStatusList; let i = index" >
+									<option [selected] = "roadmapStatusList[i]==roadmap.status" [value]="roadmapStatusList[i]" class="cap">
+									{{roadmapStatusList[i]}}
+									</option>
+								</ng-container>
+							</select>
+						</div>
+	
+						 </div>
+                         <div class="clearfix"></div>
+						 <div class="btn-box mt-3">
+							<div class="theme-btn">
+							   <span class="txt">
+								  <button [disabled]="roadmap.open_status=='close' ? true : false" class = "forsubmit btn_blueas btn" (click)="updateRoadmapStatus(roadmap.id,roadmap.pkag_gp_id,i)" >Update</button>
+							   </span>
+							</div>
+						 </div>
+
+
+						</div>
+
+
+						</div>
+						</ng-container>
+
+					</div>
+				  </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+	
+
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>
+
+
+   

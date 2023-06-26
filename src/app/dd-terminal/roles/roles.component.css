@@ -1,0 +1,31 @@
+.ng-autocomplete {
+    width: auto;
+}
+
+.content-box-shadow-sec {
+	padding: 20px 20px 0 !important;
+}
+
+@media only screen and (min-width : 768px) 
+{
+	.myform .col_lable1 {
+		max-width: 100px;
+		padding-top: 8px;		
+	}
+	.rloes_lable {
+		margin-right: 60px;
+	}
+	.rloes_lable:last-child {
+		margin-right: 0px;
+	}
+}
+@media only screen and (min-width : 1025px) 
+{
+	.resourcedd {
+		min-width: 418px;
+	}
+	.fiftypr {
+		min-width: 585px !important;
+    	max-width: 585px !important;
+	} 
+}

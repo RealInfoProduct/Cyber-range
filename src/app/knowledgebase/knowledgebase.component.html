@@ -1,0 +1,133 @@
+<app-candidateheader></app-candidateheader>
+
+<!-- Sub Header-->
+<app-breadcrumbs [side]="'front'" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<!-- Sub Header End -->
+<div class="padding-all page-min-height contactus maxf-width"> 	
+	<div class="row mt-5 mb-5">
+		<div class="col-md-12">
+            <h2 class="heading text-center mb-4">
+                Basic Networking & IT Technology Knowldgebase!
+                <div class="heading_brd_blue_center"></div>
+            </h2>
+		
+            <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one" class="editex-accor">
+        
+                <!-- 1 -->
+                <ngb-panel title="1. WHAT IS IP ADDRESS?" id="config-panel-one">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>IP address is short for Internet Protocol Address. An IP Address is a unique number that devices use in order to identify and communicate with each other on a computer network.  If two computers have the same IP addresses, it will cause conflict and cause problem.</li>
+                                <li>IP Addresses are written as a sequence of four numbers separated by ".", like this: 208.123.246.35.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 2 -->
+                <ngb-panel title="2. WHAT IS PUBLIC IP ADDRESS? WHAT IS PRIVATE IP ADDRESS?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>Public IP addresses are IP addresses used on Internet. They are internet route-able and are visible to the public. Most people who use Cable/DSL service at home/office obtain one dynamic Public IP address from ISP (Internet Service Provider).</li>
+                                <li>Computers on a Local Area Network use Private IP addresses. 192.168.x.x is an example of a Private IP address.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 3 -->
+                <ngb-panel title="3. WHAT IS THE PURPOSE OF A BROADBAND ROUTER?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>The purpose of a broadband router is to share an internet connection among several computers.The broadband router will get one public IP from your ISP and assign dynamic private IP address to each of your computer. All of your computers will have unique private IP address but will use the same public IP address to browse Internet. </li>
+                                <li>The router provides a basic Firewall which can deny access to your local computers from Internet. </li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 4 -->
+                <ngb-panel title="4. WHY THE IP ADDRESS OF MY COMPUTERS MATTERS?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>Usually computers in the same network use the same first three numbers of their IP address, only the 4th number is different. For example, your router could have IP address 192.168.2.1 while ethernet desktop uses 192.168.2.100 and wireless iPad use 192.168.2.102...etc. </li>
+                                <li>If your network uses 192.168.2.x but one computer somehow uses an IP address of 192.168.1.100, then this computer is not in the same IP network and can not communicate with 192.168.2.x network.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 5 -->
+                <ngb-panel title="5. HOW TO FIND OUT MY COMPUTER'S PRIVATE IP ADDRESS?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>If you have Windows 7/Windows Vista computer, click on Start -&gt; go to "Search Programs and fields" field, enter "cmd" hit Enter key.</li>
+                                <li>If you have Windows XP computer, click on Start -&gt; Run -&gt; type "cmd" or "command" hit OK. </li>
+                                <li>Under the command prompt, type in "ipconfig" hit Enter.  You will see your computer's IP address (IPv4 address), subnet mask, and default gateway.  Usually the default gateway address is the IP address of your router.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 6 -->
+                <ngb-panel title="6. HOW TO MAKE MY COMPUTER OBTAIN A DYNAMIC IP ADDRESS AUTOMATICALLY?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>Usually we let computers obtain IP address automatically from the router. You can click on Start -&gt; Run -&gt; type "ncpa.cpl" hit OK. In the Network Connection window, right click on "Local Area Connection" and select Properties. Double click on Internet Protocol TCP/IP. Select the option "obtain IP address automatically" and select the option "obtain DNS server address automatically" Click OK. Click OK again.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 7 -->
+                <ngb-panel title="7. WHAT IF I PREFER TO SET A STATIC IP RATHER THAN DYNAMIC IP ADDRESS?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>If you prefer not to obtain an IP address automatically, you can set static IP address to your computer. Locate your network connection icon in the Network Connection window. Go to the property of the network connection. Go to the Internet Protocol v4 (TCP/IP) Properties.  Select the option "use the following IP address". Manually type in your static IP, subnet mask and default gateway.  You will also need to manually type in the Primary DNS server address. Click OK twice.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 8 -->
+                <ngb-panel title="8. WHAT BASIC TOOL CAN I USE TO TROUBLE SHOOT MY NETWORKING PROBLEM?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>The most popular tool is to use the "PING" command under the command prompt.</li>
+                                <li>Click on Start -&gt; Run -&gt; type "command" hit OK.  Under the command prompt, type in "ping  x.x.x.x" hit Enter   The x.x.x.x can be the IP address of your gateway.  For example, type "ping 192.168.2.1" hit Enter.  If you receive 4 replies, it means your computer can see that device and get replies.</li>
+                                <li>You also can ping a device on the Internet.  For example, "ping 209.191.93.52" is to ping a Yahoo site on Internet. If you can "ping 209.191.93.52" to get 4 replies from 209.191.93.52, you do have a good internet connection.</li>
+                                <li>Ping a DNS name on Internet.  If you can do "ping www.yahoo.com" and get 4 replies, your computer should able to browse Internet fine.  If you can "ping 209.191.93.52" to get 4 replies from 209.191.93.52, but when you "ping www.yahoo.com" you get "unknown host", you have an Internet connection but you have a DNS problem to browse Internet.  Check your DNS server address by typing "ipconfig /all" under the command prompt and it will give you some clue.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+            </ngb-accordion>
+
+            <p class="pt-3">
+                In case you haven't found the answer for your question please feel free to <a routerLink="/contact-us" class="alink">contact us</a>, our customer support will be happy to help you.
+            </p>
+        </div>
+	</div>	
+
+</div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

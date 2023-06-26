@@ -1,0 +1,116 @@
+button:focus {
+    outline: 0px dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+}
+/*.btn-padding {
+	padding: 3px 5px !important;
+    min-width: 92px;
+}*/
+.bgwhite img {
+    border-bottom: 1px solid #ccc;
+}
+.theme-btn {
+    margin: auto;
+    display: table;
+}
+.theme-btn .sbtn {
+    padding: 6px 21px 6px 10px !important;
+    display: inline-block;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #b5b5b5;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+td {
+    padding: 9px 13px;
+	border: 1px solid #b5b5b5;
+	vertical-align: top;
+	font-size: 15px;
+}
+.grid .bb{
+    font-size: 17px;
+	margin-bottom: 5px;
+    display: block;
+}
+
+
+/* Grid Layout */
+.grid .bgwhite {
+    color: #212529;
+    margin-bottom: 25px;
+    background-color: #fff;
+	box-shadow: 0 5px 15px 5px rgb(74 85 140 / 29%);
+}
+.grid .bgwhite_padding {
+    padding: 25px 20px 25px;
+}
+.grid .btn-padding2 {
+    font-size: 17px !important;
+    color: #ffffff;
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-family: 'OpenSans-SemiBold', sans-serif;
+    padding: 4px 16px !important;
+}
+.grid .infobggray {
+	background: #eff0f4;
+	/*padding: 17px 0 13px;*/
+	margin-top: 22px;
+	margin-bottom: 22px;
+}
+.grid p {
+	font-size: 15px;
+	line-height: 20px;
+}
+.grid p .bb{
+    font-size: 17px;
+    margin-bottom: 9px;
+    display: block;
+}
+
+.grid .bgwhite .heading { 
+	margin-bottom: 8px;
+}
+@media only screen and (max-width: 767px) 
+{
+	.grid .infobggray {
+		text-align: center;
+	}
+	td {
+		display: block;
+	}
+}
+@media only screen and (min-device-width : 1200px) and (max-device-width : 1400px) 
+{
+	.grid p, .grid .infobggray {
+		font-size: 13px !important;
+	}
+}
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1200px) 
+{	
+	/*.padding-all {
+		padding-left: 30px;
+		padding-right: 30px;
+	}*/
+	.ueipp {
+		flex: 0 0 33.33%;
+		max-width: 33.33%;
+	}
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1023px) 
+{	
+	td {
+		padding: 9px 8px;
+	}
+}
+@media only screen and (max-width: 1600px) 
+{
+	/*.grid p, .grid .infobggray {
+		font-size: 14px;
+	}*/
+}
+/* End Grid Layout */

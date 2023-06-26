@@ -1,0 +1,51 @@
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
+export const environment = {
+  production: false,
+<<<<<<< HEAD
+  // angular setup
+  baseUrl: 'https://dev.skyvirt.tech/appci/',
+  siteUrl: 'https://dev.skyvirt.tech',
+  // for node chat
+  apiUrl: 'https://devchat.skyvirt.tech/',
+  socketUrl: 'https://devchat.skyvirt.tech/'
+    // for node chat
+    // apiUrl: 'http://localhost:4000/',
+    // socketUrl: 'http://localhost:4000/'
+=======
+
+   // baseUrl: 'https://cyberrange.skyvirt.tech/appci/',
+ //   siteUrl: 'https://cyberrange.skyvirt.tech',
+ 
+ baseUrl: 'https://dev.skyvirt.tech/appci/',
+ siteUrl: 'https://dev.skyvirt.tech',
+
+  // baseUrl: 'https://cyberrange.skyvirt.tech/appci/',
+   //siteUrl: 'https://cyberrange.skyvirt.tech',
+  
+  //  apiUrl: 'https://chat.skyvirt.tech/',
+  //  socketUrl: 'https://chat.skyvirt.tech/'
+ 
+  apiUrl: 'http://localhost:4000/',
+  socketUrl: 'http://localhost:4000/'
+
+
+  //baseUrl: 'https://cyberrange.skyvirt.tech/appci/',
+  //siteUrl: 'https://cyberrange.skyvirt.tech',
+  //baseUrl: 'http://localhost/synergy-security-ci/',
+  //siteUrl: 'http://localhost:4200'
+>>>>>>> 32fa19f9acd3e213b620f7ed25ca9823a17dcbbb
+};
+
+/*
+https://cyber.indrasakha.com/appci/index.php/
+
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

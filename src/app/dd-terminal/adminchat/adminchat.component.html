@@ -1,0 +1,137 @@
+<div class="chat_padding">
+	<div class="chattext mb-2"><fa-icon [icon]="faComments"></fa-icon> Chatbox <fa-icon [icon]="faSearch" class="float-right searchi" (click)=toggleDisplayDivIf()></fa-icon></div>	
+
+	<div class="admmin_c">
+
+<div class="form-group chat_srch">
+    <input type="text" class="form-control input_chat_search"  (input)="searchuser($event)" name="chat_search" id="chat_search" placeholder="Search..." ngModel [ngModelOptions]="{standalone: true}" *ngIf="!isShowDivIf">
+</div>
+<div class="chat_sec chat-boxs admin-chat-list">
+    <div class="chatdiv admin_chatdiv">
+
+
+        <a class="deactivec"    *ngFor="let user of mix_user"    [class.bold_user]="getuserBold(user.id? user.id : user._id)"  placement="top" ngbTooltip="{{user.email}}" (click)="selectedUser(user)" ><fa-icon [icon]="user.id ? faUser : faUsers" class="chatufi"></fa-icon>{{user.f_name ? (user.f_name +' '+  user.l_name | slice:0:15)+'..' : user.team_name}} <fa-icon [icon]="faDotCircle" [ngClass]="user.online === 'Y' ? 'active-user' : 'deactive-user'"></fa-icon></a>
+   
+        <!-- <a class="deactivec"   *ngFor="let team of alloted_team"    (click)="selectedTeam(team)" ><fa-icon [icon]="faUsers" class="chatufi"></fa-icon>{{ team.team_name}}<fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a> -->
+
+      
+    </div>
+                
+    <!-- <div class="chat_box_div admin_chat_box"> -->
+        <div class="admin_chat_box"  *ngIf="popup_layout == true">
+            <div class="chat_box_div"  *ngFor="let t_user of total_user" >
+                <div class="header">
+                  
+
+                    <h2 *ngIf="t_user.f_name">  {{t_user !== null && t_user.f_name ? t_user.f_name +' '+t_user.l_name : ' Select a User to chat.' }}</h2>
+                    
+                    <h2 *ngIf="t_user.team_name"> {{t_user !== null && t_user.team_name ? t_user.team_name  : ' Select a Team to chat.' }}</h2>
+                    
+                     <div class="closeb"   (click)="removeUser(t_user.id)">
+
+                        <fa-icon [icon]="faTimesCircle"></fa-icon>
+                    </div>
+                    
+
+
+                </div>
+                <div class="chat-box">
+                    <div class="chating messageThread" #messageThread>    
+
+                        <div class="message-box"      [class.right-img]="alignMessage(msg.fromUserId)"  *ngFor="let msg of t_user.messages" >
+                           
+                                
+
+                            <div class="picture">
+                                <img src="{{server_url}}media/exercise-image/profile.png" class="img-fluid" />
+                                
+                            </div>
+                            
+                            <div class="message">
+                                <span>{{msg.fromUserName}}</span>
+
+                                <p style="word-break:break-all">{{msg.message}}</p>
+                            </div>
+
+                            <span  class="datefont">{{setTime(msg.time)}}</span>
+
+
+                        </div>    
+                        <div class="message-thread start-chatting-banner" *ngIf="t_user.messages == ''">
+                            <p class="heading">
+                                You haven't chatted with {{t_user.username}} in a while,
+                                <span class="sub-heading">Say Hi.</span>
+                            </p>
+                        </div>
+
+                        
+                    </div>
+                    <div class="enter-message">
+                        <span *ngIf="userTyping"> {{userTyping}}  is typing</span>
+                        <form [formGroup]="messageForm"    *ngIf="user_form==true"> 
+                            <!-- <div *ngIf="msgNotification !=null" >{{msgNotification}}
+            
+                            </div>   -->
+                        <textarea class="textare" formControlName="message" (keypress)="MessageTyping(t_user)" (keyup.enter)="sendMessageAdmin($event)"     placeholder="Enter your message.."></textarea>
+                            <button  (click)="sendMessageAdmin($event)"  class="forsubmit btn-chat-send" >
+                                <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                            </button>
+                            <!-- <div class="btn-box float-right">
+                                <div class="theme-btn">
+                                    <span class="txt">
+                                        <button  (click)="sendMessageAdmin($event)"  class="forsubmit btn_blueas" >
+                                            <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div> -->
+                            <!-- <button  *ngIf="team==true" (click)="sendMessageGroup($event)"  class="forsubmit btn_blueas" >
+                                <fa-icon [icon]="faAngleDoubleRight "></fa-icon>
+                                </button> -->
+                        </form>
+                        <!--(keypress)="gorupMessageTyping($event)" -->
+                        <form [formGroup]="messageForm"   *ngIf="team==true"> 
+                            <!-- <div *ngIf="msgNotification !=null" >{{msgNotification}}
+            
+                            </div>   -->
+                        <textarea class="textare" formControlName="message" (keypress)="gorupMessageTyping(t_user)" (keyup.enter)="sendMessageGroup($event)"     placeholder="Enter your message.."></textarea>
+                            <button  (click)="sendMessageGroup($event)"  class="forsubmit btn-chat-send" >
+                                <fa-icon [icon]="faAngleDoubleRight "></fa-icon>
+                            </button>
+                            <!-- <div class="btn-box float-right">
+                                <div class="theme-btn">
+                                    <span class="txt">
+                                        
+                                        <button  (click)="sendMessageGroup($event)"  class="forsubmit btn_blueas" >
+                                            <fa-icon [icon]="faAngleDoubleRight "></fa-icon>
+                                            </button>
+                                    </span>
+                                </div>
+                            </div> -->
+                            <!-- <button  (click)="sendMessageAdmin($event)"  class="forsubmit btn_blueas" >
+                                        <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                                        </button> -->
+                        </form>
+
+
+
+                        <!-- <textarea class="textare" placeholder="Enter your message.."></textarea> -->
+                        <!-- <div class="btn-box float-right">
+                            <div class="theme-btn">
+                                <span class="txt">
+                                    <button type="submit" class="forsubmit btn_blueas" >
+                                        <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                                    </button>
+                                </span>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    
+</div>
+
+</div> 
+</div>

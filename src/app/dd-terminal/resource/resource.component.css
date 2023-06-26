@@ -1,0 +1,63 @@
+.ng-autocomplete {
+    width: auto;
+}
+.resourcedd {
+	padding-left: 0;
+	max-width: 472px;
+}
+.resourcedd div.autocomplete-container {
+	box-shadow: none !important;
+	border-radius: .25rem;
+	border: 1px solid #ccc;
+}
+@media only screen and (min-width: 768px) 
+{	
+	.myform .plg0  {
+		padding: 0;
+	}
+	.tbp {
+		padding: 5px 0 0 5px;
+	}
+	.content-box-shadow {
+		max-width: 1000px;
+	}
+
+}
+@media only screen and (max-width: 767px) 
+{	
+	.myform .plg0  {
+		padding: 0;
+	}
+}
+@media only screen and (max-width: 1024px) 
+{
+	.resourcedd {
+		padding-left: 15px;
+	}	
+}
+@media only screen and (min-width : 1025px)
+{
+	
+	.myform .col_lable {
+		flex: 0 0 250px;
+		max-width: 250px;
+	}
+	.myform .col_input {
+		flex: 0 0 130px;
+		max-width: 130px;
+		padding: 0;
+	}
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) 
+{
+	/*.myform .col_lable {
+		padding-left: 0px;
+	}*/
+}
+@media only screen and (min-width: 1025px) 
+{
+	.myform .onecell {
+		flex: 0 0 380px;
+		max-width: 380px;
+	}
+}

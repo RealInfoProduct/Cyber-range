@@ -1,0 +1,445 @@
+<!-- Header -->
+<app-candidateheader [process_notifier]="bgProcessNotifier" (bg_process_array)="get_header_response($event)" (setting)="get_setting($event)" ></app-candidateheader>
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+<div class="col-md-12 page-min-height padding-all maxf-width">
+	<div class="row dk-table"> <!-- basketbox -->
+		<div class="col-md-12 ">
+			<ul ngbNav #nav="ngbNav" class="nav-tabs col-md-12 pl-0 pr-0">
+				<!-- Grid View -->
+				<li ngbNavItem (click)="setCurrentTab('GridView')">
+					<a ngbNavLink><fa-icon [icon]="faTh" class=""></fa-icon> Grid View</a>
+					<ng-template ngbNavContent>
+						<div class="col-md-12 pl-0 pr-0 grid"> 
+							<div *ngIf="allotted?.length != 0" class="row padding-report-right meimgbrd">
+                                <ng-container *ngFor="let alt of allotted; let i = index" >
+								<div *ngIf="status_array | allotmentstatus : alt.status" class="col-lg-3 col-md-6 ueipp">					
+									<div class="bgwhite">
+										<div class="uex">										
+											<img *ngIf="alt.thumb_image!=null" src="{{server_url}}media/exercise-image/{{alt.thumb_image}}" class="img-fluid">										
+											<img *ngIf="alt.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">
+											<div *ngIf="alt.status=='Running'" class="top_running top_green" >
+												<fa-icon [icon]="faArrowUp"></fa-icon>
+											</div>
+											<div *ngIf="alt.status=='Expired' || alt.status=='Rejected' || alt.status=='Inactive'" class="top_running top_red" >
+												<fa-icon [icon]="faArrowDown"></fa-icon>
+											</div>
+											<div *ngIf="alt.status=='Allotted' || alt.status=='Pause' || alt.status=='Approval'" class="top_running top_blue" >
+												<fa-icon [icon]="faArrowUp"></fa-icon>
+											</div>
+										</div>
+										<!-- <ngb-progressbar [value]="1000" [striped]="true"></ngb-progressbar>
+										<div *ngIf="alt.status=='Running'" class="top_running top_green" >
+											<fa-icon [icon]="faArrowUp"></fa-icon>
+										</div>
+										<div *ngIf="alt.status=='Expired' || alt.status=='Rejected' || alt.status=='Inactive'" class="top_running top_red" >
+											<fa-icon [icon]="faArrowDown"></fa-icon>
+										</div>
+										<div *ngIf="alt.status=='Allotted' || alt.status=='Pause' || alt.status=='Approval'" class="top_running top_blue" >
+											<fa-icon [icon]="faArrowUp"></fa-icon>
+										</div> -->
+										<ng-containeer *ngIf="alt.process_status" >  <!---->
+											<div class="uex-over"> 
+											</div>
+											<div class="uex-pbar"> 
+												<!-- <div class="col-md-12 pl-0 pr-0 text-center">Creating Resource</div> -->
+												<ngb-progressbar [value]="alt?.percentage !== undefined  ? alt.percentage : 100" [max]="100" textType="white" [showValue]="alt?.percentage !== undefined  ? true : false" [striped]="true" class="uex-pbar-blue"></ngb-progressbar>
+											</div>
+										</ng-containeer>
+										<div class="bgwhite_padding">
+											<h5 class="heading text-center">{{alt.name}}</h5>
+											<div class="ues teamn">
+												<p *ngIf="alt.team_name !== undefined && alt.team_name!=''" class="text-center" >Team: {{alt.team_name}}</p>
+											</div>
+											<p *ngIf="alt.instructor_name!=''" class="text-center"><span class="authorn">By: {{alt.instructor_name}}</span></p>											
+											<p class="ues text-center">Status: {{alt.status}}</p>											
+											<div class="row infobggray">	
+												<div class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Allotment ID</p>
+													{{alt.a_id}}
+												</div>	
+												<div class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Allotment Date</p>
+													{{alt.valid_start}}
+												</div>
+												<div class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Validity</p>
+													{{alt.valid_end}}
+												</div>	
+												<div class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Used/Remain (hrs)</p> 
+													<span class="useh" placement="top" ngbTooltip="Used Time">{{alt.used_time}} hrs</span>
+													<span class="remainh" placement="top" ngbTooltip="Remaining Time">{{alt.remain_time}} hrs</span>
+												</div>	
+											</div>											
+											<div class="text-center mebtn">
+												<div *ngIf="alt.status=='Expired'" class="res_del">
+													<small class="res_red ">"Resource will be deleted after two days"</small>
+												</div>
+												<ng-containeer *ngIf="alt.roadmap_status==0" > 
+													<button *ngIf="alt.status=='Allotted'" [disabled]="alt.disable" (click)="Action(alt.a_id,'launch');" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+														Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+													</button>
+												</ng-containeer>
+												<ng-containeer *ngIf="alt.roadmap_status==1" > 
+													<button *ngIf="alt.status=='Allotted'" [disabled]="alt?.roadmap_open_status=='close' ? true : false" (click)="Action(alt.a_id,'launch');" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+														Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+													</button>
+												</ng-containeer>
+												<button *ngIf="alt.status=='Running'" [disabled]="alt.disable" (click)="Action(alt.a_id,'running');" class="btn btn-padding2 launch mr-2" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Running'" [disabled]="alt.disable" (click)="Action(alt.a_id,'pause');" class="btn btn-padding2 push" placement="top" ngbTooltip="Pause">
+													Pause <fa-icon [icon]="faHandPaper" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Pause'" [disabled]="alt.disable" (click)="Action(alt.a_id,'resume');" class="btn btn-padding2 push" placement="top" ngbTooltip="Resume">
+													Resume <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Expired'" [disabled]="(alt.extend_req_status!=null || alt.disable=='true') ? true : false " (click)="ExtendAction(alt.a_id,checkoutpopup);" class="btn btn-padding2 launch" placement="top" ngbTooltip="Extend">
+													Extend <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Approval'" [disabled]="true" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Rejected'" [disabled]="true" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Inactive'" [disabled]="true" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+											</div>
+										</div>					
+									</div>
+								</div>
+								</ng-container>
+							</div>
+							<div *ngIf="allotted?.length == 0" class="col-md-12 pl-0 pr-0 padding-report-right meimgbrd">Not Found</div>
+						</div>
+					</ng-template>
+				</li>
+				<!-- End Grid View -->
+				<!-- List View -->
+				<li ngbNavItem (click)="setCurrentTab('ListView')">
+					<a ngbNavLink><fa-icon [icon]="faList" class=""></fa-icon> List View</a>
+					<ng-template ngbNavContent>
+						<div *ngIf="allotted?.length != 0" class="col-md-12 p-lg-0 table-responsive main-tabl-height basketbox">
+							<div>
+								<table class="table table-striped table-hover mb-0">
+									<thead class="thead-dark">
+										<tr>
+											<th class="tidcenter tidc">S.No.</th>
+											<th class="tex">Allotment ID</th>
+											<th class="tex">Exercise</th>
+											<th class="tttc">Author</th>
+											<th class="tluc min20">Allotment Date</th>
+											<th class="tluc">Validity</th>
+											<th class="tac">Assessment</th>
+											<th class="tttc">Status</th>
+											<th class="tluc urhrs">Used/Remain (hrs)</th>
+											<th style="width: 180px !important;">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<ng-container *ngFor="let alt of allotted; let i = index" >
+										<tr *ngIf="status_array | allotmentstatus : alt.status" >
+											<td class="tidcenter">{{i+1}}</td>
+											<td>{{alt.a_id}}</td>
+											<td class="text-left">{{alt.name}}</td>
+											<td width="235px">{{alt.instructor_name}}</td>
+											<td>{{alt.valid_start}}</td>
+											<td>{{alt.valid_end}}</td>
+											<!-- <td><a href="https://cyber.indrasakha.com/assessment/user/login_api" target="_blank" >Assessment</a></td> -->
+											<td><button  *ngIf="alt.package_id != null" (click)="getAssesment(alt.package_id,alt.a_id);"  >Assessment</button></td>
+                                         	<td>
+												<ng-containeer *ngIf="alt.process_status" > <ngb-progressbar [value]="alt?.percentage !== undefined  ? alt.percentage : 100" [max]="100" textType="white" [showValue]="alt?.percentage !== undefined  ? true : false" [striped]="true" class="uex-pbar-blue"></ngb-progressbar></ng-containeer>
+												{{alt.status}}
+											</td>
+											<td>
+												<span class="useh" placement="top" ngbTooltip="Used Time">{{alt.used_time}} hrs</span>
+												<span class="remainh" placement="top" ngbTooltip="Remaining Time">{{alt.remain_time}} hrs</span></td>
+											<td>
+												<ng-containeer *ngIf="alt.roadmap_status==0" > 
+												<button *ngIf="alt.status=='Allotted'" [disabled]="alt.disable" (click)="Action(alt.a_id,'launch');" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												</ng-containeer>
+												<ng-containeer *ngIf="alt.roadmap_status==1" > 
+													<button *ngIf="alt.status=='Allotted'" [disabled]="alt?.roadmap_open_status=='close' ? true : false" (click)="Action(alt.a_id,'launch');" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+														Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+													</button>
+												</ng-containeer>
+												<button *ngIf="alt.status=='Running'" [disabled]="alt.disable" (click)="Action(alt.a_id,'running');" class="btn btn-padding2 launch mr-2" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Running'" [disabled]="alt.disable" (click)="Action(alt.a_id,'pause');" class="btn btn-padding2 push" placement="top" ngbTooltip="Pause">
+													Pause <fa-icon [icon]="faHandPaper" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Pause'" [disabled]="alt.disable" (click)="Action(alt.a_id,'resume');" class="btn btn-padding2 push" placement="top" ngbTooltip="Resume">
+													Resume <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Expired'" [disabled]="(alt.extend_req_status!=null || alt.disable=='true') ? true : false " (click)="ExtendAction(alt.a_id,checkoutpopup);" class="btn btn-padding2 launch" placement="top" ngbTooltip="Extend">
+													Extend <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Approval'" [disabled]="true" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Rejected'" [disabled]="true" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+												<button *ngIf="alt.status=='Inactive'" [disabled]="true" class="btn btn-padding2 launch" placement="top" ngbTooltip="Launch">
+													Launch <fa-icon [icon]="faPaperPlane" class=""></fa-icon>
+												</button>
+											</td>
+										</tr>
+										</ng-container>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div *ngIf="allotted?.length == 0" class="col-md-12 pl-0 pr-0 padding-report-right meimgbrd">Not Found</div>
+					</ng-template>
+				</li>
+				<li ngbNavItem (click)="archived_load(); setCurrentTab('ArchivedView');">
+					<a ngbNavLink><fa-icon [icon]="faCloudDownloadAlt" class=""></fa-icon> Archived</a>
+					<ng-template ngbNavContent>
+						<div class="col-md-12 pl-0 pr-0 grid"> 
+							<div *ngIf="archived?.length != 0" class="row padding-report-right meimgbrd">
+                                <ng-container *ngFor="let alt of archived; let i = index" >
+								<div  class="col-lg-3 col-md-6 ueipp">					
+									<div class="bgwhite">	
+										<div  class="uex">										
+											<img *ngIf="alt.thumb_image!=null" src="{{server_url}}media/exercise-image/{{alt.thumb_image}}" class="img-fluid">
+											<img *ngIf="alt.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">
+										</div>
+										<div class="bgwhite_padding">
+											<h5 class="heading text-center">{{alt.name}}</h5>	
+											<p *ngIf="alt.instructor_name!=''" align="center"><span class="authorn">By: {{alt.instructor_name}}</span></p>											
+											<p align="center" class="ues">Status: {{alt.status}}</p>											
+											<div align="" class="row infobggray mb-1">	
+												<div class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Allotment ID</p>
+													{{alt.a_id}}
+												</div>	
+												<div class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Allotment Date</p>
+													{{alt.valid_start}}
+												</div>
+												<div class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Validity</p>
+													{{alt.valid_end}}
+												</div>	
+												<div *ngIf="alt.used_time != undefined" class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Used/Remain (hrs)</p> 
+													<span class="useh" placement="top" ngbTooltip="Used Time">{{alt.used_time}} hrs</span>
+													<span class="remainh" placement="top" ngbTooltip="Remaining Time">{{alt.remain_time}} hrs</span>
+												</div>	
+												<div *ngIf="alt.used_time == undefined" class="col-lg-6 col-md-6 mb-3">
+													<p class="mb-1">Used/Remain (hrs)</p> 
+													<span class="useh" placement="top" ngbTooltip="Used Time">0 hrs</span>
+													<span class="remainh" placement="top" ngbTooltip="Remaining Time">0 hrs</span>
+												</div>	
+											</div>											
+										</div>					
+									</div>
+								</div>
+								</ng-container>
+							</div>
+							<div *ngIf="archived?.length == 0" class="col-md-12 pl-0 pr-0 padding-report-right meimgbrd">Not Found</div>
+						</div>
+					</ng-template>
+				</li>
+    			<li ngbNavItem (click)="roadmapLoad(); setCurrentTab('RoadmapView')" >
+					<a ngbNavLink><fa-icon [icon]="faProjectDiagram" class=""></fa-icon> Exercise Roadmap</a>
+					<ng-template ngbNavContent>
+						<ng-container *ngFor="let allotRoadmap of allottedRoadmap; let k = index" >
+						<div [attr.id]="'stepper-'+k" class="bs-stepper">
+							<div class="bs-stepper-header">
+							<ng-container *ngFor="let roadmap of allotRoadmap; let i = index" >
+							  <div class="step" [attr.data-target]="'#test-'+i"  >
+								<button (click)="getExerciseDetail(roadmap.id)" class="step-trigger" [disabled]="roadmap.roadmap_open_status=='close' ? true : false" placement="top" ngbTooltip="Roadmap Status: {{roadmap.roadmap_status}}" >
+								  <span  [ngClass]="{'bs-stepper-circle': true, 'bg-success':roadmap.roadmap_current_status==1}" >{{i+1}}</span>
+								  <span class="bs-stepper-label">{{roadmap.name}}<br/>({{roadmap.a_id}})</span>
+								</button>
+							  </div>
+							  <div *ngIf="i<allotRoadmap.length-1" class="line"></div>
+							  </ng-container>
+							</div>
+						  </div>
+						  <div class="clearfix"></div>
+						   <ng-container *ngIf="k!=allottedRoadmap.length-1">
+						    <hr/>
+						  </ng-container>
+						</ng-container>
+					</ng-template>
+				</li>
+				<li ngbNavItem class="dflexcenter">
+					<div class="uesearch">
+						<label class="dflexcenter uelabel uesrch"> 
+							<b>Search:</b>
+						</label> 
+						<label class="pointerh dflexcenter uelabel" for="status-allotted" > 
+							<input (change)="onChange($event)" [checked]="true" value="Allotted" type="checkbox" class="ueinput " id="status-allotted" > 
+							Allotted
+						</label> 		
+						<label class="pointerh dflexcenter uelabel" for="status-running" > 
+							<input (change)="onChange($event)" [checked]="true" value="Running" type="checkbox" class="ueinput" id="status-running" > 
+							Running
+						</label> 		
+						<label class="pointerh dflexcenter uelabel" for="status-pause" > 
+							<input (change)="onChange($event)" [checked]="true" value="Pause" type="checkbox" class="ueinput" id="status-pause" > 
+							Pause
+						</label>		
+						<label class="pointerh dflexcenter uelabel" for="status-expired" > 
+							<input (change)="onChange($event)" [checked]="true" value="Expired" type="checkbox" class="ueinput" id="status-expired" > 
+							Expired
+						</label>
+						<label class="pointerh dflexcenter uelabel" for="status-rejected" > 
+							<input (change)="onChange($event)" value="Rejected" type="checkbox" class="ueinput" id="status-rejected" > 
+							Rejected
+						</label> 
+						<label class="pointerh dflexcenter mb-0" for="status-approval" > 
+							<input (change)="onChange($event)" value="Approval" type="checkbox" class="ueinput" id="status-approval" > 
+							Approval
+						</label> 
+					</div>
+				</li>
+				<!-- End List View -->
+			</ul>
+		   <div class="clearfix"></div>
+			<div [ngbNavOutlet]="nav" class="col-md-12 pl-0 pr-0 mt-3"></div>
+		</div>
+	</div>
+</div>
+<ng-template #checkoutpopup let-modal >
+	<div class="dk-model-box">
+		<div class="modal-header dk-model-header">
+			<h4 class="modal-title" id="modal-basic-title">Extend Allotment</h4>
+			<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="mtable-height">
+			<div class="modal-body">
+					<div class="col-md-12 float-left text-center pb-3">
+						<div *ngIf="checkout_option=='Active'" class="btn-box text-center">
+							<div class="theme-btn">
+								<span class="txt">												
+									<button type="button" (click)="ExtendSubmit('wallet',creditpopup)" class="btn btn_blueas tpin">Credit By Wallet</button>
+								</span>
+							</div>
+						</div>
+						<div *ngIf="req_to_inst_option=='Active'" class="btn-box text-center">
+							<div class="theme-btn">
+								<span class="txt">												
+									<button type="button" (click)="ExtendSubmit('instructor',creditpopup)" class="btn btn_blueas tpin">Request To Instructor</button>
+								</span>
+							</div>
+						</div>
+                    </div>
+			</div>
+		</div>
+	</div>
+</ng-template>
+<ng-template #creditpopup let-modal >
+	<div class="dk-model-box">
+		<div class="modal-header dk-model-header">
+			<h4 class="modal-title" id="modal-basic-title">Transaction PIN</h4>
+			<button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="mtable-height">
+			<div class="modal-body">
+				<form [formGroup]="checkoutfrm">
+                    <div class="col-lg-12 col-md-12 float-left form-group" >
+                        <div class="col-lg-12 col-md-12 col-12 p-0 pt-2 float-left">
+                            <input type = "text" class = "form-control fortextbox" id="t_pin" name = "t_pin" formControlName="t_pin" placeholder="Enter TPIN">
+                        </div> 
+                        <div class="clearfix"></div>
+                        <ng-container *ngFor="let error of error_messages.t_pin">
+                            <div class="error-message col-md-12 pl-0" *ngIf="checkoutfrm.get('t_pin').hasError(error.type) && (checkoutfrm.get('t_pin').dirty || checkoutfrm.get('t_pin').touched)">
+                                {{ error.message }}
+                            </div>
+                        </ng-container>	
+                    </div>
+					<div class="col-md-12 float-left text-center pb-3">
+						<div class="btn-box text-center">
+							<div class="theme-btn">
+								<span class="txt">												
+									<button type="button" (click)="TpinSubmit(checkoutfrm.value)" class="btn btn_blueas tpin">Submit</button>
+								</span>
+							</div>
+						</div>
+                    </div>
+				</form>			
+			</div>
+		</div>
+	</div>
+</ng-template>
+<div class="modal fade" id="exeDetailModal" tabindex="-1" aria-labelledby="reqModal" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Exercise Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+			<div *ngIf="currentDetail.length!=0" class="col-lg-12 col-md-12 ueipp pl-0 pr-0">					
+				<div class="bgwhite">
+					<div class="uex">										
+						<img *ngIf="currentDetail.thumb_image!=null" src="{{server_url}}media/exercise-image/{{currentDetail.thumb_image}}" class="img-fluid">										
+						<img *ngIf="currentDetail.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">
+						<div *ngIf="currentDetail.status=='Running'" class="top_running top_green" >
+							<fa-icon [icon]="faArrowUp"></fa-icon>
+						</div>
+						<div *ngIf="currentDetail.status=='Expired' || currentDetail.status=='Rejected' || currentDetail.status=='Inactive'" class="top_running top_red" >
+							<fa-icon [icon]="faArrowDown"></fa-icon>
+						</div>
+						<div *ngIf="currentDetail.status=='Allotted' || currentDetail.status=='Pause' || currentDetail.status=='Approval'" class="top_running top_blue" >
+							<fa-icon [icon]="faArrowUp"></fa-icon>
+						</div>
+					</div>
+					<div class="bgwhite_padding">
+						<h5 class="heading text-center">{{currentDetail.name}}</h5>
+						<div class="ues teamn">
+							<p *ngIf="currentDetail.team_name !== undefined && currentDetail.team_name!=''" class="text-center" >Team: {{currentDetail.team_name}}</p>
+						</div>
+						<p *ngIf="currentDetail.instructor_name!=''" class="text-center"><span class="authorn">By: {{currentDetail.instructor_name}}</span></p>											
+						<p class="ues text-center">Status: {{currentDetail.status}}</p>											
+						<div class="row infobggray">	
+							<div class="col-lg-6 col-md-6 col-sm-6 mb-3">
+								<p class="mb-1">Allotment ID</p>
+								{{currentDetail.a_id}}
+							</div>	
+							<div class="col-lg-6 col-md-6  col-sm-6 mb-3">
+								<p class="mb-1">Allotment Date</p>
+								{{currentDetail.valid_start}}
+							</div>
+							<div class="col-lg-6 col-md-6 mb-3">
+								<p class="mb-1">Validity</p>
+								{{currentDetail.valid_end}}
+							</div>	
+							<div class="col-lg-6 col-md-6 mb-3">
+								<p class="mb-1">Used/Remain (hrs)</p> 
+								<span class="useh" placement="top" ngbTooltip="Used Time">{{currentDetail.used_time}} hrs</span>
+								<span class="remainh" placement="top" ngbTooltip="Remaining Time">{{currentDetail.remain_time}} hrs</span>
+							</div>	
+						</div>											
+						</div>
+					</div>					
+				</div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...<br/>{{process_msg}}</p>
+   </div>
+</div>
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

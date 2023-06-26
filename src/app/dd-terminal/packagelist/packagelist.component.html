@@ -1,0 +1,141 @@
+<div class="col-md-12 content dashboard-body">
+    <app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<ngb-alert *ngIf="!closed" class="animate-show animate-hide mb-3" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+<div class="padding-body dk-table">
+<div class="content-box-shadow">		
+    <div class="row ">
+        
+        <div class="col-lg-2 col-md-6 ippd50 form-group">
+                <input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />
+        </div>
+
+        <div class="col-lg-5 col-md-6"></div>
+        <div class="col-lg-5 col-md-6 ippd50 btn_align">
+            <div class="btn-box">
+                <div class="theme-btn theme-btn-dd">
+                    <span class="txt">									
+                        <a class="btn btn_blueas" (click) = "redirect(dashboard_url+'package')" > <fa-icon [icon]="faUsers"></fa-icon> &nbsp;Add New Exercise Bundle</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+            <table id="team-table" datatable [dtOptions]="dtOptions[1]" dt-instance="dtInstance" [dtTrigger]="dtTrigger" class="row-border table hover table-striped">
+                <thead>
+                  <tr>
+                        <th class="tidcenter tidc">S.No.</th>
+                        <th class="tuidc">Exercise Bundle</th>
+                        <th class="ttnc">Created By</th>
+                        <th class="tluc">Last Update</th>
+                        <th class="tac">Action</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="teams?.length != 0">
+                    <tr *ngFor="let team of teams"
+                    [class.highlighted]="clicked === team.s_no" (click)="clicked = team.s_no"
+                    >
+                        <td class="tidcenter">{{ team.s_no }}</td>
+                        <td class="ttnc">
+                            <a routerLink="{{dashboard_url}}package/{{team.id}}" class="edit tablelinkc">
+                                {{ team.group_name }}
+                            </a>
+                        </td>									
+                       <td class="tcbc">
+                        <span><a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ team.created_by }}" (click)="viewUserProfile(team.created_by_id)" >{{ team.created_by }}</a></span>
+                        </td>
+                        
+                        <td class="tcbc">{{ team.last_datetime }}</td>
+                        <td class="tac" >
+                            <a routerLink="{{dashboard_url}}/package/{{team.id}}" title="Edit Exercise Bundle" class="btn btn-tean" placement="top" ngbTooltip="Edit Exercie Bundle"><fa-icon [icon]="faEdit"></fa-icon></a>
+                            <button type="button" class="btn btn-sm btn-delete" (click) = "deletePackage(team.id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+                            <a href="javascript:void(0);" class="ml-1" (click)="ViewMoreDetail(team.id,exedetails);" type="button" placement="top" ngbTooltip="View More" ><fa-icon [icon]="faEye"></fa-icon></a>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="teams?.length == 0">
+                    <tr>
+                        <td colspan="5" class="no-data-available">No data!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</div>
+
+<ng-template #exedetails let-modal >
+    <div class="dk-model-box">
+       <div class="modal-header dk-model-header">
+          <h4 class="modal-title" id="modal-basic-title">Exercise Details</h4>
+          <button type="button" class="close mclose" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+          </button>
+       </div>
+       <div class="mtable-height1">
+          <div class="modal-body">
+
+            <div class="col-lg-12 col-md-12 pl-0 pr-0 admin_ex-allot">                     
+                          
+                <div *ngFor="let ex of ex_detail; let i = index" class=" basketbox content-box-shadow">
+    
+                   <div class="row">
+                      
+                      <div class="col-md-5">
+                         <div class="ed_center">
+                            <img *ngIf="ex.thumb_image!=null" src="{{server_url}}media/exercise-image/{{ex.thumb_image}}" class="img-fluid">										
+                            <img *ngIf="ex.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">										
+                         </div>
+                         
+                         <div class="boxshad" [innerHTML]="ex.short_desc" >			
+                         </div>
+                      </div>
+                      
+                      <div class="col-md-7">
+                         <div class="boxshad">
+                            <h3 class="heading">{{ex.name}}</h3>
+                            
+                            <div class="row">
+                               <div class="col-lg-5 col-md-12">
+                                  <p class="authorby">By: {{ex.F_Name}} {{ex.L_Name}}</p>
+                               </div>
+                
+                               <div class="col-lg-7 col-md-12 text-lg-right ratting cursor-menu">				
+                                  <fa-icon [icon]="faStar" class="starc" placement="top" ngbTooltip="Rating: {{ex.rating}}"></fa-icon> {{ex.rating}} 
+                
+                                  <fa-icon [icon]="faCircle" class="lowc" placement="top" ngbTooltip="Difficulty Level: {{ex.difficulty_level}}" class="{{ex.difficulty_level}}c"></fa-icon> {{ex.difficulty_level}}
+                
+                                  <span class="subscriber">
+                                     <fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: 7/10" class="usercircle mr-1"></fa-icon>
+                                     <span placement="top" ngbTooltip="Running Subscribers: {{ex.total_running}}">{{ex.total_running}}/</span>
+                                     <span placement="top" ngbTooltip="Total Subscribers: {{ex.total_allotment}}">{{ex.total_allotment}}</span> 
+                                  </span>
+                
+                                  <fa-icon *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" class="questionc" placement="top" ngbTooltip="{{ex.key_words}}" ></fa-icon>
+                                  <span *ngIf="credit_system=='Active'" class="ercredit">Cr. {{ex.credits}}</span>
+                               </div>
+                            </div>					
+                            <hr> 
+                               
+                            <div class="" [innerHTML]="ex.long_desc" >	<!-- boxshad -->							 
+                            </div>							 
+                            <hr>
+                         
+                         </div>
+                      </div>		
+                   </div>  
+                </div>                         
+               
+             </div>
+            
+          </div>
+        </div>
+    </div> 
+</ng-template>          
+
+
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

@@ -1,0 +1,134 @@
+<app-candidateheader></app-candidateheader>
+
+<!-- Sub Header-->
+<app-breadcrumbs [side]="'front'" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<!-- Sub Header End -->
+<div class="padding-all page-min-height contactus maxf-width"> 	
+	<div class="row mt-5 mb-5">
+		<div class="col-md-12">
+            <h2 class="heading text-center">
+                Frequently Asked Questions
+                <div class="heading_brd_blue_center"></div>
+            </h2>
+
+			<p class="pt-3">
+                SkyVirt® Cyber Range is a unique visual and interactive resource for students, irrespective of age, qualification or branch, interested in Information Security Skill Development. It has been developed to break the monotony of conventional e-learning resources, and give the students a hands-on approach to everything that they learn.
+            </p>
+		
+            <ngb-accordion #acc="ngbAccordion" activeIds="config-panel-one" class="editex-accor">
+        
+                <!-- 1 -->
+                <ngb-panel title="1. HOW DO I REGISTER MY ACCOUNT?" id="config-panel-one">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>To register your account , go to <a routerLink="/registration" class="alink">Registration</a></li>
+                                <li>Activate your account via a link sent on your registered email.</li>
+                                <li>Once you create your account, you can change your account settings any time.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 2 -->
+                <ngb-panel title="2. HOW DO I SUBSCRIBE A MODULE?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>Go to <a routerLink="/exercise-repository" class="alink">Modules</a></li>
+                                <li>Click on the module you want to subscribe</li>
+                                <li>Click on <b>Subscribe</b> button</li>
+                                <li>It will redirect you to the payment gateway</li>
+                                <li>After the payment is successful, your <b>Subscribed Module</b> will be visible on your <b>Dashboard</b></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 3 -->
+                <ngb-panel title="3. HOW DO I DEREGISTER MY MODULE?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>You can <b>DeRegister</b> your module under the condition that you have <b>not launched your lab</b>.</li>
+                                <li>Once the lab is launched, the module becomes non-refundable</li>
+                                <li>To <b>DeRegister</b>, click on the <b>DeRegister</b> button next to your module on your dashboard</li>
+                                <li>For further details, contact our helpdesk team via email</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 4 -->
+                <ngb-panel title="4. FORGOT YOUR PASSWORD?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>If you have forgotten your Password, you can recover your password with the help of UserID or your Registered Email. Click <a routerLink="/forgot-password" class="alink">here</a> to recover. (In most cases, Email and UserID are same)</li> 
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 5 -->
+                <ngb-panel title="5. HOW DO I SUBSCRIBE A GROUP?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>Go to <a routerLink="/exercise-repository" class="alink">Modules</a></li>
+                                <li>Select the group you want to subscribe</li>
+                                <li>Click on <b>Subscribe</b> button next to Select Group tab</li>
+                                <li>It will redirect you to the payment gateway</li>
+                                <li>After the payment is successful, your <b>Subscribed Group modules</b> will be visible on your <b>Dashboard</b></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 6 -->
+                <ngb-panel title="6. HOW MUCH TIME DOES REFUND TAKE?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>You'll get a confirmation email when we get your refund request.</li>
+                                <li>Your module will be un-subscribed and you'll be no longer able to see the module on your dashboard.If you'd like to continue in the module, you'll need to re-subscribe.</li>
+                                <li>It can take up to 7 days for funds to return to your account after a requested refund. If it has been longer than 7 days, contact us about the problem.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+                <!-- 7 -->
+                <ngb-panel title="7. DO I GET THE SAME AMOUNT REFUNDED IF I UNSUBSCRIBE A MODULE?">
+                    <ng-template ngbPanelContent>
+                        <div>
+                            <ul class="mb-1">
+                                <li>No ,the actual amount will be deducted by a small percent.</li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </ng-template>
+                </ngb-panel>
+        
+            </ngb-accordion>
+
+            <p class="pt-3">
+                In case you haven't found the answer for your question please feel free to <a routerLink="/contact-us" class="alink">contact us</a>, our Help Desk Team will be happy to help you.
+            </p>
+        </div>
+	</div>	
+
+
+    
+
+</div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

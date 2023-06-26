@@ -1,0 +1,752 @@
+<div class="col-md-12 content dashboard-body"> 
+
+<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+<div class="myform team padding-body">
+    <div class="content-box-shadow content-box-shadow-sec"> 
+		<form [formGroup]="exefrm" >
+			<div class="row ">
+				<div class="col-lg-6">
+					<h5>Basic Information<hr></h5>
+
+					<div class="mb-4">
+						<div class="edex-lable mt-2">Exercise Name:</div>
+						<div class="edex-tbox">
+							<input type = "text" class = "form-control fortextbox" id="exe_name" name = "exe_name" placeholder="Exercise Name"  formControlName="exe_name" >
+							<ng-container *ngFor="let error of error_messages.exe_name">
+								<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('exe_name').hasError(error.type) && (exefrm.get('exe_name').dirty || exefrm.get('exe_name').touched)">
+									{{ error.message }}
+								</div>
+							</ng-container>	
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				
+					<div class="mb-4">
+						<label for="short_desc">Short Description:</label><br>
+						<angular-editor [placeholder]="short_desc_placeholder" formControlName="short_desc" id="short_desc" [(ngModel)]="short_desc" [config]="config" ></angular-editor>
+						<ng-container *ngFor="let error of error_messages.short_desc">
+							<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('short_desc').hasError(error.type) && (exefrm.get('short_desc').dirty || exefrm.get('short_desc').touched)">
+								{{ error.message }}
+							</div>
+						</ng-container>	
+					</div>
+					
+					<div class="mb-4">
+						<label for="long_desc">Long Description:</label><br>
+						<angular-editor [placeholder]="long_desc_placeholder" formControlName="long_desc" id="long_desc" [(ngModel)]="long_desc" [config]="config" ></angular-editor>
+						<ng-container *ngFor="let error of error_messages.long_desc">
+							<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('long_desc').hasError(error.type) && (exefrm.get('long_desc').dirty || exefrm.get('long_desc').touched)">
+								{{ error.message }}
+							</div>
+						</ng-container>	
+					</div>
+					
+				</div>
+						
+				<div class="col-lg-6 editex-accor">						
+										
+					  <div class="accordion" id="accordionExample">
+						<div class="card">
+						  <div class="card-header" id="headingOne">
+							<h2 class="mb-0">
+							  <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								Exercise Profiling
+							  </button>
+							</h2>
+						  </div>
+					  
+						  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+							<div class="card-body">
+								<div>
+
+									<div class="clearfix"> </div>
+
+								<div *ngIf="group_id=='1'" class="mt-2 mb-3">
+									<div class="edex-lable mt-2">Author:</div>
+									<div class="edex-tbox">
+										<ng-autocomplete #auto
+										[data]="instructor_list"
+										[searchKeyword]="keyword"
+										[debounceTime] = "200"
+										[minQueryLength] = "2" 
+										[initialValue] = "initial_value"
+										placeHolder="Selected Assign Instructor"
+										name="instructor"
+										(selected)='selectEvent($event)'
+										(inputFocused)='onFocused($event)'
+										[itemTemplate]="itemTemplate"
+										(scrolledToEnd)='scrolledToEnd($event)'
+										(inputChanged)='inputChanged($event)'
+										(inputCleared)='inputCleared($event)'
+										[notFoundTemplate]="notFoundTemplate">
+									  </ng-autocomplete>
+									 
+									  <ng-template #itemTemplate let-item>
+										<a [innerHTML]="item.name"></a>
+									  </ng-template>
+									
+									  <ng-template #notFoundTemplate let-notFound>
+										<div [innerHTML]="notFound"></div>
+									  </ng-template>
+									</div>
+									
+									<div class="clearfix"> </div>
+								</div>
+
+									<div class="edex-lable mt-2">Keywords:</div>
+									<div class="edex-tbox">
+
+										<tag-input [(ngModel)]='keyword_array' formControlName="keyword" [placeholder]="placeholder" [secondaryPlaceholder]="sec_placeholder" ></tag-input>
+
+										<!-- <tag-input [(ngModel)]='keyword_array'  [maxItems]='5' formControlName="keyword" [placeholder]="placeholder" [secondaryPlaceholder]="sec_placeholder" ></tag-input> -->
+										
+										<ng-container *ngFor="let error of error_messages.keyword">
+											<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('keyword').hasError(error.type) && (exefrm.get('keyword').dirty || exefrm.get('keyword').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container> 	
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+
+								<div class="mt-2">
+									<div class="edex-lable">Teaming:</div>
+									<div class="edex-tbox" formArrayName="teaming_array" >
+										<span  *ngFor="let nic of getTeamingControls(); let i=index" [formGroupName]="i" >
+											<div class="float-left">
+												<input type="checkbox" class="mr-2" id="teaming-{{i}}" value="{{teamingList[i]}}" formControlName="teaming">
+												<label for="teaming-{{i}}" class="mr-3">{{teamingList[i]}}</label>  
+											</div>
+										</span>	
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+								
+								<div class="mt-2">
+									<div class="edex-lable">Difficulty Level:</div>
+									<div class="edex-tbox">
+										<div class="float-left">
+											<input type = "radio" class = "mr-2" id="low" name = "difficulty_level" value="Low" formControlName="difficulty_level">
+											<label for="low" class="mr-3">Low</label>	  
+										</div>
+										
+										<div class="float-left">
+											<input type = "radio" class = "mr-2" id="medium" name = "difficulty_level" value="Medium" formControlName="difficulty_level">  
+											<label for="medium" class="mr-3">Medium</label>
+										</div>
+										
+										<div class="float-left">
+											<input type = "radio" class = "mr-2" id="high" name = "difficulty_level" value="High" formControlName="difficulty_level">  
+											<label for="high" class="mr-3">High</label>
+										</div>
+										
+										<ng-container *ngFor="let error of error_messages.difficulty_level">
+										<div class="clearfix"></div>
+											<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('difficulty_level').hasError(error.type) && (exefrm.get('difficulty_level').dirty || exefrm.get('difficulty_level').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>	
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+								
+								<div class="mt-2">
+									<div class="edex-lable">Exercise Type:</div>
+									<div class="edex-tbox">
+										<div class="float-left">
+											<input type = "radio" class = "mr-2" id="exe_type_1" name = "exe_type" value="1" formControlName="exe_type">
+											<label for="exe_type_1" class="mr-3">Instructor-Led</label>	  
+										</div>
+										
+										<div class="float-left">
+											<input type = "radio" class = "mr-2" id="exe_type_2" name = "exe_type" value="2" formControlName="exe_type">  
+											<label for="exe_type_2" class="mr-3">Self-Paced</label>
+										</div>
+										
+										<ng-container *ngFor="let error of error_messages.exe_type">
+										<div class="clearfix"></div>
+											<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('exe_type').hasError(error.type) && (exefrm.get('exe_type').dirty || exefrm.get('exe_type').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>	
+									</div>
+								</div>
+
+								<div class="clearfix"> </div>
+								
+								<div class="mt-2">
+									<div class="edex-lable">VM Permission:</div>
+									<div class="edex-tbox" formArrayName="permission_array" >
+										<span  *ngFor="let nic of getPermissionControls(); let i=index" [formGroupName]="i" >
+											<div class="float-left">
+												<input type="checkbox" class="mr-2" id="permission-{{i}}" value="{{permission[i].id}}" formControlName="permission">
+												<label for="permission-{{i}}" class="mr-3">{{permission[i].name}}</label>  
+											</div>
+										</span>	
+									</div>
+								</div>
+								
+								
+
+
+								<div class="mt-2 mb-4 float-left">									
+									<div class="edex-lable">Choose Image:
+										<br>
+									</div>
+									<div class="edex-tbox">
+										
+										<small class="red_text">Max size (800x450px)</small>
+										<div class="pimg_relative">	
+											<img *ngIf="croppedImage!=''" class="crop-image" [src]="croppedImage" />
+											<img *ngIf="croppedImage==''" class="crop-image" src="{{serverUrl}}media/exercise-image/default-exe.jpg">
+											
+											<div class="pimg_absolute">
+												<a href="javascript:void(0);" (click)="openmodal()" class=""><fa-icon [icon]="faCamera" class="iconcmr"></fa-icon></a>
+											</div>											
+										</div>
+										<div>
+											<a href="javascript:void(0);" (click)="openmodal()" class="upload_profile">Upload Exercise Image</a>
+										</div>
+									</div>
+								</div>
+                                  
+
+								<div class="clearfix"> </div>
+							</div>
+						  </div>
+						</div>
+						<div class="card">
+						  <div class="card-header" id="headingTwo">
+							<h2 class="mb-0">
+							  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+								Provisioning
+							  </button>
+							</h2>
+						  </div>
+						  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+							<div class="card-body">
+								<div class="mt-2">
+									<div class="edex-lable mt-2">Status:</div>
+									<div class="edex-tbox">
+										<select class="form-control fortextbox max200" id="status" name = "status" formControlName="status" >
+											<option  value="">Select Status</option>
+											<ng-container *ngFor="let status of status_array; let i = index" >
+											<option [value]="status_array[i]">
+											{{status_array[i]}}
+											</option>
+									     	</ng-container>
+										</select>
+										<ng-container *ngFor="let error of error_messages.status">
+											<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('status').hasError(error.type) && (exefrm.get('status').dirty || exefrm.get('status').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Visibility:</div>
+									<div class="edex-tbox">
+										<select class="form-control fortextbox max200" id="visibility" name = "visibility" formControlName="visibility" >
+											<option  value="">Select Visibility</option>
+											<option *ngFor="let status of visibility_array; let i = index" [value]="visibility_array[i]">
+											{{visibility_array[i]}}
+											</option>
+										</select>
+										<ng-container *ngFor="let error of error_messages.visibility">
+											<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('visibility').hasError(error.type) && (exefrm.get('visibility').dirty || exefrm.get('visibility').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>	
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Validity in Days:</div>
+									<div class="edex-tbox">
+										<input type = "number" class = "form-control fortextbox max200" id="validityinday" name = "validityinday" placeholder="Validity in Days"  formControlName="validityinday" >
+										<ng-container *ngFor="let error of error_messages.validityinday">
+											<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('validityinday').hasError(error.type) && (exefrm.get('validityinday').dirty || exefrm.get('validityinday').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Total Hours:</div>
+									<div class="edex-tbox">
+										<input type = "number" class = "form-control fortextbox max200" id="totalhours" name = "totalhours" placeholder="Total Hours"  formControlName="totalhours" >
+										<ng-container *ngFor="let error of error_messages.totalhours">
+											<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('totalhours').hasError(error.type) && (exefrm.get('totalhours').dirty || exefrm.get('totalhours').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>	
+									</div>
+								</div>
+
+								<div class="clearfix"> </div>
+
+								<div *ngIf="credit_system=='Active'" class="mt-3" >
+									<div class="edex-lable mt-2">Credit:</div>
+									<div class="edex-tbox">
+										<input type = "number" class = "form-control fortextbox max200" id="credits" name = "credits" placeholder="Credit"  formControlName="credits" >
+										<ng-container *ngFor="let error of error_messages.credits">
+											<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('credits').hasError(error.type) && (exefrm.get('credits').dirty || exefrm.get('credits').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>
+									</div>
+								</div>
+
+								<div class="clearfix"> </div>
+							</div>
+						  </div>
+						</div>
+						<div class="card">
+						  <div class="card-header" id="headingThree">
+							<h2 class="mb-0">
+							  <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+								Manual & Assessment
+							  </button>
+							</h2>
+						  </div>
+						  <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+							<div class="card-body">
+								<div class="mt-2">
+									<div class="edex-lable mt-2">Initial Manual:</div>
+									<div class="edex-tbox">
+								<ng-multiselect-dropdown #manual_dropdown  formControlName="start_manual"
+									[placeholder]="'Select Manual'"									
+									[settings]="manual_dropdownSettings"
+									[data]="manual_list"
+									[(ngModel)]="start_man_selectedItems"
+									(onSelect)="onItemSelect($event,'start_manual')"
+									(onDeSelect)="onItemDeSelect($event,'start_manual')"
+									>
+									<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+										{{option}}
+									</ng-template>
+									<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+										{{option}}
+									</ng-template>
+									</ng-multiselect-dropdown>
+									<ng-container *ngFor="let error of error_messages.start_manual">
+										<div class="error-message col-md-12 mb-4 pl-0" *ngIf="exefrm.get('start_manual').hasError(error.type) && (exefrm.get('start_manual').touched)">
+											{{ error.message }}
+										</div>
+									</ng-container>
+									</div>
+									
+									<div class="clearfix"> </div>
+								</div>
+
+								<div class="mt-3">
+									<div class="mt-2"><b>Set Exercise Manual</b><hr class="mt-2 mb-2"/></div>
+									<div class="mt-3">
+										<div class="edex-lable mt-2">
+											Exercise Assest:
+										</div>
+										<div class="edex-tbox">
+											<ng-multiselect-dropdown #template_dropdown [ngModelOptions]="{standalone: true}"
+											[placeholder]="'Select Assest'"
+											[settings]="template_dropdownSettings"
+											[data]="template_list"
+											[(ngModel)]="template_selectedItems"
+											(onSelect)="onItemSelect($event,'template')"
+											(onDeSelect)="onItemDeSelect($event,'template')"
+											>
+											<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+												{{option}}
+											</ng-template>
+											<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+												{{option}}
+											</ng-template>
+											</ng-multiselect-dropdown>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Manual:</div>
+									<div class="edex-tbox">
+										<ng-multiselect-dropdown #multi_manual_dropdown [ngModelOptions]="{standalone: true}"
+										[placeholder]="'Select Manual'"
+										[settings]="multi_manual_dropdownSettings"
+										[data]="manual_list"
+										[(ngModel)]="multi_man_selectedItems"
+										(onSelect)="onItemSelect($event,'manual')"
+										(onDeSelect)="onItemDeSelect($event,'manual')"
+										>
+										<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+											{{option}}
+										</ng-template>
+										<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+											{{option}}
+										</ng-template>
+										</ng-multiselect-dropdown>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								<div>
+									<div class="float-right mt-3 mb-3">
+										<div class="btn-box">
+											<div class="theme-btn">
+												<span class="txt">
+													<button class = "forsubmit btn_blueas btn" (click)="addManual();">Add Manual</button>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								<div *ngIf="exercise_manual.length != 0" class="table-responsive dk-table">
+									<table class="table table-bordered" >
+										<thead>
+											<tr> <th>Assest</th>  <th>Manual</th>  <th>Action</th> </tr>
+										</thead>
+										<tbody>
+											<ng-container *ngFor="let ex of exercise_manual; let i=index" >
+											<tr>
+												 <td>{{ex.template_id[0].name}}</td>
+												 <td><div *ngFor="let ml of ex.manual_id; let iml=index" >{{ml.menual_title}}</div></td> 
+												 <td><button class="btn btn-sm btn-delete" (click) = "deleteManual(i)" placement="top" ngbTooltip="Remove Manual">
+												<fa-icon [icon]="faTrash"></fa-icon>
+												</button></td> 
+											</tr>
+											</ng-container>
+			
+										</tbody>		
+									</table>
+								</div>
+
+								<div class="mt-0 mb-5">
+									<div class="edex-lable mt-2">Assessment:</div>
+									<div class="edex-tbox">
+									<ng-multiselect-dropdown #package_dropdown [ngModelOptions]="{standalone: true}"
+									[placeholder]="'Select Assessment'"
+									[settings]="package_dropdownSettings"
+									[data]="package_list"
+									[(ngModel)]="package_selectedItems"
+									(onSelect)="onItemSelect($event,'assessment')"
+									(onDeSelect)="onItemDeSelect($event,'assessment')"
+									>
+									<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+									{{option}}
+									</ng-template>
+									<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+									{{option}}
+									</ng-template>
+									</ng-multiselect-dropdown>
+
+							      </div>
+								</div>
+							</div>
+						  </div>
+						</div>
+
+						<div class="card">
+							<div class="card-header" id="headingFive">
+							  <h2 class="mb-0">
+								<button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+									Resource Management
+								</button>
+							  </h2>
+							</div>
+							<div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+							  <div class="card-body">
+								<div class="mt-2"><b>Set Assest Alias</b><hr class="mt-2 mb-2"></div>
+								
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Exercise Assest:</div>
+									<div class="edex-tbox">
+										<ng-multiselect-dropdown #vm_als_temp_dp [ngModelOptions]="{standalone: true}"
+										[placeholder]="'Select Assest'"
+										[settings]="vm_als_temp_dpSettings"
+										[data]="template_list"
+										[(ngModel)]="vm_als_temp_items"
+										(onSelect)="onItemSelect($event,'vm_als_temp')"
+										(onDeSelect)="onItemDeSelect($event,'vm_als_temp')"
+										>
+										<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+											{{option}}
+										</ng-template>
+										<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+											{{option}}
+										</ng-template>
+										</ng-multiselect-dropdown>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Alias:</div>
+									<div class="edex-tbox">
+										<input type = "text" class = "form-control fortextbox" maxlength="50" #vmAliasInput (keyup)="vm_alias_store($event)" id="vm_alias" name = "vm_alias" ngModel [ngModelOptions]="{standalone: true}" >
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+								<div>
+									<div class="float-right mt-3">
+										<div class="btn-box">
+											<div class="theme-btn">
+												<span class="txt">
+													<button class = "forsubmit btn_blueas btn" (click)="addVmAlias();">Add Alias</button>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								
+								<div *ngIf="vm_alias.length != 0" class="table-responsive dk-table">
+									<table class="table table-bordered" >
+										<thead>
+											<tr> <th>Assest</th>  <th>Alias</th>  <th>Action</th> </tr>
+										</thead>
+										<tbody>
+											<ng-container *ngFor="let vmals of vm_alias; let i=index" >
+											<tr>
+												 <td>{{vmals.template_id[0].name}}</td>
+												 <td>{{vmals.alias}}</td> 
+												 <td><button class="btn btn-sm btn-delete" (click) = "deleteVmAlias(i)" placement="top" ngbTooltip="Remove Manual">
+												<fa-icon [icon]="faTrash"></fa-icon>
+												</button></td> 
+											</tr>
+											</ng-container>
+			
+										</tbody>		
+									</table>
+								</div>
+							  </div>
+							</div>
+						  </div>
+
+						  <div *ngIf="mitre_system=='Active'" class="card">
+							<div class="card-header" id="headingSix">
+							  <h2 class="mb-0">
+								<button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+									Mitre
+								</button>
+							  </h2>
+							</div>
+							<div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+							  <div class="card-body">
+								<div class="mt-2"><b>Mitre</b><hr class="mt-2 mb-2"></div>
+									
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Category:</div>
+									<div class="edex-tbox">
+										<ng-multiselect-dropdown #mit_dp [ngModelOptions]="{standalone: true}"
+										[placeholder]="'Select Category'"
+										[settings]="mit_dpSettings"
+										[data]="mit_category_list"
+										[(ngModel)]="mit_items"
+										(onSelect)="onItemSelect($event,'mit_cate')"
+										(onDeSelect)="onItemDeSelect($event,'mit_cate')"
+										>
+										<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+											{{option}}
+										</ng-template>
+										<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+											{{option}}
+										</ng-template>
+										</ng-multiselect-dropdown>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Technique:</div>
+									<div class="edex-tbox">
+										<ng-multiselect-dropdown #mit_tech_dp [ngModelOptions]="{standalone: true}"
+										[placeholder]="'Select Technique'"
+										[settings]="mit_tech_dpSettings"
+										[data]="mit_tech_list"
+										[(ngModel)]="mit_tech_items"
+										(onSelect)="onItemSelect($event,'mit_sub_tech')"
+										(onDeSelect)="onItemDeSelect($event,'mit_sub_tech')"
+										>
+										<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+											{{option}}
+										</ng-template>
+										<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+											{{option}}
+										</ng-template>
+										</ng-multiselect-dropdown>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								<div class="mt-3">
+									<div class="edex-lable mt-2">Sub Technique:</div>
+									<div class="edex-tbox">
+										<ng-multiselect-dropdown #mit_sub_tech_dp [ngModelOptions]="{standalone: true}"
+										[placeholder]="'Select Sub Technique'"
+										[settings]="mit_sub_tech_dpSettings"
+										[data]="mit_sub_tech_list"
+										[(ngModel)]="mit_sub_tech_items"
+										(onSelect)="onItemSelect($event,'mit_subs_tech')"
+										(onDeSelect)="onItemDeSelect($event,'mit_subs_tech')"
+										>
+										<ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+											{{option}}
+										</ng-template>
+										<ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+											{{option}}
+										</ng-template>
+										</ng-multiselect-dropdown>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+
+								<div class="float-right mt-3 mb-3">
+									<div class="btn-box">
+										<div class="theme-btn">
+											<span class="txt">
+												<button class = "forsubmit btn_blueas btn" (click)="addMitre();">Add Mitre</button>
+											</span>
+										</div>
+									</div>
+								</div>
+								<div class="clearfix"> </div>
+
+								<div *ngIf="mitre_list.length != 0" class="table-responsive dk-table">
+									<table class="table table-bordered" >
+										<thead>
+											<tr> <th>Category</th>  <th>Tech.</th>  <th>Sub Tech.</th>  <th>Action</th> </tr>
+										</thead>
+										<tbody>
+											<ng-container *ngFor="let m of mitre_list; let i=index" >
+											<tr>
+												 <td>{{m.cate_title}}</td>
+												 <td>{{m.tech_title}}</td> 
+												 <td>{{m.sub_tech_title}}</td> 
+												 <td><button class="btn btn-sm btn-delete" (click) = "deleteMitre(i)" placement="top" ngbTooltip="Remove Mitre">
+												<fa-icon [icon]="faTrash"></fa-icon>
+												</button></td> 
+											</tr>
+											</ng-container>
+			
+										</tbody>		
+									</table>
+								</div>
+							  </div>
+							</div>
+						  </div>
+
+					  </div>
+					  
+				</div>
+
+
+				
+				<div class="col-md-12 form_lable form-group mt-3 btn_align">										
+					<div class="btn-box">
+						<div class="theme-btn mr-2">
+							<span class="txt">
+								<button class = "forsubmit btn_blueas btn" (click)="onSubmit(exefrm.value)">Submit</button>
+							</span>
+						</div>
+						
+						<div class="theme-btn">
+							<span class="txt">
+								<a class = "btn_blueas btn" routerLink="{{dashboard_url}}exercise-list" >Cancel</a>
+							</span>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="modal {{modalfadeclass}} {{modalshow}} dk-model-box" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header dk-model-header">
+                <h5 class="modal-title" id="exampleModalLabel">Upload Exercise Image</h5>
+                <button type="button" (click)="closemodal()" class="close mclose" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div *ngIf="croppedImage!=''" class="col-md-12 mt-3 text-center float-left">
+                <img class="crop-image" [src]="croppedImage" />  
+                <p class="previewimg">Preview</p>
+            </div>
+
+
+            <div class="modal-body">
+                <image-cropper
+                    [imageChangedEvent]="imageChangedEvent"
+                    [maintainAspectRatio]="true"
+                    [containWithinAspectRatio]="containWithinAspectRatio"
+                    [aspectRatio]="1/1"
+                    [resizeToWidth]="571"
+                    [resizeToHeight]="321"
+                    [cropperMinWidth]="571"
+                    [cropperMinHeight]="321"
+                    [cropperStaticWidth]="571"
+                    [cropperStaticHeight]="321"
+                    [onlyScaleDown]="true"
+                    [roundCropper]="false"
+                    [initialStepSize] ="3"
+                    [canvasRotation]="canvasRotation"
+                    [transform]="transform"
+                    [style.display]="showCropper ? null : 'none'"
+                    format="png"
+                    (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady($event)"
+                    (loadImageFailed)="loadImageFailed()"
+                ></image-cropper>
+                        
+                <div class="col-md-12 mt-3 mb-2 float-left">	
+                    <div class="mautobtn">	
+                        <div class="floatleft">
+                            <input name="profile_photo" class="choosimg" type="file" (change)="fileChangeEvent($event)" />
+                        </div>
+                        <div class="btn-box text-center">
+                            <div class="theme-btn">
+                                <span class="txt">												
+                                    <button class="btn btn-sm btn_blueas" (click)="zoomOut()">Zoom -</button>
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="btn-box text-center">
+                            <div class="theme-btn">
+                                <span class="txt">												
+                                    <button class="btn btn-sm btn_blueas" (click)="zoomIn()">Zoom +</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                      
+            </div>
+        </div>
+    </div>
+</div>	
+
+
+</div>
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>
+    </div>
+</div> 

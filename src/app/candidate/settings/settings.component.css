@@ -1,0 +1,177 @@
+.form-control {
+    border: 1px solid #ccc;
+    padding: .375rem 1rem;
+    height: 45px;
+}
+
+.bg-lgray {
+    background: #eff6f9;
+    color: #141d38;
+    padding: 0 15px;
+}
+
+.maximmwidth {
+	max-width: 900px;
+    margin: auto;    
+}
+.ubcti {
+    font-size: 25px;
+    padding-right: 10px;
+}
+.ucogis {
+    font-size: 25px;
+    padding-right: 10px;
+    min-width: 42px;
+}
+.divcenter {
+	display: flex;
+    align-items: center;
+    min-height: 44px;
+}
+.page-min-height {
+    min-height: 950px;
+    display: block;
+}
+.user-breadc {
+    padding: 14px 0 7px;
+    border-bottom: 1px solid #141d38;
+    margin-bottom: 18px;
+}
+
+.user-bc-left {
+    float: left;
+    font-size: 20px;
+}
+.user-bc-right {
+    float: right;
+}
+
+.user-link-left {
+    float: left;
+    font-size: 20px;
+}
+.user-link-right {
+    float: right;
+}
+
+.user-ali {
+    padding-right: 5px;
+    font-size: 17px;    
+}
+.user-ari {
+    padding-right: 5px;
+    font-size: 25px;
+}
+.user-sec-a {
+    background: #fff;
+    padding: 8px 30px;
+    border-radius: 3px;
+}
+.user-link a {
+    color: #141d38;
+    display: inline-block;
+}
+.user-link a:hover {
+    color: #fff;
+    background: #141d38;
+}
+
+.profile_bg {
+	/*background: #f5f5f5;
+    padding: 25px 10px 20px;
+    border: 2px solid #ececec;*/
+    padding: 10px 10px;
+    margin-bottom: 20px;    
+    box-shadow: 0 2px 9px 1px rgb(74 85 140 / 18%);
+}
+.pimg_relative{
+    position: relative;
+    height: 100px;
+    width: 100px;
+	margin: auto;
+}
+.crop-image{
+	border-radius: 100%;
+	border: 2px solid #d8d8d8;
+}
+.pimg_absolute{
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+    background: #ffffff;
+    padding: 3px 6px;
+    border: 2px solid #b9b9b9;
+    border-radius: 20px;
+	color: #132144;
+}
+.pimg_absolute .iconcmr{
+	color: #525252 !important;
+}
+.pimg_absolute:hover{
+	background: #f5f5f5 !important;
+}
+.upload_profile {
+    color: #132144;
+    font-family: 'OpenSans-SemiBold', sans-serif;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 20px;
+    padding: 3px 11px;
+    margin-top: 1px;
+    display: inline-block;
+    font-size: 13px;
+}
+.upload_profile:hover {
+	background: #e8e8e8;
+}
+@media only screen and (min-device-width : 1300px) and (max-device-width : 1400px) 
+{
+	.upload_profile {
+		font-size: 12px;
+	}
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+    .bg-lgray {
+        padding: 0 35px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .user-sec-a {
+        background: #fff;
+        padding: 4px 6px;
+        border-radius: 3px;
+    }
+    /*.user-bc-left {
+        float: none;
+        font-size: 18px;
+    }
+    .user-bc-right {
+        float: none;
+    }*/
+    .user-bc-left {
+        font-size: 18px;
+    }
+    .user-ali {
+        background: #0b0f3a;
+        color: #fff;
+        padding: 0 7px;
+    }
+    .user-link-left {
+        font-size: 15px;
+    }
+    .divcenter {
+        min-height: 30px;
+    }
+    .ucogis {
+        font-size: 18px;
+        padding-right: 5px;
+    }
+    .ubcti {
+        font-size: 18px;
+        padding-right: 5px;
+    }
+}

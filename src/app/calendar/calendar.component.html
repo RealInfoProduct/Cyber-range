@@ -1,0 +1,143 @@
+<app-candidateheader></app-candidateheader>
+
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+
+<div class="col-md-12 page-min-height padding-all padding-tb">
+
+    <div class="dk-table mb-3 float-left col-md-12 pl-0">
+        <div class="col-md-1 col-sm-2 pl-0 float-left"><span class="active-allotted"></span> Allotted </div>
+        <div class="col-md-1 col-sm-2  float-left"><span class="active-pause"></span> Pause </div>
+        <div class="col-md-1 col-sm-2  float-left"><span class="active-running"></span> Running </div>
+        <div class="col-md-1 col-sm-2  float-left"><span class="active-schedule"></span> Schedule </div>
+      </div>
+<div class="clearfix"></div>
+<div class="row text-center">
+  <div class="clearfix"></div>
+
+
+
+  <div class="clearfix"></div>
+
+    <div class="col-md-3 text-left">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          mwlCalendarPreviousView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Previous
+        </div>
+        <div
+          class="btn btn-outline-secondary"
+          mwlCalendarToday
+          [(viewDate)]="viewDate"
+        >
+          Today
+        </div>
+        <div
+          class="btn btn-primary"
+          mwlCalendarNextView
+          [view]="view"
+          [(viewDate)]="viewDate"
+          (viewDateChange)="closeOpenMonthViewDay()"
+        >
+          Next
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+    </div>
+    <div class="col-md-3 text-right">
+      <div class="btn-group">
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Month)"
+          [class.active]="view === CalendarView.Month"
+        >
+          Month
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Week)"
+          [class.active]="view === CalendarView.Week"
+        >
+          Week
+        </div>
+        <div
+          class="btn btn-primary"
+          (click)="setView(CalendarView.Day)"
+          [class.active]="view === CalendarView.Day"
+        >
+          Day
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+        <div class="float-right">
+          <div class="btn-box">
+            <div class="theme-btn">
+              <span class="txt">
+                <button class = "forsubmit btn_blueas btn" (click)="addEvent();">Add Schedule</button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
+
+  </div>
+  <br />
+
+
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="CalendarView.Week"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="events"
+      [refresh]="refresh"
+      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventTimesChanged)="eventTimesChanged($event)"
+    >
+    </mwl-calendar-day-view>
+</div>
+</div>
+
+
+<app-schedule></app-schedule>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>
+   </div>
+</div>

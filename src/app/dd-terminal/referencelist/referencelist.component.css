@@ -1,0 +1,10 @@
+.dk-table .status-Active, .dk-table .status-Inactive {
+    float: right;
+}
+
+@media only screen and (min-width: 1025px) 
+{
+	.dk-table table.dataTable .tidc, .dk-table .tidc {	
+		width: 60px !important;
+	}
+}

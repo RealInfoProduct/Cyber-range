@@ -1,0 +1,77 @@
+<div class="padding-body">
+    <div class="content-box-shadow">
+        <div class="row d-block">
+        <form [formGroup] = "formdata">
+               <!-- <div class="col-lg-2 float-left col-md-6 form-group ippd50">
+                    <select class="form-control fortextbox" id="status" name = "status" (change) = "changeStatus($event)" formControlName="status" >
+                        <option  value="">Select Status</option>
+                        <option  value="Claim">Claim</option>
+                    </select>					
+                </div>-->
+                
+                <div class="col-lg-2 float-left col-md-6 form-group ippd50">
+                    <input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />			
+                </div>
+                
+                <div class="col-md-12">
+                    <ngb-alert *ngIf="!closed" class="animate-show animate-hide mt-2 mb-2" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+                </div>
+                <div class="col-md-12 table-responsive wallet basketbox">
+                    <table datatable [dtOptions]="dtOptions" class="row-border table hover table-striped">
+                        <thead class="wthead">
+                            <tr>
+                                <th class="tidcenter tidc">S.No.</th>
+                                <th *ngIf="group_id=='1'" class="ttnc">User Name</th>
+                                <th *ngIf="group_id=='1'" class="ttnc">Email</th>
+                                <th class="width-350" >Transactions</th>
+                                <th class="tluc">Credit</th>
+                                <th class="tluc">Transaction ID</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="persons?.length != 0">
+                            <tr *ngFor="let person of persons" [class.highlighted]="clicked === person.s_no" (click)="clicked = person.s_no" >
+                                <td class="tidc">{{ person.s_no }}</td>
+                                <td *ngIf="group_id=='1'" ><a href="javascript:void(0);" placement="top" ngbTooltip="View Profile - {{ person.user_name }}" (click)="viewUserProfile(person.user_id)" >{{ person.user_name }}</a></td>
+                                <td *ngIf="group_id=='1'" >{{ person.email }}</td>
+                                <td *ngIf="person.trans_type=='DR'" >
+                                    <div class="w-icon">
+                                        <fa-icon [icon]="faExchangeAlt"></fa-icon>
+                                    </div>
+                                    <div class="w-tra">
+                                        {{ person.description }}
+                                        <span classs="cap">{{ person.last_datetime }}</span>
+                                    </div>
+                                </td>
+
+                                <td *ngIf="person.trans_type=='CR'" >
+                                    <div class="w-icon">
+                                        <fa-icon [icon]="faWallet"></fa-icon>
+                                    </div>
+                                    <div class="w-tra">
+                                        {{ person.description }}
+                                        <span classs="cap">{{ person.last_datetime }}</span>
+                                    </div>
+                                </td>
+
+                                <td *ngIf="person.trans_type=='CR'" class="cr-pluse" >
+                                    <fa-icon [icon]="faPlus" class="crpi"></fa-icon>{{ person.credit }}
+                                </td>
+                                <td *ngIf="person.trans_type=='DR'" class="cr-minus" >
+                                    <fa-icon [icon]="faMinus" class="crmi"></fa-icon>{{ person.credit }}
+                                </td>
+                                <td>{{ person.trans_id }}</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="persons?.length == 0">
+                            <tr>
+                                <td [attr.colspan]="table_length" class="no-data-available">No data!</td>
+                            </tr>
+                        <tbody>
+                    </table>
+              </div>
+      </form> 
+    </div>				  
+    </div>
+</div>
+<app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>
+

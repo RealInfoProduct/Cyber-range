@@ -1,0 +1,9 @@
+.dk-table table.dataTable .tuidc, .dk-table .tuidc {
+    min-width: 130px !important;
+}
+.datetime{
+    width:150px;
+}
+span.date {
+    width: 95px;
+}

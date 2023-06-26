@@ -1,0 +1,130 @@
+<div class="col-md-12">
+    <div class="row">
+        <div class="col-md-8 tpr_brd topo_relative">
+            <div class="row header"> 
+                <div class="col-lg-10 col-md-12 p-0">  
+                    <div class="theme-btn mr10 float-left">
+                        <span class="txt">
+                            <a class="btn_blueas btn" placement="bottom" (click)="redirect_home();">Exercises Repository</a>
+                        </span>
+                    </div>         
+                    <div class="theme-btn mr10 float-left">
+                        <span class="txt">
+                            <a class="btn_blueas btn" placement="bottom" (click)="redirect();">My Exercises</a>
+                        </span>
+                    </div>                    
+                    <div *ngIf="team_name==''" class="theme-btn mr10 float-left">
+                        <span class="txt">
+                            <button class="btn_blueas btn" (click)="restore_machine();" [disabled]="disable_click==true ? true : false"  placement="bottom" ngbTooltip="Restore all VM at initial stage">Restore</button>
+                        </span>
+                    </div>
+                    <div class="mr10 float-left">
+                        <span class="btn btn-sm btn-primary used-remaining">Used/Remain(hrs) : {{used_time}}/{{remain_time}}</span>
+                    </div>
+                    <div class="mr10 float-left">
+                        <!-- <span class="btn btn-sm btn-primary used-remaining"></span> aidtn -->
+                        <span *ngIf="team_name!=''" class="btn btn-sm btn-primary used-remaining">Team : {{team_name}}</span>
+                    </div>
+
+                    
+
+
+                </div> 
+                
+                <div class="col-lg-2 col-md-12 p-0 pt-lg-2 text-lg-right">                    
+                    <div ngbDropdown placement="bottom-right"  class="d-inline-block user-note">
+                        <button class="btn btn-outline-primary user-note-btn" id="dropdownBasic1" ngbDropdownToggle>Hi, {{loginName}} <fa-icon [icon]="faBell" class="discontents"></fa-icon> <sup class="ball-counter">{{pro_len}}</sup></button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="user_dropdown_box dropdown_box_width uball">                            
+                            <div class="notification">
+                                <div *ngFor="let pro of process_array; let i = index" class="notify process-{{i}} bg-process"> 
+
+                                    <div>
+                                        <div class="notification-time pl-0 pr-0 restoring">
+                                            <span class="float-left text-left label restore-txt">{{pro.label}} - <span *ngIf="pro.status=='in_queue'; else pro_status" > processing</span><ng-template #pro_status > {{pro.status}}</ng-template></span>
+                                            <span class="notification-date" placement="bottom" ngbTooltip="{{pro.date_time}}">{{pro.time_ago}}</span>
+                                            <button *ngIf="pro.status!='in_queue' && pro.status!='processing'" (click)="remove_bgprocss_notify(i,pro.id)" class="corse pull-right" placement="bottom" ngbTooltip="Dismiss">
+                                                <fa-icon [icon]="faTimesCircle"></fa-icon>
+                                            </button>
+                                        </div>
+                        
+                                        <div class="progress">
+                                            <div [ngClass]="{'progress-bar progress-bar-striped': true, 'progress-bar-animated': pro.status!='success', 'bg-success': pro.status=='success', 'bg-danger': pro.status=='fail'}" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div *ngIf="process_array.length==0">
+                                    <span class="notification-heading">
+                                        Empty										
+                                    </span>
+                                </div>
+                            </div>
+                                                            
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <div class="row">  
+                <div class="col-md-12"> 
+                    <!-- Buttons Description -->                    
+                    <div class="buttons-description">
+                        <div class="btn-tpdes">
+                            <fa-icon [icon]="faPowerOff" class="btn actionbtnp btn-sm btn-danger cursor-menu m-0" ></fa-icon>Power Off  
+                        </div>
+                        <div class="btn-tpdes">
+                            <fa-icon [icon]="faPowerOff" class="btn actionbtnp btn-sm btn-success cursor-menu m-0"></fa-icon>Power ON 
+                        </div>
+                        <div class="btn-tpdes">
+                            <fa-icon [icon]="faDesktop" class="btn actionbtnp btn-sm btn-primary cursor-menu m-0"></fa-icon>Local Console  
+                        </div>
+                        <div class="btn-tpdes">
+                            <fa-icon [icon]="faLaptop" class="btn actionbtnp btn-sm btn-warning cursor-menu m-0"></fa-icon>Web Console  
+                        </div>
+                        <div class="btn-tpdes">
+                            <fa-icon [icon]="faFileExport" class="btn actionbtnp btn-sm btn-secondary cursor-menu m-0"></fa-icon>Create Snapshot  
+                        </div>
+                        <div class="btn-tpdes">
+                            <fa-icon [icon]="faRedo" class="btn actionbtnp btn-sm btn-secondary cursor-menu m-0"></fa-icon>Restore Snapshot  
+                        </div>
+                        <div class="btn-tpdes">
+                            <fa-icon [icon]="faTrash" class="btn actionbtnp btn-sm btn-secondary cursor-menu m-0"></fa-icon>Delete Snapshot
+                        </div>
+                        <div class="btn-tpdes">
+                            <fa-icon [icon]="faRedoAlt" class="btn actionbtnp btn-sm btn-info cursor-menu m-0"></fa-icon>Restore At Initial Stage
+                        </div>
+                        <div class="btn-tpdes ml-1">
+                            <fa-icon [icon]="faCircle" class="text-red red-shadow cursor-menu m-0"></fa-icon> <span class="ml-1"> Power ON</span>
+                        </div>
+                        <div class="btn-tpdes ml-1">
+                            <fa-icon [icon]="faCircle" class="text-red green-shadow cursor-menu m-0"></fa-icon> <span class="ml-1"> Power Off</span>
+                        </div>
+                    </div>
+                    <!-- End Buttons Description -->
+
+                    <app-viewnetwork [resource_img_url]="resource_img_url" [resources]="resource_added" [vm_user]="vm_user" [network_data]="network_data" (perform_action)="network_toplogy_action($event);" [draw_net_topology]="redraw_net_topology" ></app-viewnetwork>
+                </div>
+            </div>
+
+            <div class="tp-lr-btn" id="0">               
+                <fa-icon [icon]="faAngleRight" class="fa_right"></fa-icon>
+                <fa-icon [icon]="faAngleLeft" class="fa_left "></fa-icon>
+            </div>
+        </div>
+
+        <div class="col-md-4 p-0 topo_side">
+            <div *ngIf="start_manual.length!=0 && ex_exercise_id!=''"> 
+                <app-excercisecom team_id="{{this.team_id}}" ex_exercise_id="{{ex_exercise_id}}" [ex_manual_id] ="start_manual"></app-excercisecom>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...<br/>{{process_msg}}</p>
+   </div>
+</div>
+<app-chat  *ngIf="user_id != null"></app-chat> 

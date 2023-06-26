@@ -1,0 +1,140 @@
+<div id="mySidepanel" class="sidepanel">
+    <div class="sidepanel-header">
+        Let us Begin <span href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+            <fa-icon [icon]="faBars"></fa-icon>
+        </span>
+
+        <select class="form-control h-m" (change)="getManualData($event)" name="c_manual_id">
+            <option *ngFor="let manual of ex_manual_id" value="{{manual.id}}">{{manual.name}}</option>
+        </select>
+
+        <div class="">
+            <input type="search" (keyup.enter)="searchitems($event)" class="form-control" placeholder="Search docs">
+        </div>
+    </div>
+
+    <div class="">
+        <div class="sidenav">
+            <div *ngFor="let item of topicslist; let i = index;">
+                <button class="dropdown-btn" (click)="getTopicDetails(item.topic_id)" >
+                    {{item.topic_name}}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="description_selected == ''; else manualTitle">
+    <div class="manual-header">
+        <span class="openbtn" onclick="openNav()">
+            <fa-icon [icon]="faBars" class="fabari"></fa-icon>
+        </span> {{getExercisedata.name}}
+    </div>
+</div>
+<ng-template #manualTitle>
+    <div class="manual-header">
+        <span class="openbtn" onclick="openNav()">
+            <fa-icon [icon]="faBars" class="fabari"></fa-icon>
+        </span> {{manual_title}}
+    </div>
+
+
+</ng-template>
+
+<div class="manual-content zoom-display">
+
+    <div id="lb-back">
+        <div id="lb-img"></div>
+    </div>
+
+    <div *ngIf="search_element ==false">
+        <div class="manual-breadcrumbs" *ngIf="title_selected != null">
+            <a>{{manual_title}} </a>{{title_selected}}
+        </div>
+
+        <h1 class="mh1">{{selected_content}}</h1>
+
+        <div *ngIf="description_selected != ''">            
+            <div [innerHTML]="description_selected"></div>
+        </div>
+
+        <div *ngIf="description_selected == ''">
+            <div *ngIf="ex_exercise_id == '' ||  ex_exercise_id == null">
+                <h1 style="text-align: center">Preview Loading</h1>
+            </div>
+            <img src="{{server_url}}media/images/logo-admin.png" class="img-fluid" />
+            <img *ngIf="getExercisedata.thumb_image!=null" src="{{server_url}}media/exercise-image/{{getExercisedata.thumb_image}}" class="img-fluid exe-img" />
+            <img *ngIf="getExercisedata.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid exe-img" />
+
+            <div class="mb-2" [innerHTML]="getExercisedata.short_desc" ></div>
+            <div [innerHTML]="getExercisedata.long_desc"></div>
+
+        </div>
+              
+        <div *ngIf="show_nav == true">
+            <ul class="ul_prenxt">
+                <li class="left">
+                    <div class="btn-box to-top"> 
+                        <div class="theme-btn">
+                            <span class="txt">
+                                <button type="button" (click)="prev_content(updateItem)" [disabled]="prevdisabled"
+                                    class="btn btn_blueas man-btn">
+                                    <fa-icon [icon]="faArrowCircleLeft"></fa-icon> Previous
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </li> 
+                <li>
+                    <div class="to-top back_to_top cursor-menu">
+                        <fa-icon [icon]="faAngleUp" class="tticon" ></fa-icon>
+                    </div>
+                </li>
+                <li class="right">
+                    <div class="btn-box to-top">
+                        <div class="theme-btn">
+                            <span class="txt">
+                                <button type="button" (click)="next_content(updateItem)" [disabled]="nextdisabled"
+                                    class="btn btn_blueas man-btn">
+                                    Next <fa-icon [icon]="faArrowCircleRight"></fa-icon>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+
+    <div *ngIf="search_element == true">
+        <div class="manual-breadcrumbs">
+            <a>Search Results </a>{{search_key}}
+        </div>
+
+        <div *ngIf="search_result.data?.length > 0 ; else loggedOut">
+            <ul class="mul-li" *ngFor="let result  of search_result.data">
+                <li (click)="getTopicDetails(result['topic_id'])"> <a> {{result['topic_name']}} </a> </li>
+            </ul>
+        </div>
+        <ng-template #loggedOut>
+            <h1>No Result Found</h1>
+        </ng-template>
+
+    </div>
+
+    <div class="clearfix"></div>
+</div>
+
+<div *ngIf="progressbar" class="progressbar-area col-md-12">
+    <div class="inner-area col-md-6">
+        <div *ngIf="progress_message==''" class="text-center">
+            <img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+            <p class="text-center loaderc">Please Wait ...</p>
+        </div>
+        <p *ngIf="progress_message!=''" class="text-center">
+            {{progress_message}}<span class="spinner-grow text-light" role="status"></span><span
+                class="spinner-grow text-light" role="status"></span><span class="spinner-grow text-light"
+                role="status"></span>
+        </p>
+    </div>
+</div>

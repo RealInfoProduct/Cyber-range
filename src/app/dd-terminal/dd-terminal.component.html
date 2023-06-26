@@ -1,0 +1,237 @@
+
+		<div class="col-md-12 content dashboard-body"> 
+			<div class="row">
+				<div class="col-md-12 dashboard-breadcrumb">
+					<div class="breadcrumb-sidepadd">
+						<button type="button" class="side-menu-btn asbibtn" (click)="action_sidebar()" id="sidebarCollapse">
+							<fa-icon [icon]="faBars"></fa-icon>
+						</button>
+						<h4 class="dashboard-heading">Dashboard</h4>
+						<div class="right-breadcrumb">
+						</div>
+					</div>	
+					
+					<div class="dash-ref form-group">
+						<label for="time_select"><b>Refresh</b> : </label> 
+						<select class="wdsel form-control" id="time_select" (change)="timeSelect($event);" ngModel="5" [ngModelOptions]="{standalone: true}" >
+						<option value="5">5 Sec</option>
+						<option value="10">10 Sec</option>
+						<option value="15">15 Sec</option>
+						<option value="20">20 Sec</option>
+						<option value="30">30 Sec</option>
+					</select></div>
+				</div>
+			</div>			
+			
+			<div class="padding-body">	
+				<div class="row dahboard_blocksd">
+									
+					<div class="col-sm-6 col-lg-3 total-box">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2 cpointer" placement="top" ngbTooltip="List of Instructors">{{total_instructors}}</div>
+									<div class="text-muted">List of Instructors</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faUserTie" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+							<div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+								<a class="font-w500 d-flex align-items-center" routerLink="/dd-terminal/users-list/2">
+									View all Instructor								
+									<fa-icon [icon]="faArrowCircleRight" class="faicn ml-1 opacity-25 font-size-base"></fa-icon>
+								</a>
+							</div>
+						</div>								
+					</div>	
+					
+					<div class="col-sm-6 col-lg-3 total-box">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2 cpointer" placement="top" ngbTooltip="List of Users">{{total_users}}</div>
+									<div class="text-muted">List of Users</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faUserCircle" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+							<div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+								<a class="font-w500 d-flex align-items-center" routerLink="/dd-terminal/users-list/3">
+									View all User								
+									<fa-icon [icon]="faArrowCircleRight" class="faicn ml-1 opacity-25 font-size-base"></fa-icon>
+								</a>
+							</div>
+						</div>								
+					</div>	
+					
+					<div class="col-sm-6 col-lg-3 total-box">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">
+										<div class="list-item" placement="top" ngbTooltip="Total Exercises" >{{total_excercise}}</div> 
+										<div class="list-item" placement="top" ngbTooltip="Public" >{{total_exe_public}}</div>
+										<div class="list-item list-item-last" placement="top" ngbTooltip="Private" >{{total_exe_private}}</div>
+									</div>
+
+									<div class="text-muted">List of Exercises</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faBook" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+							<div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+								<a class="font-w500 d-flex align-items-center" routerLink="/dd-terminal/exercise-list">
+									View all Exercise								
+									<fa-icon [icon]="faArrowCircleRight" class="faicn ml-1 opacity-25 font-size-base"></fa-icon>
+								</a>
+							</div>
+						</div>								
+					</div>	
+					
+					<div class="col-sm-6 col-lg-3 total-box">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2 cpointer" placement="top" ngbTooltip="List of Teams">{{total_team}}</div>
+									<div class="text-muted">List of Teams</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faUsers" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+							<div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+								<a class="font-w500 d-flex align-items-center" routerLink="/dd-terminal/team-list">
+									View all Team								
+									<fa-icon [icon]="faArrowCircleRight" class="faicn ml-1 opacity-25 font-size-base"></fa-icon>
+								</a>
+							</div>
+						</div>								
+					</div>
+
+					<div class="col-sm-6 col-lg-3 total-box">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2">
+										<div class="list-item" placement="top" ngbTooltip="Total Allotment">{{total_allotment}}</div>
+										<div class="list-item" placement="top" ngbTooltip="Allotted" >{{total_allotted}}</div>
+										<div class="list-item" placement="top" ngbTooltip="Running" >{{total_running}}</div>
+										<div class="list-item" placement="top" ngbTooltip="Pause" >{{total_pause}}</div>
+										<div class="list-item list-item-last" placement="top" ngbTooltip="Expired" >{{total_expired}}</div>
+									</div>
+
+									<div class="text-muted">List of Allotment</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faNetworkWired" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+							<div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+								<a class="font-w500 d-flex align-items-center" routerLink="/dd-terminal/allotment-list">
+									View all Allotment								
+									<fa-icon [icon]="faArrowCircleRight" class="faicn ml-1 opacity-25 font-size-base"></fa-icon>
+								</a>
+							</div>
+						</div>								
+					</div>
+
+					<div class="col-sm-6 col-lg-3 total-box">
+						<div class="block block-rounded d-flex flex-column">
+							<div class="block-content block-content-full flex-grow-1 d-flex justify-content-between align-items-center">
+								<div class="">
+									<div class="font-size-h2 cpointer">
+										<span placement="top" ngbTooltip="Total Manual" >{{total_manual}}</span>
+
+									</div>
+									<div class="text-muted">List of Manual</div>
+								</div>
+								<div class="item item-rounded bg-body">
+									<fa-icon [icon]="faBookReader" class="faicn font-size-h3 fac"></fa-icon>
+								</div>
+							</div>
+							<div class="block-content block-content-full block-content-sm bg-body-light font-size-sm">
+								<a class="font-w500 d-flex align-items-center" routerLink="/dd-terminal/manual-list">
+									View all Manual								
+									<fa-icon [icon]="faArrowCircleRight" class="faicn ml-1 opacity-25 font-size-base"></fa-icon>
+								</a>
+							</div>
+						</div>								
+					</div>
+
+				</div>	
+			</div>				
+		</div>	
+		
+		
+		<div class="col-md-12 dashboard-body">
+			<ul ngbNav #nav="ngbNav" class="nav-tabs">
+				<li ngbNavItem>
+					<a ngbNavLink><fa-icon [icon]="faCog"></fa-icon> Physical Resource Status</a>
+					<ng-template ngbNavContent>				
+						<div class="row text-center">						
+							<div class="col-lg-4 col-md-6 col3ip pm0">
+								<div class="content-box-shadow">
+									<div class="col-md-12">
+										<h5 class="resource_heading"><fa-icon [icon]="faServer" class="faicn"></fa-icon> CPU</h5>					
+										<div class="icon-container icpu">
+											<fa-icon [icon]="faServer" class="star star-under"></fa-icon>
+											<fa-icon [icon]="faServer" class="star star-over" style="width:{{used_cpu}}%;"></fa-icon>
+										</div>
+										<p>
+											<b>{{cpu}}% available of 100%</b>
+										</p>
+									</div>	
+								</div>	
+							</div>
+
+							<div class="col-lg-4 col-md-6 col3ip pm0">
+								<div class="content-box-shadow">
+									<div class="col-md-12">
+										<h5 class="resource_heading"><fa-icon [icon]="faMemory" class="faicn"></fa-icon> Memory</h5>					
+										<div class="icon-container iram">
+											<fa-icon [icon]="faMemory" class="star star-under"></fa-icon>
+											<fa-icon [icon]="faMemory" class="star star-over" style="width: {{used_memory}}%;"></fa-icon>
+										</div>
+										<p class="">
+											<b>{{memory}}GB available of {{total_memory}}GB remain</b>
+										</p>
+									</div>	
+								</div>	
+							</div>	
+							
+							<div class="col-lg-4 col-md-6 col3ip pm0">
+								<div class="content-box-shadow">
+									<div class="col-md-12">
+										<h5 class="resource_heading"><fa-icon [icon]="faDatabase" class="faicn"></fa-icon> Storage</h5>															
+										<div class="icon-container istorage">
+											<fa-icon [icon]="faDatabase" class="star star-under"></fa-icon>
+											<fa-icon [icon]="faDatabase" class="star star-over" style="width: {{used_storage}}%;"></fa-icon>
+										</div>
+										<p class="">
+											<b>{{storage}}GB available of {{total_storage}}GB</b>
+										</p>
+									</div>	
+								</div>	
+							</div>	
+						</div>
+
+						<div class="dacin text-center mb-3">
+							<div class="min80"><span class="Available"></span> Available</div>
+							<div class="min80"><span class="Used"></span> Used</div>
+						</div>
+					</ng-template>
+				</li>
+				
+				<li ngbNavItem>
+					<a ngbNavLink><fa-icon [icon]="faBell"></fa-icon> Notifications</a>
+					<ng-template ngbNavContent>
+						<app-notifications [refreshDTable]="resetNotiTable" ></app-notifications>
+					</ng-template>
+				</li>
+			</ul>
+			<div [ngbNavOutlet]="nav" class="col-md-12 mt-3 p-0"></div>
+		</div>
+	

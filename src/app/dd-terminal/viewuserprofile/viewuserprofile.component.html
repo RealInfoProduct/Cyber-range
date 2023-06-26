@@ -1,0 +1,84 @@
+<style>
+   .c{
+     margin-top: 169px;
+   }
+</style>
+  <!-- The Modal -->
+  <div [ngClass]="{'modal': true, 'modal-show': showModal === true }" id="user-modal" [style.display]="showModal ? 'block' : 'none'">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header dk-model-header">
+         <h5 class="modal-title" id="exampleModalLabel">User Profile</h5>
+         <button type="button" class="close" data-dismiss="modal" (click) = "hide()">&times;</button>
+       </div>
+
+        
+        <!-- Modal body -->
+        <div class="modal-body"> 
+         <div class="table-responsive mtable-height">
+
+          <div class="pimg_relative mb-3 text-right">	
+              <img *ngIf="croppedImage!=''" class="crop-image" [src]="croppedImage" />
+              <img *ngIf="croppedImage==''" class="crop-image" src="{{serverUrl}}media/profile/profile-img.jpg">
+          </div>
+
+            <table class="table table-bordered hover table-striped">
+               <tbody>
+                  <tr>
+                     <th scope="row"><b>First Name</b></th>
+                     <td>{{candidate_f_name}}</td>
+                     <th scope="row"><b>Middle Name</b></th>
+                     <td>{{candidate_m_name}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"><b>Last Name</b></th>
+                     <td>{{candidate_l_name}}</td>
+                     <th scope="row"><b>Status</b></th>
+                     <td>{{candidate_status}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"><b>Email</b></th>
+                     <td>{{candidate_email}}</td>
+                     <th scope="row"><b>Mobile</b></th>
+                     <td>{{candidate_mobile}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"><b>Language</b></th>
+                     <td>{{candidate_language}}</td>
+                     <th scope="row"><b>Address</b></th>
+                     <td>{{candidate_address}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"><b>Country</b></th>
+                     <td>{{candidate_country}}</td>
+                     <th scope="row"><b>State</b></th>
+                     <td>{{candidate_state}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"><b>City</b></th>
+                     <td>{{candidate_city}}</td>
+                     <th scope="row"><b>Pin</b></th>
+                     <td>{{candidate_pin}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"><b>Gender</b></th>
+                     <td colspan="3">{{candidate_sex}}</td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+     </div>
+        
+      </div>
+    </div>
+   </div>
+   
+    <div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+      <div class="inner-area col-md-6 text-center">
+         <img src="{{serverUrl}}media/images/loader.svg" class="img-fluid">
+         <p class="text-center loaderc" >Please Wait ...</p>
+      </div>
+   </div>
+

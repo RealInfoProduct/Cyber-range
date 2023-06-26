@@ -1,0 +1,161 @@
+	
+		<div class="col-md-12 content dashboard-body"> 
+					
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+						
+			<div class="padding-body dk-table">
+				<div class="content-box-shadow">
+					<form [formGroup] = "formdata">
+						<div class="row">							
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+								<select class="form-control fortextbox" name = "group" (change) = "changeGroup($event)"  formControlName="group" [(ngModel)]="group_id" >
+									<option  value="">Select Role</option>
+									<option *ngFor="let group of groupList; let i = index" [value]="groupList[i].id"  >
+										{{group.role}} 
+									</option>
+								</select>						
+							</div>
+								
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+								<select class="form-control fortextbox" id="user_status" name = "user_status" (change) = "changeUserStatus($event)" formControlName="user_status" >
+									<option  value="">Select Status</option>
+									<option *ngFor="let userStatus of userStatusList; let i = index" [value]="userStatusList[i]">
+										{{userStatusList[i]}}
+									</option>
+								</select>					
+							</div>
+							
+							<div class="col-lg-2 col-md-6 form-group ippd50">
+								<input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />			
+							</div>
+
+							<div class="col-lg-3 col-md-6 mb-4 ippd50">
+								<div class="mtain">
+									<div class="min80"><span class="Actives"></span> Active</div>
+									<div class="min80"><span class="Inactives"></span> Inactive</div>	
+								</div>
+							</div>
+							
+							<div *ngIf="login_gp=='1'" class="col-lg-3 col-md-12 form-group ipp100 btn_align">
+								<div class="btn-box">
+									<div class="theme-btn theme-btn-dd">
+										<span class="txt">									
+											<a class="btn btn_blueas" (click) = "redirect('/dd-terminal/user-profile')" ><fa-icon [icon]="faUser"></fa-icon> &nbsp;Add New User</a>
+										</span>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-md-12">
+								<ngb-alert *ngIf="!closed" class="animate-show animate-hide mt-2 mb-2" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+							</div>
+
+							<div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+								<table datatable [dtOptions]="dtOptions" class="row-border table hover table-striped">
+									<thead>
+										<tr>
+											<th class="tidcenter tidc">S.No.</th>
+											<th class="tuidc">Unique ID</th>
+											<th class="ttnc">Name</th>
+											<th class="tttc">Role</th>
+											<th class="tttc">Mobile</th>
+											<th class="tttc">Email</th>
+											<th class="">Reg. Date</th>
+											<th class="tluc">Last Login</th>
+											<th style="width:150px;">Action</th>
+										</tr>
+									</thead>
+									<tbody *ngIf="persons?.length != 0">
+										<tr *ngFor="let person of persons"
+											[class.highlighted]="clicked === person.s_no" (click)="clicked = person.s_no"
+										>
+											<td class="tidcenter">{{ person.s_no }}</td>
+											<td><span class="{{person.user_status}}"></span>  {{ person.User_Unique_ID }}</td>
+											<td>
+												<ng-container *ngIf="login_gp=='1';else other_content" >
+												<a routerLink="/dd-terminal/user-profile/{{person.user_id}}" class="tablelinkc">
+													{{ person.firstName }} {{ person.lastName }}
+												</a>
+												</ng-container>
+												<ng-template #other_content >
+													{{ person.firstName }} {{ person.lastName }}
+												</ng-template>
+											</td>
+											<td><span class="role-{{person.role}}">{{ person.role }}</span></td>
+											<td>{{ person.mobile }}</td>
+											<td><span class="user-email">{{ person.email }}</span></td>
+											<td><span class="date d-block">{{ person.regDateTime }}</span></td>
+											<td *ngIf="person.last_login_date!=''" ><span class="datetime d-block">{{ person.last_login_date }}</span></td>
+											<td *ngIf="person.last_login_date==''" class="text-center" >-</td>
+
+											<td>
+												<ng-container *ngIf="login_gp=='1'" >
+												<a routerLink="/dd-terminal/user-profile/{{person.user_id}}" class="btn-default btn-sm btn-danger" class="edit" placement="top" ngbTooltip="Edit"><fa-icon [icon]="faEdit"></fa-icon></a>
+											   <button *ngIf="person.user_id != '1'" type="button" class="btn btn-sm btn-delete" (click) = "deleteUser(person.user_id)" placement="top" ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+											   <a *ngIf="person.group_id=='2' || person.group_id=='3'" routerLink="/dd-terminal/permission/{{person.user_id}}" class="btn-default btn-sm btn-danger" class="edit" placement="top" ngbTooltip="Permission"><fa-icon [icon]="faCheck"></fa-icon></a>
+											   </ng-container>
+											   <a *ngIf="person.user_id != '1' && credit_system == 'Active' " href="javascript:void(0);" (click) = "openCreditModal(person.user_id)" class="edit ml-2" placement="top" ngbTooltip="Add Credit"><fa-icon [icon]="faCreditCard"></fa-icon></a>
+
+											</td>
+										</tr>
+									</tbody>
+									<tbody *ngIf="persons?.length == 0">
+										<tr>
+											<td colspan="8" class="no-data-available">No data!</td>
+										</tr>
+									<tbody>
+								</table>
+							</div>
+						</div>
+				  </form> 				  
+				</div>
+			</div>			
+		</div>	
+		
+		<!-- Modal -->
+<div *ngIf="credit_system=='Active'" class="modal fade" id="creditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Credit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup] = "creditFrm" >
+				<input type = "hidden" id="user_id" name="user_id" formControlName="user_id" >
+				<div class="col-lg-3 col-md-4 float-left form_lable form-group fpt8 mb-0">
+                    <label for="">Credit:</label>
+                </div>
+                <div class="col-lg-9 col-md-8 float-left form-group" >{{userCredit}}</div>
+                <div class="clearfix"></div>
+
+                <div class="col-lg-3 col-md-4 float-left form_lable form-group fpt8 mb-0">
+                    <label for="price">Add Credit:</label>
+                </div>
+                <div class="col-lg-9 col-md-8 float-left form-group" >
+                    <input type = "text" class = "form-control fortextbox" id="credit" name = "credit"  formControlName="credit" >
+                    <div class="clearfix"></div>
+                    <ng-container *ngFor="let error of error_messages.credit">
+                        <div class="error-message col-md-12 pl-0 pr-0" *ngIf="creditFrm.get('credit').hasError(error.type) && (creditFrm.get('credit').dirty || creditFrm.get('credit').touched)">
+                            {{ error.message }}
+                        </div>
+                    </ng-container>	
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 float-left text-right pb-4">
+                    <div class="btn-box">
+                        <div class="theme-btn">
+                            <span class="txt">												
+                                <button type="button" (click)="updateCredit(creditFrm.value)" class="btn btn-sm btn_blueas">Save</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+              </form>
+        </div>
+
+      </div>
+    </div>
+  </div>

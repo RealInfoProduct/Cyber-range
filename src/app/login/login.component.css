@@ -1,0 +1,331 @@
+.btn-google {
+    background-color: #dd4b39;
+    color: white;
+}
+.block-center {
+    margin: auto;
+}
+.social-media .so_image{
+    width: auto;
+    height: auto;
+    max-width: 80px;
+}
+.lw {
+    color: #fff;
+    font-family: 'OpenSans-SemiBold', sans-serif;
+}
+.social {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+.social img{
+    margin-right: 5px;
+}
+.shr {
+    margin-top: 0;
+    border-top: 1px solid #bdbdbd;
+}
+.or-container {
+    align-items: center;
+    color: #ccc;
+    display: flex;
+    margin: 25px 0
+}
+
+.line-separator {
+    background-color: #ccc;
+    flex-grow: 5;
+    height: 1px
+}
+.btn-google {
+    color: rgb(68, 65, 65);
+    background-color: #fff;
+}
+.btn-linkedin {
+    color: #fff;
+    background-color: #0e76a8;
+}
+.or-label {
+    flex-grow: 1;
+    margin: 0 15px;
+    text-align: center
+}
+
+/* login css */
+.container {
+    max-width: 1800px;
+}
+
+.login-section {
+    background: #081327;
+}
+
+.login-card {
+    background-image: url('../../assets/images/home/login-bg-image.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login_item_box {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(13.5px);
+    backdrop-filter: blur(13.5px);
+    border-radius: 20px;
+}
+
+.login_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 67px;
+    height: 66px;
+    left: calc(50% - 67px/2 - 0.5px);
+    top: -29px;
+    background: #00FFFA;
+    border: 3px solid #FFFFFF;
+    border-radius: 50px;
+}
+
+.login_header {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 39px;
+    text-align: center;
+    color: #00FFFA;
+    padding-top: 59px;
+}
+
+.login_input_text {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.input {
+    box-sizing: border-box;
+    /* width: 490px; */
+    width: 100%;
+    height: 56px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 250, 0.2);
+    padding-left: 25px;
+}
+
+.login_rem_forgot {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-top: 25px;
+}
+
+.remember-me {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+
+    color: #00FFFA;
+}
+
+.forgot-password a{
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+
+    color: #00FFFA;
+}
+
+.sign_in {
+    padding-top: 25px;
+}
+
+.button {
+    /* width: 490px; */
+    height: 56px;
+    background: #00FFFA;
+    width: 100%;
+    border: 1px solid rgba(0, 255, 250, 0.2);
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.308088px;
+    color: #0E2E4A;
+
+}
+.have_an_account {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #CCCCCC;
+    padding-top: 24px;
+}
+
+.have_an_account label a {
+    color: #00FFFA;
+}
+
+.login_hr_or {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+}
+
+.login_hr {
+    background: rgba(0, 255, 250, 0.2);
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+    width: 210px;
+    height: 1px;
+}
+
+
+.login_or {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    align-items: center;
+    text-align: center;
+    color: #CCCCCC;
+}
+
+.login_with_section{
+    padding: 30px 0px;
+}
+.login_with_google{
+    width: 100%;
+    height: 56px;
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.308088px;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+}
+.google_item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 56px;
+}
+.goole_text{
+    padding-left: 15px;
+}
+
+.cyberrange {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    padding-top: 45px;
+    color: #FFFFFF;
+
+}
+
+input:focus
+{
+    border: 1px solid rgba(0, 255, 250, 0.4);
+    box-shadow: 0 0 3px #00FFFA;
+    outline-offset: 0px;
+    outline: none;
+}
+
+input,
+select,
+textarea {
+    color:  #FFFFFF;
+}
+
+.border-blue {
+    border-left: 4px solid #00FFFA;
+    border-top: 1px solid rgba(0, 255, 250, 0.5);
+    border-right: 1px solid rgba(0, 255, 250, 0.5);
+    border-bottom: 1px solid rgba(0, 255, 250, 0.5);
+}
+
+.border-red {
+    border-left: 4px solid #FF8B89;
+    border-top: 1px solid rgba(255, 139, 137, 0.5);
+    border-right: 1px solid rgba(255, 139, 137, 0.5);
+    border-bottom: 1px solid rgba(255, 139, 137, 0.5);
+}
+
+.error_mess{
+    display: flex;
+    align-items: baseline;
+    padding-top: 10px;
+}
+.error-text{
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 135%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #FF8B89;
+    padding-left: 6px;
+
+}
+.error_mess .card{
+    width: 100%;
+    border-radius: 5px;
+    background: #1e334b;
+    color: #FFFFFF;
+    padding: 15px;
+    border: none;
+}
+
+.error_mess .card span{
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 16px;
+    max-width: 400px;
+    line-height: 30px;
+}
+.icon {
+    position: absolute;
+    top: 41px;
+    right: 30px;
+    font-size: 23px;
+
+}
+.icon i {
+    font-size: 20px;
+    color: #00FFFA;
+
+}
+
+.hide {
+    display: none;
+}
+
+@media only screen and (max-width: 567px){
+
+    .login_screen{
+        width: 100%;
+        padding: 0px 20px;
+
+    }
+}
+
+
+

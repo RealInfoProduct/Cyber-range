@@ -1,0 +1,897 @@
+.banner-bg { 
+	background-size: cover;	
+	background-repeat: no-repeat;
+	padding: 30px 100px 20px;
+    margin-top: 115px;
+}
+.bheaading {
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 47px;
+}
+.bheaading span{
+    font-family: 'Open Sans', sans-serif;
+    display: block;
+}
+.text-upper {
+	text-transform: uppercase;
+}
+.bnr-tagline{
+	font-size: 18px;
+    color: #fff;
+}
+.bg-grayh { 
+	background-color: #f2f2f2; 
+	background-size: cover;	
+	background-repeat: no-repeat;
+}
+.home .htsec {
+    padding: 0 41px 36px;
+}
+.home .sech {
+	margin-top: 20px;
+}
+.home .secp {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    line-height: 21px;
+}
+.text-red{
+	color: #e94a5b;
+	font-weight: 600;
+}
+.text-blue{
+	color: #023652;
+	font-weight: 600;
+}
+.ptext-blue{
+	color: #023652;
+}
+.hboxshado{
+	box-shadow: 0 5px 15px 3px rgb(74 85 140 / 29%);
+}
+.max-width {
+	max-width: 1366px;
+    margin: auto;
+}
+.max-widths {
+	max-width: 1200px;
+    margin: auto;
+}
+.sideh-padding {
+	padding: 50px 80px 0;
+}
+.sideh-paddingt {
+	padding: 50px 110px 0;
+}
+
+.testimonial-box {
+    background-color: #013051;
+    line-height: 21px;
+    padding: 25px;
+    margin: 80px 15px 15px;
+    font-size: 15px;
+}
+.testimonial-profile {
+    margin-top: -80px;    
+    margin-bottom: 20px;
+}
+.testimonial-profile img{
+    border-radius: 100%;
+}
+.video-icon {
+    top: 30%;
+    left: 43%;
+}
+
+@media only screen and (max-width: 768px)
+{
+    .banner-bg {
+        padding: 50px 20px 20px;
+    }
+    .bnr-text {
+        margin-left: 0px;
+    }
+    .bheaading {
+        font-size: 23px;
+        text-align: center;
+    }
+    .sideh-padding {
+        padding: 50px 20px 0;
+    }
+    .sideh-paddingt {
+        padding: 50px 20px 0;
+    }
+    .home .htsec {
+        padding: 0 20px 36px;
+    }
+}
+@media only screen and (max-width: 767px)
+{
+    .sideh-paddingt {
+        padding: 50px 0px 0;
+    }
+    .testimonial-box {
+        padding: 25px 8px;
+        margin: 80px 0px 15px;
+    }    
+}
+@media only screen and (min-width: 1024px) and (max-width: 1200px)
+{
+    .sideh-paddingt {
+        padding: 50px 50px 0;
+    }  
+}
+@media only screen and (min-width: 1300px)
+{
+    .banner-bg { 
+        height: 87vh;
+    }
+    .slider-center {
+        height: 60vh;
+        align-items: center;
+    }
+    .bheaading {
+        float: right;
+    }
+    .testimonial-box {
+        min-height: 460px;
+    }
+}
+@media only screen and (min-width: 1600px)
+{
+    .testimonial-box {
+        min-height: 400px;
+    }
+}
+.no-mar{
+    margin-bottom:0px;
+}
+/* end demo popup   */
+
+/* //////// New Version //////// */
+.container-fluid {
+    background: #081327;
+    margin-top: 20px;
+}
+
+.container {
+    max-width: 1800px;
+}
+
+.section {
+    padding: 10px 0px;
+}
+
+.section nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.section nav ul {
+    list-style: none;
+    display: flex;
+    font-weight: 500;
+    margin: 0;
+    cursor: pointer;
+    padding: 0;
+}
+    
+.section nav ul li a{
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0px 13px;
+    font-family: 'Chakra Petch';
+    color: #fff;
+    letter-spacing: 0.4px;
+}
+
+.section nav ul li a:hover {
+    color: #00FFFA;
+    transition: 0.5s all ease-in-out;;
+}
+
+.credit {
+    display: flex;
+}
+
+.credit .wallet {
+    display: flex;
+    align-items: center;
+}
+
+.navbar button {
+    background: #fff;
+}
+
+.credit .wallet span {
+    font-family: 'Chakra Petch';
+    font-weight: 500;
+    margin-left: 5px;
+    color: #fff;
+}
+
+.sign-btn {
+    font-family: 'Chakra Petch';
+    border: none;
+    background: #00FFFA !important;
+    font-weight: 600;
+    padding: 8px 25px;
+    margin-left: 30px;
+}
+
+.banner {
+    background-image: url('../../assets/images/home/dots-vector-background.png.svg');
+    height: 730px;
+    background-position: right;
+    background-repeat: no-repeat;
+}
+
+.banner .banner-details {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.banner-text {
+    position: relative;
+}
+
+.banner-text span {
+    color: #fff;
+    font-family: 'Chakra Petch';
+    font-size: 50px;
+    font-weight: 600;
+}
+
+.banner-text p {
+    font-size: 18px;
+    font-family: 'Chakra Petch';
+    color: #ccc;
+    letter-spacing: 0.4px;
+    margin-top: 20px;
+    line-height: 30px;
+}
+
+.banner-text label{
+    color: #00FFFA;
+    font-size: 28px;
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+}
+
+.banner-text .features-option {
+    background-image: url('../../assets/images/home/background-effect.svg');
+    background-position: left;
+    height: 100%;
+    background-size: auto;
+    background-repeat: no-repeat;
+}
+
+.banner-text .features-option .row {
+    width: 60%;
+}
+
+.features-1 {
+    background: linear-gradient(214.25deg, rgba(0, 0, 0, 0.224) 6.73%, rgba(0, 0, 0, 0.084) 100.28%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 9.89672px 13.1956px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(23.0923px);
+    border-radius: 4px;
+    padding: 10px 15px;
+    margin-top: 20px;
+ }
+
+ .pattern {
+    position: absolute;
+ }
+
+.features-1 .features-title {
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 15px;
+}
+
+.show-demo {
+    font-family: 'Chakra Petch';
+    border: none;
+    background: #00FFFA;
+    font-weight: 600;
+    padding: 8px 25px;
+    margin-top: 40px;
+}
+
+.vector-image img {
+    width: -webkit-fill-available;
+}
+
+.nav-collapse {
+    padding: 0 !important;
+}
+
+.our-industry , .our-client {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+    border-radius: 20px;
+    padding: 50px 30px;
+    background-image: url('../../assets/images/home/Ellipse-4.svg'), url('../../assets/images/home/Ellipse-6.svg'), url('../../assets/images/home/Ellipse-5.svg');
+    background-repeat: no-repeat;
+    background-position: 100% 50%, 0% 50%, center bottom;
+}
+
+.our-client {
+    padding: 100px 30px;
+}
+
+.our-industry span {
+    font-size: 38px;
+    font-family: 'Chakra Petch';
+    color: #fff;
+    font-weight: 500;
+    letter-spacing: 0.4px;
+}
+
+.partner,.client {
+    margin-top: 10px;
+}
+
+.partner span {
+    font-size: 22px;
+}
+
+.client span {
+    font-size: 22px;
+}
+
+.our-partner {
+    display: flex;
+    overflow-y: scroll;
+}
+
+.our-partner img{
+    margin-right: 100px;
+}
+
+.about-cyberRange label {
+    font-size: 18px;
+    font-family: 'Chakra Petch';
+    color: #00FFFA;
+    letter-spacing: 0.4px;
+}
+
+.about-cyberRange span {
+    font-family: 'Chakra Petch';
+    font-size: 38px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.about-cyberRange p {
+    font-size: 18px;
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+    line-height: 28px;
+    margin-top: 30px;
+    font-weight: 200;
+}
+
+.cyber-text {
+    display: flex;
+    align-items: center;
+}
+
+.cybersecurity {
+    margin: 50px 0px;
+}
+
+.cyber-project span{
+    font-size: 55px;
+    font-family: 'Chakra Petch';
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.cyber-project{
+    margin-left: 20px;
+}
+
+.cyber-project p{
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+    margin: 0;
+}
+
+.client-icon img {
+    padding: 15px 20px;
+}
+
+.client-icon {
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    background: #00FFFA;
+    padding: 5px;
+}
+
+.total-clients {
+    display: flex;
+    align-items: center;
+}
+
+.category-icon {
+    height: 74px;
+}
+
+.company-category .category-details {
+    margin-top: 30px;
+}
+
+.company-category {
+    padding: 30px;
+    /* height: 350px; */
+}
+
+.company-category:hover {
+    background: rgba(33, 103, 163, 0.3);
+    border: 1px solid #131A34;
+    box-shadow: 0px 15px 35px rgba(12, 199, 171, 0.35);
+    backdrop-filter: blur(2px);
+    border-radius: 10px;
+    transition: .3s all ease-in-out;
+}
+
+.company-category .category-details span{
+  color: #fff;
+  font-family: 'Chakra Petch';
+  letter-spacing: 0.4px;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.company-category .category-details p {
+    color: #fff;
+    font-family: 'Chakra Petch';
+    font-size: 18px;
+    letter-spacing: 0.4px;
+    margin-top: 20px;
+    font-weight: 300;
+}
+
+.category {
+    margin-top: 7%;
+}
+
+.category-card {
+    margin-top: 50px;
+}
+
+.category-bg-image {
+    margin-top: 5%;
+}
+
+.category-bg-image img {
+    width: 100%;
+}
+
+.footer {
+    background-image: url('../../assets/images/home/footer-bg-image.svg');
+}
+
+.footer-header-title {
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+}
+
+.footer-option {
+    margin-top: 20px;
+}
+
+.footer-all-section {
+    margin-top: 4%;
+}
+
+.footer-all-section .row {
+  border-bottom: 1px solid #00FFFA;
+}
+
+.footer-option p{
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+}
+
+.footer-menu ul{
+    list-style: none;
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+    line-height: 40px;
+    padding: 0;
+}
+
+.footer-social-icon {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.footer-social-icon .social-icon {
+    height: 40px;
+    width: 40px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.footer-copyright {
+    text-align: center;
+    margin: 28px 0px;
+}
+
+.footer-copyright .copyright {
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+    font-size: 18px;
+}
+
+.footer-copyright span {
+    color: #00FFFA;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+}
+
+.footer-copyright span i {
+    color: red;
+}
+
+@media only screen and (max-width: 1440px) {
+
+    .banner-text .features-option .row {
+        width:70%;
+    }
+}
+
+@media only screen and (max-width: 1366px) {
+    .section nav ul li a{
+        font-size: 14px;
+        margin: 0px 7px;
+    }
+
+    .navbar-brand {
+        margin: 0;
+    }
+
+    .sign-btn {
+        font-size: 14px;
+        padding: 6px 18px;
+        margin-left: 15px;
+    }
+
+    .banner-text label{
+        font-size: 20px;
+    }
+
+    .banner-text span {
+        font-size: 30px;
+    }
+
+    .banner-text p {
+        font-size: 16px;
+    }
+
+    .features-1 {
+        padding: 10px 6px;
+    }
+
+    .banner-text .features-option .row {
+        width:70%;
+    }
+
+    .features-1 .features-title {
+        font-size: 13px;
+        margin-left: 8px;
+    }
+
+    .show-demo {
+        font-size: 14px
+    }
+}
+
+@media only screen and (max-width: 1170px) {
+
+    .footer .footer-logo {
+        width: 220px;
+    }
+
+    .section nav ul li a{
+        font-size: 12px;
+        padding: 5px 5px;
+        margin-left: 10px;
+    }
+
+    .section nav .logo img {
+        width: 200px;
+    }
+
+    .sign-btn {
+        font-size: 12px;
+        padding: 6px 18px;
+        margin-left: 15px;
+    }
+
+    .our-industry span {
+        font-size: 30px;
+    }
+
+    .partner span, .client span {
+        font-size: 20px;
+    }
+
+    .client-icon img {
+        padding: 15px 20px;
+    }
+    
+    .client-icon {
+        height: 75px;
+        width: 75px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        background: #00FFFA;
+        padding: 5px;
+    }
+
+    .cyber-project span {
+        font-size: 35px;
+    }
+
+    .cyber-project p {
+        font-size: 14px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .banner-text .features-option .row {
+        width:100%;
+    }
+
+    .cyber-range img {
+        width: -webkit-fill-available;
+    }
+
+    .made-in-india {
+        width: -webkit-fill-available;
+    }
+
+    .social-icon {
+        margin-right: 10px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .banner {
+        height: auto;
+    }
+
+    .our-client {
+        padding: 60px 30px;
+    }
+
+    .total-clients {
+        margin: 20px 0px;
+    }
+
+    .vector-image {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .vector-image img {
+        width: -webkit-fill-available;
+    }
+
+    .made-in-india {
+        width: auto;
+    }
+}
+
+/* Video css */
+
+.video_section {
+    margin-top: 5%;
+    background: linear-gradient(214.25deg, rgba(0, 0, 0, 0.224) 6.73%, rgba(0, 0, 0, 0.084) 100.28%),
+        linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
+    backdrop-filter: blur(2px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 50px 30px;
+    background-image: url('../../assets/images/home/Ellipse-7.svg'), url('../../assets/images/home/Ellipse-8.svg'), url('../../assets/images/home/Ellipse-9.svg');
+    background-repeat: no-repeat;
+    background-position: 110% -14%, -12% 50%, 108% 130%, center bottom;
+    padding-bottom: 6%;
+}
+
+.video_section_header {
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 38px;
+}
+
+.video_section_register {
+    font-family: 'Chakra Petch';
+    font-weight: 700;
+    font-size: 26px;
+    text-align: center;
+    color: #00FFFA;
+    /* padding: 25px 0px; */
+    padding-top: 25px;
+    padding-bottom: 50px;
+}
+
+.video_box {
+    box-sizing: border-box;
+    border: 3px solid #00FFFA;
+    border-radius: 20px;
+    max-width: 1100px;
+    /* width: max-content; */
+}
+
+.video_player {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    width: 100%;
+    /* height: 558px; */
+}
+.video{
+    display: flex;
+    justify-content: center;
+    padding: 15px 0px;
+}
+.video_icon{
+    position: absolute;
+    top: 50%;
+}
+
+.about_us_header {
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 49px;
+    text-align: center;
+    color: #FFFFFF;
+    padding-top: 7%;
+}
+
+.about_us_item {
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 20px 0;
+}
+
+.about_card {
+    background: linear-gradient(129.37deg, rgba(193, 255, 254, 0.2) 8.09%, rgba(0, 255, 250, 0.2) 100%);
+    border-radius: 30px;
+    padding: 5%;
+}
+.about_card_user{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.about_card_text {
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 40px;
+    display: flex;
+    color: #FFFFFF;
+}
+
+.about_card_user_name {
+    font-family: 'Chakra Petch';
+    font-style: italic;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #00FFFA;
+    /* padding-left: 20px; */
+    display: flex;
+    align-items: center;
+}
+
+.about_card_user_name span{
+    padding-left: 20px;
+}
+.userpic{
+    border: 1px solid #00FFFA;
+    border-radius: 50%;
+}
+
+.about_button .button {
+    list-style-type: none;
+    display: flex;
+}
+.about_button .button .active {
+    width: 15px;
+    height: 15px;
+    left: 697px;
+    top: 556.5px;
+    background: #00FFFA;
+    border: 1px solid #00FFFA;
+    border-radius: 7.5px;
+    padding-left: 10px;
+}
+ ::ng-deep .owl-theme .owl-dots .owl-dot.active span {
+    width: 15px !important;
+    background: #00FFFA !important;
+    height: 15px !important;
+}
+
+ ::ng-deep .owl-theme .owl-dots .owl-dot span {
+    width: 15px !important;
+    background: #FFFFFF !important;
+    border: 1px solid #AAAAAA !important;
+    height: 15px !important;
+}
+.about_button .button li {
+    width: 15px;
+    height: 15px;
+    left: 697px;
+    top: 556.5px;
+    background: #FFFFFF;
+    border: 1px solid #AAAAAA;
+    border-radius: 7.5px;
+    padding-left: 10px;
+}
+.about_button{
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+}
+.about_button .button li{
+    margin-right: 20px;
+}
+
+@media only screen and (max-width: 550px) {
+
+    .video_icon{
+        position: absolute;
+        top: 62%;
+        left: 41%;
+    }
+  .video_icon img{
+        width: 50%;
+    }
+    .video_section_header{
+        font-size: 25px;
+    }
+    .video_section {
+        margin-top: 20%;
+        padding-bottom: 12%;
+    }
+
+    .video_section_register{
+        font-size: 22px;
+        padding-bottom: 30px;
+    }
+}

@@ -1,0 +1,249 @@
+.regbg {       
+	margin: auto;	
+	display: block;
+}
+
+.regpage {
+    color: #212529;
+    text-align: center;    
+	padding-top: 40px;
+	padding-bottom: 30px;
+    background-color: #fff;
+}
+.regform .heading{ 
+    margin-bottom: 50px;
+}
+.regform .btn.btn-dark.btn-register{ 
+    background: #737f9e; 
+	width: 125px;
+    margin: auto;
+    display: block;
+    border: 0;
+}
+.regform .btn.btn-dark.btn-register:hover{ 
+    color: #fff;
+    background: #64738f; 
+    border: 0;
+}
+.regform .linka{ 
+    color: #fff; 
+}
+.regform .form_lable{ 
+    text-align: left !important;
+}
+@media only screen and (min-width: 768px) 
+{
+	.regform .col4 {
+		/*max-width: 165px;
+		padding-right: 5px;*/
+		max-width: 178px;
+		padding-right: 0;
+	}
+}
+@media only screen and (max-width: 768px) 
+{
+	.regbg {       
+		width: 100%; 
+    }
+	.regform .heading{ 
+		margin-bottom: 30px; 
+		padding: 10px 0px;
+		font-size: 24px;
+	}
+	.regform .form_lable{ 
+		margin-bottom: 0px !important;
+	}
+}
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1365px) and (orientation:portrait) 
+{
+	.regbg {       
+		width: 100%;
+    }
+}
+
+
+/* forgot css */
+.container {
+    max-width: 1800px;
+}
+
+.forgot-section {
+    background: #081327;
+}
+
+.forgot-card {
+    background-image: url('../../assets/images/home/login-bg-image.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgot_item_box {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(13.5px);
+    backdrop-filter: blur(13.5px);
+    border-radius: 20px;
+}
+
+.forgot_logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 67px;
+    height: 66px;
+    left: calc(50% - 67px/2 - 0.5px);
+    top: -29px;
+    background: #00FFFA;
+    border: 3px solid #FFFFFF;
+    border-radius: 50px;
+}
+
+.forgot_header {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 39px;
+    text-align: center;
+    color: #00FFFA;
+    padding-top: 59px;
+}
+
+.forgot_input_text {
+    text-align: center;
+    padding-top: 30px;
+}
+
+.input {
+    box-sizing: border-box;
+    /* width: 490px; */
+    width: 100%;
+    height: 56px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 255, 250, 0.2);
+    padding-left: 25px;
+}
+
+.sign_in {
+    padding-top: 25px;
+}
+
+.button {
+    width: 450px;
+    height: 56px;
+    background: #00FFFA;
+    border: 1px solid rgba(0, 255, 250, 0.2);
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.308088px;
+    color: #0E2E4A;
+
+}
+.have_an_account {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #CCCCCC;
+    padding: 24px 0px;
+}
+
+.have_an_account label a {
+    color: #00FFFA;
+}
+
+.cyberrange {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    padding-top: 45px;
+    color: #FFFFFF;
+
+}
+
+input:focus
+{
+    border: 1px solid rgba(0, 255, 250, 0.4);
+    box-shadow: 0 0 3px #00FFFA;
+    outline-offset: 0px;
+    outline: none;
+}
+
+input,
+select,
+textarea {
+    color:  #FFFFFF;
+}
+
+.border-blue {
+    border-left: 4px solid #00FFFA;
+    border-top: 1px solid rgba(0, 255, 250, 0.5);
+    border-right: 1px solid rgba(0, 255, 250, 0.5);
+    border-bottom: 1px solid rgba(0, 255, 250, 0.5);
+}
+
+.border-red {
+    border-left: 4px solid #FF8B89;
+    border-top: 1px solid rgba(255, 139, 137, 0.5);
+    border-right: 1px solid rgba(255, 139, 137, 0.5);
+    border-bottom: 1px solid rgba(255, 139, 137, 0.5);
+}
+
+.error_mess{
+    display: flex;
+    align-items: baseline;
+    padding-top: 10px;
+}
+.error-text{
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 135%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #FF8B89;
+    padding-left: 6px;
+
+}
+
+.success_mess{
+    display: flex;
+    align-items: baseline;
+    padding-top: 10px;
+}
+.success-text{
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 135%;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #58FF55;
+    padding-left: 6px;
+
+}
+.success-text span {
+    max-width: 430px;		
+}
+
+@media only screen and (max-width: 567px){
+
+    .login_screen{
+        width: 100%;
+        padding: 0px 20px;
+
+    }
+    .button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,124 @@
+		<div class="col-md-12 content dashboard-body"> 
+		
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			<ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+			
+			<div class="myform team padding-body">
+				<div class="row">
+						<div class="col-lg-6 col-md-12"> 	
+							<form [formGroup] = "man_frm">
+								<div class="row">
+									<div class="col-lg-12 col-md-12"> 
+										<div class="content-box-shadow content-box-shadow-sec"> 
+											<div>
+											<div  *ngIf="notification ==true" >
+												<p  class="alert alert-success">{{message}}</p>
+											</div>	
+											 <label>Manual Title:</label><br>
+												<input type="text" class="form-control fortextbox" id="m_title" value="" name="m_title" placeholder="Manual Title" formControlName="m_title"> 
+												<ng-container *ngFor="let error of error_messages.m_title">
+													<div class="error-message col-md-12 mb-4 pl-0" *ngIf="man_frm.get('m_title').hasError(error.type) && (man_frm.get('m_title').dirty || man_frm.get('m_title').touched)">
+														{{ error.message }}
+													</div>
+												</ng-container>	
+											</div>
+											<div *ngIf="group_id=='1'" class="mt-2">
+												<label>Author:</label><br>
+												<div >
+													<ng-autocomplete #auto
+													[data]="instructor_list"
+													[searchKeyword]="keyword"
+													[debounceTime] = "200"
+													[minQueryLength] = "2" 
+													[initialValue] = "initial_value"
+													placeHolder="Selected Assign Instructor"
+													name="instructor"
+													(selected)='selectEvent($event)'
+													(inputFocused)='onFocused($event)'
+													[itemTemplate]="itemTemplate"
+													(scrolledToEnd)='scrolledToEnd($event)'
+													(inputChanged)='inputChanged($event)'
+													(inputCleared)='inputCleared($event)'
+													[notFoundTemplate]="notFoundTemplate">
+												  </ng-autocomplete>
+												 
+												  <ng-template #itemTemplate let-item>
+													<a [innerHTML]="item.name"></a>
+												  </ng-template>
+												
+												  <ng-template #notFoundTemplate let-notFound>
+													<div [innerHTML]="notFound"></div>
+												  </ng-template>
+												</div>
+												
+												<div class="clearfix"> </div>
+											</div>
+											<div class="btn-box btn_align mt-3">
+												<div class="theme-btn mr-2"  *ngIf="manual_id ==null">
+													<span class="txt">
+														<button class="forsubmit btn_blueas btn" (click)="onSubmit(man_frm.value)" >Save</button>
+													</span>
+												</div> 
+			
+												<div class="theme-btn mr-2"  *ngIf="manual_id !=null">
+													<span class="txt">
+														<button class="forsubmit btn_blueas btn" (click)="updateManual(man_frm.value)" >Update</button>
+													</span>
+												</div>  
+                                 				<div class="theme-btn"  *ngIf="Topicbtn ==true" >
+													<span class="txt">
+														<a class="btn_blueas btn" (click)="addContent()">Add Content</a>
+													</span>
+												</div>
+												<div class="theme-btn ml-2"  *ngIf="Topicbtn ==true" >
+													<span class="txt">
+														<a class="btn_blueas btn"  routerLink="/exercise-console/preview/{{manual_id}}"  target="_blank" >Preview</a>
+													</span>
+												</div> 
+											</div>
+										</div>							
+									</div>						
+								</div>
+							</form>
+                                                        
+                                                        
+                                                        <div class="row">
+					<div class="col-lg-12 col-md-12">
+						<div class="content-box-shadow content-box-shadow-sec"> 							
+							<h5 class="mb-3">Content List</h5>
+								<div cdkDropList
+								#personList = "cdkDropList"
+								[cdkDropListData] = "topicslist"
+								class = "example-list"
+								(cdkDropListDropped) = "onDrop($event)"  *ngIf="topicslist != 0  ; else elseBlock ">	
+
+										<div *ngFor="let value of topicslist ; index as i" class = "divlayout" cdkDrag >
+												<div class="ttflex paddy">
+													<div class="ttsn mr-1">
+														<fa-icon [icon]="faSort" placement="top" ngbTooltip="Set order"  ></fa-icon>
+														<span class="ml-2" >{{i+1}}</span> 
+													</div>
+													<div class="ttn mr-1">
+														<a (click)='editTopic(value.id)' >{{value['menual_title']}}</a>
+													</div>
+													<div class="ttn mr-1">
+														{{value['last_date']}}
+													</div>
+													<div>
+														<a  title="Edit" class="btn btn-tean" (click)='editTopic(value.id)' placement="top" ngbTooltip="Edit"><fa-icon [icon]="faEdit"></fa-icon></a>
+														<button class="btn btn-sm btn-delete" placement="top" (click)='deleteTopic(value.id)' ngbTooltip="Delete"><fa-icon [icon]="faTrash"></fa-icon></button>
+													</div>
+												</div>
+										</div>
+								</div>
+						<div>
+							<ng-template #elseBlock>Content Not Found.</ng-template>
+				</div>
+							
+						</div>
+					</div>
+				</div>
+						</div>
+					</div>
+				</div>	
+			</div>

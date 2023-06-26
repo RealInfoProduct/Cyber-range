@@ -1,0 +1,196 @@
+<div class="wrapper">
+	<nav id="sidebar" class="">
+		<div *ngIf="loginGroupId=='1'">
+		<ul class="list-unstyled components list-color">
+			<li > 
+				<a  (click) = "redirect(dashboard_url+'dashboard')"  id="{{dashboard_url}}dashboard" class="aa"><fa-icon [icon]="faGlobe" class="faicn ter-icon"></fa-icon> <span class="mtc">Dashboard</span></a>
+			</li>  
+			 <li > 
+				<a href = "#homeSubmenu" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faCog" class="faicn ter-icon"></fa-icon> <span class="mtc">Resources</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+				<ul class="collapse list-unstyled" id="homeSubmenu">
+					<li>
+						<a (click) = "redirect(dashboard_url+'resource')"  id="{{dashboard_url}}resource" ngbDropdownItem class="">Allocate Resources</a>
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'resource-list')" id="{{dashboard_url}}resource-list" ngbDropdownItem class="">Allocated Resource List</a>
+					</li>
+				</ul>
+			</li>
+			
+			<li>
+				<a href = "#dropdownExercise" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faBook" class="faicn ter-icon"></fa-icon> <span class="mtc">Exercise</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+				<ul class="collapse list-unstyled" id="dropdownExercise">
+					<li>
+						<a (click) = "redirect(dashboard_url+'exercise')" id="{{dashboard_url}}exercise" ngbDropdownItem class="">New Exercise</a>
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'exercise-list')" id="{{dashboard_url}}exercise-list" ngbDropdownItem class="">Exercise List</a>
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'allotment-list')" id="{{dashboard_url}}allotment-list" ngbDropdownItem class="">Allotment List</a> 
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'archive-list')" id="{{dashboard_url}}archive-list" ngbDropdownItem class="">Archive List</a> 
+					</li>
+				    <li>
+						<a (click) = "redirect(dashboard_url+'package-list')" id="{{dashboard_url}}package-list" ngbDropdownItem class="">Exercise Bundle</a> 
+					</li>				   
+				</ul>
+			</li>
+			<!-- <li>
+				<a href = "#dropdownChallenge" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Challenge</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+				<ul class="collapse list-unstyled" id="dropdownChallenge"> 
+					<li>
+						<a (click) = "redirect(dashboard_url+'challenge')" id="{{dashboard_url}}Challenge" ngbDropdownItem class="">New Challenge</a>
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'challenge-list')" id="{{dashboard_url}}challenge-list" ngbDropdownItem class="">Challenge List</a>
+					</li>
+				</ul>
+			</li> -->
+			<li>
+				<a href = "#dropdownManual" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Manual</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+				<ul class="collapse list-unstyled" id="dropdownManual"> 
+					<li>
+						<a (click) = "redirect(dashboard_url+'manual')" id="{{dashboard_url}}manual" ngbDropdownItem class="">New Manual</a>
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'manual-list')" id="{{dashboard_url}}manual-list" ngbDropdownItem class="">Manual Library</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href = "#dropdownUsers" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faUser" class="faicn ter-icon"></fa-icon> <span class="mtc">User Manager</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+				<ul class="collapse list-unstyled" id="dropdownUsers">
+					<li>
+						<a (click) = "redirect(dashboard_url+'user-profile')" id="{{dashboard_url}}user-profile" ngbDropdownItem class="">New User</a>
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'users-list')" id="{{dashboard_url}}users-list" ngbDropdownItem class="">Users List</a>
+					</li>
+				</ul>
+			</li>
+			<li>
+				<a href = "#dropdownTeam" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faUserTie" class="faicn ter-icon"></fa-icon> <span class="mtc">Team Manager</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+				<ul class="collapse list-unstyled" id="dropdownTeam">
+					<li>
+						<a (click) = "redirect(dashboard_url+'team-type-list')" id="{{dashboard_url}}team-type-list" ngbDropdownItem class="">Team Type List</a>
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'team-list')"  id="{{dashboard_url}}team-list"  ngbDropdownItem class="">Teams</a>
+					</li>
+				</ul>
+			</li>
+
+			<li *ngIf="credit_system=='Active'"  >
+				<a href = "#dropdownPurchase" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faCreditCard" class="faicn ter-icon"></fa-icon> <span class="mtc">Purchase</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+				<ul class="collapse list-unstyled {{showclass}}" id="dropdownPurchase">
+					<li>
+						<a (click) = "redirect(dashboard_url+'purchase-voucher-list')"  id="{{dashboard_url}}purchase-voucher-list"  ngbDropdownItem class=""><span class="mtc">Purchase Voucher</span></a>
+					</li>
+					<li>
+						<a (click) = "redirect(dashboard_url+'wallet-transition-list')"  id="{{dashboard_url}}wallet-transition-list"  ngbDropdownItem class=""><span class="mtc">Wallet Transactions</span></a>
+					</li>
+				</ul>
+			</li>		
+			<li>
+				<a href="{{site_Url}}/assessment/ci-admin/login" target="_blank" ngbDropdownItem class=""><fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Assessment</span></a>
+			</li>
+			<li *ngIf="ref_system=='Active'" >
+				<a (click)="redirect(dashboard_url+'reference-list')"  ngbDropdownItem class=""><fa-icon [icon]="faUserFriends" class="faicn ter-icon"></fa-icon> <span class="mtc">Reference List</span></a>
+			</li>
+			<li>
+				<a (click)="redirect(dashboard_url+'demo-request-list')"  ngbDropdownItem class=""><fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Demo Requests</span></a>
+			</li>
+			<li *ngIf="credit_system=='Active'" >
+				<a (click)="redirect(dashboard_url+'voucher-list')"  ngbDropdownItem class=""><fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Voucher List</span></a>
+			</li>
+			<li *ngIf="credit_system=='Active'"  >
+				<a (click)="redirect(dashboard_url+'claim-list')"  ngbDropdownItem class=""><fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Claim List</span></a>
+			</li>
+			<li *ngIf="credit_system=='Active'"  >
+				<a (click)="redirect(dashboard_url+'resource-req-list')"  ngbDropdownItem class=""><fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Resource Request List</span></a>
+			</li>
+			<li>
+				<a (click)="redirect(dashboard_url+'general-setting')"  ngbDropdownItem class=""><fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">General Settings</span></a>
+			</li>
+
+		</ul>
+		</div>
+
+		<div *ngIf="loginGroupId=='2'">
+			<ul class="list-unstyled components list-color">
+				<li > 
+					<a (click) = "redirect(dashboard_url+'dashboard')" id="{{dashboard_url}}dashboard" class="aa"><fa-icon [icon]="faGlobe" class="faicn ter-icon"></fa-icon> <span class="mtc">Dashboard</span></a>
+				</li>  
+				<li *ngIf="ex_menu=='Allowed'" >
+					<a href = "#dropdownExercise" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faBook" class="faicn ter-icon"></fa-icon> <span class="mtc">Exercise</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+					<ul class="collapse list-unstyled" id="dropdownExercise">
+						<li *ngIf="create_ex_menu=='Allowed'" >
+							<a (click) = "redirect(dashboard_url+'exercise')" id="{{dashboard_url}}exercise" ngbDropdownItem class="">New Exercise</a>
+						</li>
+						<li *ngIf="create_ex_menu=='Allowed'" >
+							<a (click) = "redirect(dashboard_url+'exercise-list')" id="{{dashboard_url}}exercise-list" ngbDropdownItem class="">Exercise List</a>
+						</li>
+						<li *ngIf="allotment_menu=='Allowed'" >
+							<a (click) = "redirect(dashboard_url+'allotment-list')" id="{{dashboard_url}}allotment-list" ngbDropdownItem class="">Allotment List</a>
+						</li>
+						<li *ngIf="exe_bundle_menu=='Allowed'" >
+							<a (click) = "redirect(dashboard_url+'package-list')" id="{{dashboard_url}}package-list" ngbDropdownItem class="">Exercise Bundle</a> 
+						</li>
+					</ul>
+				</li>
+				<li *ngIf="manual_menu=='Allowed'">
+					<a href = "#dropdownManual" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Manual</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+					<ul class="collapse list-unstyled" id="dropdownManual"> 
+						<li>
+							<a (click) = "redirect(dashboard_url+'manual')" id="{{dashboard_url}}manual" ngbDropdownItem class="">New Manual</a>
+						</li>
+						<li>
+							<a (click) = "redirect(dashboard_url+'manual-list')" id="{{dashboard_url}}manual-list" ngbDropdownItem class="">Manual Library</a>
+						</li>
+					</ul>
+				</li>
+				<li *ngIf="team_menu=='Allowed'">
+					<a href = "#dropdownTeam" class="aa" data-toggle="collapse" aria-expanded="false" class="sideddtm dropdown-toggle"> <fa-icon [icon]="faUserTie" class="faicn ter-icon"></fa-icon> <span class="mtc">Team Manager</span><fa-icon [icon]="faAngleRight" class="maright marrow"></fa-icon> <fa-icon [icon]="faAngleDown" class="maleft marrow"></fa-icon></a>
+					<ul class="collapse list-unstyled" id="dropdownTeam">
+						<li>
+							<a (click) = "redirect(dashboard_url+'team-type-list')" id="{{dashboard_url}}team-type-list" ngbDropdownItem class="">Team Type List</a>
+						</li>
+						<li>
+							<a (click) = "redirect(dashboard_url+'team-list')" id="{{dashboard_url}}team-list" ngbDropdownItem class="">Teams</a>
+						</li>					   
+					</ul>
+				</li>
+				<li *ngIf="credit_system=='Active'"  >
+					<a (click)="redirect(dashboard_url+'claim-list')"  ngbDropdownItem class=""><fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Claim List</span></a>
+				</li>
+				<li *ngIf="credit_system=='Active'"  >
+					<a (click)="redirect(dashboard_url+'resource-req-list')"  ngbDropdownItem class=""><fa-icon [icon]="faFile" class="faicn ter-icon"></fa-icon> <span class="mtc">Resource Request List</span></a>
+				</li>
+				<li>
+					<a (click) = "redirect(dashboard_url+'users-list')" ngbDropdownItem class=""> <fa-icon [icon]="faUser" class="faicn ter-icon"></fa-icon> <span class="mtc"></span>Users List</a>
+				</li>
+				<li *ngIf="ref_system=='Active'"  >
+					<a (click)="redirect(dashboard_url+'reference-list')"  ngbDropdownItem class=""><fa-icon [icon]="faUserFriends" class="faicn ter-icon"></fa-icon> <span class="mtc">Reference List</span></a>
+				</li>
+			  </ul>
+		</div> 
+
+
+
+		<div class="clearfix"></div>
+		
+		<div class="ascb">
+			<app-adminchat *ngIf="chat_userId != null && chat_status == 1 && chat_menu=='Allowed'"></app-adminchat>
+		</div>
+		
+	</nav>
+</div>
+
+
+
+
+
+
+

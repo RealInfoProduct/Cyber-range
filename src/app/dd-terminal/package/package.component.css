@@ -1,0 +1,22 @@
+.ttflex {
+    display: flex;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+}
+.paddy {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
+.ttsn {
+    display: inline-block;
+    min-width: 21px;
+    text-align: center;
+}
+.ttn {
+    flex: 1 1 0%;
+}
+.ttn a:hover {
+    color: #0060ff;
+}
+.content-box-shadow-sec {
+    margin-bottom: 17px !important;
+}

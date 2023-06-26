@@ -1,0 +1,10 @@
+.crop-image {
+    border-radius: 100%;
+    border: 2px solid #d8d8d8;
+}
+@media only screen and (min-width: 1025px) 
+{
+	.mtain {
+		margin-top: 0px;
+	}
+}

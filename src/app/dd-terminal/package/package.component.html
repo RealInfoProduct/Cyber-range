@@ -1,0 +1,217 @@
+<div class="col-md-12 content dashboard-body"> 
+
+    <app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+    
+    <ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+    
+    <div class="myform team padding-body">	
+        <form [formGroup] = "formdata">	
+            <div class="row">
+                <div class="col-lg-5 col-md-12 fiftypr"> 
+                    <div class="content-box-shadow content-box-shadow-sec">
+                        
+                        <div class="row">
+                            <div class="col-md-5 col_lable   form-group">
+                                <label>Bundle Name<span class="red-astr">*</span></label>
+                            </div>
+                            <div class="col-md-7 col_input form-group" >
+                                <input type = "text" class = "form-control fortextbox" name = "package_name" placeholder = "Bundle Name" formControlName="package_name"  >                           
+                                <ng-container *ngFor="let error of error_messages.package_name">
+                                   <div class="error-message" *ngIf="formdata.get('package_name').hasError(error.type) && (formdata.get('package_name').dirty || formdata.get('package_name').touched)">
+                                      {{ error.message }}
+                                   </div>
+                                </ng-container>
+                            </div>					 
+                        </div>
+
+                        <div class="row">						
+                            <div class="col-md-5 col_lable  form-group">
+                                <label>Exercise<span class="red-astr">*</span></label>
+                            </div>
+
+                            <div class="col-md-7 col_input form-group"  >
+                                <!--[ngModelOptions]="{standalone: true}"-->
+                                <ng-multiselect-dropdown #exercise_dropdown 
+                                name = "package_exe" formControlName="package_exe"
+                                [placeholder]="'Select Exercise'"
+                                [settings]="exercise_dropdownSettings"
+                                [data]="exercise_dropdownList"
+                                [(ngModel)]="exercise_selectedItems"
+                                (onSelect)="onItemSelect($event,'Exercise')"
+                                (onDeSelect)="onItemDeSelect($event,'Exercise')"
+                                >
+                                <ng-template #optionsTemplate let-item let-option="option" let-id="id" let-isSelected="isSelected">
+                                    {{option}}
+                                </ng-template>
+                                <ng-template #optionSelectedTemplate optionSelectedTemplate let-option="option"  let-id="id">
+                                    {{option}}
+                                </ng-template>
+                                </ng-multiselect-dropdown>
+
+                                <ng-container *ngFor="let error of error_messages.package_exe">
+                                    <div class="error-message" *ngIf="formdata.get('package_exe').hasError(error.type) && (formdata.get('package_exe').touched)">
+                                       {{ error.message }}
+                                    </div>
+                                 </ng-container>
+                            </div>	
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-5 col_lable form-group pt-0">
+                                <label for="roadmap">Roadmap</label>
+                            </div>
+                            <div class="col-md-7 col_input form-group" >
+                                <input 
+                            id="roadmap" 
+                            type="checkbox" 
+                            (change)="isNoteChecked($event);"
+                            [checked]="roadmap"
+                            >
+                            </div>					 
+                        </div>
+	
+                        
+                        <div class="row">						
+                            <div class="col-md-4 col_lable  form-group">								
+                            </div>
+                            <div class="col-md-8 col_input btn_align">
+                                <div class="btn-box">
+                                    <div class="theme-btn mr-2">
+                                        <span class="txt">
+                                            <button class = "forsubmit btn_blueas btn" (click)="onSubmit(formdata.value)">Submit</button>
+                                        </span>
+                                    </div>
+                                    
+                                    <div class="theme-btn">
+                                        <span class="txt">
+                                            <a class = "btn_blueas btn" routerLink="{{dashboard_url}}package-list" >Cancel</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>							
+                        </div>									
+                    </div>
+                </div>
+                
+                				
+            </div>			
+        </form>
+
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="content-box-shadow content-box-shadow-sec admin_ex-allot">             
+
+            <div cdkDropList
+								#personList = "cdkDropList"
+								[cdkDropListData] = "ex_detail"
+								class = "example-list"
+								(cdkDropListDropped) = "onDrop($event)"  *ngIf="ex_detail.length != 0  ; else elseBlock ">	
+
+										<div *ngFor="let ex of ex_detail ; index as i" class = "divlayout" cdkDrag >
+												<div class="ttflex paddy">
+													<div class="ttsn mr-1">
+														<fa-icon [icon]="faSort" placement="top" ngbTooltip="Set order"  ></fa-icon>
+														<span class="ml-2" >{{i+1}}</span> 
+													</div>
+													<div class="ttn mr-1">
+														{{ex.name}}
+													</div>
+                                                    <div class="ttn mr-1">
+														Created By: <a href="javascript:void(0);" (click)="viewUserProfile(ex.created_by);" class="tablelinkc cap" title="{{ex.F_Name}} {{ex.L_Name}} profile" >{{ex.F_Name}} {{ex.L_Name}}</a>
+													</div>
+                                                    <div class="ttn mr-1 ratting cursor-menu">
+
+                                                        <a href="javascript:void(0);" (click) = "openExeModal(i)" class="edit mr-2" placement="top" ngbTooltip="View Request"><fa-icon [icon]="faEye"></fa-icon></a>
+
+
+														<fa-icon [icon]="faStar" class="starc" placement="top" ngbTooltip="Rating: {{ex.rating}}"></fa-icon> {{ex.rating}} 
+            
+                              <fa-icon [icon]="faCircle" class="lowc" placement="top" ngbTooltip="Difficulty Level: {{ex.difficulty_level}}" class="{{ex.difficulty_level}}c"></fa-icon> {{ex.difficulty_level}}
+            
+                              <span class="subscriber">
+                                 <fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: 7/10" class="usercircle mr-1"></fa-icon>
+                                 <span placement="top" ngbTooltip="Running Subscribers: {{ex.total_running}}">{{ex.total_running}}/</span>
+                                 <span placement="top" ngbTooltip="Total Subscribers: {{ex.total_allotment}}">{{ex.total_allotment}}</span> 
+                              </span>
+            
+                              <fa-icon *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" class="questionc" placement="top" ngbTooltip="{{ex.key_words}}" ></fa-icon>
+                              <span *ngIf="credit_system=='Active'" class="ercredit">Cr. {{ex.credits}}</span>
+                   
+													</div>
+													
+												</div>
+										</div>
+								</div>
+                                <ng-template #elseBlock>Content Not Found.</ng-template>
+
+                          
+           
+        </div>		
+    </div>		
+</div>		
+
+    </div>		
+
+
+<div class="modal fade" id="reqModal" tabindex="-1" aria-labelledby="reqModal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Resource/Permission Request</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+            <div class="row admin_ex-allot">
+                  
+                <div class="col-md-5">
+                   <div class="ed_center">
+                      <img *ngIf="exeData.thumb_image!=null" src="{{server_url}}media/exercise-image/{{exeData.thumb_image}}" class="img-fluid">										
+                      <img *ngIf="exeData.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">										
+                   </div>
+                   
+                   <div class="boxshad" [innerHTML]="exeData.short_desc" >			
+                   </div>
+                </div>
+                
+                <div class="col-md-7">
+                   <div class="boxshad">
+                      <h3 class="heading">{{exeData.name}}</h3>
+                      
+                      <div class="row">
+                         <div class="col-lg-5 col-md-12">
+                            <p class="authorby">By: {{exeData.F_Name}} {{exeData.L_Name}}</p>
+                         </div>
+          
+                         <div class="col-lg-7 col-md-12 text-lg-right ratting cursor-menu">				
+                            <fa-icon [icon]="faStar" class="starc" placement="top" ngbTooltip="Rating: {{exeData.rating}}"></fa-icon> {{exeData.rating}} 
+          
+                            <fa-icon [icon]="faCircle" class="lowc" placement="top" ngbTooltip="Difficulty Level: {{exeData.difficulty_level}}" class="{{exeData.difficulty_level}}c"></fa-icon> {{exeData.difficulty_level}}
+          
+                            <span class="subscriber">
+                               <fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: 7/10" class="usercircle mr-1"></fa-icon>
+                               <span placement="top" ngbTooltip="Running Subscribers: {{exeData.total_running}}">{{exeData.total_running}}/</span>
+                               <span placement="top" ngbTooltip="Total Subscribers: {{exeData.total_allotment}}">{{exeData.total_allotment}}</span> 
+                            </span>
+          
+                            <fa-icon *ngIf="exeData.key_words!=null" [icon]="faQuestionCircle" class="questionc" placement="top" ngbTooltip="{{exeData.key_words}}" ></fa-icon>
+                            <span *ngIf="credit_system=='Active'" class="ercredit">Cr. {{exeData.credits}}</span>
+                         </div>
+                      </div>					
+                      <hr> 
+                         
+                      <div class="" [innerHTML]="exeData.long_desc" >								 
+                      </div>							 
+                      <hr>
+                   
+                   </div>
+                </div>		
+             </div>  
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-viewuserprofile [get_viewProfile]="viewProfile" ></app-viewuserprofile>

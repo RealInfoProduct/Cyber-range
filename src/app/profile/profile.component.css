@@ -1,0 +1,120 @@
+.crop-image{
+	border-radius: 100%;
+	border: 2px solid #d8d8d8;
+}
+.modal-show {
+    display: block;
+    background-color: rgba(0,0,0,.5);
+}
+.ml23 {
+	margin-left: 23px;
+}
+.upload_profile {
+    color: #132144;
+    font-family: 'OpenSans-SemiBold', sans-serif;
+    border-radius: 3px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    border: 1px solid #d0d0d0;
+    border-radius: 20px;
+    padding: 3px 11px;
+    margin-top: 1px;
+    display: inline-block;
+    font-size: 14px;
+}
+.upload_profile:hover {
+	background: #e8e8e8;
+}
+.dk-model-box .dk-model-header {
+    background: #141d38;
+    color: #fff;
+}
+.dk-model-box .mclose span {
+    color: #fff;
+}
+.dk-model-box .mclose:focus {
+    outline: 0;
+}
+.previewimg {
+	font-family: 'OpenSans-SemiBold', sans-serif;
+    color: #141d38;
+    font-size: 17px;
+    font-style: italic;
+    margin-bottom: 0;
+    margin-top: 5px;
+}	
+.mautobtn .btn-box {
+	margin-right: 15px;
+	float: left;
+}
+
+@media only screen and (min-width: 768px) 
+{
+	.mautobtn {
+		margin: auto;
+		text-align: center;
+		display: table;
+	}
+	.mautobtn .floatleft{
+		float: left;
+	}	
+	.mautobtn .floatleft .choosimg{
+		width: 215px;
+	}	
+}
+@media only screen and (min-width: 767px) 
+{
+	.mautobtn .floatleft .choosimg{
+		float: none;
+	}
+}
+@media only screen and (max-width: 767px) 
+{
+	.mautobtn .floatleft{
+		margin-bottom: 25px;
+	}
+}
+
+@media only screen and (min-device-width : 1300px) and (max-device-width : 1400px) 
+{
+	.myform .col_lable {
+		min-width: 150px;
+	}
+	.upload_profile {
+		font-size: 12px;
+	}
+}
+.pimg_relative{
+    position: relative;
+    height: 100px;
+    width: 100px;
+	margin: auto;
+}
+.pimg_absolute{
+    bottom: 0px;
+    position: absolute;
+    right: 0px;
+    background: #ffffff;
+    padding: 3px 6px;
+    border: 2px solid #b9b9b9;
+    border-radius: 20px;
+	color: #132144;
+}
+.pimg_absolute .iconcmr{
+	color: #525252 !important;
+}
+.pimg_absolute:hover{
+	background: #f5f5f5 !important;
+}
+.profile_bg {
+	background: #f5f5f5;
+    padding: 25px 10px 20px;
+}
+
+@media only screen and (min-width: 1024px)
+{
+	.myform .col_input {
+		flex: 0 0 62% !important;
+		max-width: 62% !important;
+	}
+}

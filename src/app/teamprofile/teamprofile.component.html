@@ -1,0 +1,50 @@
+<app-candidateheader></app-candidateheader>
+
+<!-- Sub Header-->
+<app-breadcrumbs [side]="'front'" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+
+<!-- Sub Header End -->
+<div class="padding-all page-min-height maxf-width"> 	
+	<div class="row mt-5 mb-5" *ngFor="let tp of team_profile; let i = index" >
+		<div class="col-md-4 our-team text-center">
+            <img src="{{server_url}}media/images/{{tp.image}}" class="img-fluid rounded-circle grounded-radiants">
+            <h5>{{tp.name}}</h5>
+            <div class="heading_brd_name"></div>
+            <p [innerHTML]="tp.designation"></p>             
+            <div class="mb-4">
+                <span *ngFor="let sp of tp. specialty; let isp = index">
+                    <a class="mr-2" placement="top" ngbTooltip="{{sp.title}}">
+                        <img src="{{server_url}}media/images/{{sp.icon}}" class="img-fluid">
+                    </a>
+                </span>
+            </div> 
+		</div>
+
+        <div class="col-md-8">
+            <h3 class="heading">
+                About {{tp.short_name}}
+                <div class="heading_brd_blue_left"></div>
+            </h3>
+            
+            <div class="" [innerHTML]="tp.description">							 
+            </div>
+
+            <h5 class="heading mt-4 mb-3">
+                Get in touch with {{tp.short_name}}
+                <div class="heading_brd_blue_left"></div>
+            </h5> 
+            <div class="our-team">
+                <div class="social">
+                    <span *ngFor="let sm of tp. soical_media; let isp = index" class="sa">
+                        <a href="{{sm.link}}" target="_blank">
+                            <img src="{{server_url}}media/images/{{sm.icon}}" class="img-fluid {{sm.type}}">
+                        </a>
+                    </span>
+                </div>
+            </div>
+         </div>
+	</div>	
+</div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

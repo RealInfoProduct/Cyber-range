@@ -1,0 +1,119 @@
+		<div class="col-md-12 content dashboard-body"> 		
+						
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+			
+			<ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+			
+			
+			<div class="myform padding-body">				
+				<form [formGroup] = "rolesfrm">
+					<div class="row">
+						<div class="col-lg-6 col-md-12 fiftypr"> 
+							<div class="content-box-shadow content-box-shadow-sec"> 
+								<div class="row">
+									<div class="col-lg-4 col-md-4 col_lable1 form-group">
+										<label>Instructor<span class="red-astr">*</span></label>              
+										<img *ngIf="spinner==true" width="25" src="{{site_url}}/assets/images/spinner-green.svg" />
+									</div>
+									<div class="col-lg-8 col-md-8 col_input-1 form-group" >
+										<div *ngIf="disabled_dropdown == true" class="col-md-12 pr-0 float-left resourcedd" >
+											<input type="text" class = "form-control fortextbox"  value="{{initial_value}}" disabled="disabled" >
+										</div>
+					
+										<div *ngIf="disabled_dropdown == false" class="ng-autocomplete resourcedd">
+											<ng-autocomplete #auto
+											  [data]="instructor_list"
+											  [searchKeyword]="keyword"
+											  [debounceTime] = "800"
+											  [minQueryLength] = "3" 
+											  placeHolder="Assign Role To Instructor"
+											  name="instructor"
+											  (selected)='selectEvent($event)'
+											  (inputFocused)='onFocused($event)'
+											  [itemTemplate]="itemTemplate"
+											  (scrolledToEnd)='scrolledToEnd($event)'
+											  (inputChanged)='inputChanged($event)'
+											  (inputCleared)='inputCleared($event)'
+											  [notFoundTemplate]="notFoundTemplate">
+											</ng-autocomplete>
+										  
+											<ng-template #itemTemplate let-item>
+											  <a [innerHTML]="item.name"></a>
+											</ng-template>
+										  
+											<ng-template #notFoundTemplate let-notFound>
+											  <div [innerHTML]="notFound"></div>
+											</ng-template>
+										</div>
+					
+										<div *ngIf="instructor_selected == true" class="error-message col-md-12 pl-0 pr-0" >
+											Instructor required
+										</div>				
+									</div> 
+									
+													
+									<div class="col-lg-12"> 
+										<label for="create_team" class="rloes_lable">
+											<input type = "checkbox" class = "" id="create_team" name = "create_team" formControlName="create_team">  
+											Can Create Team
+										</label>
+										<ng-container *ngFor="let error of error_messages.create_team">
+											<div class="error-message" *ngIf="rolesfrm.get('create_team').hasError(error.type) && (rolesfrm.get('create_team').dirty || rolesfrm.get('create_team').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>
+										<br>
+										
+										<label for="create_exercise" class="rloes_lable">
+											<input type="checkbox" class="" id="create_exercise" name="create_exercise" formControlName="create_exercise"> 
+											Can Create Exercise
+										</label>
+										<ng-container *ngFor="let error of error_messages.create_exercise">
+											<div class="error-message" *ngIf="rolesfrm.get('create_exercise').hasError(error.type) && (rolesfrm.get('create_exercise').dirty || rolesfrm.get('create_exercise').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>	
+										<br>
+										
+										<label for="allocate_exercise_user" class="rloes_lable">
+											<input type="checkbox" class="" id="allocate_exercise_user" name="allocate_exercise_user" formControlName="allocate_exercise_user">	
+											Can Allocate Exercise To User
+										</label>										
+										<ng-container *ngFor="let error of error_messages.allocate_exercise_user">
+											<div class="error-message" *ngIf="rolesfrm.get('allocate_exercise_user').hasError(error.type) && (rolesfrm.get('allocate_exercise_user').dirty || rolesfrm.get('allocate_exercise_user').touched)">
+												{{ error.message }}
+											</div>
+										</ng-container>
+									</div>
+										
+
+									<div class="col-md-12 form_lable form-group mt-3 btn_align">										
+										<div class="btn-box">
+											<div class="theme-btn mr-2">
+												<span class="txt">
+													<button class = "forsubmit btn_blueas btn" (click)="onSubmit(rolesfrm.value)">Submit</button>
+												</span>
+											</div>
+											
+											<div class="theme-btn">
+												<span class="txt">
+													<a class = "btn_blueas btn" routerLink="{{dashboard_url}}instructor-permission" >Cancel</a>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+													
+					</div>						
+				</form>				
+			</div>
+		
+			<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+				<div class="inner-area col-md-6 text-center">
+					<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+					<p class="text-center loaderc" >Please Wait ...</p>
+				</div>
+			</div>
+		</div>		

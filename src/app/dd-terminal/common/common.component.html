@@ -1,0 +1,47 @@
+<div *ngIf="progressbar" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>
+   </div>
+</div>
+
+<div class="modal fade" id="tpinModal" tabindex="-1" aria-labelledby="tpinModal" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+       <div class="modal-header">
+         <h5 class="modal-title" id="exampleModalLabel">Transaction PIN</h5>
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       </div>
+       <div class="modal-body">
+         <form [formGroup]="tpinfrm">
+            <div class="col-lg-12 col-md-12 float-left form-group" >
+               <div class="col-lg-12 col-md-12 col-12 p-0 pt-2 float-left">
+                  <input type = "text" class = "form-control fortextbox" id="t_pin" name = "t_pin" formControlName="t_pin" placeholder="Enter TPIN">
+               </div>
+               <div class="clearfix"></div>
+               <ng-container *ngFor="let error of error_messages.t_pin">
+                  <div class="error-message col-md-12 pl-0" *ngIf="tpinfrm.get('t_pin').hasError(error.type) && (tpinfrm.get('t_pin').dirty || tpinfrm.get('t_pin').touched)">
+                     {{ error.message }}
+                  </div>
+               </ng-container>
+            </div>
+            <div class="col-md-12 float-left text-center pb-3">
+               <div class="btn-box text-center">
+                  <div class="theme-btn">
+                     <span class="txt">												
+                     <button type="button" (click)="submit_tpin(tpinfrm.value)" class="btn btn_blueas tpin">Submit</button>
+                     </span>
+                  </div>
+               </div>
+            </div>
+         </form>
+       </div>
+       <!-- <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-primary">Save changes</button>
+       </div> -->
+     </div>
+   </div>
+ </div>

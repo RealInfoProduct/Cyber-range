@@ -1,0 +1,61 @@
+.cr-pluse {
+    color: #008e00;
+    font-weight: 600 !important;
+}
+.cr-minus {
+    color: #ff3e3e;
+    font-weight: 600 !important;
+}
+
+.cr-pluse .crpi{
+    font-size: 10px;
+    min-width: 13px;
+    display: inline-block;
+}
+.cr-minus .crmi{
+    font-size: 9px;
+    min-width: 14px;
+    display: inline-block;
+}
+.bshadow {
+    box-shadow: 0 2px 9px 2px rgb(0 0 0 / 14%);
+}
+.dahboard_blocksd .block-content.block-content-sm.block-content-full {
+    padding-bottom: 0;
+}
+.w-tra{
+    display: flow-root;
+}
+.width-350{
+    width:300px !important;
+}
+.wthead th {
+    padding: 10px 15px;
+    border-top: 0 !important;
+    border-bottom: 1px solid #dee2e6 !important;
+}
+.wallet td {
+    padding: 20px 15px;
+}
+.w-icon {
+    float: left;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    background: #cecece;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    border-radius: 100pc;
+    margin-right: 9px;
+    margin-top: 5px;
+}
+.w-tra {
+    font-family: 'OpenSans-SemiBold', sans-serif;
+}
+.w-tra span{
+    display: block;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: #808080;
+}

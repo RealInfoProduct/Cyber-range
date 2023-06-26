@@ -1,0 +1,90 @@
+<div class="col-lg-12 col-md-12">
+
+    <app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+    <div class="padding-body dk-table">
+        <div class="content-box-shadow">		
+                <div class="row">				
+                    
+                    <div class="col-lg-2 col-md-6 form-group ippd50">
+                        <input id="search" type="text" placeholder="Search..." class="form-control" (keyup)="datatableSearch($event)" />
+                    </div>
+                    
+                    	
+                    <div class="col-lg-3 col-md-6 mb-4 ippd50">
+                        <div class="mtain">
+                            <div class="min80"><span _ngcontent-ppn-c248="" class="Actives"></span> Read</div>
+                            <div class="min80"><span _ngcontent-ppn-c248="" class="Inactives"></span> Unread</div>
+                            <div class="min80 ml-3"><span _ngcontent-ppn-c248="" class="Schedule"></span> Schedule</div>
+
+                        </div>
+                    </div>
+                    
+    
+                    <div class="col-md-12 form_lable form-group table-responsive main-tabl-height dk-table tpm">
+                        <form >
+                            <table id="demorequest-table" datatable  [dtOptions]="dtOptions[1]"  dt-instance="dtInstance" class="row-border table hover table-striped">
+                                <thead>
+                                <tr>
+                                    <th class="tidcenter tidc">S.No.</th>
+                                    <th class="tuidc">Customer Name</th>
+                                    <th class="ttnc">Customer Email</th>
+                                    <th class="tcbc">Contact Number</th>
+                                    <th class="tcbc">Request Date</th>
+                                    <th class="tttc">Status</th>
+                                    <th class="tcbc">Action</th>
+
+                                  
+                                </tr>
+                                </thead>
+                                <tbody >
+                                    <tr *ngFor="let demo of demorequest; let i = index"
+                                    
+                                    >
+                                        <td class="tidcenter">{{ demo.s_no }}</td>
+                                        <td class="tuidc">{{ demo.candidate_name }}</td>									
+                                        <td  class="ttnc">{{ demo.candidate_email }}</td>	
+                                        <td  class="ttnc">{{ demo.contact_number }}</td>
+                                        <td  class="ttnc">{{ demo.created_at }}</td>
+                                        <td  class="tttc"><span class="status {{ demo.read_status }}">{{ demo.read_status }}</span></td>
+                                        <td>
+                                           <table>
+                                            <tr class="back_rv">   
+                                              <!-- <td><a (click)="deleteRequest(demo.id)"  > <fa-icon style="color: red;"[icon]="faTrash"></fa-icon> &nbsp;</a></td> -->
+                                           <!-- <a (click)="changeReadStatus(demo.id,demo.read_status)"  [class.disabled]="statusshow(demo.read_status)"  [ngClass]="{'seen_button': checkseenStatus(demo.read_status), 'unseen_button': checkunseenStatus(demo.read_status) }"  placement="top"  >  &nbsp;{{demo.read_status}}</a> -->
+                                           <td class="s_action"><select (change)="changeAction($event,demo.id)" name="action" class="form-control" [ngModelOptions]="{standalone: true}" >
+                                               <option value="">Select</option>   
+                                               <option value="Read">Read</option>
+                                               <option value="Unread">Unread</option>
+                                               <option value="DeleteDemo">Delete Demo</option>
+                                               <option *ngIf="demo.read_status!='Schedule'" value="AddSchedule">Add Schedule</option>
+                                               <option *ngIf="demo.read_status=='Schedule'" value="EditSchedule">Edit Schedule</option>
+                                               <option *ngIf="demo.read_status=='Schedule'" value="DeleteSchedule">Delete Schedule</option>
+                                           </select> 
+                                           </td> 
+                                           <td>
+                                            <button (click)="action(demo.id,demo.schedule_id,demo.candidate_email)" class="btn btn-sm btn-primary">OK</button>
+                                           </td>    
+                                         </tr>
+                                         </table>
+                                          
+                                           
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                                <tbody >
+                                    <tr *ngIf="demorequest?.length == 0">
+                                        <td colspan="8" class="no-data-available">No data!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>
+   
+
+
+    </div>
+    <app-schedule></app-schedule>

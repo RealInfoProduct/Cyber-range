@@ -1,0 +1,261 @@
+		<div class="col-md-12 content dashboard-body"> 
+
+			<app-breadcrumbs side="admin" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+						
+			<div class="padding-body">
+				<ngb-alert *ngIf="!closed" class="animate-show animate-hide" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+
+				<!-- Instructor -->
+				<form [formGroup] = "formdata">	
+				<div *ngIf="group_id=='2'" class="col-lg-7 col-md-12 fronttbl p-0 ipp100">
+					<div class="content-box-shadow content-box-shadow-sec">
+						<h4 class="mt-2 mb-4">Instructor - {{user_name}}</h4>	
+						
+						<div *ngIf="credit_system == 'Active'" class="row">
+
+							<div class="col-md-4 col_lable form_lable form-group">
+								<label for="credit">Credit:</label>
+							</div>
+
+							<div class="col-md-2 form-group" >
+									<input type = "number" class = "form-control" id="credit" value="{{credit}}" min="0" name = "credit" formControlName="credit" >
+								<ng-container *ngFor="let error of error_messages.credit">
+									<div class="error-message col-md-12 mb-4 pl-0" *ngIf="packagefrm.get('credit').hasError(error.type) && (packagefrm.get('credit').dirty || packagefrm.get('credit').touched)">
+										{{ error.message }}
+									</div>
+								</ng-container>		
+							</div>
+
+						</div>
+						
+							<div class="table-responsive">
+								<table class="table">
+									<thead class="thead-dark">
+										<tr>
+											<th class="max33">Permission</th>
+											<th class="max33">Status</th>
+											<th class="max33">Default Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Create Team: {{team}}</td>
+											<td>
+												<select name="create_team" id="create_team" formControlName="create_team" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.create_team">
+													<div class="error-message" *ngIf="formdata.get('create_team').hasError(error.type) && (formdata.get('create_team').dirty || formdata.get('create_team').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Denied</span></td>
+										</tr>
+										<tr>
+											<td>Create Exercise: {{exercise}}</td>
+											<td>
+												<select name="create_exercise" id="create_exercise" formControlName="create_exercise" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.create_exercise">
+													<div class="error-message" *ngIf="formdata.get('create_exercise').hasError(error.type) && (formdata.get('create_exercise').dirty || formdata.get('create_exercise').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Denied</span></td>
+										</tr>
+										<tr>
+											<td>Exercise Bundle: {{exe_bundle}}</td>
+											<td>
+												<select name="exercise_bundle" id="exercise_bundle" formControlName="exercise_bundle" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.exercise_bundle">
+													<div class="error-message" *ngIf="formdata.get('exercise_bundle').hasError(error.type) && (formdata.get('exercise_bundle').dirty || formdata.get('exercise_bundle').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Denied</span></td>
+										</tr>
+										<tr>
+											<td>Allocate Exercise to User: {{allot_user}}</td>
+											<td>
+												<select name="allocate_exe_user" id="allocate_exe_user" formControlName="allocate_exe_user" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.allocate_exe_user">
+													<div class="error-message" *ngIf="formdata.get('allocate_exe_user').hasError(error.type) && (formdata.get('allocate_exe_user').dirty || formdata.get('allocate_exe_user').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Denied</span></td>
+										</tr>
+										<tr>
+											<td>Create Manual: {{manual}}</td>
+											<td>
+												<select name="create_manual" id="create_manual" formControlName="create_manual" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.create_manual">
+													<div class="error-message" *ngIf="formdata.get('create_manual').hasError(error.type) && (formdata.get('create_manual').dirty || formdata.get('create_manual').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Denied</span></td>
+										</tr>
+										<tr>
+											<td>Chat: {{chat}}</td>
+											<td>
+												<select name="chat" id="chat" formControlName="chat" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.chat">
+													<div class="error-message" *ngIf="formdata.get('chat').hasError(error.type) && (formdata.get('chat').dirty || formdata.get('chat').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Denied</span></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							<div class="pt-3 btn_align">										
+								<div class="btn-box">
+									<div class="theme-btn mr-2">
+										<span class="txt">
+											<button type="submit" name="submit" class="btn_blueas" (click)="onSubmit(formdata.value)"  >Submit</button>
+										</span>
+									</div>
+									
+									<div class="theme-btn">
+                                        <span class="txt">
+                                            <a class = "btn_blueas btn" routerLink="{{dashboard_url}}users-list" >Cancel</a>
+                                        </span>
+                                    </div>
+								</div>
+							</div>
+					</div>					
+				</div>
+				</form>
+				
+				<form [formGroup] = "formUserData">	
+				<div *ngIf="group_id=='3'" class="col-lg-7 col-md-12 table-responsive fronttbl p-0 ipp100">
+					<div class="content-box-shadow content-box-shadow-sec">
+						<h4 class="mt-2 mb-4">User - {{user_name}}</h4>						
+							<div class="table-responsive">
+								<table class="table">
+									<thead class="thead-dark">
+										<tr>
+											<th class="max33">Permission</th>
+											<th class="max33">Status</th>
+											<th class="max33">Default Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Edit Profile:</td>
+											<td>
+												<select name="edit_profile" id="edit_profile" formControlName="edit_profile" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.edit_profile">
+													<div class="error-message" *ngIf="formUserData.get('edit_profile').hasError(error.type) && (formUserData.get('edit_profile').dirty || formUserData.get('edit_profile').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Allowed</span></td>
+										</tr>
+										<tr>
+											<td>Enroll:</td>
+											<td>
+												<select name="enroll" id="enroll" formControlName="enroll" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.enroll">
+													<div class="error-message" *ngIf="formUserData.get('enroll').hasError(error.type) && (formUserData.get('enroll').dirty || formUserData.get('enroll').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Allowed</span></td>
+										</tr>
+										<tr>
+											<td>Access Exercise:</td>
+											<td>
+												<select name="access_exercise" id="access_exercise" formControlName="access_exercise" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.access_exercise">
+													<div class="error-message" *ngIf="formUserData.get('access_exercise').hasError(error.type) && (formUserData.get('access_exercise').dirty || formUserData.get('access_exercise').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Allowed</span></td>
+										</tr>
+										<tr>
+											<td>Chat:</td>
+											<td>
+												<select name="chat" id="chat" formControlName="chat" class="form-control max150" placement="top" ngbTooltip="Select Status">
+													<option value="">Select Status</option>
+													<option value="Allowed">Allowed</option>
+													<option value="Denied">Denied</option>
+												</select>
+												<ng-container *ngFor="let error of error_messages.chat">
+													<div class="error-message" *ngIf="formUserData.get('chat').hasError(error.type) && (formUserData.get('chat').dirty || formUserData.get('chat').touched)">
+													   {{ error.message }}
+													</div>
+												 </ng-container>
+											</td>
+											<td><span class="defstatus">Allowed</span></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							<div class="pt-3 btn_align">										
+								<div class="btn-box">
+									<div class="theme-btn mr-2">
+										<span class="txt">
+											<button type="submit" name="submit" class="btn_blueas" (click)="onSubmit(formUserData.value)" >Submit</button>
+										</span>
+									</div>
+									
+									<div class="theme-btn">
+                                        <span class="txt">
+                                            <a class = "btn_blueas btn" routerLink="{{dashboard_url}}users-list" >Cancel</a>
+                                        </span>
+                                    </div>
+								</div>
+							</div>
+					</div>					
+				</div>
+			</form>
+			</div>
+		</div>

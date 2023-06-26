@@ -1,0 +1,29 @@
+a.disabled {
+    color: gray;
+    cursor: not-allowed;
+    text-decoration: underline;
+}
+
+.seen_button{
+    color: #fff;
+                                         font-family: 'OpenSans-SemiBold', sans-serif;
+                                         background: #aeffae;
+                                         padding: 4px 10px;
+                                         border-radius: 8px;
+                                         min-width: 100px;
+                                         display: inline-block;
+                                         text-align: center;
+}
+.unseen_button{
+    color: #fff;
+                                         font-family: 'OpenSans-SemiBold', sans-serif;
+                                         background: #df1f1f;
+                                         padding: 4px 10px;
+                                         border-radius: 8px;
+                                         min-width: 100px;
+                                         display: inline-block;
+                                         text-align: center;
+}
+.back_rv {
+    background-color: rgb(0 0 0 / 0%) !important;
+}

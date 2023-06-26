@@ -1,0 +1,102 @@
+.apexcharts-toolbar {
+    display: none;
+}
+#chart {
+	padding: 0;
+	max-width: 650px;
+	margin: 35px auto;
+}
+/*.mleftm svg#SvgjsSvg1026{
+	min-width: 350px !important;
+	width: 350px !important;
+}*/
+.content-box-shadow {
+    padding: 20px 10px 0;
+}
+.resource_heading {
+	margin-bottom: 20px;
+}
+.resource_boxo{
+	float: left;
+    font-size: 22px;
+    margin-right: 8px;
+    /*margin-top: 6px;*/
+	background-color: #edf0f2!important;
+    border-radius: .25rem;
+    padding: 4px 10px;
+	font-family: 'OpenSans-SemiBold', sans-serif;
+}
+.resource_boxt{
+	float: left;
+	line-height: 20px;
+	font-size: 14px;
+}
+
+.exerciesh .faicn{
+	font-size: 18px;
+	margin-right: 3px;
+}
+
+.exerciesh {
+	font-size: 17px;
+    margin-bottom: 7px;
+}
+.exerciesc {
+	font-size: 21px;
+}
+.exerciesc .faicn, .exerciesc .faicns{
+	font-size: 15px;
+}
+
+.mleftm {
+	padding: 0;
+}
+@media only screen and (min-width : 768px) {
+	.mleftm {
+		padding: 0;
+		margin-left: -10px;
+	}
+}
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1365px) 
+{
+	.col3ip {
+		flex: 0 0 33.33%;
+		max-width: 33.33%;
+	}
+}
+@media only screen and (min-width : 1366px) {
+	.col3ip {
+		flex: 0 0 20%;
+		max-width: 20%;
+	}
+}
+@media only screen and (min-device-width : 1024px) 
+{
+	.exercise_box {
+		flex: 0 0 20%;
+		max-width: 20%;
+	}	
+	
+}
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1365px) 
+{
+	.faicn {
+		display: block;
+	}
+	.exerciesh{
+		font-size: 14px;
+		margin-bottom: 7px;
+	}
+}
+@media only screen and (min-device-width : 1200px) and (max-device-width : 1400px) 
+{
+	.resource_heading {
+		font-size: 17px;
+	}
+}
+
+
+
+
+
+

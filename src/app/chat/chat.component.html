@@ -1,0 +1,153 @@
+<div class="chat_sec">
+    <!-- <app-chat-list></app-chat-list> -->
+    <!-- <app-conversation></app-conversation> -->
+
+    <div class="chatdiv fc_chatdiv" *ngIf="list_status == true">
+        <a class="deactivec" placement="top" ngbTooltip="{{user.email}}" [class.bold_user]="getuserBold(user.id? user.id : user._id)"    *ngFor="let user of mix_user"  (click)="selectedUser(user)" ><fa-icon [icon]="user.id ? faUser : faUsers" class="chatufi"></fa-icon>{{user.f_name ? (user.f_name +' '+  user.l_name | slice:0:15)+'..'  : user.team_name}}<fa-icon [icon]="faDotCircle" [ngClass]="user.online === 'Y' ? 'active-user' : 'deactive-user'"></fa-icon></a>
+        
+
+        <!-- <a class="deactivec "  *ngFor="let team of alloted_team "  (click)="selectedTeam(team)" ><fa-icon [icon]="faUsers" class="chatufi"></fa-icon>{{ team.team_name}}<fa-icon [icon]="faDotCircle" class="active-user"></fa-icon></a> -->
+        
+       
+    </div>
+    
+    <!--  class="chat_box_div fc_chat_box_div" -->
+
+    <div class="chat_box_div fc_chat_box_div">
+        
+        <div class="multi_chat_box" *ngFor="let t_user of total_user">
+            <div class="header">
+                <h2 *ngIf="t_user.f_name"  >{{t_user !== null && t_user.f_name ? t_user.f_name  : ' Select a User to chat.' }} </h2>
+                <h2 *ngIf="t_user.team_name"  >{{t_user !== null && t_user.team_name ? t_user.team_name  : ' Select a Team to chat.' }}</h2>
+                <div class="closeb" (click)="removeUser(t_user.id)">
+        
+                    <fa-icon [icon]="faTimesCircle"></fa-icon>
+                </div>
+            </div>
+            <div class="chat-box" >
+                <div class="chating messageThread" >
+                    <div class="message-box"   [class.right-img]="alignMessage(msg.fromUserId)"  *ngFor="let msg of t_user.messages">
+                        <div class="picture">
+                            <img src="{{server_url}}media/exercise-image/profile.png" class="img-fluid" />
+                        
+                        </div>
+        
+                        <div class="message">
+                            <span>{{msg.fromUserName}}</span>
+                            <p style="word-break: break-all;">{{msg.message}}</p>
+                        </div>
+                        <span class="datefont"  >{{setTime(msg.time)}}</span>
+                        <!-- <div *ngIf="progressbar" class="progressbar-area col-md-12">
+                            <div class="inner-area col-md-6">
+                                <div *ngIf="progress_message==''" class="text-center">
+                                    <img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+                                    <p class="text-center loaderc">Please Wait ...</p>
+                                </div>
+                                <p *ngIf="progress_message!=''" class="text-center">
+                                    {{progress_message}}<span class="spinner-grow text-light" role="status"></span><span
+                                        class="spinner-grow text-light" role="status"></span><span class="spinner-grow text-light"
+                                        role="status"></span>
+                                </p>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="message-thread start-chatting-banner" *ngIf="t_user.messages == 0">
+                        <p class="heading">
+                            You haven't chatted with {{selectedUser.username}} in a while,
+                            <span class="sub-heading">Say Hi.</span>
+                        </p>
+                    </div>
+        
+                    
+                    <!-- <div class="message-box right-img">
+                        <div class="picture">
+                            <img src="{{server_url}}media/exercise-image/EXACB75.jpg" class="img-fluid" />
+                            <span class="time">2 mins</span>
+                        </div>
+                        <div class="message">
+                            <span>Mike Moloney</span>
+                            <p>Pretty good, Eating nutella, nommommom</p>
+                        </div>
+                    </div> -->
+                    <!-- <div class="message-box left-img">
+                        <div class="picture">
+                            <img src="{{server_url}}media/exercise-image/EXACB75.jpg" class="img-fluid" />
+                            <span class="time">10 mins</span>
+                        </div>
+                        <div class="message">
+                            <span>Bobby Giangeruso</span>
+                            <p>Hey Mike, how are you doing?</p>
+                        </div>
+                    </div>
+                    <div class="message-box right-img">
+                        <div class="picture">
+                            <img src="{{server_url}}media/exercise-image/EXACB75.jpg" class="img-fluid" />
+                            <span class="time">2 mins</span>
+                        </div>
+                        <div class="message">
+                            <span>Mike Moloney</span>
+                            <p>Pretty good, Eating nutella, nommommom</p>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="enter-message">
+                    <span *ngIf="userTyping"> {{userTyping}}  is typing</span>
+        
+                    
+                    <form [formGroup]="messageForm" *ngIf="user_form==true" > 
+                        <!-- <div *ngIf="msgNotification !=null" >{{msgNotification}}
+                            (keypress)="MessageTyping($event)"
+                        </div>   -->
+                    <textarea class="textare" formControlName="message" (keyup.enter)="sendMessage($event)"  (keypress)="MessageTyping(t_user)"   placeholder="Enter your message.."></textarea>
+                        
+                        <button (click)="sendMessage($event)"  class="forsubmit btn-chat-send" >
+                            <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                        </button> 
+                        <!-- <div class="btn-box float-right">
+                            <div class="theme-btn">
+                                <span class="txt">
+                                    <button   (click)="sendMessage($event)"  class="forsubmit btn_blueas" >
+                                    <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                                    </button>                                    
+                                </span>
+                            </div>
+                        </div> -->
+                        <!-- <button  *ngIf="team==true" (click)="sendMessageGroup($event)"  class="forsubmit btn_blueas" >
+                            <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                        </button> -->
+                    </form>
+
+
+                    <form [formGroup]="messageForm"  *ngIf="team==true" > 
+                        <!-- <div *ngIf="msgNotification !=null" >{{msgNotification}}
+        
+                        </div>   -->
+                    <textarea class="textare" formControlName="message"  (keyup.enter)="sendMessageGroup($event)"  (keypress)="gorupMessageTyping(t_user)" placeholder="Enter your message.."></textarea>
+                        <button (click)="sendMessageGroup($event)"  class="forsubmit btn-chat-send" >
+                            <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                        </button>
+                        <!-- <div class="btn-box float-right">
+                            <div class="theme-btn">
+                                <span class="txt">
+                                    <button   (click)="sendMessageGroup($event)"  class="forsubmit btn_blueas" >
+                                        <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                                        </button>
+                                </span>
+                            </div>
+                        </div> -->
+                        
+                        <!-- <button  *ngIf="user_form==true" (click)="sendMessage($event)"  class="forsubmit btn_blueas" >
+                        <fa-icon [icon]="faAngleDoubleRight"></fa-icon>
+                        </button> -->
+                    </form>
+                    
+                </div> 
+            </div>
+        
+        </div>
+    </div>
+    
+</div>
+<button class="drpd_chat_btn chat-drpd fc-chat-drpd" (click)="chat_list_display(list_status)" >
+    <fa-icon [icon]="faComments"></fa-icon> <!--Live Chat <fa-icon [icon]="faCaretUp"></fa-icon>-->
+</button> 

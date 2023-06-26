@@ -1,0 +1,44 @@
+<!-- Header -->
+<app-candidateheader (setting)="get_setting($event)" ></app-candidateheader>
+
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+
+<div class="col-md-12 page-min-height padding-all padding-tb">
+	<div class="row grid">
+
+		<div *ngFor="let v of voucher; let i = index" class="col-lg-3 col-md-6 ueipp">					
+			<div class="bgwhite">											
+				<img *ngIf="v.image==null" src="{{server_url}}media/voucher-image/default-exe.jpg" class="img-fluid">										
+				<img *ngIf="v.image!=null" src="{{server_url}}media/voucher-image/{{v.image}}" class="img-fluid">
+				<div class="bgwhite_padding">
+					<h5 class="heading text-center">{{v.name}}</h5>	
+					<div align="" class="infobggray">
+						<table>
+							<tr>
+								<td>
+									<b class="bb">Price</b>
+									<fa-icon [icon]="cur_icon"></fa-icon> {{v.price}}
+								</td>
+								<td>
+									<b class="bb">Credit</b>
+									<fa-icon [icon]="faMoneyBill"></fa-icon> {{v.credit}}
+								</td>
+							</tr>
+						</table>
+					</div>	
+					
+					<div class="theme-btn">
+						<span class="txt"><a routerLink="/buy-voucher/{{v.unique_id}}" class="btn_blueas sbtn"><fa-icon [icon]="faPaperPlane" class="mr-1"></fa-icon> By Now</a></span>
+					</div>
+				</div>					
+			</div>
+		</div>		
+		
+
+	</div>
+</div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

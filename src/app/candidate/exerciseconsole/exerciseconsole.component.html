@@ -1,0 +1,15 @@
+
+<div class="col-md-12">
+    <div class="row">
+
+        <div *ngIf="vl_id!='preview' && ex_manual_id.length!=0" class="col-md-12 p-0 manual">
+            <app-excercisecom team_id={{team_id}} ex_mode={{ex_mode}} ex_exercise_id="{{ex_exercise_id}}" [ex_manual_id] ="ex_manual_id"></app-excercisecom>
+       </div>
+
+       <div *ngIf="vl_id=='preview' && ex_manual_id.length!=0" class="col-md-12 p-0 manual">
+           <app-excercisecom  ex_exercise_id="" [ex_manual_id] ="ex_manual_id"></app-excercisecom>
+       </div>
+
+    </div>
+</div>
+<!-- <app-footer></app-footer> -->

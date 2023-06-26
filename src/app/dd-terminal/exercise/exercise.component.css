@@ -1,0 +1,307 @@
+.mautobtn .btn-box {
+	margin-right: 15px;
+	float: left;
+}
+
+.res-img{
+    width: 80px;
+}
+.modal-show,
+.modal.confirm-modal-show {
+    display:block;
+    background-color: rgba(0,0,0,.5);
+}
+
+
+.infra-progressbar {
+    padding-top: 10%!important;
+}
+button.close-processbar {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+.confirm-modal-show .alert {
+    background-color: transparent !important;
+     border-color: transparent !important;
+    font-size: 18px;
+}
+.confirm-modal-show .modal-dialog {
+    max-width: 350px!important;
+}
+.exbtnpls {
+	padding: 7px 12px; 
+}
+@media only screen and (min-width: 768px) 
+{
+	.mautobtn {
+		margin: auto;
+		text-align: center;
+	}
+	.mautobtn .floatleft{
+		float: left;
+	}	
+	.mautobtn .floatleft .choosimg{
+		width: 215px;
+	}
+}
+@media only screen and (min-width: 767px) 
+{
+	.mautobtn .floatleft .choosimg{
+		float: none;
+	}
+}
+@media only screen and (max-width: 767px) 
+{
+	.mautobtn .floatleft{
+		margin-bottom: 25px;
+	}
+}
+/* Latest compiled and minified CSS included as External Resource*/
+/* Optional theme */
+/*@import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');*/
+body {
+    margin-top:30px;
+}
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 12px;
+    line-height: 1.428571429;
+    border-radius: 15px;
+}
+@media only screen and (min-width: 1024px)
+{
+	.myform .col_lable {
+		max-width: 160px;
+	}
+}
+.table .thead-dark th {
+    color: #fff;
+    background-color: #141d38;
+}
+.table th {
+    font-size: 16px !important;
+	font-family: 'Ubuntu-Medium', sans-serif;
+	padding: 0.75rem 0.60rem;
+}
+.table td {
+    font-size: 14px !important;
+    font-family: 'Open Sans', sans-serif;
+	padding: 8px 10px !important;
+	vertical-align: middle;
+}
+.tbl-tvn.table td {
+    font-size: 16px !important;
+}
+.tbl-tvn .tnvtxt {
+    width: 169px;
+}
+
+@media only screen and (min-device-width: 1024px) and (max-device-width: 1366px)
+{
+	.minwidth {
+		min-width: 220px;
+	}
+	.minwidthresources {
+		min-width: 100%;
+	}
+}
+
+.restbl .actionbtnp {
+    margin: 5px 5px 5px 0;
+}
+.restbl .resabtn {
+	padding: 1px 4px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: .2rem;
+}
+.pnt .netshadow {
+	box-shadow: 0 4px 12px 2px rgb(74 85 140 / 28%);
+	margin-bottom: 20px;
+}
+
+
+/* Steps */
+/* Steps */
+.stepwizard-step a.bg-success,
+.stepwizard-step a.bg-secondary {
+    color: #fff !important;
+}
+.stepwizard-step p {
+    margin-top: 0px;
+    color:#666;
+	margin-bottom: 0px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.boxbrd {
+	border: 3px solid #4c5879;
+    padding: 3px 15px 20px;
+	margin-bottom: 15px;
+}
+.stepwizard .btn.disabled, .stepwizard .btn[disabled], .stepwizard fieldset[disabled] .btn {
+    opacity:1 !important;
+    color:#bbb;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.setup-panel {
+    padding: 0;
+    list-style-type: none;
+    font-family: arial;
+    font-size: 12px;
+    clear: both;
+    line-height: 1em;
+    margin: 0 -1px;
+    text-align: center;
+}
+.setup-panel .stepwizard-step {
+    float: left;
+    background: #ececec;
+    color: #fff;
+    position: relative;
+    width: 230px;
+    margin: 0 1px;
+}
+.setup-panel a{
+	/*display: block;
+	width: 100%;
+	min-height: 70px;
+    padding: 12px 0 0 38px;
+	font-size: 16px;
+    letter-spacing: 1px;*/
+	
+	display: block;
+	width: 100% !important;
+	min-height: 70px;
+    padding: 12px 0 0 38px !important;
+	font-size: 16px !important;
+    letter-spacing: 1px;
+
+}
+.setup-panel .stepwizard-step:before {
+    content: '';
+    border-left: 35px solid #fff;
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+	border-width: 35px;
+}
+.setup-panel .stepwizard-step:after {
+    content: '';
+    border-left: 35px solid #ececec;
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 20;
+    border-width: 35px;
+}
+.setup-panel .bg-success {
+    background-color: #141d38!important;
+}
+.setup-panel a.btnbgn:focus, a.btnbgn:hover{
+	background: none !important;
+}
+.setup-panel .bg-success:after {
+    content: '';
+    border-left: 35px solid #141d38 !important;
+    border-top: 35px solid transparent !important;
+    border-bottom: 35px solid transparent !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 100% !important;
+    z-index: 20 !important;
+    border-width: 35px !important;
+}
+.setup-panel .bg-secondary {
+    background-color: #4c5879 !important;
+}
+.setup-panel .bg-secondary:after {
+    content: '';
+    border-left: 35px solid #4c5879 !important;
+    border-top: 35px solid transparent !important;
+    border-bottom: 35px solid transparent !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 100% !important;
+    z-index: 20 !important;
+    border-width: 35px !important;
+}
+@media only screen and (min-device-width: 768px) and (max-device-width: 1023px)
+{
+	.setup-panel .stepwizard-step {
+		width: 32%;
+	}
+	.setup-panel a {
+		padding: 12px 0 0 38px !important;
+		font-size: 12px !important;
+	}
+}
+@media only screen and (max-width: 767px)
+{
+	.setup-panel .stepwizard-step {
+		width: 85%;
+		margin: 0 1px 8px;
+	}
+	.setup-panel a {
+		min-height: 55px;
+		font-size: 10px !important;
+		padding: 12px 0 0 35px !important;
+		letter-spacing: 0px;
+	}
+	.setup-panel .stepwizard-step:before, .setup-panel .bg-success:after, .setup-panel .bg-secondary:after, .setup-panel .btn-disabled:after  {
+		content: '';
+		border-width: 27.5px !important;
+	}
+}
+/* End Steps */
+/* End Steps */
+
+
+@media only screen and (max-width: 767px)
+{
+	
+	.boxbrd {
+		padding: 0px 8px 0;
+	}
+	.theme-btnw {
+		width: 125px;
+		padding: 4px 0px 4px 5px;
+		text-align: left;
+	}
+	.nav-tabs .nav-link {
+		font-size: 15px !important;
+		padding: 6px 10px;
+	}
+	.myform .col_lable {
+		margin-bottom: 5px;
+	}
+	.theme-btn .btn_blueas {
+		padding: 5px 13px 5px 9px !important;
+	}
+}
+
+
+@media only screen and (max-width: 768px)
+{
+	.table th {
+		min-width: 165px;
+	}
+}

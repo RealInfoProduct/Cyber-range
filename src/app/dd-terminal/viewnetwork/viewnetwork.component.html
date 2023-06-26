@@ -1,0 +1,75 @@
+
+<div class="net-topology">
+<div class="{{side}} mynetwork" id="mynetwork" #siteConfigNetwork></div>
+
+<div *ngIf="demo_view==null" class="action-menu" >
+    <ng-container *ngIf="side=='backend'" >
+    <div class='custom-menu backend' *ngFor="let act of action_array; let i = index" (contextmenu)="onRightClick()" >
+
+        <button *ngIf="act.power_on_status=='up'" [disabled]="act?.locked_vm" placement="top" ngbTooltip="Power off" type="button" (click)="action('power_off',act.asset_unique_id); power_down = true; " [ngClass]="{'btn btn-sm mr-3': true, 'btn-success': true,'btn-outline-secondary': power_down === 'true'}" ><fa-icon [icon]="faPowerOff"></fa-icon></button> 
+        <button *ngIf="act.power_on_status=='down'" [disabled]="act?.locked_vm || disable_step2_ctrl==true" placement="top" ngbTooltip="Power on" type="button" (click)="action('power_on',act.asset_unique_id); power_up = true; " [ngClass]="{'btn btn-sm mr-3': true, 'btn-danger': true,'btn-outline-secondary': power_up === 'true'}" ><fa-icon [icon]="faPowerOff"></fa-icon></button> 
+        <button *ngIf="act.power_on_status==true" [disabled]="act?.locked_vm || act.power_on_status==true" placement="top" ngbTooltip="{{res?.power_on_label}}" type="button" [ngClass]="{'btn btn-sm mr-3': true, 'btn-primary': true}" ><fa-icon [icon]="faPowerOff"></fa-icon></button> 
+
+        <button *ngIf="!act.snapshot" placement="top" ngbTooltip="Create snapshot" [disabled]="act?.locked_vm==true || act.power_on_status==true || disable_step2_ctrl==true" type="button" (click)="action('create_snapshot',act.asset_unique_id);" class="btn btn-sm btn-secondary mr-3"><fa-icon [icon]="faFile"></fa-icon></button> 
+        <button *ngIf="act.snapshot==1" placement="top" ngbTooltip="Restore snapshot" [disabled]="act?.locked_vm==true || act.power_on_status==true || disable_step2_ctrl==true" type="button" (click)="action('restore_snapshot',act.asset_unique_id);" class="btn btn-sm btn-secondary mr-3"><fa-icon [icon]="faRedo"></fa-icon></button> 
+        <button *ngIf="act.snapshot==1" placement="top" ngbTooltip="Delete snapshot" [disabled]="act?.locked_vm==true || act.power_on_status==true || disable_step2_ctrl==true" type="button" (click)="action('delete_snapshot',act.asset_unique_id)" class="btn btn-sm btn-secondary mr-3"><fa-icon [icon]="faTrash"></fa-icon></button> 
+        <button placement="top" ngbTooltip="Download console file"  type="button" (click)="action('download_console',act.asset_unique_id)"  [disabled]="act?.locked_vm==true || act.power_on_status==true || act.power_on_status=='down' || disable_step2_ctrl==true" class="btn btn-sm btn-primary mr-3"><fa-icon [icon]="faDesktop"></fa-icon></button> 
+        <button placement="top" ngbTooltip="Update network" [disabled]="act?.locked_vm==true || act.power_on_status==true || disable_step2_ctrl==true" type="button" (click)="action('configure_network',act.asset_unique_id);" class="btn btn-sm btn-warning"><fa-icon [icon]="faCog"></fa-icon></button>
+
+    </div>
+    </ng-container>
+    <ng-container *ngIf="side=='frontend'" >
+
+        <ng-container *ngFor="let act of action_array;" >
+
+            <div *ngIf="act?.vm_control?.control != undefined" class='custom-menu frontend' (contextmenu)="onRightClick()" >
+
+            <ng-container *ngFor="let vctrl of act.vm_control.control;" class="control-btn" >
+
+                    <button *ngIf="vctrl=='1' && act.power_on_status=='up'" (click)="action('power_off',act.asset_unique_id); disable_click = true;" [disabled]="act?.locked_vm == true || disable_click==true ? true : false" placement="top" ngbTooltip="Power on/off" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-success': true}" >
+                    <fa-icon [icon]="faPowerOff"></fa-icon>
+                    </button> 
+                    <button *ngIf="vctrl=='1' && act.power_on_status=='down'" (click)="action('power_on',act.asset_unique_id); disable_click = true;" [disabled]="act?.locked_vm == true || disable_click==true ? true : false" placement="top" ngbTooltip="Power on/off" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-danger': true}" >
+                    <fa-icon [icon]="faPowerOff"></fa-icon>
+                    </button> 
+
+                    <button *ngIf="vctrl=='2'" (click)="action('download_console',act.asset_unique_id);" [disabled]="act?.locked_vm == true || act.power_on_status=='down' ? true : false" placement="top" ngbTooltip="Local Console" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-primary': true}" >
+                    <fa-icon [icon]="faDesktop"></fa-icon>
+                    </button> 
+
+                    <button *ngIf="vctrl=='3'" (click)="action('web_console',act.asset_unique_id);"  [disabled]="act?.locked_vm == true || act.power_on_status=='down'" placement="top" ngbTooltip="Web Console" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-warning': true}" >
+                    <fa-icon [icon]="faLaptop"></fa-icon>
+                    </button> 
+                   <!-- <button *ngIf="vctrl=='4'" (click)="action('USB',act.asset_unique_id);" placement="top" ngbTooltip="USB" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-danger': true}" >
+                    <fa-icon [icon]="faRandom"></fa-icon>
+                    </button> -->
+                    <button *ngIf="vctrl=='5' && act?.user_snapshot_id == undefined" (click)="action('create_snapshot',act.asset_unique_id); disable_click=true;" [disabled]="act?.locked_vm == true || disable_click==true ? true : false" placement="top" ngbTooltip="Create Snapshot" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-secondary': true}" >
+                    <fa-icon [icon]="faFile"></fa-icon>
+                    </button>
+
+                    <button *ngIf="vctrl=='5' && act?.user_snapshot_id != undefined" (click)="action('restore_snapshot',act.asset_unique_id); disable_click=true;" [disabled]="act?.locked_vm == true || disable_click==true || act.power_on_status=='up' ? true : false" placement="top" ngbTooltip="Restore Snapshot" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-secondary': true}" >
+                        <fa-icon [icon]="faRedo"></fa-icon>
+                    </button>
+
+                    <button *ngIf="vctrl=='5' && act?.user_snapshot_id != undefined" (click)="action('delete_snapshot',act.asset_unique_id); disable_click=true;" [disabled]="act?.locked_vm == true || disable_click==true ? true : false" placement="top" ngbTooltip="Delete Snapshot" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-secondary': true}" >
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                    </button>
+                    <button *ngIf="vctrl=='6'" (click)="action('restore_vm',act.asset_unique_id); disable_click=true;" [disabled]="act?.locked_vm == true || disable_click==true || act.power_on_status=='up' ? true : false" placement="top" ngbTooltip="Restore" type="button" [ngClass]="{'btn actionbtnp btn-sm': true, 'btn-info': true}" >
+                        <fa-icon [icon]="faRedoAlt"></fa-icon>
+                    </button> 
+
+            </ng-container>
+
+
+
+        </div>
+
+        <div *ngIf="vm_user != undefined" class="col-md-12">  
+            <ng-container *ngFor="let vmu of vm_user;" > <ng-container *ngIf="vmu.unique_id==act.asset_unique_id"><img placement="bottom" ngbTooltip="{{vmu.name}}" class="img-profile mr-2 ml-2 mt-2" src="{{resource_img_url}}profile/{{vmu.image}}"></ng-container> </ng-container>
+        </div>
+
+                </ng-container>
+
+    </ng-container>
+</div>  
+</div>

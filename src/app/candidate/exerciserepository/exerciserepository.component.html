@@ -1,0 +1,197 @@
+<!-- Header -->
+<app-candidateheader #head (setting)="get_setting($event)" (added_basket)="get_added_basket($event)" ></app-candidateheader>
+
+<!-- Sub Header -->
+<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- Sub Header End -->
+
+<div class="col-md-12 report-page maxf-width">
+	<div class="row" [formGroup]="exefilterfrm" >
+		<!-- Report Left -->
+		<div class="col-lg-2 col-md-3 report-left mobilefilter"> <!-- report-left -->		
+			<div [hidden] = "isShow" class="mobilefilter-height">				
+				<!-- d-inline-block -->				
+				<div class="ex_sidebar"> 
+					<input type="text" (keyup)="onKeyUpEvent(exefilterfrm.value)" (keyup.enter)="search(exefilterfrm.value);" class="form-control fortextbox" id="search" name="search" value="" placeholder="Search Exercise"  formControlName="search" placement="top" ngbTooltip="Please Enter Exercise Name & Press Enter"> 					
+				</div>
+
+				<div class="ex_sidebar">			
+					<h6 class="heading mb-2">User Ratings</h6>		 
+					<ngx-slider [(value)]="maxValue" [options]="options" (userChangeEnd)="onUserChangeEnd($event)" ></ngx-slider>
+				</div>
+				
+				<div class="ex_sidebar">
+					<h6 class="heading">Teaming</h6>			
+					<div class="form-group mb-0" >
+						<div *ngFor="let tm of teamingList; let i = index" >
+								<label class="pointerh" for="teaming-{{i}}" > 
+								<input (change)="onChange(teamingList[i], $event.target.checked)" type="checkbox" class="" id="teaming-{{i}}" name="teaming[]" value="{{teamingList[i]}}"  > 
+								<span class="sidec sp-teaming-{{i}}"><fa-icon [icon]="faCircle" style="color: {{teamingList[i]}} " class="{{teamingList[i]}}"></fa-icon> {{teamingList[i]}}</span>
+							</label> 
+							<br/>
+						</div>						
+					</div>
+				</div>
+				
+				<div class="ex_sidebar">
+					<h6 class="heading ">Difficulty Level</h6>
+					<div *ngFor="let dfty of difficultyList; let i = index" >
+						<label class="pointerh" for="difficulty-{{i}}" > 
+						 <input (change)="onDiffChange(difficultyList[i], $event.target.checked)" type="checkbox" class="" id="difficulty-{{i}}" name="difficulty[]" value="{{difficultyList[i]}}"  > 
+						<span class="sidec sp-difficulty-{{i}}"><fa-icon [icon]="faCircle" class="{{difficultyClass[i]}}"></fa-icon> {{difficultyList[i]}}</span>
+						</label> 
+						<br/>	
+					</div>
+				</div>
+
+				<div class="ex_sidebar">
+					<h6 class="heading ">Exercise Type</h6>
+					<div *ngFor="let et of exe_type; let i = index" >
+						<label class="pointerh" for="exe-type-{{i}}" > 
+						 <input (change)="onExTypeChange($event.target.value)" type="radio" class="" id="exe-type-{{i}}" name="exe_type[]" value="{{i+1}}"  > 
+						<span class="sidec sp-exe-type-{{i}}">{{exe_type[i]}}</span>
+						</label> 
+						<br/>	
+					</div>
+				</div>
+
+				<div class="col-lg-12 col-md-12 mt-4 mb-2">
+					<div class="btn-box">
+						<div class="theme-btn senario-btn">
+							<span class="txt"><button class="btn_blueas" (click)="resetForm();" ><fa-icon [icon]="faAngleDoubleLeft"></fa-icon> Clear Filter</button></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button (click) = toggleDisplay() class="btn-filter mob_toggle">
+				<span class="{{toggletxt}}" >
+					{{toggletxt}} 
+					<fa-icon [icon]="faAngleDoubleRight" class="{{toggletxt}} fiu"></fa-icon>
+				</span>
+			</button>			
+		</div>
+		<!-- Report Left End -->
+	
+		<!-- Report Right -->
+		<div class="col-lg-10 col-md-9 report-right">
+			<div class="minheight800">
+				<div class="row padding-report-right">
+
+					<div *ngFor="let ex of exerciseData; let i = index" class="col-lg-4 col-md-6">					
+						<div class="bgwhite">
+							<div class="ex_relative">
+								<a routerLink="/exercise-description/{{ex.alias}}">
+									<div class="eimg">
+										<img *ngIf="ex.thumb_image!=null" src="{{server_url}}media/exercise-image/{{ex.thumb_image}}" class="img-fluid">										
+										<img *ngIf="ex.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">
+									</div>				
+                                </a>
+    							<div class="ex_absolute">
+									<div class="row ratting cursor-menu">
+										<div class="col-sm-3 col-3">
+											<span placement="right" ngbTooltip="Rating: {{ex.rating}}" ><fa-icon [icon]="faStar" class="starc"></fa-icon> {{ex.rating}}</span>
+										</div>
+										<div class="col-sm-9 col-9 text-right">
+											<span>
+												<fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: {{ex.total_running}}/{{ex.total_exercise}}" class="usercircle mr-1"></fa-icon>
+												<span placement="top" ngbTooltip="Running Subscribers: {{ex.total_running}}">{{ex.total_running}}/</span>
+												<span placement="top" ngbTooltip="Total Subscribers: {{ex.total_exercise}}" class="mr-2">{{ex.total_exercise}}</span> 
+											</span> 
+
+											<span placement="left" ngbTooltip="Difficulty Level: {{ex.difficulty_level}}" ><fa-icon [icon]="faCircle" class="{{ex.difficulty_level}}"></fa-icon> {{ex.difficulty_level}}</span>
+										</div>
+									</div>
+								</div>
+							</div>						
+							<div class="bgwhite_padding text-center">
+								<a routerLink="/exercise-description/{{ex.alias}}" class="sra"><h5 class="heading">{{ex.name}}</h5></a>
+								<div class="btn-box text-center">
+									<p class="authorby">By: {{ex.F_Name}} {{ex.L_Name}}</p>
+									
+										<ng-container *ngIf="ex.credits!=null;else nullcreditshow">
+											<p><span *ngIf="credit_system=='Active';" class="ercredit">
+											Cr. {{ex.credits}}
+											</span></p>
+									    </ng-container>
+										<ng-template #nullcreditshow>
+											<ng-container *ngIf="credit_system=='Active';" >
+											<p><span class="ercredit">
+												Cr. 0
+											</span></p>
+											<div class="theme-btn">
+												<span class="txt"><a class="btn_blueas senariobtn disable-cls"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span> 
+											 </div>
+											</ng-container>
+										</ng-template>	
+
+									
+									
+									<ng-container *ngIf="credit_system=='Active'; else free" >
+										<ng-container *ngIf="ex.credits!=null">
+											<div *ngIf="added_basket | filterPipe : ex.id; else added" class="theme-btn ">
+												<span class="txt"><a (click)="head.addToBasket(ex.id,ex.credits);" class="btn_blueas senariobtn"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span> 
+											</div>
+											<ng-template #added>
+												<div class="theme-btn">
+												<span class="txt"><a class="btn_blueas senariobtn"><fa-icon [icon]="faCartPlus"></fa-icon> Added To Basket</a></span> 
+												</div>
+											</ng-template>
+									    </ng-container>
+									</ng-container>
+									<ng-template #free>
+										<div *ngIf="added_basket | filterPipe : ex.id; else added" class="theme-btn ">
+											<span class="txt"><a (click)="head.addToBasket(ex.id,ex.credits);" class="btn_blueas senariobtn"><fa-icon [icon]="faShoppingCart"></fa-icon> Add To Basket</a></span> 
+										</div>
+										<ng-template #added>
+											<div class="theme-btn">
+											   <span class="txt"><a class="btn_blueas senariobtn"><fa-icon [icon]="faCartPlus"></fa-icon> Added To Basket</a></span> 
+											</div>
+										</ng-template>
+									</ng-template>
+
+									<fa-icon *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" class="questionc" placement="top" ngbTooltip="{{ex.key_words}}" ></fa-icon>
+								</div>								
+							</div>					
+						</div>					
+					</div>
+					
+					<div *ngIf="load_more_btn==true" class="col-lg-12 col-md-12 mt-4 mb-2">
+						<div class="btn-box text-center">
+							<div class="theme-btn">
+								<span class="txt"><button class="btn_blueas" (click)="loadMore();" ><fa-icon [icon]="faCog"></fa-icon> Load More</button></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- End  Old -->
+				</div>
+			</div>
+			
+			<!-- Alerts/News  -->
+			<!-- <div *ngIf="newsList.length!=0" class="row alert-news">
+				<div class="col-md-12">
+					<div class="alert-txt">
+						<div class="alerts">Alerts/News |</div>
+					</div>
+					<div class="news-scroll">
+						<marquee scrollamount="8" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+							<span *ngFor="let ns of newsList; let i = index" ><a href="#">{{i+1}}. {{ns.title}}</a></span> 
+						</marquee>
+					</div>
+				</div>
+			</div>  -->
+			<!-- Alerts/News End -->
+			
+		</div>
+		<!-- Report Right End -->
+	</div>
+</div>
+	
+<div *ngIf="loader==true" class="progressbar-area col-md-12"> 
+	<div class="inner-area col-md-6 text-center">
+		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
+		<p class="text-center loaderc" >Please Wait ...</p>
+    </div>
+</div>
+
+<app-candidatefooter></app-candidatefooter>
