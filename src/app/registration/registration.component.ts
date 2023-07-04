@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {noWhitespaceValidator} from '../helper/validatefun';
 import {mustMatch} from '../helper/confirmed.validator';
 import { Subscription,Subject, BehaviorSubject,Observable } from 'rxjs';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 @Component({
   selector: 'app-registration',
@@ -94,6 +95,28 @@ ref_code:string = '';
 current_url_array = [];
 form_title:string = 'Registration';
 recaptch:string = 'Inactive'
+banner_slider: OwlOptions = {
+  autoplay: true,
+  loop: true,
+  mouseDrag: true,
+  touchDrag: true,
+  pullDrag: false,
+  dots: true,
+  nav: false,
+  navSpeed: 700,
+  navText: ['', ''],
+  responsive: {
+    0: {
+      items: 1
+    },
+    400: {
+      items: 1
+    },
+    768: {
+      items: 1
+    }
+  }
+}
 
 constructor(
       private router: Router,

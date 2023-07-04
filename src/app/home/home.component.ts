@@ -6,11 +6,20 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import Swal from 'sweetalert2';
 import { DatapassService } from '../services/datapass.service';
 import { Subscription } from 'rxjs/Subscription';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('countAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(50px)' }),
+        animate('1s', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ])
+  ]
 })
 export class HomeComponent implements OnInit {
 
@@ -98,23 +107,27 @@ export class HomeComponent implements OnInit {
   ourclient : any = [
     {
       ourclientPic : "../../assets/images/home/our-client-1.svg",
-      ourclientNumber : "750+",
+      ourclientNumber : 0,
       ourclientDetails : "Cyber Security Projects",
+      key : '+'
     } ,
     {
       ourclientPic : "../../assets/images/home/our-client-2.svg",
-      ourclientNumber : "12k+",
+      ourclientNumber : 0,
       ourclientDetails : "Students Globally",
+      key : 'k+'
     } ,
     {
       ourclientPic : "../../assets/images/home/our-client-3.svg",
-      ourclientNumber : "150+",
+      ourclientNumber : 0,
       ourclientDetails : "Cyber Security Expersts",
+      key : '+'
     } ,
     {
       ourclientPic : "../../assets/images/home/our-client-4.svg",
-      ourclientNumber : "150%",
+      ourclientNumber : 0,
       ourclientDetails : "Client Retention Rate",
+      key : '%'
     } ,
   ]
 
@@ -218,6 +231,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.startCounting();
   }
 
   openmodal()
@@ -225,6 +239,30 @@ export class HomeComponent implements OnInit {
     var array = ['open_demo_model','open'];
     this.ds.sendData(array);
   }
+
+  ngAfterViewInit() {
+  }
 	
+  startCounting() {
+    this.ourclient.forEach((client, index) => {
+      setTimeout(() => {
+        this.incrementClient(index);
+      }, index * 1000);
+    });
+  }
+
+  incrementClient(index: number) {
+    const increment = 1;
+    const arr = [750, 13, 150, 150]
+    const finalCount = arr[index];
+
+    const timer = setInterval(() => {
+      this.ourclient[index].ourclientNumber += increment;
+
+      if (this.ourclient[index].ourclientNumber >= finalCount) {
+        clearInterval(timer);
+      }
+    }, 40);
+  }
 
 }

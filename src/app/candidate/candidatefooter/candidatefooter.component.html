@@ -80,7 +80,7 @@
 
 <app-chat  *ngIf="user_id != null && chat_status == 1 && chat_access=='Allowed'"></app-chat> 
 
-<div class="col-md-12 footer-section">
+<!-- <div class="col-md-12 footer-section">
 	<div class="row hf-max-width">
 		<div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
 			<img src="{{server_url}}media/images/logo-white.png" class="img-fluid">
@@ -128,5 +128,62 @@
 			Design & Develop By StraightArc Technologies (P) Ltd.
 		</div>
 	</div>
-</div>
+</div> -->
 
+
+<div class="container-fluid p-0">
+	<div class="section footer-all-section">
+		<div class="container">
+			<div class="footer">
+				<div class="row">
+					<div class="col-md-3 col-sm-12 col-xs-12 pt-5">
+						<img class="footer-logo" src="../../assets/images/home/footer-logo.svg" />
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12 pt-5 footer-menu">
+						<ul class="p-0">
+							<li><a>ABOUT US</a></li>
+							<li><a routerLink="/FAQs">FAQ's</a></li>
+							<li><a routerLink="/team">Team</a></li>
+							<li><a routerLink="/disclaimer">DISCLAIMER</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12 pt-5 footer-menu">
+						<ul class="p-0">
+							<li><a routerLink="/knowledge-base">KNOWLEDGE BASE</a></li>
+							<li><a href="{{site_url}}/downloads/doc/pdf/User_Guide.pdf" target="_blank">HOW TO USE</a>
+							</li>
+							<li><a routerLink="/users-testimonial">WHAT USERS SAY ABOUT US</a></li>
+						</ul>
+					</div>
+					<div class="col-md-3 col-sm-12 col-xs-12 pt-5 footer-social">
+						<div class="footer-social-icon">
+							<div class="social-icon">
+								<a href="https://www.facebook.com/skyvirt" target="_blank"><i
+										class="bi bi-twitter"></i></a>
+							</div>
+							<div class="social-icon">
+								<a href="https://twitter.com/sky_virt" target="_blank"><i
+										class="bi bi-facebook"></i></a>
+							</div>
+							<div class="social-icon">
+								<a href="https://www.linkedin.com/company/skyvirt" target="_blank"><i
+										class="bi bi-instagram"></i></a>
+							</div>
+							<div class="social-icon">
+								<a href="https://discord.com/invite/zVASPd4F" target="_blank"><i
+										class="bi bi-linkedin"></i></a>
+							</div>
+						</div>
+						<img src="../../assets/images/home/made-in-india-image.svg" class="made-in-india" />
+					</div>
+				</div>
+				<div class="footer-copyright">
+					<div class="copyright">Copyright © 2023 SkyVirt® CyberRange | Privacy Policy</div>
+					<div class="copyright pt-2">
+						<span>Made with <i class="bi bi-suit-heart-fill"></i> in India</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

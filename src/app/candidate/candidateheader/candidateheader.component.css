@@ -425,6 +425,16 @@ button:focus {
 		margin-top: 0px;
 	}
 }
+
+
+@media only screen and (max-width: 1065px) {
+
+	.section nav ul li a{ 
+		margin: 0 !important;
+		font-size: 14px;
+	}
+}
+
 @media only screen and (max-width: 767px)
 {
 	.header-top .user-note .user-note-btn {
@@ -456,4 +466,91 @@ button:focus {
 	.wmlh {
 		margin-left: 100px !important;
 	}
+}
+
+
+
+.container-fluid {
+    background: #081327;
+	position: sticky;
+    top: 0;
+	/* position: absolute;
+    top: -11%; */
+    z-index: 11;
+}
+
+.container {
+    max-width: -webkit-fill-available;
+	
+}
+
+
+.section {
+    padding: 10px 0px;
+}
+
+.section nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.section nav ul {
+    list-style: none;
+    display: flex;
+    font-weight: 500;
+    margin: 0;
+    cursor: pointer;
+    padding: 0;
+}
+    
+.section nav ul li a{
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 0px 13px;
+    font-family: 'Chakra Petch';
+    color: #fff;
+    letter-spacing: 0.4px;
+}
+
+.section nav ul li a:hover {
+    color: #00FFFA;
+    transition: 0.5s all ease-in-out;;
+}
+
+.credit {
+    display: flex;
+}
+
+.credit .wallet {
+    display: flex;
+    align-items: center;
+}
+
+.navbar button {
+    background: #fff;
+}
+
+.credit .wallet span {
+    font-family: 'Chakra Petch';
+    font-weight: 500;
+    margin-left: 5px;
+    color: #fff;
+}
+
+.sign-btn {
+    font-family: 'Chakra Petch';
+    border: none;
+    background: #00FFFA !important;
+    font-weight: 600;
+    padding: 8px 25px;
+    margin-left: 30px;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    color: #000;
+    font-size: 16px;
+}
+  
+.mymovenavbar{
+	background: #081327;
+
 }

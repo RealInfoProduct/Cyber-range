@@ -417,3 +417,400 @@ a.sra {
 	}
 } */
 /* End New Design */
+
+
+
+
+
+/* New Version*/
+.exercise{
+	background: url(../../../assets/images/home/Exercises-Bg.svg) #020920;
+	background-repeat: no-repeat;
+	/* background-position: center; */
+	background-size: cover;
+}
+
+.container {
+	max-width: 1400px;
+}
+
+.leftFilterPanel {
+	border: 1px solid #2A6E63;
+	background-color: #000;
+	color: #0cc7b3;
+    font-family: 'Tomorrow';
+}
+
+.user-rating {
+	font-family: 'Tomorrow';
+	color: #fff;
+}
+
+.details-section {
+	border-bottom: 1px solid #2A6E63;
+    padding: 25px;
+	padding-bottom: 18px;
+}
+
+.details-section .main-title {
+	font-family: 'Tomorrow';
+	color: #0CC7AB;
+}
+
+.clear-filter {
+	clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+	background: #0CC7AB;
+    color: #fff;
+    border: none;
+	font-size: 14px;
+    font-weight: 500;
+    padding: 10px 16px;
+}
+
+.point-icon span {
+	font-family: 'Tomorrow';
+}
+
+.exercise-bgwhite{
+	background: rgba(33, 103, 163, 0.31);
+    border: 1px solid #22619E;
+    backdrop-filter: blur(2px);
+	margin-bottom: 28px;
+}
+
+.bgwhite_padding {
+    padding: 13px;
+}
+.bgwhite_padding .exercise-heading {
+	font-family: 'Chakra Petch';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0.308088px;
+    color: #00FFFA;
+}
+
+.bgwhite_padding .exercise-authorby {
+	font-family: 'Chakra Petch';
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 18px;
+	letter-spacing: 0.308088px;
+	color: #00FFFA;
+	
+}
+
+.exercise-button{
+	clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    background: #0CC7AB;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 20px;
+}
+
+.add-to-basket-button{
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 20px;
+    background: rgba(33, 103, 163, 0.31);
+	position: relative;
+
+	/* --grad: transparent 99%,rgb(72, 250, 72) 50%;
+    background: linear-gradient(to top right ,var(--grad)) top right,
+				linear-gradient(to top left ,var(--grad)) top left,
+				linear-gradient(to bottom right,var(--grad)) bottom right,
+				linear-gradient(to bottom left ,var(--grad)) bottom left, rgba(33, 103, 163, 0.31);
+    cursor: pointer;
+    border: 2px solid #0cc7b3; */
+}
+
+.add-to-basket-button:hover {
+	color: #000;
+	background: #00FFFA;
+	transition: all 0.5s ease-in-out;
+}
+
+.addBasket {
+	position: absolute;
+    width: 95%;
+    height: 88%;
+    top: 3px;
+    left: 3px;
+    background-color: rgba(33, 103, 163, 0.31);;
+}
+
+.exercise-price-button{
+	display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.exercise-price span {
+font-family: 'Chakra Petch';
+font-weight: 600;
+font-size: 20px;
+line-height: 26px;
+color: #00FFFA;
+}
+
+::ng-deep .ngx-slider .ngx-slider-pointer {
+	background-color: #0cc7b3 !important;
+}
+
+.search_exercises {
+	display: flex;
+}
+
+.exercises-repo {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 40px;
+	padding-bottom: 10px;
+}
+
+.exercises-repo .exercises-title {
+	font-size: 32px;
+    color: #00FFFA;
+    font-family: 'Chakra Petch';
+	font-weight: 600;
+}
+
+.btn-filter {
+	border: 1px solid #00FFFA;
+    font-size: 16px;
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    background: transparent;
+    color: #00FFFA;
+    padding: 5px 50px;
+    border-radius: 5px;
+}
+
+.repo-input {
+	background: #00403f;
+    border: none;
+    margin-right: 20px;
+    width: 250px;
+	color: #00FFFA;
+    font-family: 'Chakra Petch';
+}
+
+.repo-input::placeholder {
+	color: #00FFFA;
+    font-family: 'Chakra Petch';
+}
+
+.dropdown-menu {
+    margin: 20px 0px !important;
+    padding: 0;
+    width: 340px;
+}
+
+.accordion {
+	padding: 10px;
+    background-color: #0c2840;
+}
+
+.accordion .accordion-item {
+	border: none;
+	margin-bottom: 10px;
+}
+
+.accordion-button {
+	background: #0c2840;
+    border-radius: 0;
+	padding: 20px 15px;
+}
+
+.accordion-button:not(.collapsed)::after {
+	background-image: url('./../../../assets/images/home/accordion-icon.svg');
+	height: 10px;
+    width: 20px;
+    background-size: contain;
+	margin-right: 5px;
+}
+
+.accordion-button::after {
+	background-image: url('./../../../assets/images/home/accordion-icon.svg');
+	height: 10px;
+    width: 20px;
+    background-size: contain;
+}
+
+.active{
+	background-color: #0b3e53;
+}
+
+.accordion-body {
+	background: #0c2840;
+	color: #fff;
+}
+
+.clear-filter {
+	background-color: #243e53;
+}
+
+.filters {
+	display: flex;
+	justify-content: space-between;
+	background: #243e53;
+	padding: 20px 22px;
+}
+
+.accordion-body .user-rating-star {
+    line-height: 40px;
+}
+
+.accordion-body .user-rating-star .form-check {
+	display: flex;
+    align-items: center;
+}
+ 
+.accordion-body .user-rating-star .form-check .rating-radio {
+	margin-bottom: 4px;
+}
+
+.accordion-body .user-rating-star .form-check .rating-label {
+	font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+}
+
+.clear-rating {
+	color: #FF8B89;
+    font-family: 'Chakra Petch';
+    font-size: 14px;
+	letter-spacing: 0.4px;
+	text-decoration: underline;
+	font-weight: 500;
+}
+
+.filters .clear-btn {
+	color: #00FFFA;
+    background: transparent;
+    border: 2px solid #00FFFA;
+    border-radius: 5px;
+    padding: 7px 20px;
+    font-family: Chakra Petch;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+.filters .btn-done {
+	color: #0b556b;
+    background: #00FFFA;
+    border: 2px solid #00FFFA;
+    border-radius: 5px;
+    padding: 7px 20px;
+    font-family: Chakra Petch;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+.filters-title {
+	background: #0c2840;
+    border-bottom: 3px solid #000000;
+    padding: 16px 25px;
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.filters-title label {
+	color: #fff;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+    font-family: Chakra Petch;
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+	width: 100%;
+}
+
+.exercise-basket {
+	display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.disable-cls {
+	cursor: not-allowed;
+}
+
+.close-icon {
+	position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
+@media only screen and (max-width: 440px){
+	.exercises-repo .exercises-title {
+        font-size: 20px !important;
+    }
+
+    .search_exercises .repo-input {
+        width: 150px !important;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .exercises-repo .exercises-title {
+        font-size: 24px;
+    }
+
+    .btn-filter {
+        padding: 5px 20px
+    }
+
+    .search_exercises .repo-input {
+        width: 190px;
+    }
+}
+
+.searchinput{
+	padding-left: 35px;
+}
+.searchicon{
+	position: relative;
+    top: 5px;
+    left: 25px;
+}
+
+.filter-by {
+	padding-bottom: 40px;
+	display: flex;
+	align-items: center;
+}
+
+.filter-by span {
+   font-size: 16px;
+   font-family: 'Chakra Petch';
+   letter-spacing: 0.4px;
+   color: #fff;
+   font-weight: 500;
+}
+
+.user-rate {
+	color: #fff;
+	font-size: 16px;
+	font-family: 'Chakra Petch';
+	letter-spacing: 0.4px;
+	display: flex;
+    background-color: #4B4B4B;
+    align-items: center;
+	padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.user-rate p {
+	margin: 0;
+	font-family: 'Chakra Petch';
+}

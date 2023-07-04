@@ -12,6 +12,8 @@ import { ChatService } from '../services/chat.service';
 import { FrontenddbService } from '../services/frontenddb.service';
 import { Auth } from './../interfaces/auth';
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { OwlOptions } from 'ngx-owl-carousel-o';
+
 
 @Component({
   selector: 'app-login',
@@ -68,6 +70,7 @@ export class LoginComponent implements OnInit {
   showPassword:boolean = false
   @ViewChild('content', { static: false }) private content;
   public user: any;
+  
   constructor(
     private loginService: LoginService,
     private BackenddbService: BackenddbService,
@@ -94,6 +97,71 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  banner_slider: OwlOptions = {
+    autoplay: true,
+    loop: true,
+    mouseDrag: true, 
+    touchDrag: true,
+    pullDrag: false,
+    dots: true,
+    nav: false,
+    navSpeed: 700,
+    navText: ['', ''],
+    responsive: {
+      0: {
+        items: 1
+      },
+      400: {
+        items: 1
+      },
+      768: {
+        items: 1
+      }
+    }
+  }
+
+  ourStudents :any = [
+    {
+      studentsPic : 'media/images/rishi-kumar.jpg',
+      studentsName : 'Rishi Kumar',
+      studentsDetails : 'The internship at SkyVirt® CyberRange is the best decision that I have took regarding my career. SkyVirt® CyberRange is helping me to grow in every manner possible. It has the perfect architecture that is required for enhancing the skills of one in this field. The work environment is also very nice and everyone is always up for help. Overall it is turning out to be a great experience of HOL at SkyVirt® CyberRange .',
+    },
+    {
+      studentsPic : 'media/images/aman-pandey.jpg',
+      studentsName : 'Aman Pandey',
+      studentsDetails : 'As a whole I believe that this internship was successful in furthering my knowledge of a career in the field of Cyber Security. While being immersed in a company I saw the pressure of deadlines, importance of appearance, the value of being a self-motivator and the joy of loving IT job.',
+    },
+    {
+      studentsPic : 'media/images/devesh-singh.jpg',
+      studentsName : 'Devesh Singh',
+      studentsDetails : 'I thoroughly enjoyed my internship this summer and now have very valuable experience under my belt. I know this will help when looking for jobs and needing references. I was dreading it in the beginning, but now I am so happy it was required. As much as the curriculum changes, I hope that class remains constant.',
+    },
+    {
+      studentsPic : 'media/images/akshita-jain.jpg',
+      studentsName : 'Akshita Jain',
+      studentsDetails : 'Ive had a great work experience at SkyVirt® CyberRange . It has friendly work environment which motivates an individual working in the firm to work hard in order to bring success to the firm. They also offer the best platform to learn new technologies. SkyVirt® CyberRange  helped me in learning the work ethics and grow in every aspect.',
+    },
+    {
+      studentsPic : 'media/images/rishi-kumar.jpg',
+      studentsName : 'Rishi Kumar',
+      studentsDetails : 'The internship at SkyVirt® CyberRange is the best decision that I have took regarding my career. SkyVirt® CyberRange is helping me to grow in every manner possible. It has the perfect architecture that is required for enhancing the skills of one in this field. The work environment is also very nice and everyone is always up for help. Overall it is turning out to be a great experience of HOL at SkyVirt® CyberRange .',
+    },
+    {
+      studentsPic : 'media/images/aman-pandey.jpg',
+      studentsName : 'Aman Pandey',
+      studentsDetails : 'As a whole I believe that this internship was successful in furthering my knowledge of a career in the field of Cyber Security. While being immersed in a company I saw the pressure of deadlines, importance of appearance, the value of being a self-motivator and the joy of loving IT job.',
+    },
+    {
+      studentsPic : 'media/images/devesh-singh.jpg',
+      studentsName : 'Devesh Singh',
+      studentsDetails : 'I thoroughly enjoyed my internship this summer and now have very valuable experience under my belt. I know this will help when looking for jobs and needing references. I was dreading it in the beginning, but now I am so happy it was required. As much as the curriculum changes, I hope that class remains constant.',
+    },
+    {
+      studentsPic : 'media/images/akshita-jain.jpg',
+      studentsName : 'Akshita Jain',
+      studentsDetails : 'Ive had a great work experience at SkyVirt® CyberRange . It has friendly work environment which motivates an individual working in the firm to work hard in order to bring success to the firm. They also offer the best platform to learn new technologies. SkyVirt® CyberRange  helped me in learning the work ethics and grow in every aspect.',
+    },
+  ]
 
   ngOnInit() {
     this.current_url_array = [

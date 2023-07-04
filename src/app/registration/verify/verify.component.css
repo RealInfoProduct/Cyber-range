@@ -55,7 +55,7 @@ hr {
 
 /* forgot css */
 .container {
-    max-width: 1800px;
+    /* max-width: 1800px; */
 }
 
 .forgot-section {
@@ -74,11 +74,11 @@ hr {
 
 .forgot_item_box {
     /* width: 50%; */
-    background: rgba(255, 255, 255, 0.1);
+    /* background: rgba(255, 255, 255, 0.1); */
     -webkit-backdrop-filter: blur(13.5px);
     backdrop-filter: blur(13.5px);
     border-radius: 20px;
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 /* .forgot_item_box_passwordset {
@@ -109,7 +109,7 @@ hr {
     font-weight: 400;
     font-size: 30px;
     line-height: 39px;
-    text-align: center;
+    text-align: start;
     color: #00FFFA;
     padding-top: 59px;
 }
@@ -262,4 +262,78 @@ textarea {
     .forgot_item_box {
         width: 100%;
     }
+
+    .button {
+        width: 100%;
+    }
+
+    .login-slider {
+        display: none;
+    }
+
+    .forgot_header span {
+        font-size: 26px;
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .login-slider {
+        display: none;
+    }
+
+    .forgot-details {
+        margin: auto;
+    }
+
+    .forgot_header span {
+        font-size: 26px;
+    }
+}
+
+
+.forgot-details {
+    margin: auto;
+}
+
+.real-world {
+    background: #003A6D;
+    backdrop-filter: blur(13.5px);
+}
+.row{
+    border-radius: 30px;
+}
+.about_card {
+    background: #003A6D;
+    border-radius: 20px 0 0 20px;
+    padding: 14% 5%;
+    height: 635px;
+}
+
+.bheaading {
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 26px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.bnr-tagline {
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    color: #CCCCCC;
+}
+
+.login_item_box1 {
+    width: 100%;
+    padding: 0% 10%;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(13.5px);
+    backdrop-filter: blur(13.5px);
+    border-radius: 0 20px 20px 0;
 }

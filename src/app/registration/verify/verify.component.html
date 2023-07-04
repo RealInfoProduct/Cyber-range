@@ -2,10 +2,10 @@
 <app-candidateheader></app-candidateheader>
 
 <!-- Sub Header -->
-<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- <app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs> -->
 <!-- Sub Header End -->
 
-<div class="loginbg padding-all verifybgimg"> 
+<!-- <div class="loginbg padding-all verifybgimg"> 
 	<div class="loginpage"> 
 		<div class="loginform">
 			<h3 class="heading">Verification! <div class="heading_brd_white"></div></h3>
@@ -79,155 +79,224 @@
 		<p>&nbsp;</p>
 
 	</div>
-</div>
-
-<!-- Footer -->
-<app-candidatefooter></app-candidatefooter>
-
+</div> -->
 
 <div class="section forgot-section">
 	<div class="forgot-card">
 		<div class="forgot_screen">
-			<div class="forgot_item_box container" [style.width.px]="{width: passwordset == 'Yes' ? '50%' : '100%'}">
-				<div class="container">
-					<div class="forgot_logo">
-						<img src="../../assets/images/home/login-logo.svg" alt="">
-					</div>
-					<div class="forgot_header">
-						<span>Verification</span>
-					</div>
-					<ng-container>
-						<div class="success-message" *ngIf="!closed">
-							<div class="success_mess">
-								<div class="img">
-									<img src="../../assets/images/home/success-vector.svg" alt="">
-								</div>
-								<div class="success-text">
-									<span>
-										{{ alertMessage }}
-									</span>
-								</div>
+			<div class="forgot_item_box container p-0">
+				<div class="row container p-0 m-0">
+					<div class="col-xs-12 col-sm-12 col-md-6 p-0 login-slider">
+						<div class="about_us">
+							<div class="about_card">
+								<owl-carousel-o [options]="banner_slider">
+									<ng-template carouselSlide>
+										<div class="row slider-center">
+											<div class="col-md-12">
+												<img src="../../assets/images/home/real-world.svg" class="img-fluid">
+												<div>
+													<h1 class="bheaading mt-5">
+														<span>Real World Cyber Attacks</span>
+													</h1>
+												</div>
+												<p class="bnr-tagline mt-3">Take Cyber Security in your hands. Launch Real Cyber
+													Attacks.
+													Develop an Understanding of Cyber Threat and Defences</p>
+											</div>
+										</div>
+									</ng-template>
+									<ng-template carouselSlide>
+										<div class="row slider-center">
+											<div class="col-md-12">
+												<img src="../../assets/images/home/Access.svg" class="img-fluid">
+												<div>
+													<h1 class="bheaading mt-5">
+														<span>Access anywhere, anytime</span>
+													</h1>
+												</div>
+												<p class="bnr-tagline mt-3">Totally Browser Based. No Additional Software
+													Required. 24x7 Availability.</p>
+											</div>
+										</div>
+									</ng-template>
+									<ng-template carouselSlide>
+										<div class="row slider-center">
+											<div class="col-md-12">
+												<img src="../../assets/images/home/Access.svg" class="img-fluid">
+												<div>
+													<h1 class="bheaading mt-5">
+														<span>Multiple Roles & Scenarios</span>
+													</h1>
+												</div>
+												<p class="bnr-tagline mt-3">Multiple Real World Scenarios in a single platform
+												</p>
+											</div>
+										</div>
+									</ng-template>
+									<ng-template carouselSlide>
+										<div class="row slider-center">
+											<div class="col-md-12">
+												<img src="../../assets/images/home/Get-Industry.svg" class="img-fluid">
+												<div>
+													<h1 class="bheaading mt-5">
+														<span>Get Industry Ready</span>
+													</h1>
+												</div>
+												<p class="bnr-tagline mt-3">Skyvirt helps in learning and building various
+													information Security skills.</p>
+											</div>
+										</div>
+									</ng-template>
+								</owl-carousel-o>
 							</div>
 						</div>
-						
-					</ng-container>	
-					<!-- *ngIf="passwordset=='Yes'" -->
-					<form [formGroup]="resetpass_frm"  (ngSubmit)="onSubmit(resetpass_frm.value)">
-						<div class="row">
-
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="forgot_input_text">
-									<input class="input" [ngClass]="resetpass_frm.value.f_name?.length > 0 || (resetpass_frm.get('f_name').touched || resetpass_frm.get('f_name').dirty) ? invalidMessage(error_messages.f_name, 'firstName') : '' "
-										type="text" placeholder="First name" formControlName="f_name">
-									</div>
-									<ng-container *ngFor="let error of error_messages.f_name">
-										<div class="error-message" *ngIf="resetpass_frm.get('f_name').hasError(error.type) && ( resetpass_frm.get('f_name').dirty ||  resetpass_frm.get('f_name').touched)">
-											<!-- {{ error.message }} -->
-											<ng-container>
-												<div class="error_mess">
-													<div class="img">
-														<img src="../../../assets/images/home/error-vector.svg" alt="">
-													</div>
-													<div class="error-text">
-														{{ error.message }}
-													</div>
-												</div>
-											</ng-container>
-										</div>
-									</ng-container>
-							</div>
-
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="forgot_input_text">
-									<input class="input" [ngClass]="resetpass_frm.value.l_name?.length > 0 ||  (resetpass_frm.get('l_name').touched || resetpass_frm.get('l_name').dirty) ? invalidMessage(error_messages.l_name, 'lastName') : '' "
-										type="text" placeholder="Last name" formControlName="l_name">
-								</div>
-								<ng-container *ngFor="let error of error_messages.l_name">
-									<div class="error-message" *ngIf="resetpass_frm.get('l_name').hasError(error.type) && (resetpass_frm.get('l_name').dirty || resetpass_frm.get('l_name').touched)">
-										<!-- {{ error.message }} -->
-										<ng-container>
-											<div class="error_mess">
-												<div class="img">
-													<img src="../../../assets/images/home/error-vector.svg" alt="">
-												</div>
-												<div class="error-text">
-													{{ error.message }}
-												</div>
-											</div>
-										</ng-container>
-									</div>
-								</ng-container>	
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="forgot_input_text">
-									<input class="input"  [ngClass]="resetpass_frm.value.password?.length > 0 || (resetpass_frm.get('password').dirty ||  resetpass_frm.get('password').touched) ? invalidMessage(error_messages.password , 'password') : '' "
-									[type]="showPassword ? 'text' : 'password'" placeholder="Password"  formControlName="password">
-								</div>
-								<div class="icon">
-									<i class="bi bi-eye-slash-fill" (click)="showPassword = !showPassword" [class.hide]="showPassword"></i>
-									<i class="bi bi-eye-fill" (click)="showPassword = !showPassword" [class.hide]="!showPassword"></i>
-								</div>
-								<ng-container *ngFor="let error of error_messages.password">
-									<div class="error-message" *ngIf="resetpass_frm.get('password').hasError(error.type) && (resetpass_frm.get('password').dirty || resetpass_frm.get('password').touched)">
-										<!-- {{ error.message }} -->
-										<ng-container>
-											<div class="error_mess">
-												<div class="img">
-													<img src="../../../assets/images/home/error-vector.svg" alt="">
-												</div>
-												<div class="error-text">
-													{{ error.message }}
-												</div>
-											</div>
-										</ng-container>
-									</div>
-								</ng-container>	
-							</div>
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="forgot_input_text">
-									<input class="input"  [ngClass]="resetpass_frm.value.conf_password?.length > 0 || (resetpass_frm.get('conf_password').dirty ||  resetpass_frm.get('conf_password').touched) ? invalidMessage(error_messages.conf_password , 'confirmPassword') : '' "
-									[type]="confirmPassword ? 'text' : 'password'" placeholder="Confirm Password"  formControlName="conf_password">
-								</div>
-								<div class="icon">
-									<i class="bi bi-eye-slash-fill" (click)="confirmPassword = !confirmPassword" [class.hide]="confirmPassword"></i>
-									<i class="bi bi-eye-fill" (click)="confirmPassword = !confirmPassword" [class.hide]="!confirmPassword"></i>
-								</div>
-								<ng-container *ngFor="let error of error_messages.conf_password">
-									<!-- <div class="error-message" *ngIf="resetpass_frm.get('conf_password').hasError(error.type) && (resetpass_frm.get('conf_password').dirty || resetpass_frm.get('conf_password').touched)">
-										{{ error.message }}
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 p-0 forgot-details">
+						<div class="forgot_screen">
+							<div class="forgot_item_box container" [style.width.px]="{width: passwordset == 'Yes' ? '50%' : '100%'}">
+								<div class="container">
+									<!-- <div class="forgot_logo">
+										<img src="../../assets/images/home/login-logo.svg" alt="">
 									</div> -->
-									<div class="error-message" *ngIf="resetpass_frm.get('conf_password').hasError(error.type) && (resetpass_frm.get('conf_password').dirty || resetpass_frm.get('conf_password').touched)">
-										<ng-container>
-											<div class="error_mess">
+									<div class="forgot_header">
+										<span>Verification</span>
+									</div>
+									<ng-container>
+										<div class="success-message" *ngIf="!closed">
+											<div class="success_mess">
 												<div class="img">
-													<img src="../../../assets/images/home/error-vector.svg" alt="">
+													<img src="../../assets/images/home/success-vector.svg" alt="">
 												</div>
-												<div class="error-text">
-													{{ error.message }}
+												<div class="success-text">
+													<span>
+														{{ alertMessage }}
+													</span>
 												</div>
 											</div>
-										</ng-container>
-									</div>
-								</ng-container>	
-								<div class="error-text" *ngIf="f.conf_password.errors?.mustMatch">
-									<div class="error_mess">
-										<div class="img">
-											<img src="../../../assets/images/home/error-vector.svg" alt="">
 										</div>
-										<div class="error-text">
-											Passwords must match
+										
+									</ng-container>	
+									<!-- *ngIf="passwordset=='Yes'" -->
+									<form [formGroup]="resetpass_frm" *ngIf="passwordset=='Yes'" (ngSubmit)="onSubmit(resetpass_frm.value)">
+										<div class="row">
+				
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<div class="forgot_input_text">
+													<input class="input" [ngClass]="resetpass_frm.value.f_name?.length > 0 || (resetpass_frm.get('f_name').touched || resetpass_frm.get('f_name').dirty) ? invalidMessage(error_messages.f_name, 'firstName') : '' "
+														type="text" placeholder="First name" formControlName="f_name">
+													</div>
+													<ng-container *ngFor="let error of error_messages.f_name">
+														<div class="error-message" *ngIf="resetpass_frm.get('f_name').hasError(error.type) && ( resetpass_frm.get('f_name').dirty ||  resetpass_frm.get('f_name').touched)">
+															<!-- {{ error.message }} -->
+															<ng-container>
+																<div class="error_mess">
+																	<div class="img">
+																		<img src="../../../assets/images/home/error-vector.svg" alt="">
+																	</div>
+																	<div class="error-text">
+																		{{ error.message }}
+																	</div>
+																</div>
+															</ng-container>
+														</div>
+													</ng-container>
+											</div>
+				
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<div class="forgot_input_text">
+													<input class="input" [ngClass]="resetpass_frm.value.l_name?.length > 0 ||  (resetpass_frm.get('l_name').touched || resetpass_frm.get('l_name').dirty) ? invalidMessage(error_messages.l_name, 'lastName') : '' "
+														type="text" placeholder="Last name" formControlName="l_name">
+												</div>
+												<ng-container *ngFor="let error of error_messages.l_name">
+													<div class="error-message" *ngIf="resetpass_frm.get('l_name').hasError(error.type) && (resetpass_frm.get('l_name').dirty || resetpass_frm.get('l_name').touched)">
+														<!-- {{ error.message }} -->
+														<ng-container>
+															<div class="error_mess">
+																<div class="img">
+																	<img src="../../../assets/images/home/error-vector.svg" alt="">
+																</div>
+																<div class="error-text">
+																	{{ error.message }}
+																</div>
+															</div>
+														</ng-container>
+													</div>
+												</ng-container>	
+											</div>
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<div class="forgot_input_text">
+													<input class="input"  [ngClass]="resetpass_frm.value.password?.length > 0 || (resetpass_frm.get('password').dirty ||  resetpass_frm.get('password').touched) ? invalidMessage(error_messages.password , 'password') : '' "
+													[type]="showPassword ? 'text' : 'password'" placeholder="Password"  formControlName="password">
+												</div>
+												<div class="icon">
+													<i class="bi bi-eye-slash-fill" (click)="showPassword = !showPassword" [class.hide]="showPassword"></i>
+													<i class="bi bi-eye-fill" (click)="showPassword = !showPassword" [class.hide]="!showPassword"></i>
+												</div>
+												<ng-container *ngFor="let error of error_messages.password">
+													<div class="error-message" *ngIf="resetpass_frm.get('password').hasError(error.type) && (resetpass_frm.get('password').dirty || resetpass_frm.get('password').touched)">
+														<!-- {{ error.message }} -->
+														<ng-container>
+															<div class="error_mess">
+																<div class="img">
+																	<img src="../../../assets/images/home/error-vector.svg" alt="">
+																</div>
+																<div class="error-text">
+																	{{ error.message }}
+																</div>
+															</div>
+														</ng-container>
+													</div>
+												</ng-container>	
+											</div>
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<div class="forgot_input_text">
+													<input class="input"  [ngClass]="resetpass_frm.value.conf_password?.length > 0 || (resetpass_frm.get('conf_password').dirty ||  resetpass_frm.get('conf_password').touched) ? invalidMessage(error_messages.conf_password , 'confirmPassword') : '' "
+													[type]="confirmPassword ? 'text' : 'password'" placeholder="Confirm Password"  formControlName="conf_password">
+												</div>
+												<div class="icon">
+													<i class="bi bi-eye-slash-fill" (click)="confirmPassword = !confirmPassword" [class.hide]="confirmPassword"></i>
+													<i class="bi bi-eye-fill" (click)="confirmPassword = !confirmPassword" [class.hide]="!confirmPassword"></i>
+												</div>
+												<ng-container *ngFor="let error of error_messages.conf_password">
+													<!-- <div class="error-message" *ngIf="resetpass_frm.get('conf_password').hasError(error.type) && (resetpass_frm.get('conf_password').dirty || resetpass_frm.get('conf_password').touched)">
+														{{ error.message }}
+													</div> -->
+													<div class="error-message" *ngIf="resetpass_frm.get('conf_password').hasError(error.type) && (resetpass_frm.get('conf_password').dirty || resetpass_frm.get('conf_password').touched)">
+														<ng-container>
+															<div class="error_mess">
+																<div class="img">
+																	<img src="../../../assets/images/home/error-vector.svg" alt="">
+																</div>
+																<div class="error-text">
+																	{{ error.message }}
+																</div>
+															</div>
+														</ng-container>
+													</div>
+												</ng-container>	
+												<div class="error-text" *ngIf="f.conf_password.errors?.mustMatch">
+													<div class="error_mess">
+														<div class="img">
+															<img src="../../../assets/images/home/error-vector.svg" alt="">
+														</div>
+														<div class="error-text">
+															Passwords must match
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
-									</div>
+										<div class="sign_in">
+											<button type="submit" class="button" (click)="onSubmit(resetpass_frm.value)">SUBMIT</button>
+										</div>
+										<div class="have_an_account" *ngIf="loginlink==true">
+											<span>Go to <label><a routerLink="/login">Login</a></label> Page?</span>
+										</div>
+									</form>
 								</div>
 							</div>
 						</div>
-						<div class="sign_in">
-							<button type="submit" class="button" (click)="onSubmit(resetpass_frm.value)">SUBMIT</button>
-						</div>
-						<div class="have_an_account" *ngIf="loginlink==true">
-							<span>Go to <label><a routerLink="/login">Login</a></label> Page?</span>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 			<div class="cyberrange">
@@ -236,3 +305,8 @@
 		</div>
 	</div>
 </div>
+
+<!-- Footer -->
+<!-- <app-candidatefooter></app-candidatefooter> -->
+
+

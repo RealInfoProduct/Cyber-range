@@ -1,24 +1,25 @@
 <div class="header-sticky">
 	<!-- Top Bar -->
-	<div class="header-top">	
-		<div class="clearfix hf-max-width">			
+	<!-- <div class="header-top">	
+		<div class="clearfix hf-max-width">			 -->
 			<!-- Top Left -->
-			<div class="top-left">
+			<!-- <div class="top-left"> -->
 				<!-- Info List -->
-				<ul class="info-list">
+				<!-- <ul class="info-list">
 					<li><a href="mailto:info@skyvirt.tech"><fa-icon [icon]="faEnvelope"></fa-icon> <span class="mob-hide">{{web_email}}</span></a></li>
 					<li class="infolast"><a href="tel:0294-2417300"><fa-icon [icon]="faPhoneSquare"></fa-icon> <span class="mob-hide">{{web_contact}}</span></a></li>
 				</ul>
-			</div>
+			</div> -->
 			
 			<!-- Top Right -->
-			<div class="top-right pull-right">
-				<ul class="info-list"> <!--  social-box  -->
-					<li *ngIf="loginName == null"><a routerLink="/login"><fa-icon [icon]="faSignInAlt"></fa-icon> <span class="mob-hide">Login</span></a></li>
-					<li *ngIf="loginName == null"><a routerLink="/registration"><fa-icon [icon]="faUserCircle"></fa-icon> <span class="mob-hide">Registration</span></a></li>
+			<!-- <div class="top-right pull-right">
+				<ul class="info-list"> -->
+					 <!--  social-box  -->
+					<!-- <li *ngIf="loginName == null"><a routerLink="/login"><fa-icon [icon]="faSignInAlt"></fa-icon> <span class="mob-hide">Login</span></a></li>
+					<li *ngIf="loginName == null"><a routerLink="/registration"><fa-icon [icon]="faUserCircle"></fa-icon> <span class="mob-hide">Registration</span></a></li> -->
 					
 					<!-- Wallet -->
-					<li *ngIf="credit_system=='Active'" >
+					<!-- <li *ngIf="credit_system=='Active'" >
 											<div ngbDropdown placement="bottom-right" class="d-inline-block user-note">
 							<button class="btn btn-outline-primary user-note-btn" id="dropdownBasic1" ngbDropdownToggle><fa-icon [icon]="faWallet" class="discontents"></fa-icon> <sup class="ball-counter">{{wallet_balance}}</sup></button>
 							<div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="user_dropdown_box user_dropdown_menu text-center wmlh">
@@ -28,9 +29,9 @@
 					</li>
 					
 					<li *ngIf="loginName != null" > 
-						<div class="top-rside">
+						<div class="top-rside"> -->
 							<!-- Basket -->
-							<div placement="bottom-left" ngbDropdown class="d-inline-block user-note">
+							<!-- <div placement="bottom-left" ngbDropdown class="d-inline-block user-note">
 								<button class="btn btn-outline-primary user-note-btn" id="dropdownBasic1" ngbDropdownToggle><fa-icon [icon]="faShoppingBasket" class="discontents"></fa-icon> <sup class="ball-counter">{{basket_count}}</sup></button>							
 								<div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="user_dropdown_box dropdown_box_width user_basketi">							
 									<div class="basket-scroll">										
@@ -43,10 +44,10 @@
 
 										<div *ngIf="basket.length==0" class="basket empty">
 											<span class="basket-heading">Empty Basket</span>
-										</div>
+										</div> -->
 										
 										<!-- -->
-										<div *ngIf="basket.length!=0" class="basket">
+										<!-- <div *ngIf="basket.length!=0" class="basket">
 											<div class="btn-box text-center mt-2">
 												<div class="basket">
 													<div class="btn-box text-right mt-2">
@@ -61,9 +62,9 @@
 								</div>
 							</div>	
 						</div>
-					</li>
+					</li> -->
 					
-					<li *ngIf="loginName != null" > 
+					<!-- <li *ngIf="loginName != null" > 
 						<div class="top-rside">						  				
 							<div ngbDropdown placement="bottom-right" class="d-inline-block user-note">
 								<button class="btn btn-outline-primary user-note-btn" id="dropdownBasic1" ngbDropdownToggle>
@@ -148,12 +149,13 @@
 				</ul>
 			</div>	
 		</div>		
-	</div>
+	</div> -->
 	<!-- Top Bar End -->
 
 
 	<!-- Menu -->
-	<nav class="navbar navbar-expand-md navbar-dark pl-0 pr-0 hf-max-width">  <!-- bg-primary -->
+	<!-- bg-primary -->
+	<!-- <nav class="navbar navbar-expand-md navbar-dark pl-0 pr-0 hf-max-width">  
 		<a class="navbar-brand" routerLink="/">
 			<img src="{{server_url}}media/images/logo.png" class="img-fluid">
 		</a>
@@ -188,7 +190,7 @@
 				</li>					
 			</ul>
 		</div>  
-	</nav>
+	</nav> -->
 </div>
 
 <div *ngIf="progressbar" class="progressbar-area col-md-12"> 
@@ -196,4 +198,58 @@
 		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
 		<p class="text-center loaderc" >Please Wait ...</p>
    </div>
+</div>
+<div style="background: #081327">
+	<div class="container-fluid p-0 mymovenavbar animate__animated  animate__fadeInDownBig animate__delay-2s animate__slow">
+		<div class="container">
+			<div class="section">
+				<nav class="navbar navbar-expand-lg nav-collapse">
+					<a class="navbar-brand logo mr-0" href="#"><img src="../../assets/images/home/logo.svg" /></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<i class="bi bi-text-center"></i>
+					</button>
+	
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav mr-auto">
+	
+							<li class="nav-item active">
+								<a class="nav-link" routerLink="/">HOME</a>
+							</li>
+							<li class="nav-item" *ngIf="loginGroupId=='3'" >
+					<a class="nav-link" (click)="assessmentLogin(user_id)" >Assessment</a>
+				</li>
+							<li class="nav-item">
+								<a class="nav-link" routerLink="/exercise-repository">EXERCISE REPOSITORY</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" routerLink="/voucher">VOUCHER</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" routerLink="/mitre">MITRE</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" (click)="open_demo_model()" >DEMO REQUEST</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" routerLink="/contact-us">CONTACT US</a>
+							</li>
+						</ul>
+						<div class="credit">
+							<!-- <div class="wallet">
+								<img src="../../assets/images/home/wallet.svg" />
+								<span><b>00</b> Credit</span>
+							</div> -->
+							<div class="wallet">
+								<!-- <img src="../../assets/images/home/wallet.svg" /> -->
+								<span routerLink="/login" ><b><fa-icon [icon]="faSignInAlt"></fa-icon></b><span>Login</span></span>
+							</div>
+							<button class="sign-btn" routerLink="/registration">SIGN IN</button>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
 </div>

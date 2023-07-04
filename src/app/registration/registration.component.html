@@ -2,16 +2,16 @@
 <app-candidateheader #head (setting)="get_setting($event)" ></app-candidateheader>
 
 <!-- Sub Header -->
-<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- <app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs> -->
 <!-- Sub Header End -->
 
-<div class="loginbg loginbgimg padding-all"> 
+<!-- <div class="loginbg loginbgimg padding-all"> 
     <div class="loginpage"> 
        <div class="loginform">
 
           <h3 class="heading">Registration<div class="heading_brd_blue"></div></h3>
 		  
-			<form [formGroup] = "formdata" > 
+			<form [formGroup] = "formdata" >  -->
                  <!-- <div class="row"> 
 					<div class="col-md-6"> 
 						<div class="row"> 
@@ -42,7 +42,7 @@
 				</div> -->
 				
 				
-				<div class="row"> 
+				<!-- <div class="row">  -->
 					<!-- <div class="col-md-6"> 
 						<div class="row"> 
 							<div class="col-md-4 col4 form_lable form-group">
@@ -58,12 +58,12 @@
 							</div>
 						</div>	
                     </div>	 -->
-					<div class="col-md-12 block-center"> 
-						<div class="row">
+					<!-- <div class="col-md-12 block-center"> 
+						<div class="row"> -->
 							<!-- <div class="col-md-4 col4 form_lable form-group">
 								<label>Email<span class="red-astr">*</span></label>
 							</div> -->
-							<div class="col-md-12 form-group" >
+							<!-- <div class="col-md-12 form-group" >
 								<input type = "email" class = "form-control fortextbox" name = "email" placeholder = "Email" formControlName="email"  >
 								<ng-container *ngFor="let error of error_messages.email">
 									<div class="error-message" *ngIf="formdata.get('email').hasError(error.type) && (formdata.get('email').dirty || formdata.get('email').touched)">
@@ -73,7 +73,7 @@
 							</div>
 						</div>
                     </div>
-				</div>
+				</div> -->
 				
 				<!-- <div class="row"> 
 					<div class="col-md-6"> 
@@ -203,7 +203,7 @@
                     </div>
 				</div> -->
 				
-				<div class="row"> 
+				<!-- <div class="row">  -->
 					<!-- <div class="col-md-6"> 
 						<div class="row"> 
 							<div class="col-md-4 col4 form_lable form-group">
@@ -219,12 +219,12 @@
 							</div>
 						</div>	
                     </div>	 -->
-					<div class="col-md-6 block-center"> 
-						<div class="row">
+					<!-- <div class="col-md-6 block-center"> 
+						<div class="row"> -->
 							<!-- <div class="col-md-4 col4 form_lable  form-group">
 								<label>Confirm Password<span class="red-astr">*</span></label>
 							</div> -->
-							<div class="col-md-8 form-group" >
+							<!-- <div class="col-md-8 form-group" > -->
 								<!-- <input type = "password" class = "form-control fortextbox" name = "conf_password" placeholder = "Confirm Password"  formControlName="conf_password"  >                           
 								<ng-container *ngFor="let error of error_messages.conf_password">
 									<div class="error-message" *ngIf="formdata.get('conf_password').hasError(error.type) && (formdata.get('conf_password').dirty || formdata.get('conf_password').touched)">
@@ -234,7 +234,7 @@
 								<div class="error-message" *ngIf="f.conf_password.errors?.mustMatch">Passwords must match</div>
 								 -->
 
-							  <div *ngIf="captchaError==true" class="col-md-12 mt-2 pl-0 pr-0 text-right error-message">
+							  <!-- <div *ngIf="captchaError==true" class="col-md-12 mt-2 pl-0 pr-0 text-right error-message">
 								  Invalid recaptcha.Refresh page and try again.
 							  </div>
 								<div class="btn-box text_right mt-4">
@@ -257,6 +257,162 @@
 
 	   </div>	   
     </div>
+</div> -->
+
+<div class="section forgot-section">
+	<div class="forgot-card">
+		<div class="forgot_screen">
+			<div class="forgot_item_box container p-0">
+				<div class="row container p-0 m-0">
+					<div class="col-xs-12 col-sm-12 col-md-6 p-0 login-slider">
+						<div class="about_us">
+							<div class="about_card">
+								<owl-carousel-o [options]="banner_slider">
+									<ng-template carouselSlide>
+										<div class="row slider-center">
+											<div class="col-md-12">
+												<img src="../../assets/images/home/real-world.svg" class="img-fluid">
+												<div>
+													<h1 class="bheaading mt-5">
+														<span>Real World Cyber Attacks</span>
+													</h1>
+												</div>
+												<p class="bnr-tagline mt-3">Take Cyber Security in your hands. Launch Real Cyber
+													Attacks.
+													Develop an Understanding of Cyber Threat and Defences</p>
+											</div>
+										</div>
+									</ng-template>
+									<ng-template carouselSlide>
+										<div class="row slider-center">
+											<div class="col-md-12">
+												<img src="../../assets/images/home/Access.svg" class="img-fluid">
+												<div>
+													<h1 class="bheaading mt-5">
+														<span>Access anywhere, anytime</span>
+													</h1>
+												</div>
+												<p class="bnr-tagline mt-3">Totally Browser Based. No Additional Software
+													Required. 24x7 Availability.</p>
+											</div>
+										</div>
+									</ng-template>
+									<ng-template carouselSlide>
+										<div class="row slider-center">
+											<div class="col-md-12">
+												<img src="../../assets/images/home/Access.svg" class="img-fluid">
+												<div>
+													<h1 class="bheaading mt-5">
+														<span>Multiple Roles & Scenarios</span>
+													</h1>
+												</div>
+												<p class="bnr-tagline mt-3">Multiple Real World Scenarios in a single platform
+												</p>
+											</div>
+										</div>
+									</ng-template>
+									<ng-template carouselSlide>
+										<div class="row slider-center">
+											<div class="col-md-12">
+												<img src="../../assets/images/home/Get-Industry.svg" class="img-fluid">
+												<div>
+													<h1 class="bheaading mt-5">
+														<span>Get Industry Ready</span>
+													</h1>
+												</div>
+												<p class="bnr-tagline mt-3">Skyvirt helps in learning and building various
+													information Security skills.</p>
+											</div>
+										</div>
+									</ng-template>
+								</owl-carousel-o>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-12 col-md-6 p-0 forgot-details">
+						<!-- <div class="forgot_logo">
+							<img src="../../assets/images/home/login-logo.svg" alt="">
+						</div> -->
+						<div class="forgot_header">
+							<span>Registration</span>
+						</div>
+						<form [formGroup]="formdata" (ngSubmit)="onSubmit(formdata.value)">
+							<div class="row">
+								<div class="col-md-12 col-sm-12 col-xs-12">
+									<div class="forgot_input_text">
+										<input class="input" [ngClass]="this.formdata.value.email?.length > 0 || (formdata.get('email').dirty || formdata.get('email').touched) ? invalidMessage(error_messages.email) : '' "
+											type="email" placeholder="Email id" formControlName = "email">
+									</div>
+									<ng-container *ngFor="let error of error_messages.email">
+										<div class="error-message" *ngIf="formdata.get('email').hasError(error.type) && (formdata.get('email').dirty || formdata.get('email').touched)">
+											<ng-container>
+												<div class="error_mess">
+													<div class="img">
+														<img src="../../assets/images/home/error-vector.svg" alt="">
+													</div>
+													<div class="error-text">
+														{{ error.message }}
+													</div>
+												</div>
+											</ng-container>
+										</div>
+									</ng-container>	
+								</div>
+							</div>
+							
+							<ng-container>
+								<div class="success-message" *ngIf="!closed">
+									<div class="success_mess">
+										<div class="img">
+											<img src="../../assets/images/home/success-vector.svg" alt="">
+										</div>
+										<div class="success-text">
+											<span>
+												Registration has been completed successfully. Please check your registered email for verify registration
+											</span>
+										</div>
+									</div>
+								</div>
+								
+	
+								<div class="error_mess" *ngIf="captchaError==true">
+									<div class="img">
+										<img src="../../assets/images/home/error-vector.svg" alt="">
+									</div>
+									<div class="error-text">
+										Invalid recaptcha.Refresh page and try again.
+									</div>
+								</div>
+								<div class="btn-box text_right">
+									<div>
+										<span *ngIf="recaptch=='Active'" class="txt">
+										 <re-captcha #captchaRef="reCaptcha" (resolved)="resolved($event)" siteKey="6Le-6-MZAAAAACff_ZUyMGTdnl5xh0abz9_Zr5h6" size="invisible"></re-captcha>
+										 <div class="sign_in">
+											<button type="submit" class="button" (click)="captchaRef.execute()" value="Register Now">Register Now</button>
+										</div>
+										</span>
+										<div class="sign_in" *ngIf="recaptch=='Inactive'">
+											<button type="submit" class="button" (click)="onSubmit(formdata.value)" value="Register Now">Register Now</button>
+										</div>
+									</div>
+								</div>
+							</ng-container>	
+						</form>
+						<!-- <div class="have_an_account">
+							<span>Don’t have an account? <label><a routerLink="/registration">Register
+										now</a></label></span>
+						</div> -->
+					</div>
+				</div>
+				<ng-container *ngIf="alertClass">
+					<ngb-alert class="animate-show animate-hide mb-5" type="{{alertClass}}" (close)="closed = true"><strong innerHTML={{alertMessage}} >{{ alertMessage }}</strong></ngb-alert>
+				</ng-container>
+			</div>
+			<div class="cyberrange">
+				<span>© 2023 SkyVirt® CyberRange</span>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div *ngIf="progressbar" class="progressbar-area col-md-12"> 
@@ -266,80 +422,5 @@
     </div>
 </div>
 
-<app-candidatefooter></app-candidatefooter>
+<!-- <app-candidatefooter></app-candidatefooter> -->
 
-
-<div class="section forgot-section">
-	<div class="forgot-card">
-		<div class="forgot_screen">
-			<div class="forgot_item_box container">
-				<div class="container">
-					<div class="forgot_logo">
-						<img src="../../assets/images/home/login-logo.svg" alt="">
-					</div>
-					<div class="forgot_header">
-						<span>Registration</span>
-					</div>
-					<form [formGroup]="formdata" (ngSubmit)="onSubmit(formdata.value)">
-						<div class="row">
-							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="forgot_input_text">
-									<input class="input" [ngClass]="this.formdata.value.email?.length > 0 || (formdata.get('email').dirty || formdata.get('email').touched) ? invalidMessage(error_messages.email) : '' "
-										type="email" placeholder="Email id" formControlName = "email">
-								</div>
-								<ng-container *ngFor="let error of error_messages.email">
-									<div class="error-message" *ngIf="formdata.get('email').hasError(error.type) && (formdata.get('email').dirty || formdata.get('email').touched)">
-										<ng-container>
-											<div class="error_mess">
-												<div class="img">
-													<img src="../../assets/images/home/error-vector.svg" alt="">
-												</div>
-												<div class="error-text">
-													{{ error.message }}
-												</div>
-											</div>
-										</ng-container>
-									</div>
-								</ng-container>	
-							</div>
-						</div>
-						<div class="sign_in">
-							<button type="submit" class="button" (click)="onSubmit(formdata.value)">SUBMIT</button>
-						</div>
-						<ng-container>
-							<div class="success-message" *ngIf="!closed">
-								<div class="success_mess">
-									<div class="img">
-										<img src="../../assets/images/home/success-vector.svg" alt="">
-									</div>
-									<div class="success-text">
-										<span>
-											Registration has been completed successfully. Please check your registered email for verify registration
-										</span>
-									</div>
-								</div>
-							</div>
-							
-
-							<div class="error_mess" *ngIf="captchaError==true">
-								<div class="img">
-									<img src="../../assets/images/home/error-vector.svg" alt="">
-								</div>
-								<div class="error-text">
-									Invalid recaptcha.Refresh page and try again.
-								</div>
-							</div>
-						</ng-container>	
-					</form>
-					<div class="have_an_account">
-						<span>Don’t have an account? <label><a routerLink="/registration">Register
-									now</a></label></span>
-					</div>
-				</div>
-			</div>
-			<div class="cyberrange">
-				<span>© 2023 SkyVirt® CyberRange</span>
-			</div>
-		</div>
-	</div>
-</div>

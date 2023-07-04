@@ -2,15 +2,14 @@
 <app-candidateheader #head (setting)="get_setting($event)" (added_basket)="get_added_basket($event)" ></app-candidateheader>
 
 <!-- Sub Header -->
-<app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs>
+<!-- <app-breadcrumbs side="front" [form_title]="form_title" [current_url_array]="current_url_array" ></app-breadcrumbs> -->
 <!-- Sub Header End -->
 
-<div class="col-md-12 report-page maxf-width">
+
+<!-- <div class="col-md-12 report-page maxf-width">
 	<div class="row" [formGroup]="exefilterfrm" >
-		<!-- Report Left -->
-		<div class="col-lg-2 col-md-3 report-left mobilefilter"> <!-- report-left -->		
+		<div class="col-lg-2 col-md-3 report-left mobilefilter">	
 			<div [hidden] = "isShow" class="mobilefilter-height">				
-				<!-- d-inline-block -->				
 				<div class="ex_sidebar"> 
 					<input type="text" (keyup)="onKeyUpEvent(exefilterfrm.value)" (keyup.enter)="search(exefilterfrm.value);" class="form-control fortextbox" id="search" name="search" value="" placeholder="Search Exercise"  formControlName="search" placement="top" ngbTooltip="Please Enter Exercise Name & Press Enter"> 					
 				</div>
@@ -70,9 +69,7 @@
 				</span>
 			</button>			
 		</div>
-		<!-- Report Left End -->
 	
-		<!-- Report Right -->
 		<div class="col-lg-10 col-md-9 report-right">
 			<div class="minheight800">
 				<div class="row padding-report-right">
@@ -162,31 +159,370 @@
 							</div>
 						</div>
 					</div>
-
-					<!-- End  Old -->
 				</div>
 			</div>
+		</div>
+	</div>
+</div> -->
+
+<div class="section exercise">
+	<div class="container">
+		<div class="exercises-repo">
+			<span class="exercises-title">Exercises Repository</span>
+			<div class="search_exercises" [formGroup]="exefilterfrm"> 
+				<div class="searchicon">
+					<img src="../../../assets/images/home/searchicon.svg" alt="">
+				</div>
+				<input type="text" (keyup)="onKeyUpEvent(exefilterfrm.value)" (keyup.enter)="search(exefilterfrm.value);" class="form-control fortextbox repo-input searchinput" id="search" name="search" value="" placeholder="Search Exercise"  formControlName="search" placement="top" ngbTooltip="Please Enter Exercise Name & Press Enter"> 					
+				<div class="dropdown">
+					<button class="btn-filter" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+						<div class="filters-title" (click)="$event.stopPropagation()">
+							<label>Filter</label>
+						</div>
+						<img class="close-icon" data-bs-auto-close="outside" src="../../../assets/images/home/filter-close-icon.svg"/>
+						<div class="accordion" id="accordionExample" (click)="$event.stopPropagation()">
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingOne">
+									<button class="accordion-button" (click)="selectedMenu(1)" type="button"
+										data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+										aria-controls="collapseOne" [style.background-color]="(selectedFilterMenu == '1') ? '#0b3e53' : '#0c2840'">
+										<h6 class="user-rating m-0">User Ratings</h6>
+									</button>
+								</h2>
+								<div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+									data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+										<div class="user-rating-star">
+											<div class="form-check" *ngFor="let item of userRatingArr; let i = index" (change)="userRatingChange($event,item)">
+												<input class="form-check-input rating-radio" checked type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+												<label class="form-check-label rating-label" for="flexRadioDefault1">
+												  {{item.value}} star rating
+												</label>
+											  </div>
+
+											  <label class="clear-rating">Clear</label>
+											<!-- <ngx-slider [(value)]="maxValue" [options]="options"
+												(userChangeEnd)="onUserChangeEnd($event)"></ngx-slider> -->
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingTwo">
+									<button class="accordion-button collapsed" (click)="selectedMenu(2)"
+										type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+										aria-controls="collapseTwo"  [style.background-color]="(selectedFilterMenu == '2') ? '#0b3e53' : '#0c2840'">
+										<h6 class="user-rating m-0">Teaming</h6>
+									</button>
+								</h2>
+								<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+									data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+										<div *ngFor="let tm of teamingList; let i = index">
+											<label class="point-icon" for="teaming-{{i}}">
+												<input (change)="onChange(teamingList[i], $event.target.checked)" type="checkbox" class=""
+													id="teaming-{{i}}" name="teaming[]" value="{{teamingList[i]}}">
+												<span class="sidec sp-teaming-{{i}}"><fa-icon [icon]="faCircle"
+														style="color: {{teamingList[i]}} " class="{{teamingList[i]}}"></fa-icon>
+													{{teamingList[i]}}</span>
+											</label>
+											<br />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingThree">
+									<button class="accordion-button collapsed" type="button" (click)="selectedMenu(3)"
+										 data-bs-toggle="collapse" data-bs-target="#collapseThree"
+										aria-expanded="false" aria-controls="collapseThree" [style.background-color]="(selectedFilterMenu == '3') ? '#0b3e53' : '#0c2840'">
+										<h6 class="m-0 user-rating">Difficulty Level</h6>
+									</button>
+								</h2>
+								<div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+									data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+										<div *ngFor="let dfty of difficultyList; let i = index">
+											<label class="point-icon" for="difficulty-{{i}}">
+												<input (change)="onDiffChange(difficultyList[i], $event.target.checked)" type="checkbox"
+													class="" id="difficulty-{{i}}" name="difficulty[]" value="{{difficultyList[i]}}">
+												<span class="sidec sp-difficulty-{{i}}"><fa-icon [icon]="faCircle"
+														class="{{difficultyClass[i]}}"></fa-icon> {{difficultyList[i]}}</span>
+											</label>
+											<br />
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="accordion-item">
+								<h2 class="accordion-header" id="headingFour">
+									<button class="accordion-button collapsed" type="button" (click)="selectedMenu(4)"
+										data-bs-toggle="collapse" data-bs-target="#collapseFour"
+										aria-expanded="false" aria-controls="collapseFour" [style.background-color]="(selectedFilterMenu == '4') ? '#0b3e53' : '#0c2840'">
+										<h6 class="m-0 user-rating">Exercise Type</h6>
+									</button>
+								</h2>
+								<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+									data-bs-parent="#accordionExample">
+									<div class="accordion-body">
+										<div *ngFor="let et of exe_type; let i = index">
+											<label class="point-icon" for="exe-type-{{i}}">
+												<input (change)="onExTypeChange($event.target.value)" type="radio" class="" id="exe-type-{{i}}"
+													name="exe_type[]" value="{{i+1}}">
+												<span class="sidec sp-exe-type-{{i}}">{{exe_type[i]}}</span>
+											</label>
+											<br />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="filters">
+							<button class="clear-btn" (click)="resetForm();$event.stopPropagation()">Clear Filter</button>
+							<button class="btn-done">Done</button>
+						</div>
+   
+						<!-- <div>		
+							<div [hidden] = "isShow" class="leftFilterPanel">				
+					
+								<div class="details-section">			
+									<h6 class="mb-2 user-rating">User Ratings</h6>		 
+									<ngx-slider [(value)]="maxValue" [options]="options" (userChangeEnd)="onUserChangeEnd($event)" ></ngx-slider>
+								</div>
+								
+								<div class="details-section">
+									<h6 class="heading main-title">Teaming</h6>			
+									<div class="form-group mb-0" >
+										<div *ngFor="let tm of teamingList; let i = index" >
+												<label class="point-icon" for="teaming-{{i}}" > 
+												<input (change)="onChange(teamingList[i], $event.target.checked)" type="checkbox" class="" id="teaming-{{i}}" name="teaming[]" value="{{teamingList[i]}}"  > 
+												<span class="sidec sp-teaming-{{i}}"><fa-icon [icon]="faCircle" style="color: {{teamingList[i]}} " class="{{teamingList[i]}}"></fa-icon> {{teamingList[i]}}</span>
+											</label> 
+											<br/>
+										</div>						
+									</div>
+								</div>
+								
+								<div class="details-section">
+									<h6 class="heading main-title ">Difficulty Level</h6>
+									<div *ngFor="let dfty of difficultyList; let i = index" >
+										<label class="point-icon" for="difficulty-{{i}}" > 
+											<input (change)="onDiffChange(difficultyList[i], $event.target.checked)" type="checkbox" class="" id="difficulty-{{i}}" name="difficulty[]" value="{{difficultyList[i]}}"  > 
+										<span class="sidec sp-difficulty-{{i}}"><fa-icon [icon]="faCircle" class="{{difficultyClass[i]}}"></fa-icon> {{difficultyList[i]}}</span>
+										</label> 
+										<br/>	
+									</div>
+								</div>
+					
+								<div class="details-section">
+									<h6 class="heading main-title ">Exercise Type</h6>
+									<div *ngFor="let et of exe_type; let i = index" >
+										<label class="point-icon" for="exe-type-{{i}}" > 
+											<input (change)="onExTypeChange($event.target.value)" type="radio" class="" id="exe-type-{{i}}" name="exe_type[]" value="{{i+1}}"  > 
+										<span class="sidec sp-exe-type-{{i}}">{{exe_type[i]}}</span>
+										</label> 
+										<br/>	
+									</div>
 			
-			<!-- Alerts/News  -->
-			<!-- <div *ngIf="newsList.length!=0" class="row alert-news">
-				<div class="col-md-12">
-					<div class="alert-txt">
-						<div class="alerts">Alerts/News |</div>
-					</div>
-					<div class="news-scroll">
-						<marquee scrollamount="8" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
-							<span *ngFor="let ns of newsList; let i = index" ><a href="#">{{i+1}}. {{ns.title}}</a></span> 
-						</marquee>
+									<div class="mt-2 mb-2">
+										<button class="clear-filter" (click)="resetForm()">CLEAR FILTER</button>
+									</div>
+								</div>
+					
+							</div>
+							<button (click) = toggleDisplay() class="btn-filter mob_toggle">
+								<span class="{{toggletxt}}" >
+									{{toggletxt}} 
+									<fa-icon [icon]="faAngleDoubleRight" class="{{toggletxt}} fiu"></fa-icon>
+								</span>
+							</button>			
+						</div> -->
 					</div>
 				</div>
-			</div>  -->
-			<!-- Alerts/News End -->
-			
+			</div>
 		</div>
-		<!-- Report Right End -->
+		<div class="filter-by">
+			<span class="mr-2">Filter by:</span>
+			<div class="user-rate">
+				<span>User Rating:</span>
+				<p>&nbsp;{{maxValue}} star rating</p>
+			</div>
+			<div class="user-rate ml-4" *ngIf="exefilterfrm.value.teaming.length">
+				<span>Teaming:</span>
+				<p>&nbsp; <ng-container *ngFor="let items of exefilterfrm.value.teaming">
+					<fa-icon [icon]="faCircle" style="color: {{items}} "></fa-icon>
+					{{items}}
+					&nbsp;</ng-container></p>
+			</div>
+			<div class="user-rate ml-4" *ngIf="exefilterfrm.value.difficulty.length">
+				<span>Diffculty Level:</span>
+				<p>&nbsp; <ng-container *ngFor="let items of exefilterfrm.value.difficulty">
+					<fa-icon [icon]="faCircle" class="{{items}}"></fa-icon>
+					{{items}}
+					&nbsp;</ng-container></p>
+			</div>
+			<div class="user-rate ml-4" *ngIf="exe_val">
+				<span>Exercise Type:</span>
+				<p>&nbsp;{{exe_val == '1' ? 'Instructor-Led' : 'Self-Paced'}}</p>
+			</div>
+		</div>
+		<div class="row" [formGroup]="exefilterfrm" >
+			<!-- Report Left -->
+			<!-- <div class="col-lg-3 col-md-3" *ngIf="isFilterOption">	
+				<div [hidden] = "isShow" class="leftFilterPanel">				
+					<div class="details-section"> 
+						<input type="text" (keyup)="onKeyUpEvent(exefilterfrm.value)" (keyup.enter)="search(exefilterfrm.value);" class="form-control fortextbox" id="search" name="search" value="" placeholder="Search Exercise"  formControlName="search" placement="top" ngbTooltip="Please Enter Exercise Name & Press Enter"> 					
+					</div>
+		
+					<div class="details-section">			
+						<h6 class="mb-2 user-rating">User Ratings</h6>		 
+						<ngx-slider [(value)]="maxValue" [options]="options" (userChangeEnd)="onUserChangeEnd($event)" ></ngx-slider>
+					</div>
+					
+					<div class="details-section">
+						<h6 class="heading main-title">Teaming</h6>			
+						<div class="form-group mb-0" >
+							<div *ngFor="let tm of teamingList; let i = index" >
+									<label class="point-icon" for="teaming-{{i}}" > 
+									<input (change)="onChange(teamingList[i], $event.target.checked)" type="checkbox" class="" id="teaming-{{i}}" name="teaming[]" value="{{teamingList[i]}}"  > 
+									<span class="sidec sp-teaming-{{i}}"><fa-icon [icon]="faCircle" style="color: {{teamingList[i]}} " class="{{teamingList[i]}}"></fa-icon> {{teamingList[i]}}</span>
+								</label> 
+								<br/>
+							</div>						
+						</div>
+					</div>
+					
+					<div class="details-section">
+						<h6 class="heading main-title ">Difficulty Level</h6>
+						<div *ngFor="let dfty of difficultyList; let i = index" >
+							<label class="point-icon" for="difficulty-{{i}}" > 
+								<input (change)="onDiffChange(difficultyList[i], $event.target.checked)" type="checkbox" class="" id="difficulty-{{i}}" name="difficulty[]" value="{{difficultyList[i]}}"  > 
+							<span class="sidec sp-difficulty-{{i}}"><fa-icon [icon]="faCircle" class="{{difficultyClass[i]}}"></fa-icon> {{difficultyList[i]}}</span>
+							</label> 
+							<br/>	
+						</div>
+					</div>
+		
+					<div class="details-section">
+						<h6 class="heading main-title ">Exercise Type</h6>
+						<div *ngFor="let et of exe_type; let i = index" >
+							<label class="point-icon" for="exe-type-{{i}}" > 
+								<input (change)="onExTypeChange($event.target.value)" type="radio" class="" id="exe-type-{{i}}" name="exe_type[]" value="{{i+1}}"  > 
+							<span class="sidec sp-exe-type-{{i}}">{{exe_type[i]}}</span>
+							</label> 
+							<br/>	
+						</div>
+
+						<div class="mt-2 mb-2">
+							<button class="clear-filter" (click)="resetForm()">CLEAR FILTER</button>
+						</div>
+					</div>
+				</div>
+				<button (click) = toggleDisplay() class="btn-filter mob_toggle">
+					<span class="{{toggletxt}}" >
+						{{toggletxt}} 
+						<fa-icon [icon]="faAngleDoubleRight" class="{{toggletxt}} fiu"></fa-icon>
+					</span>
+				</button>			
+			</div> -->
+			<!-- Report Left End -->
+		
+			<!-- Report Right -->
+			<div class="col-lg-12 col-md-12">
+				<div class="minheight800">
+					<div class="row">
+		
+						<div *ngFor="let ex of exerciseData; let i = index" class="col-lg-3 col-md-6">					
+							<div class="exercise-bgwhite">
+								<div class="ex_relative">
+									<a routerLink="/exercise-description/{{ex.alias}}">
+										<div class="eimg">
+											<img *ngIf="ex.thumb_image!=null" src="{{server_url}}media/exercise-image/{{ex.thumb_image}}" class="img-fluid">										
+											<img *ngIf="ex.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">
+										</div>				
+									</a>
+									<!-- <div class="ex_absolute">
+										<div class="row ratting cursor-menu">
+											<div class="col-sm-3 col-3">
+												<span placement="right" ngbTooltip="Rating: {{ex.rating}}" ><fa-icon [icon]="faStar" class="starc"></fa-icon> {{ex.rating}}</span>
+											</div>
+											<div class="col-sm-9 col-9 text-right">
+												<span>
+													<fa-icon [icon]="faUserCircle" placement="top" ngbTooltip="Subscribers: {{ex.total_running}}/{{ex.total_exercise}}" class="usercircle mr-1"></fa-icon>
+													<span placement="top" ngbTooltip="Running Subscribers: {{ex.total_running}}">{{ex.total_running}}/</span>
+													<span placement="top" ngbTooltip="Total Subscribers: {{ex.total_exercise}}" class="mr-2">{{ex.total_exercise}}</span> 
+												</span> 
+		
+												<span placement="left" ngbTooltip="Difficulty Level: {{ex.difficulty_level}}" ><fa-icon [icon]="faCircle" class="{{ex.difficulty_level}}"></fa-icon> {{ex.difficulty_level}}</span>
+											</div>
+										</div>
+									</div> -->
+								</div>						
+								<div class="bgwhite_padding">
+									<a routerLink="/exercise-description/{{ex.alias}}" class="sra"><h5 class="exercise-heading">{{ex.name}}</h5></a>
+									<div class="btn-box">
+										<p class="exercise-authorby">By: {{ex.F_Name}} {{ex.L_Name}}</p>
+
+										<div class="exercise-basket" *ngIf="credit_system=='Active'">
+											<div class="exercise-price">
+												<span>Cr.{{ex?.credits ? ex.credits : '0'}}</span>
+											</div>
+											<ng-container *ngIf="ex.credits==null; else addBasket">
+												<div>
+													<button class="add-to-basket-button disable-cls" [icon]="faCartPlus">Add To Basket</button>
+													<img style="margin-left: 9px;" src="../../../assets/images/home/exercise-Vector.svg" alt="" *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" placement="top" ngbTooltip="{{ex.key_words}}">
+												</div>
+											</ng-container>
+											<ng-template #addBasket>
+												<div *ngIf="added_basket | filterPipe : ex.id; else added">
+													<button class="add-to-basket-button" (click)="head.addToBasket(ex.id,ex.credits);" [icon]="faShoppingCart">Add To Basket</button>
+													<img style="margin-left: 9px;" src="../../../assets/images/home/exercise-Vector.svg" alt="" *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" placement="top" ngbTooltip="{{ex.key_words}}">
+												</div>
+												<ng-template #added>
+													<button class="add-to-basket-button" [icon]="faCartPlus">Add To Basket</button>
+													<img style="margin-left: 9px;" src="../../../assets/images/home/exercise-Vector.svg" alt="" *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" placement="top" ngbTooltip="{{ex.key_words}}">
+												</ng-template>
+											</ng-template>
+										</div>
+									</div>								
+								</div>					
+							</div>					
+						</div>
+						
+						<div *ngIf="load_more_btn==true" class="col-lg-12 col-md-12 mt-4 mb-2">
+							<div class="btn-box text-center">
+								<div class="theme-btn">
+									<span class="txt"><button class="btn_blueas" (click)="loadMore();" ><fa-icon [icon]="faCog"></fa-icon> Load More</button></span>
+								</div>
+							</div>
+						</div>
+		
+						<!-- End  Old -->
+					</div>
+				</div>
+				
+				<!-- Alerts/News  -->
+				<!-- <div *ngIf="newsList.length!=0" class="row alert-news">
+					<div class="col-md-12">
+						<div class="alert-txt">
+							<div class="alerts">Alerts/News |</div>
+						</div>
+						<div class="news-scroll">
+							<marquee scrollamount="8" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+								<span *ngFor="let ns of newsList; let i = index" ><a href="#">{{i+1}}. {{ns.title}}</a></span> 
+							</marquee>
+						</div>
+					</div>
+				</div>  -->
+				<!-- Alerts/News End -->
+				
+			</div>
+			<!-- Report Right End -->
+		</div>
 	</div>
 </div>
-	
+
 <div *ngIf="loader==true" class="progressbar-area col-md-12"> 
 	<div class="inner-area col-md-6 text-center">
 		<img src="{{server_url}}media/images/loader.svg" class="img-fluid">
@@ -195,3 +531,7 @@
 </div>
 
 <app-candidatefooter></app-candidatefooter>
+
+
+<!-- <div class="col-md-12 report-page maxf-width">
+</div> -->

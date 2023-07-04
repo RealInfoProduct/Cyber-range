@@ -253,12 +253,14 @@
   
   .sub-header .header-title {
 	  /* font-family: 'Ubuntu-Medium', sans-serif; */
-	color: #0CC7AB;
-    font-family: 'Tomorrow';
-    letter-spacing: 0.4px;
+	  color: #0CC7AB;
+	  font-family: 'Tomorrow';
+	  letter-spacing: 0.4px;
+	  
   }
   .page-breadcrumb li a, .page-breadcrumb li{
-	  /* font-family: 'Open Sans', sans-serif; */
+	  /* font-family: 'Open Sans', sans-serif;
+	  font-size: 16px; */
 	  font-family: 'Tomorrow';
 	  font-size: 16px;
 	  font-weight: 500;
@@ -652,13 +654,13 @@
   }
   /* Sub Header img*/
   .sub-header {
-	  /* background: url('image/sub-header.jpg') #131E45;	 */
+	  /* background: url('image/sub-header.jpg') #131E45; */
 	  background: url('assets/images/home/breadcrumb-bg-image.svg')	#020920;
 	  background-size: cover;
 	  text-align: center;
 	  padding: 50px 0;
 	  color: #fff;
-	  margin-top: 115px;
+	  /* margin-top: 115px; */
   }
   .sub-header .header-title {
   font-size: 32px;
@@ -1798,7 +1800,7 @@
 		  width: 185px !important;
 	  }
 	  .dk-table  table.dataTable .tac, .dk-table .tac {
-		  width: 121px !important;
+		  /* width: 121px !important; */
 	  }
 	  .dk-table .tex {
 		  width: 400px !important;
@@ -1916,7 +1918,7 @@
 		  margin-left: 20px !important;
 	  }
 	  .sub-header {
-		  margin-top: 105px;
+		  /* margin-top: 105px; */
 	  }
   }
   /* End Assgin Team To Candidate */
@@ -1980,7 +1982,7 @@
   @media only screen and (max-width: 767px) 
   {
 	  .sub-header {
-		  margin-top: 110px;
+		  /* margin-top: 110px; */
 	  }
 	  .mtain {
 		  margin-bottom: 15px;

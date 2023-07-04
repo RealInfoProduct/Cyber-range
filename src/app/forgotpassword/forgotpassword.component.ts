@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup,  FormBuilder, FormControl, Validators, AbstractControl  } from '@angular/forms';
 import { LoginService } from '../services/login.service';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 
 @Component({
@@ -34,6 +35,30 @@ export class ForgotpasswordComponent implements OnInit {
 
 	// form group
 	forgotpass_frm: FormGroup;
+
+	banner_slider: OwlOptions = {
+		autoplay: true,
+		loop: true,
+		mouseDrag: true, 
+		touchDrag: true,
+		pullDrag: false,
+		dots: true,
+		nav: false,
+		navSpeed: 700,
+		navText: ['', ''],
+		responsive: {
+		  0: {
+			items: 1
+		  },
+		  400: {
+			items: 1
+		  },
+		  768: {
+			items: 1
+		  }
+		}
+	  }
+	
 
 	constructor(
 		private formBuilder: FormBuilder,

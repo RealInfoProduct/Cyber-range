@@ -7,6 +7,7 @@ import { ChatService } from '../../services/chat.service';
 
 import { Router, ActivatedRoute } from '@angular/router';
 import {noWhitespaceValidator} from '../../helper/validatefun';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 
 
 @Component({
@@ -34,7 +35,28 @@ current_url_array = [];
 form_title:string = 'Verification';
 showPassword:boolean = false
 confirmPassword:boolean = false
-
+banner_slider: OwlOptions = {
+  autoplay: true,
+  loop: true,
+  mouseDrag: true,
+  touchDrag: true,
+  pullDrag: false,
+  dots: true,
+  nav: false,
+  navSpeed: 700,
+  navText: ['', ''],
+  responsive: {
+    0: {
+      items: 1
+    },
+    400: {
+      items: 1
+    },
+    768: {
+      items: 1
+    }
+  }
+}
 error_messages = {
   'f_name': [
     { type: 'required', message: 'First Name is required.' },

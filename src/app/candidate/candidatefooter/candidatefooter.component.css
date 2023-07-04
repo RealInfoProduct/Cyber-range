@@ -38,3 +38,194 @@
 }
 
 
+
+.container-fluid {
+    background: #081327;
+    /* margin-top: 20px; */
+}
+
+.container {
+    max-width: -webkit-fill-available;
+}
+
+.footer .row {
+    padding: 50px 0px;
+}
+
+.footer-header-title {
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+}
+
+.footer-option {
+    margin-top: 20px;
+}
+
+
+.footer-all-section .row {
+  border-bottom: 1px solid #00FFFA;
+  margin: 0px 50px;
+}
+
+.footer-all-section{
+    /* background-image: url('./../../../assets/images/home/footer-bg.jpg');
+    background-size: cover; */
+    background-color: 09114A;
+}
+
+.footer-option p{
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+}
+
+.footer-menu {
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-social {
+    text-align: end;
+}
+
+.footer-social .footer-social-icon {
+    justify-content: end;
+}
+
+.footer-menu ul li a{
+    list-style: none;
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+    line-height: 40px;
+    padding: 0;
+}
+
+.footer-social-icon {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.footer-social-icon .social-icon a {
+    height: 40px;
+    width: 40px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.footer-copyright {
+    text-align: center;
+    padding: 28px 0px;
+    padding-bottom: 40px;
+}
+
+.footer-copyright .copyright {
+    color: #fff;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+    font-size: 18px;
+}
+
+.footer-copyright span {
+    color: #00FFFA;
+    font-family: 'Chakra Petch';
+    letter-spacing: 0.4px;
+}
+
+.footer-copyright span i {
+    color: red;
+}
+.social-icon i {
+    color: #081327;   
+}
+
+@media only screen and (max-width: 991px){
+
+    .made-in-india {
+        width: -webkit-fill-available;
+    }
+
+    .footer-social-icon .social-icon a {
+        height: 32px;
+        width: 32px;
+        margin-right: 8px;
+    }
+
+    .footer img {
+		width: -webkit-fill-available;
+	}
+}
+
+
+@media only screen and (max-width: 767px){
+
+    .made-in-india {
+        width: auto;
+    }
+
+    .footer-social-icon .social-icon a {
+        height: 32px;
+        width: 32px;
+        margin-right: 8px;
+    }
+
+    .footer-menu ul { 
+		padding: 0;
+	}
+
+	.footer img {
+		width: auto;
+	}
+    
+    .footer-menu {
+        justify-content: start;
+    }
+
+    .footer-social {
+        text-align: start;
+    }
+
+    .footer-social .footer-social-icon {
+        justify-content: start;
+    }
+    
+    .footer-all-section .row {
+		margin: 0px 10px;
+	}
+}
+
+
+
+@media only screen and (max-width: 360px){
+
+    /* .footer-logo {
+        width: fit-content;
+    }
+
+    .made-in-india {
+        width: fit-content;
+    } */
+
+    .footer-social-icon .social-icon a {
+        height: 32px;
+        width: 32px;
+        margin-right: 8px;
+    }
+}
+
+.footer-img{
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 49px;
+    text-align: center;
+    color: #FFFFFF;
+    padding-top: 10%;
+}

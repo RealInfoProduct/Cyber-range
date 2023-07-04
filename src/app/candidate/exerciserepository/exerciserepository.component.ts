@@ -10,15 +10,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { faStar, faCircle, faQuestion, faQuestionCircle, faPowerOff, faTrash, faShoppingCart, faRecycle, faCog, faArrowCircleRight, faAngleDoubleLeft, faAngleDoubleRight, faAngleUp, faAngleDown, faAnchor, faLifeRing, faUndo, faCartPlus, faMoneyBill, faMoneyBillWave, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup,  FormBuilder, FormArray, FormControl, Validators  } from '@angular/forms';
 import {FilterPipe} from '../../modal/filter.pipe';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-exerciserepository',
   templateUrl: './exerciserepository.component.html',
-  styleUrls: ['./exerciserepository.component.css']
+  styleUrls: ['./exerciserepository.component.css'],
 })
 export class ExerciserepositoryComponent implements OnInit {
 
 	//icon
+	selectedFilterMenu:any = 1;
 	faStar = faStar;
 	faCircle = faCircle;
 	faQuestionCircle = faQuestionCircle;
@@ -78,6 +80,29 @@ export class ExerciserepositoryComponent implements OnInit {
 	
 	/* show hide button */
 	isShow = false;
+
+	userRatingArr = [
+		{
+			value: '1',
+			checked: false
+		},
+		{
+			value: '2',
+			checked: false
+		},
+		{
+			value: '3',
+			checked: false
+		},
+		{
+			value: '4',
+			checked: false
+		},
+		{
+			value: '5',
+			checked: true
+		}
+	]
 	toggleDisplay() {
 		this.isShow = !this.isShow;
 		if(this.toggletxt =='Show Filter'){
@@ -97,7 +122,8 @@ export class ExerciserepositoryComponent implements OnInit {
 	/*breadcrumbs array */
 	current_url_array = [];
     form_title:string = 'Exercises';
-	
+	isFilterOption = false;
+
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
@@ -191,6 +217,8 @@ export class ExerciserepositoryComponent implements OnInit {
 				res.forEach((myObject:any, index:any) => {
 					this.exerciseData.push(res[index]);
 				});
+				console.log(this.exerciseData , "exerciseData------------");
+				
 				//console.log(this.exerciseData);
 				//alert();
 				if(res.length>=16)
@@ -241,6 +269,7 @@ export class ExerciserepositoryComponent implements OnInit {
 	  }
 	  onExTypeChange(diffy:string)
 	  {
+		debugger
 		this.exe_val = diffy
 		this.exerciseData = [];
 		this.start_limit = 0;
@@ -313,4 +342,18 @@ export class ExerciserepositoryComponent implements OnInit {
 	}
 
 
+	showFilterOption(){
+		this.isFilterOption = !this.isFilterOption
+	}
+
+	userRatingChange(event,item){
+		this.maxValue = item.value
+		this.exerciseData = [];
+		this.start_limit = 0;
+		this.loadExerciseRepository();
+	}
+
+	selectedMenu(index){
+		this.selectedFilterMenu = index;
+	}
 }

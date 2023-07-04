@@ -152,63 +152,12 @@
 /* //////// New Version //////// */
 .container-fluid {
     background: #081327;
-    margin-top: 20px;
 }
 
 .container {
-    max-width: 1800px;
-}
+    max-width: -webkit-fill-available;
+    background: #081327;
 
-.section {
-    padding: 10px 0px;
-}
-
-.section nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.section nav ul {
-    list-style: none;
-    display: flex;
-    font-weight: 500;
-    margin: 0;
-    cursor: pointer;
-    padding: 0;
-}
-    
-.section nav ul li a{
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    margin: 0px 13px;
-    font-family: 'Chakra Petch';
-    color: #fff;
-    letter-spacing: 0.4px;
-}
-
-.section nav ul li a:hover {
-    color: #00FFFA;
-    transition: 0.5s all ease-in-out;;
-}
-
-.credit {
-    display: flex;
-}
-
-.credit .wallet {
-    display: flex;
-    align-items: center;
-}
-
-.navbar button {
-    background: #fff;
-}
-
-.credit .wallet span {
-    font-family: 'Chakra Petch';
-    font-weight: 500;
-    margin-left: 5px;
-    color: #fff;
 }
 
 .sign-btn {
@@ -218,23 +167,27 @@
     font-weight: 600;
     padding: 8px 25px;
     margin-left: 30px;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    color: #000;
+    font-size: 16px;
 }
 
 .banner {
-    background-image: url('../../assets/images/home/dots-vector-background.png.svg');
-    height: 730px;
-    background-position: right;
-    background-repeat: no-repeat;
+    height: 680px;
 }
 
 .banner .banner-details {
     height: 100%;
     display: flex;
     align-items: center;
+    background-image: url('../../assets/images/home/cyber-bag-video.gif');
 }
 
 .banner-text {
+    padding: 0px 50px;
     position: relative;
+    text-align: center;
+    max-width: -webkit-fill-available;
 }
 
 .banner-text span {
@@ -260,17 +213,6 @@
     font-weight: 600;
 }
 
-.banner-text .features-option {
-    background-image: url('../../assets/images/home/background-effect.svg');
-    background-position: left;
-    height: 100%;
-    background-size: auto;
-    background-repeat: no-repeat;
-}
-
-.banner-text .features-option .row {
-    width: 60%;
-}
 
 .features-1 {
     background: linear-gradient(214.25deg, rgba(0, 0, 0, 0.224) 6.73%, rgba(0, 0, 0, 0.084) 100.28%);
@@ -280,6 +222,14 @@
     border-radius: 4px;
     padding: 10px 15px;
     margin-top: 20px;
+ }
+
+ .features-1:hover {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 15px 35px rgba(12, 199, 171, 0.35), 0px 9.89672px 13.1956px rgba(0, 0, 0, 0.16);
+    backdrop-filter: blur(23.0923px);
+    transition: all 0.3s ease-in-out;
+    background: #102D4D;
  }
 
  .pattern {
@@ -297,8 +247,9 @@
     border: none;
     background: #00FFFA;
     font-weight: 600;
-    padding: 8px 25px;
     margin-top: 40px;
+    padding: 12px 25px;
+    margin-left: 0px !important;
 }
 
 .vector-image img {
@@ -314,13 +265,16 @@
     backdrop-filter: blur(2px);
     border-radius: 20px;
     padding: 50px 30px;
-    background-image: url('../../assets/images/home/Ellipse-4.svg'), url('../../assets/images/home/Ellipse-6.svg'), url('../../assets/images/home/Ellipse-5.svg');
+    /* animation: motion-blur 5s ease-in-out infinite; */
+    /* background-image: url('../../assets/images/home/Effect-1.svg'); */
     background-repeat: no-repeat;
-    background-position: 100% 50%, 0% 50%, center bottom;
+    background-position: 50% -30%, 0% 50%, center bottom;
 }
 
 .our-client {
     padding: 100px 30px;
+    margin: 0px 50px;
+    position: relative;
 }
 
 .our-industry span {
@@ -332,7 +286,7 @@
 }
 
 .partner,.client {
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .partner span {
@@ -382,7 +336,7 @@
 }
 
 .cybersecurity {
-    margin: 50px 0px;
+    margin: 100px 50px;
 }
 
 .cyber-project span{
@@ -395,6 +349,7 @@
 
 .cyber-project{
     margin-left: 20px;
+    text-align: start;
 }
 
 .cyber-project p{
@@ -463,7 +418,8 @@
 }
 
 .category {
-    margin-top: 7%;
+    margin-top: 7% !important;
+    margin: 0px 50px;
 }
 
 .category-card {
@@ -471,7 +427,8 @@
 }
 
 .category-bg-image {
-    margin-top: 5%;
+    margin-top: 5% !important;
+    margin: 0px 50px;
 }
 
 .category-bg-image img {
@@ -553,11 +510,18 @@
     color: red;
 }
 
+
+.our-industry {
+    border-radius: 0;
+    display: flex;
+    justify-content: center;
+}
+
 @media only screen and (max-width: 1440px) {
 
-    .banner-text .features-option .row {
+    /* .banner-text .features-option .row {
         width:70%;
-    }
+    } */
 }
 
 @media only screen and (max-width: 1366px) {
@@ -592,9 +556,9 @@
         padding: 10px 6px;
     }
 
-    .banner-text .features-option .row {
+    /* .banner-text .features-option .row {
         width:70%;
-    }
+    } */
 
     .features-1 .features-title {
         font-size: 13px;
@@ -686,6 +650,14 @@
         padding: 60px 30px;
     }
 
+    .our-industry {
+        display: block;
+    }
+
+    .our-industry .row {
+        width: auto !important;
+    }
+
     .total-clients {
         margin: 20px 0px;
     }
@@ -702,21 +674,29 @@
     .made-in-india {
         width: auto;
     }
+
+    .sign-btn {
+        margin-bottom: 30px;
+    }
 }
 
 /* Video css */
 
 .video_section {
-    margin-top: 5%;
+    margin-top: 5% !important;
+    margin: 0px 50px;
     background: linear-gradient(214.25deg, rgba(0, 0, 0, 0.224) 6.73%, rgba(0, 0, 0, 0.084) 100.28%),
         linear-gradient(0deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4));
     backdrop-filter: blur(2px);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.4);
     padding: 50px 30px;
-    background-image: url('../../assets/images/home/Ellipse-7.svg'), url('../../assets/images/home/Ellipse-8.svg'), url('../../assets/images/home/Ellipse-9.svg');
-    background-repeat: no-repeat;
-    background-position: 110% -14%, -12% 50%, 108% 130%, center bottom;
+    background: linear-gradient(214.25deg, rgba(0, 0, 0, 0.224) 6.73%, rgba(0, 0, 0, 0.084) 100.28%);
+    /* animation: motion-blur 5s ease-in-out infinite; */
+    /* background-image:  url('../../assets/images/home/Ellipse-9.svg'); */
+    /* background-image: url('../../assets/images/home/Ellipse-7.svg'), url('../../assets/images/home/Ellipse-8.svg'), url('../../assets/images/home/Ellipse-9.svg'); */
+    /* background-repeat: no-repeat; */
+    /* background-position: 110% -14%, -12% 50%, 108% 130%, center bottom; */
     padding-bottom: 6%;
 }
 
@@ -764,6 +744,10 @@
     top: 50%;
 }
 
+.about_us {
+    padding-bottom: 8%;
+}
+
 .about_us_header {
     font-family: 'Chakra Petch';
     font-style: normal;
@@ -772,7 +756,7 @@
     line-height: 49px;
     text-align: center;
     color: #FFFFFF;
-    padding-top: 7%;
+    padding-top: 10%;
 }
 
 .about_us_item {
@@ -787,8 +771,10 @@
 }
 
 .about_card {
-    background: linear-gradient(129.37deg, rgba(193, 255, 254, 0.2) 8.09%, rgba(0, 255, 250, 0.2) 100%);
+    /* background: linear-gradient(129.37deg, rgba(193, 255, 254, 0.2) 8.09%, rgba(0, 255, 250, 0.2) 100%); */
+    background: #174550;
     border-radius: 30px;
+    margin: 0px 50px;
     padding: 5%;
 }
 .about_card_user{
@@ -894,4 +880,473 @@
         font-size: 22px;
         padding-bottom: 30px;
     }
+}
+
+    .counter {
+        font-size: 36px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+
+    .client.ng-enter {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    .client.ng-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 1s, transform 1s;
+    }
+
+    .line-1 {
+        width: 100%;
+        margin: 0 auto;
+        color: #fff;
+        text-align: center;
+        white-space: nowrap;
+        font-family: 'Chakra Petch';
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0.4px;
+        line-height: 33px;
+    }
+
+
+    /* .anim-typewriter:nth-child(2) {
+        animation: typewriter 10s steps(80) 11s 1 normal both;
+    }
+
+    .anim-typewriter:nth-child(3) {
+        animation: typewriter 10s steps(80) 20s 1 normal both;
+    }
+
+    .anim-typewriter {
+        animation: typewriter 10s steps(80) 1s 1 normal both;
+        overflow: hidden;
+        word-break: break-word;
+    }
+
+    @keyframes typewriter {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 50em;
+        }
+    } */
+
+    @keyframes blinkTextCursor {
+        from {
+            border-right-color: rgba(255, 255, 255, .75);
+        }
+
+        to {
+            border-right-color: transparent;
+        }
+    }
+
+    .image {
+        -webkit-animation: mover 2s infinite  alternate;
+        animation: mover 2s infinite  alternate;
+    }
+
+    @-webkit-keyframes mover {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-30px); }
+    }
+
+    @keyframes mover {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-30px); }
+    }
+
+
+  .typewriter p {
+      /* width: 0;
+      max-width: max-content;
+      overflow: hidden;
+      border-right: .05em solid #464545; */
+      /* white-space: nowrap;
+      margin: 0; */
+      color: #00FFFA;
+      font-size: 28px;
+      font-family: 'Chakra Petch';
+      font-weight: 600;
+  }
+
+  /* .typing-erase {
+      animation:
+          2s typing-erase 4s steps(50, end) infinite,
+          blink-caret .5s step-end infinite;
+  } */
+
+  @keyframes typing-erase {
+      0% {
+          width: 0
+      }
+
+      80% {
+          width: 100%
+      }
+
+      90%,
+      100% {
+          width: 0
+      }
+  }
+
+  @keyframes blink-caret {
+
+      from,
+      to {
+          border-color: transparent
+      }
+
+      50% {
+          border-color: gray
+      }
+  }
+
+
+
+
+
+  .background {
+    width: 100%;
+    height: auto;   
+
+  }
+  
+  .ball {
+    position: absolute;
+    top: 30%;
+  }
+
+  .balls {
+    position: absolute;
+    bottom: 30%;
+  }
+  
+  .ball img, .balls img{
+    height: auto;
+    border-radius: 50%;
+  }
+  
+  .ball.motion-blur {
+    animation: motion-blur 7s infinite;
+    z-index: 1;
+  }
+
+  .balls.top-motion-blur {
+    animation: top-motion-blur 7s infinite;
+    z-index: 1;
+  }
+
+  @keyframes top-motion-blur {
+    0% {
+        right: 0%;
+        bottom: 20%;
+    }
+    5% {
+        right: 0%;
+        bottom: 20%;
+    }
+    50% {
+        right: 57%;
+        bottom: 0%;
+    }
+    55% {
+        right: 57%;
+        bottom: 0%;
+    }
+    100% {
+        right: 0%;
+        bottom: 25%;
+    }
+  }
+
+  
+  @keyframes motion-blur {
+    0% {
+        left: 0%;
+        top: 20%;
+    }
+    5% {
+        left: 0%;
+        top: 20%;
+    }
+    50% {
+        left: 75%;
+        top: 0%;
+    }
+    55% {
+        left: 75%;
+        top: 0%;
+    }
+    100% {
+        left: 0%;
+        top: 25%;
+    }
+  }
+
+
+
+  .backgroundbanner1, .backgroundbanner3, .backgroundbanner4 {
+    width: 100%;
+    height: auto;   
+  }
+
+  .balls1.top-motion-blur-banner1 {
+    animation: motion-blur1 9s infinite;
+  }
+
+  .balls1 {
+    position: absolute;
+    bottom: 0%;
+  }
+
+  @keyframes motion-blur1 {
+    0% {
+        right: 60%;
+    }
+    5% {
+        right: 60%;
+    }
+    50% {
+        right: 0%;
+    }
+    55% {
+        right: 0%;
+    }
+    100% {
+        right: 60%;
+    
+    }
+  }
+
+  .backgroundbanner2 {
+    width: 100%;
+    height: auto;   
+
+  }
+  .balls2.top-motion-blur-banner2 {
+    animation: motion-blur2 7s infinite;
+  }
+
+  .balls2 {
+    position: absolute;
+    bottom: 0%;
+    width: 50%;
+  }
+
+  @keyframes motion-blur2 {
+    0% {
+        right: 10%;
+        bottom: 50%;
+    }
+    5% {
+        right: 10%;
+        bottom: 50%;
+    }
+    50% {
+        right: 0%;
+        bottom: 0%;
+    }
+    55% {
+        right: 0%;
+        bottom: 0%;
+    }
+    100% {
+        right: 10%;
+        bottom :50%;
+    
+    }
+  }
+
+  .balls3.top-motion-blur-banner3 {
+    animation: motion-blur3 9s infinite;
+  }
+
+  .balls3 {
+    position: absolute;
+    bottom: 0%;
+  }
+
+  .balls3 img , .balls4 img {
+    opacity: 0.7;
+  }
+
+  @keyframes motion-blur3 {
+    0% {
+        left: 30%;
+        bottom: 50%;
+    }
+    5% {
+        left: 30%;
+        bottom: 50%;
+    }
+    50% {
+        left: 0%;
+        bottom: 0%;
+    }
+    55% {
+        left: 0%;
+        bottom: 0%;
+    }
+    100% {
+        left: 30%;
+        bottom: 50%;
+    
+    }
+  }
+
+
+  .balls4.top-motion-blur-banner4 {
+    animation: motion-blur4 9s infinite;
+  }
+
+  .balls4 {
+    position: absolute;
+    bottom: 0%;
+  }
+
+  @keyframes motion-blur4 {
+    0% {
+        top: 30%;
+        left: -5%;
+    }
+    5% {
+        top: 30%;
+        left: -5%;
+    }
+    50% {
+        top: 0%;
+        left: -5%;
+    }
+    55% {
+        top: 0%;
+        left: -5%;
+    }
+    100% {
+        top: 30%;
+        left: -5%;
+    }
+  }
+  
+  .balls5.top-motion-blur-banner5 {
+    animation: motion-blur5 9s infinite;
+    z-index: -1;
+  }
+
+  .balls5 {
+    position: absolute;
+    top: 50%;
+  }
+
+  @keyframes motion-blur5 {
+    0% {
+        right: -4%;
+    }
+    5% {
+        right: -4%;
+    }
+    50% {
+        right: 30%;
+    }
+    55% {
+        right: 30%;
+    }
+    100% {
+        right: -4%;
+    }
+  }
+  .balls6.top-motion-blur-banner6 {
+    animation: motion-blur6 9s infinite;
+    z-index: -1;
+
+  }
+
+  .balls6 {
+    position: absolute;
+    top: 0%;
+  }
+
+  @keyframes motion-blur6 {
+    0% {
+        right: 0%;
+        top: 0%;
+    }
+    5% {
+        right: 0%;
+    }
+    50% {
+        right: 40%;
+        top: 50%;
+    }
+    55% {
+        right: 40%;
+        top: 50%;
+    }
+    100% {
+        right: 0%;
+    
+    }
+}
+
+.balls7.top-motion-blur-banner7 {
+    animation: motion-blur7 10s infinite;
+    z-index: -1;
+  }
+
+  .balls7 {
+    position: absolute;
+    top: 35%;
+  }
+
+  @keyframes motion-blur7 {
+    0% {
+        left: 60%;
+    }
+    5% {
+        left: 60%;
+    }
+    50% {
+        left: 0%;
+    }
+    55% {
+        left: 0%;
+    }
+    100% {
+        left: 60%;
+    
+    }
+  }
+
+  .row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+.about_card_bg{
+    display: flex;
+    justify-content: flex-end;
+}
+.Partners_Clients{
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 32px;
+    padding: 30px;
+}
+.Partners_Clients_img{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.Partners__Clients{
+    padding: 30px 0;
 }
