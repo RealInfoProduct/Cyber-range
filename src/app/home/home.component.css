@@ -1423,3 +1423,44 @@
 .about-section{
     margin: 10% !important;
 }
+
+@media only screen and (max-width: 450px) {
+    .motion-blur{
+        display: none;
+    }
+    .top-motion-blur{
+        display: none;
+    }
+    .about-section{
+        margin: 0 !important;
+    }
+    .our-client{
+        margin: 0 !important;
+    }
+    .category{
+        margin: 0 !important;
+        margin-top: 0 !important;
+    }
+    .about_card {
+        margin: 0 !important;
+    }
+    .about_card_bg{
+        display: none;
+    }
+    .Partners_Clients_img{
+        flex-direction: column;
+    }
+    .top-motion-blur-banner5{
+        display: none;
+    }
+    .top-motion-blur-banner6{
+        display: none;
+    }
+    .top-motion-blur-banner7{
+        display: none;
+    }
+    .typewriter {
+        width: 100%;
+        overflow: hidden;
+    }
+}

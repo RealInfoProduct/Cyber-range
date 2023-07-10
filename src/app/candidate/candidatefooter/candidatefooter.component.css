@@ -307,3 +307,25 @@
 .footer-wehelp{
     width: 50%;
 }
+.footer-all-section{
+    background: #111c2f;
+}
+
+@media only screen and (max-width: 450px) {
+
+    .copyright-menu{
+        display: flow-root;
+    }
+    .copy-img-made{
+        display: flow-root;
+    }
+    .copyright-menu ul{
+        padding: 0;
+    }
+    .copyright-img-menu{
+        margin: 0;
+    }
+    .copyright {
+        margin-bottom: 15px;
+    }
+}
