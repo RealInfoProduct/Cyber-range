@@ -121,6 +121,7 @@
     .sideh-paddingt {
         padding: 50px 50px 0;
     }  
+    
 }
 @media only screen and (min-width: 1300px)
 {
@@ -522,6 +523,9 @@
     /* .banner-text .features-option .row {
         width:70%;
     } */
+    .about-section{
+        margin: 5% !important;
+    }
 }
 
 @media only screen and (max-width: 1366px) {
@@ -567,6 +571,14 @@
 
     .show-demo {
         font-size: 14px
+    }
+
+    .about-section{
+        margin: 4% !important;
+    }
+
+    .typewriter p {
+        font-size: 20px !important;
     }
 }
 
@@ -620,6 +632,10 @@
 
     .cyber-project p {
         font-size: 14px;
+    }
+
+    .about-section{
+        margin: 0% !important;
     }
 }
 
@@ -772,7 +788,7 @@
 
 .about_card {
     /* background: linear-gradient(129.37deg, rgba(193, 255, 254, 0.2) 8.09%, rgba(0, 255, 250, 0.2) 100%); */
-    background: #174550;
+    background: #0e2b3d;
     border-radius: 30px;
     margin: 0px 50px;
     padding: 5%;
@@ -913,17 +929,8 @@
         line-height: 33px;
     }
 
-
-    /* .anim-typewriter:nth-child(2) {
-        animation: typewriter 10s steps(80) 11s 1 normal both;
-    }
-
-    .anim-typewriter:nth-child(3) {
-        animation: typewriter 10s steps(80) 20s 1 normal both;
-    }
-
     .anim-typewriter {
-        animation: typewriter 10s steps(80) 1s 1 normal both;
+        animation: typewriter 25s steps(100) 2s 1 normal both;
         overflow: hidden;
         word-break: break-word;
     }
@@ -936,7 +943,7 @@
         to {
             width: 50em;
         }
-    } */
+    }
 
     @keyframes blinkTextCursor {
         from {
@@ -1030,41 +1037,42 @@
     bottom: 30%;
   }
   
+  
   .ball img, .balls img{
     height: auto;
     border-radius: 50%;
   }
   
   .ball.motion-blur {
-    animation: motion-blur 7s infinite;
+    animation: motion-blur 6s infinite reverse;
     z-index: 1;
   }
 
   .balls.top-motion-blur {
-    animation: top-motion-blur 7s infinite;
+    animation: top-motion-blur 6s infinite;
     z-index: 1;
   }
 
   @keyframes top-motion-blur {
     0% {
         right: 0%;
-        bottom: 20%;
+        bottom: 0%;
     }
     5% {
         right: 0%;
-        bottom: 20%;
+        bottom: 0%;
     }
     50% {
-        right: 57%;
+        right: 70%;
         bottom: 0%;
     }
     55% {
-        right: 57%;
+        right: 70%;
         bottom: 0%;
     }
     100% {
         right: 0%;
-        bottom: 25%;
+        bottom: 0%;
     }
   }
 
@@ -1072,23 +1080,23 @@
   @keyframes motion-blur {
     0% {
         left: 0%;
-        top: 20%;
+        top: 0%;
     }
     5% {
         left: 0%;
-        top: 20%;
+        top: 0%;
     }
     50% {
-        left: 75%;
+        left: 70%;
         top: 0%;
     }
     55% {
-        left: 75%;
+        left: 70%;
         top: 0%;
     }
     100% {
         left: 0%;
-        top: 25%;
+        top: 0%;
     }
   }
 
@@ -1248,10 +1256,10 @@
 
   @keyframes motion-blur5 {
     0% {
-        right: -4%;
+        right: -3%;
     }
     5% {
-        right: -4%;
+        right: -3%;
     }
     50% {
         right: 30%;
@@ -1260,7 +1268,7 @@
         right: 30%;
     }
     100% {
-        right: -4%;
+        right: -3%;
     }
   }
   .balls6.top-motion-blur-banner6 {
@@ -1349,4 +1357,69 @@
 }
 .Partners__Clients{
     padding: 30px 0;
+}
+.glass-effects {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+&:before {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.glassIco {
+    --width: 100px;
+    /* height: 100px; */
+    backdrop-filter: blur(2px);
+    /* text-decoration: none; */
+    background: #00fffa;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Chakra Petch';
+    border: none;
+    background: #00FFFA;
+    font-weight: 600;
+    margin-top: 40px;
+    padding: 12px 25px;
+    margin-left: 0px !important;
+
+    &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 20%;
+        height: 100%;
+        background: #FFFFFF;
+        filter: blur(0px);
+        transition: 0.7s;
+        transform: skewX(35deg) translateX(calc(var(--width) + 20%));
+    }
+
+
+    &:hover {
+
+        &:before {
+            transform: skewX(35deg) translateX(calc(var(--width) * -1 - 20%))
+        }
+    }
+
+    &>* {
+        opacity: 0.8;
+    }
+
+    & * {
+        box-sizing: border-box;
+        transition: 300ms;
+    }
+}
+.about-section{
+    margin: 10% !important;
 }

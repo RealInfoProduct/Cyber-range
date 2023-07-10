@@ -61,15 +61,15 @@
     display: inline-block;
 }
 
-.header-top .top-right {
-    /*position: relative;*/
-}
+/* .header-top .top-right {
+    position: relative;
+} */
 .pull-right {
     float: right;
 }
-.header-top .top-right .social-box {
-    /*position: relative;*/
-}
+/* .header-top .top-right .social-box {
+    position: relative;
+} */
 .header-top .top-right .social-box li {
     /*position: relative;*/
     margin-left: 18px;
@@ -133,12 +133,12 @@
 .header-top .user_dropdown_box a:last-child {
 	border-bottom: 0px;
 }*/
-.header-top .user_dropdown_box a:hover {
-    /*background-color: #212529;*/ 
-	/*background-color: #f8f8f8;
-    color: #212529 !important;*/	
+/* .header-top .user_dropdown_box a:hover {
+    background-color: #212529; 
+	background-color: #f8f8f8;
+    color: #212529 !important;	
     
-}
+} */
 .header-top .user_dropdown_box a:focus {
     outline: 0 !important;
     box-shadow: none !important;
@@ -469,6 +469,12 @@ button:focus {
 }
 
 
+@media only screen and (max-width: 1366px) {
+	
+	.navbar {
+		font-size: 12px !important;
+	} 
+}
 
 .container-fluid {
     background: #081327;
@@ -553,4 +559,66 @@ button:focus {
 .mymovenavbar{
 	background: #081327;
 
+}
+
+.glass-effects {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+&:before {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.glassIco {
+    --width: 100px;
+    /* height: 100px; */
+    backdrop-filter: blur(2px);
+    /* text-decoration: none; */
+    background: #00fffa;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Chakra Petch';
+    border: none;
+    background: #00FFFA;
+    font-weight: 600;
+	margin-left: 30px;
+    padding: 12px 25px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 20%;
+        height: 100%;
+        background: #FFFFFF;
+        filter: blur(0px);
+        transition: 0.7s;
+        transform: skewX(35deg) translateX(calc(var(--width) + 20%));
+    }
+
+
+    &:hover {
+
+        &:before {
+            transform: skewX(35deg) translateX(calc(var(--width) * -1 - 20%))
+        }
+    }
+
+    &>* {
+        opacity: 0.8;
+    }
+
+    & * {
+        box-sizing: border-box;
+        transition: 300ms;
+    }
 }

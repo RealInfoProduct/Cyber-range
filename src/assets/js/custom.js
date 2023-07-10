@@ -202,7 +202,7 @@ function showhide2(){
 
 /* Preloader */
 function preloaderFadeOutInit(){
-	$('.preloader').delay(3000).fadeOut('slow');
+	$('.preloader').delay(100).fadeOut('slow');
 	$('body').attr('id','');
 	}
 

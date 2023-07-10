@@ -186,49 +186,49 @@ export class ContactusComponent implements OnInit {
 
 
 	  
-	invalidMessage(errorMessage, controlName) {
-		for (let error of errorMessage) {
-			switch (controlName) {
-				case 'name':
-					if (this.contact_frm.get('name').status == 'INVALID' && (this.contact_frm.get('name').dirty || this.contact_frm.get('name').touched)) {
-						return 'border-red'
-					} else {
-						return 'border-blue'
-					}
-					break;
-				case 'email':
-					if (this.contact_frm.get('email').status == 'INVALID' && (this.contact_frm.get('email').dirty || this.contact_frm.get('email').touched)) {
-						return 'border-red'
-					} else {
-						return 'border-blue'
-					}
-					break;
-				case 'mobile':
-					if (this.contact_frm.get('mobile').status == 'INVALID' && (this.contact_frm.get('mobile').dirty || this.contact_frm.get('mobile').touched)) {
-						return 'border-red'
-					} else {
-						return 'border-blue'
-					}
-					break;
-				case 'subject':
-					if (this.contact_frm.get('subject').status == 'INVALID' && (this.contact_frm.get('subject').dirty || this.contact_frm.get('subject').touched)) {
-						return 'border-red'
-					} else {
-						return 'border-blue'
-					}
-					break;
-				case 'message':
-					if (this.contact_frm.get('message').status == 'INVALID' && (this.contact_frm.get('message').dirty || this.contact_frm.get('message').touched)) {
-						return 'border-red'
-					} else {
-						return 'border-blue'
-					}
-					break;
-				default:
-					break;
-			}
+	// invalidMessage(errorMessage, controlName) {
+	// 	for (let error of errorMessage) {
+	// 		switch (controlName) {
+	// 			case 'name':
+	// 				if (this.contact_frm.get('name').status == 'INVALID' && (this.contact_frm.get('name').dirty || this.contact_frm.get('name').touched)) {
+	// 					return 'border-red'
+	// 				} else {
+	// 					return 'border-blue'
+	// 				}
+	// 				break;
+	// 			case 'email':
+	// 				if (this.contact_frm.get('email').status == 'INVALID' && (this.contact_frm.get('email').dirty || this.contact_frm.get('email').touched)) {
+	// 					return 'border-red'
+	// 				} else {
+	// 					return 'border-blue'
+	// 				}
+	// 				break;
+	// 			case 'mobile':
+	// 				if (this.contact_frm.get('mobile').status == 'INVALID' && (this.contact_frm.get('mobile').dirty || this.contact_frm.get('mobile').touched)) {
+	// 					return 'border-red'
+	// 				} else {
+	// 					return 'border-blue'
+	// 				}
+	// 				break;
+	// 			case 'subject':
+	// 				if (this.contact_frm.get('subject').status == 'INVALID' && (this.contact_frm.get('subject').dirty || this.contact_frm.get('subject').touched)) {
+	// 					return 'border-red'
+	// 				} else {
+	// 					return 'border-blue'
+	// 				}
+	// 				break;
+	// 			case 'message':
+	// 				if (this.contact_frm.get('message').status == 'INVALID' && (this.contact_frm.get('message').dirty || this.contact_frm.get('message').touched)) {
+	// 					return 'border-red'
+	// 				} else {
+	// 					return 'border-blue'
+	// 				}
+	// 				break;
+	// 			default:
+	// 				break;
+	// 		}
 
-		}
-	}
+	// 	}
+	// }
 
 }

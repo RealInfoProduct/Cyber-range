@@ -126,6 +126,7 @@
         </div>
     </div>
 </div>
+
 <!-- Services  -->
 <!-- <div class="row home bg-blue text-center text-white sideh-padding">   
     <div class="col-md-12 max-width">  
@@ -344,12 +345,13 @@
                 <div class="col-md-12 col-sm-12 col-xs-12" style="display: flex; justify-content: center;">
                     <div class="banner-text">
                         <div class="typewriter">
-                            <p class="typing-erase" >Secure Skills:</p>
+                            <!-- <p class="typing-erase" >Secure Skills:</p> -->
+                            <p class="line-1 anim-typewriter">Secure Skills:</p>
                         </div>
                         <span>Your One-Stop <br/>Cybersecurity Skill Development Platform</span>
                         <p>we offers a range of courses and training programs designed to cater to every skill level, from novice to expert. With CyberRange, you can gain practical knowledge and hands-on  experience in the field of cybersecurity, ensuring that you stay up-to-date with the latest  trends and technologies.</p>
                         <div class="features-option">
-                            <div class="row wow animate__animated animate__fadeInLeftBig  animate__delay-3s animate__slow">
+                            <div class="row wow animate__animated animate__fadeInLeftBig  animate__slow">
                                 <div class="col-md-3">
                                     <div class="features-1">
                                         <img src="../../assets/images/home/check.svg" />
@@ -376,6 +378,7 @@
                                 </div>
                             </div>
                         </div>
+                    
                         <!-- <div class="backgroundbanner4">
                             <div class="balls4 top-motion-blur-banner4"> <img src="../../assets/images/home/banner1.svg" alt=""></div>
                         </div>
@@ -386,7 +389,16 @@
                             <div class="balls1 top-motion-blur-banner1"> <img src="../../assets/images/home/banner1.svg" alt=""></div>
                         </div> -->
                         <!-- <button class="show-demo">REQUEST DEMO</button> -->
-                        <button class="sign-btn show-demo wow animate__animated animate__fadeInRightBig  animate__delay-3s animate__slow" (click)="openmodal()">SHOW DEMO</button>
+                        <!-- <button class="sign-btn show-demo wow animate__animated animate__fadeInRightBig  animate__slow" (click)="openmodal()">SHOW DEMO</button> -->
+                        <div class="glass-effects">
+                            <button class="glassIco show-demo wow animate__animated animate__fadeInRightBig animate__slow" (click)="openmodal()">SHOW DEMO</button>
+                        </div>
+                            <div class="background">
+                            <div class="ball motion-blur"> <img src="../../assets/images/home/Ellipse-5.svg" alt=""></div>
+                        </div>
+                        <div class="background">
+                            <div class="balls top-motion-blur" style="top: 41%;"> <img src="../../assets/images/home/Ellipse-5.svg" alt=""></div>
+                        </div>
                     </div>
                     <!-- <div class="backgroundbanner2">
                         <div class="balls2 top-motion-blur-banner2"> <img src="../../assets/images/home/banner1.svg" alt=""></div>
@@ -443,14 +455,14 @@
     </div> -->
 
     <div class="container">
-        <div class="section" style="margin: 10%;">
+        <div class="section about-section">
             <div class="row cybersecurity">
-                <div class="col-md-6  wow animate__animated animate__fadeInBottomLeft animate__slow">
-                    <div class="cyber-range  ">
-                        <img src="../../assets/images/home/About -video-to-gif.gif" />
+                <div class="col-md-6 col-sm-12 col-xs-12 wow animate__animated animate__fadeInLeftBig animate__slow">
+                    <div class="cyber-range">
+                        <img src="../../assets/images/home/About -video-to-gif.gif" width="100%"/>
                     </div>
                 </div>
-                <div class="col-md-6 cyber-text wow animate__animated animate__fadeInBottomRight animate__slow ">
+                <div class="col-md-6 col-sm-12 col-xs-12 cyber-text wow animate__animated animate__fadeInRightBig animate__slow ">
                     <div class="about-cyberRange ">
                         <label>About CyberRange</label><br />
                         <span>CyberRange: Empowering You with Cybersecurity Skills</span>
@@ -463,9 +475,9 @@
 
         <div class="section">
             <div class="our-client">
-                <!-- <div class="background">
+                <div class="background">
                     <div class="balls top-motion-blur"> <img src="../../assets/images/home/Ellipse-5.svg" alt=""></div>
-                </div> -->
+                </div>
                 <div class="row counter">
                     <div class="col-md-3 col-sm-6 col-xs-12 total-clients client" *ngFor="let item of ourclient">
                         <div class="client-icon">
@@ -477,9 +489,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="background">
+                <div class="background">
                     <div class="ball motion-blur"> <img src="../../assets/images/home/Ellipse-5.svg" alt=""></div>
-                </div> -->
+                </div>
             </div>
         </div>
 
@@ -571,8 +583,8 @@
                                         </div>
                                     </div>
                                     <div class="about_card_bg">
-                                        <!-- <img src="../../assets/images/home/about_cardbg.png.svg" alt=""> -->
-                                        <video width="11%" autoplay loop muted src="../../assets/images/home/students-video.mp4"></video>
+                                        <img src="../../assets/images/home/quotes.gif" alt="">
+                                        <!-- <video  autoplay loop muted src="../../assets/images/home/students-video.mp4"></video> -->
                                     </div>
                                 </div>
                         </ng-template>
@@ -586,9 +598,7 @@
         <div class="container">
             <div class="row" style="margin-top: 4%;">
                 <div class="col-md-12">
-                    <p class="line-1 anim-typewriter">"THERE'S NOT A VIABLE ALTERNATIVE FOR REAL-WORLD EXPERIENCE THAT IS THE REASON WE MADE</p>
-                    <p class="line-1 anim-typewriter">THE SKYVIRT® CYBERRANGE- REAL TIME EMULATION TRAINING PLATFORM FOR ACADEMIA,</p> 
-                    <p class="line-1 anim-typewriter">INDUSTRIES AND GOVERNMENT" - <b>Tarun Kumar Kushwaha</b></p>
+                  
                 </div>
             </div>
         </div>

@@ -63,7 +63,7 @@
 }
 
 
-.footer-all-section .row {
+.footer-all-section .borderbottom {
   border-bottom: 1px solid #00FFFA;
   margin: 0px 50px;
 }
@@ -106,6 +106,7 @@
 .footer-social-icon {
     display: flex;
     margin-bottom: 30px;
+    padding-left: 30px;
 }
 
 .footer-social-icon .social-icon a {
@@ -133,7 +134,7 @@
 }
 
 .footer-copyright span {
-    color: #00FFFA;
+    color: #fff;
     font-family: 'Chakra Petch';
     letter-spacing: 0.4px;
 }
@@ -198,6 +199,17 @@
     .footer-all-section .row {
 		margin: 0px 10px;
 	}
+    /* new  */
+   .footer-details-icon{
+    float: left !important;
+    width: 50%;
+   }
+   .copyright-menu{
+    justify-content: center !important;
+   }
+   .copy-img-made{
+    justify-content: center !important;
+   }
 }
 
 
@@ -219,13 +231,79 @@
     }
 }
 
-.footer-img{
+@media only screen and (max-width: 1366px){
+    .footer-wehelp{
+        width: 70% !important;
+    }
+}
+
+@media only screen and (max-width: 1366px){
+    .footer-wehelp{
+        width: 80% !important;
+    }
+}
+
+.copyright-img-menu{
+    margin: 0px 50px;
+}
+
+.footer-help{
     font-family: 'Chakra Petch';
-    font-style: normal;
     font-weight: 600;
     font-size: 38px;
     line-height: 49px;
     text-align: center;
     color: #FFFFFF;
-    padding-top: 10%;
+}
+.footer-details{
+    font-size: 16px;
+    font-family: 'Chakra Petch';
+    color: #FFFFFF;
+    
+}
+.footer-ui{
+    margin-top: 0;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+.footer-ui-help{
+    margin-top: 0;
+    padding: 0;
+    margin-bottom: 3rem;
+}
+.copyright-menu {
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+    font-size: 16px;
+    color: #FFFFFF;
+    display: flex;
+}
+.copyright-menu ul {
+    list-style-type: none;
+}
+
+.footer-details-icon{
+    float: right;
+    width: 50%;
+    margin-right: 100px;
+    letter-spacing: 0.4px;
+    font-family: 'Chakra Petch';
+}
+.img-text{
+    display: flex;
+}
+.img-text .img{
+    padding-right: 10px;
+}
+.copyright-img img{
+    width: 100px;
+    padding-left: 20px;
+}
+.copy-img-made{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.footer-wehelp{
+    width: 50%;
 }

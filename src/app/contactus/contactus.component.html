@@ -66,7 +66,7 @@
 							<input type="text" class="form-control fortextbox" name="name" id="name" formControlName="name"> 
 							<ng-container *ngFor="let error of error_messages.name">
 								<div class="error-message" *ngIf="contact_frm.get('name').hasError(error.type) && (contact_frm.get('name').dirty || contact_frm.get('name').touched)">
-									{{ error.message }}
+								{{ error.message }}
 								</div>
 							</ng-container>
 						</div>
@@ -153,10 +153,9 @@
    </div>
 </div>
 
-<!-- Footer -->
-<app-candidatefooter></app-candidatefooter>
 
-<div class="section">
+
+<!-- <div class="section">
 	<div class="contact_us">
 		<div class="contact_us_bg">
 			<div class="contact-title">
@@ -300,4 +299,146 @@
 			</div>
 		</div>
 	</div>
+</div> -->
+
+
+<div class="section">
+	<div class="contact-us">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="follow-us">
+					<ul>
+						<li class="follow-text wow animate__animated animate__fadeInDownBig">follow us</li>
+						<li>
+							<div class="contact-hr wow animate__animated animate__fadeInDownBig"></div>
+						</li>
+						<li style="padding-top: 10px;" class="wow animate__animated animate__fadeInUp">
+							<div class="contact-social-icon">
+								<div class="social-icon pt-0">
+									<a href="https://www.facebook.com/skyvirt" target="_blank"><i
+											class="bi bi-twitter"></i></a>
+								</div>
+								<div class="social-icon">
+									<a href="https://twitter.com/sky_virt" target="_blank"><i
+											class="bi bi-facebook"></i></a>
+								</div>
+								<div class="social-icon">
+									<a href="https://www.linkedin.com/company/skyvirt" target="_blank"><i
+											class="bi bi-instagram"></i></a>
+								</div>
+								<div class="social-icon">
+									<a href="https://discord.com/invite/zVASPd4F" target="_blank"><i
+											class="bi bi-linkedin"></i></a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="contact-us-input">
+					<div class="span-contact-us">
+						<span>Contact Us</span>
+					</div>
+					<div class="contact-us-hr">
+						<hr>
+					</div>
+					<div class="contact-us-reach">
+						<label>Reach out to us for any inquiries</label>
+					</div>
+
+					<div class="input-type">
+						<form [formGroup] = "contact_frm" >
+
+							<div class="form">
+								<input type="text" name="text" autocomplete="off" required formControlName="name" />
+								<label for="text" class="label-name">
+									<span class="content-name">
+										Full name
+									</span>
+								</label>
+							</div>
+							<ng-container *ngFor="let error of error_messages.name">
+								<div class="error-message" *ngIf="contact_frm.get('name').hasError(error.type) && (contact_frm.get('name').dirty || contact_frm.get('name').touched)">
+									<img src="../../assets/images/home/error-vector.svg" alt="">{{ error.message }}
+								</div>
+							</ng-container>
+							<div class="form">
+								<input type="text" name="text" autocomplete="off" required  formControlName="email"/>
+								<label for="text" class="label-name">
+									<span class="content-name">
+										Email id
+									</span>
+								</label>
+							</div>
+							<ng-container *ngFor="let error of error_messages.email">
+								<div class="error-message" *ngIf="contact_frm.get('email').hasError(error.type) && (contact_frm.get('email').dirty || contact_frm.get('email').touched)">
+									<img src="../../assets/images/home/error-vector.svg" alt="">{{ error.message }}
+								</div>
+							</ng-container>
+							<div class="form">
+								<input type="text" name="text" autocomplete="off" required formControlName="mobile" />
+								<label for="text" class="label-name">
+									<span class="content-name">
+										Phone number
+									</span>
+								</label>
+							</div>
+							<ng-container *ngFor="let error of error_messages.mobile">
+								<div class="error-message" *ngIf="contact_frm.get('mobile').hasError(error.type) && (contact_frm.get('mobile').dirty || contact_frm.get('mobile').touched)">
+									<img src="../../assets/images/home/error-vector.svg" alt="">{{ error.message }}
+								</div>
+							</ng-container>
+							<div class="form">
+								<input type="text" name="text" autocomplete="off" required formControlName="subject" />
+								<label for="text" class="label-name">
+									<span class="content-name">
+										Subject
+									</span>
+								</label>
+							</div>
+							<ng-container *ngFor="let error of error_messages.subject">
+								<div class="error-message" *ngIf="contact_frm.get('subject').hasError(error.type) && (contact_frm.get('subject').dirty || contact_frm.get('subject').touched)">
+									<img src="../../assets/images/home/error-vector.svg" alt="">{{ error.message }}
+								</div>
+							</ng-container>
+							<div class="form">
+								<input type="text" name="text" autocomplete="off" required formControlName="message" />
+								<label for="text" class="label-name">
+									<span class="content-name">
+										Message
+									</span>
+								</label>
+							</div>
+							<ng-container *ngFor="let error of error_messages.message">
+								<div class="error-message" *ngIf="contact_frm.get('message').hasError(error.type) && (contact_frm.get('message').dirty || contact_frm.get('message').touched)">
+									<img src="../../assets/images/home/error-vector.svg" alt="">{{ error.message }}
+								</div>
+							</ng-container>
+						</form>
+					</div>
+					<div class="register-button" *ngIf="recaptch=='Active'">
+						<re-captcha #captchaRef="reCaptcha" (resolved)="resolved($event)" siteKey={{this.recaptchSiteKey}} size="invisible"></re-captcha>
+						<button (click)="captchaRef.execute()" class="glass-effects glassIco">Register now </button>
+					</div>
+					<div class="register-button"  *ngIf="recaptch=='Inactive'" >
+						<re-captcha #captchaRef="reCaptcha" (resolved)="resolved($event)" siteKey={{this.recaptchSiteKey}} size="invisible"></re-captcha>
+						<button [disabled]="disabled_btn" (click)="onSubmit(contact_frm.value)" class="glass-effects glassIco">Submit </button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-7">
+				<div class="contact-us-map-bg">
+					<div class="bg-img wow animate__animated animate__fadeInRightBig animate__slow"></div>
+					</div>
+					<div class="contact-us-map ">
+						<iframe class="iframe wow animate__animated animate__zoomIn animate__slow" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.25280002074!2d-74.14448754461242!3d40.69763123334598!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sin!4v1688551534956!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+					</div>
+			</div>
+		</div>
+	</div>
+
 </div>
+
+<!-- Footer -->
+<app-candidatefooter></app-candidatefooter>

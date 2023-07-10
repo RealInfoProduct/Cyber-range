@@ -2,18 +2,22 @@
     background-color: #dd4b39;
     color: white;
 }
+
 .block-center {
     margin: auto;
 }
-.social-media .so_image{
+
+.social-media .so_image {
     width: auto;
     height: auto;
     max-width: 80px;
 }
+
 .lw {
     color: #fff;
     font-family: 'OpenSans-SemiBold', sans-serif;
 }
+
 .social {
     font-size: 14px;
     display: flex;
@@ -21,13 +25,16 @@
     text-align: center;
     justify-content: center;
 }
-.social img{
+
+.social img {
     margin-right: 5px;
 }
+
 .shr {
     margin-top: 0;
     border-top: 1px solid #bdbdbd;
 }
+
 .or-container {
     align-items: center;
     color: #ccc;
@@ -40,14 +47,17 @@
     flex-grow: 5;
     height: 1px
 }
+
 .btn-google {
     color: rgb(68, 65, 65);
     background-color: #fff;
 }
+
 .btn-linkedin {
     color: #fff;
     background-color: #0e76a8;
 }
+
 .or-label {
     flex-grow: 1;
     margin: 0 15px;
@@ -64,7 +74,7 @@
     background-image: url('../../assets/images/home/login-bg-image.svg');
     background-repeat: no-repeat;
     background-size: cover;
-    
+
 }
 
 .login-card {
@@ -107,6 +117,7 @@
     /* text-align: center; */
     color: #00FFFA;
     padding-top: 59px;
+    padding-bottom: 20px;
 }
 
 .login_input_text {
@@ -142,6 +153,7 @@
     color: #00FFFA;
 }
 
+/* 
 .forgot-password a{
     font-family: 'Chakra Petch';
     font-weight: 400;
@@ -151,11 +163,11 @@
     align-items: center;
 
     color: #00FFFA;
-}
+} */
 
-.sign_in {
+/* .sign_in {
     padding-top: 25px;
-}
+} */
 
 .button {
     /* width: 490px; */
@@ -171,6 +183,7 @@
     color: #0E2E4A;
 
 }
+
 .have_an_account {
     font-family: 'Chakra Petch';
     font-weight: 400;
@@ -184,7 +197,7 @@
     color: #00FFFA;
 }
 
-.login_hr_or {
+/* .login_hr_or {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -207,12 +220,13 @@
     align-items: center;
     text-align: center;
     color: #CCCCCC;
-}
+} */
 
-.login_with_section{
+.login_with_section {
     padding: 30px 0px;
 }
-.login_with_google{
+
+.login_with_google {
     width: 100%;
     height: 56px;
     font-family: 'Chakra Petch';
@@ -223,16 +237,19 @@
     color: #FFFFFF;
     border: 1px solid #FFFFFF;
 }
-.google_item{
+
+.google_item {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 56px;
 }
-.goole_text{
+
+.goole_text {
     padding-left: 15px;
 }
 
+/* 
 .cyberrange {
     font-family: 'Chakra Petch';
     font-weight: 400;
@@ -242,8 +259,8 @@
     padding-top: 45px;
     color: #FFFFFF;
     width: 100%;
-}
-
+} */
+/* 
 input:focus
 {
     border: 1px solid rgba(0, 255, 250, 0.4);
@@ -256,8 +273,8 @@ input,
 select,
 textarea {
     color:  #FFFFFF;
-}
-
+} */
+/* 
 .border-blue {
     border-left: 4px solid #00FFFA;
     border-top: 1px solid rgba(0, 255, 250, 0.5);
@@ -270,9 +287,9 @@ textarea {
     border-top: 1px solid rgba(255, 139, 137, 0.5);
     border-right: 1px solid rgba(255, 139, 137, 0.5);
     border-bottom: 1px solid rgba(255, 139, 137, 0.5);
-}
+} */
 
-.error_mess{
+/* .error_mess{
     display: flex;
     align-items: baseline;
     padding-top: 10px;
@@ -288,8 +305,8 @@ textarea {
     color: #FF8B89;
     padding-left: 6px;
 
-}
-.error_mess .card{
+} */
+.error_mess .card {
     width: 100%;
     border-radius: 5px;
     background: #1e334b;
@@ -298,23 +315,25 @@ textarea {
     border: none;
 }
 
-.error_mess .card span{
+.error_mess .card span {
     font-family: 'Chakra Petch';
     font-weight: 400;
     font-size: 16px;
     max-width: 400px;
     line-height: 30px;
 }
+
 .icon {
     position: absolute;
-    top: 41px;
-    right: 30px;
+    top: 25px;
+    right: 7px;
     font-size: 23px;
 
 }
+
 .icon i {
     font-size: 20px;
-    color: #00FFFA;
+    color: #CDCDCD;
 
 }
 
@@ -327,9 +346,9 @@ textarea {
     border-radius: 20px 0 0 20px;
 }
 
-@media only screen and (max-width: 567px){
+@media only screen and (max-width: 567px) {
 
-    .login_screen{
+    .login_screen {
         width: 100%;
         padding: 0px 20px;
 
@@ -340,7 +359,7 @@ textarea {
     }
 }
 
-@media only screen and (max-width: 767px){
+@media only screen and (max-width: 767px) {
 
     .login-slider {
         display: none;
@@ -357,12 +376,13 @@ textarea {
     background: #003A6D;
     backdrop-filter: blur(13.5px);
 }
-.row{
+
+.row {
     border-radius: 30px;
 }
+
 .about_card {
     background: #003A6D;
-    border-radius: 20px 0 0 20px;
     padding: 14% 5%;
     height: 635px;
 }
@@ -387,12 +407,193 @@ textarea {
 
     color: #CCCCCC;
 }
+
 .login_item_box1 {
     width: 100%;
     padding: 0% 10%;
-    background: rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: blur(13.5px);
-    backdrop-filter: blur(13.5px);
-    border-radius: 0 20px 20px 0;
+    background: rgb(0 58 109 / 20%);
+    backdrop-filter: blur(3px);
+    height: 635px;
+}
 
+
+
+.form {
+    width: auto;
+    position: relative;
+    height: 70px;
+    overflow: hidden;
+    /* margin: 25px 0px; */
+}
+
+.form input {
+    width: 100%;
+    height: 100%;
+    color: #CDCDCD;
+    padding-top: 10px;
+    border: none;
+    background-color: transparent;
+}
+
+.form label {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-bottom: 1px solid #CDCDCD;
+    color: #CDCDCD;
+    font-size: 14px;
+    font-family: 'Chakra Petch';
+}
+
+.form label::after {
+    content: "";
+    position: absolute;
+    bottom: -1px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border-bottom: 3px solid #00fffa;
+    transform: translateX(-100%);
+    transition: all 0.3s ease;
+}
+
+.content-name {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+.form input:focus {
+    outline: none;
+}
+
+.form input:focus+.label-name .content-name,
+.form input:valid+.label-name .content-name {
+    transform: translateY(-110%);
+    font-size: 14px;
+    left: 0px;
+    color: #CDCDCD;
+}
+
+.form input:focus+.label-name::after,
+.form input:valid+.label-name::after {
+    transform: translateX(0%);
+}
+
+.error-message {
+    color: #DB1D1A;
+    display: block;
+    font-family: 'OpenSans-SemiBold', sans-serif;
+    align-items: center;
+    display: flex;
+}
+
+.error-message img {
+    padding-right: 5px;
+}
+
+.res-for-signin {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 30px 0;
+}
+
+.register-now span {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+
+    color: #00FFFA;
+}
+
+.forgot-password span {
+    font-family: 'Chakra Petch';
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+}
+
+.sign_in .button {
+    font-family: 'Chakra Petch';
+    border: none;
+    background: #00FFFA;
+    font-weight: 600;
+    padding: 2px 50px;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    color: #000;
+    font-size: 16px;
+}
+
+.glass-effects {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+&:before {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.glassIco {
+    --width: 100px;
+    /* height: 100px; */
+    backdrop-filter: blur(2px);
+    /* text-decoration: none; */
+    background: #00fffa;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Chakra Petch';
+    border: none;
+    background: #00FFFA;
+    font-weight: 600;
+    padding: 12px 25px;
+
+    &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 20%;
+        height: 100%;
+        background: #FFFFFF;
+        filter: blur(0px);
+        transition: 0.7s;
+        transform: skewX(35deg) translateX(calc(var(--width) + 20%));
+    }
+
+
+    &:hover {
+
+        &:before {
+            transform: skewX(35deg) translateX(calc(var(--width) * -1 - 20%))
+        }
+    }
+
+    &>* {
+        opacity: 0.8;
+    }
+
+    & * {
+        box-sizing: border-box;
+        transition: 300ms;
+    }
 }

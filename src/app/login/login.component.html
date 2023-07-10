@@ -148,7 +148,7 @@
 					<form [formGroup]="formdata" (ngSubmit)="onClickSubmit(formdata.value)">
 						<div class="row">
 							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="login_input_text">
+								<!-- <div class="login_input_text">
 									<input class="input"
 										[ngClass]="this.formdata.value.emailid?.length > 0 || (formdata.get('emailid').dirty || formdata.get('emailid').touched) ? invalidMessage(error_messages.email) : '' "
 										type="email" placeholder="Email id" formControlName="emailid">
@@ -165,10 +165,23 @@
 											</div>
 										</div>
 									</div>
+								</ng-container> -->
+								<div class="form">
+									<input type="text" name="text" autocomplete="off" required  formControlName="emailid"/>
+									<label for="text" class="label-name">
+										<span class="content-name">
+											Email id
+										</span>
+									</label>
+								</div>
+								<ng-container *ngFor="let error of error_messages.email">
+									<div class="error-message"*ngIf="formdata.get('emailid').hasError(error.type) && (formdata.get('emailid').dirty || formdata.get('emailid').touched)">
+										<img src="../../assets/images/home/error-vector.svg" alt="">{{ error.message }}
+									</div>
 								</ng-container>
 							</div>
 							<div class="col-md-12 col-sm-12 col-xs-12">
-								<div class="login_input_text">
+								<!-- <div class="login_input_text">
 									<input class="input" [type]="showPassword ? 'text' : 'password'"
 										[ngClass]="this.formdata.value.passwd?.length > 0 ? 'border-blue' : ''"
 										placeholder="Password" formControlName="passwd">
@@ -178,6 +191,21 @@
 										<i class="bi bi-eye-fill" (click)="showPassword = !showPassword"
 											[class.hide]="!showPassword"></i>
 									</div>
+								</div> -->
+
+								<div class="form">
+									<input [type]="showPassword ? 'text' : 'password'" name="text" autocomplete="off" required  formControlName="passwd"/>
+									<label for="text" class="label-name">
+										<span class="content-name">
+											Password
+										</span>
+									</label>
+									<!-- <div class="icon">
+										<i class="bi bi-eye-slash-fill" (click)="showPassword = !showPassword"
+											[class.hide]="showPassword"></i>
+										<i class="bi bi-eye-fill" (click)="showPassword = !showPassword"
+											[class.hide]="!showPassword"></i>
+									</div> -->
 								</div>
 							</div>
 						</div>
@@ -191,19 +219,29 @@
 									</label>
 								</div>
 							</div>
-							<div class="forgot-password">
+							<!-- <div class="forgot-password">
 								<span><a routerLink="/forgot-password">Forgot password</a></span>
-							</div>
+							</div> -->
 						</div>
 
-						<div class="sign_in">
-							<button type="submit" class="button">SIGN IN</button>
+					
+
+						<div class="res-for-signin">
+							<div class="register-now">
+								<span>Register now &nbsp; | </span>
+							</div>
+							<div class="forgot-password">
+								<span routerLink="/forgot-password">Forgot password</span>
+							</div>
+							<div class="sign_in glass-effects">
+								<button type="submit" class="button glassIco">SIGN IN</button>
+							</div>
 						</div>
 					</form>
-					<div class="have_an_account">
+					<!-- <div class="have_an_account">
 						<span>Don’t have an account? <label><a routerLink="/registration">Register
 									now</a></label></span>
-					</div>
+					</div> -->
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<div class="error_mess">
@@ -226,9 +264,9 @@
 						</div>
 					</div>
 					<!-- *ngIf="google_login_status" -->
-					<div class="login_hr_or">
+					<!-- <div class="login_hr_or">
 						<div class="login_hr">
-							<hr>
+							
 						</div>
 						<div class="login_or">
 							<span>Or</span>
@@ -236,8 +274,9 @@
 						<div class="login_hr">
 							<hr>
 						</div>
-					</div>
+					</div> -->
 					<!-- *ngIf="google_login_status" -->
+					
 					<div class="login_with_section" >
 						<div class="login_with_google">
 							<div class="google_item" (click)="signInWithGoogle()">
@@ -252,9 +291,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="cyberrange">
+			<!-- <div class="cyberrange">
 				<span>© 2023 SkyVirt® CyberRange</span>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>
@@ -271,4 +310,5 @@
 </div>
 
 <!-- Footer -->
-<!-- <app-candidatefooter></app-candidatefooter> -->
+<app-candidatefooter></app-candidatefooter>
+
