@@ -186,7 +186,7 @@
 								<h2 class="accordion-header" id="headingOne">
 									<button class="accordion-button" (click)="selectedMenu(1)" type="button"
 										data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
-										aria-controls="collapseOne" [style.background-color]="(selectedFilterMenu == '1') ? '#0b3e53' : '#0c2840'">
+										aria-controls="collapseOne" [style.background-color]="(selectedFilterMenu == '1') ? '#0d233c' : '#133256'">
 										<h6 class="user-rating m-0">User Ratings</h6>
 									</button>
 								</h2>
@@ -212,7 +212,7 @@
 								<h2 class="accordion-header" id="headingTwo">
 									<button class="accordion-button collapsed" (click)="selectedMenu(2)"
 										type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-										aria-controls="collapseTwo"  [style.background-color]="(selectedFilterMenu == '2') ? '#0b3e53' : '#0c2840'">
+										aria-controls="collapseTwo"  [style.background-color]="(selectedFilterMenu == '2') ? '#0d233c' : '#133256'">
 										<h6 class="user-rating m-0">Teaming</h6>
 									</button>
 								</h2>
@@ -224,7 +224,7 @@
 												<input (change)="onChange(teamingList[i], $event.target.checked)" type="checkbox" class=""
 													id="teaming-{{i}}" name="teaming[]" value="{{teamingList[i]}}">
 												<span class="sidec sp-teaming-{{i}}"><fa-icon [icon]="faCircle"
-														style="color: {{teamingList[i]}} " class="{{teamingList[i]}}"></fa-icon>
+													[ngStyle]="{'color': teamingList[i] }" class="{{teamingList[i]}}"></fa-icon>
 													{{teamingList[i]}}</span>
 											</label>
 											<br />
@@ -236,7 +236,7 @@
 								<h2 class="accordion-header" id="headingThree">
 									<button class="accordion-button collapsed" type="button" (click)="selectedMenu(3)"
 										 data-bs-toggle="collapse" data-bs-target="#collapseThree"
-										aria-expanded="false" aria-controls="collapseThree" [style.background-color]="(selectedFilterMenu == '3') ? '#0b3e53' : '#0c2840'">
+										aria-expanded="false" aria-controls="collapseThree" [style.background-color]="(selectedFilterMenu == '3') ? '#0d233c' : '#133256'">
 										<h6 class="m-0 user-rating">Difficulty Level</h6>
 									</button>
 								</h2>
@@ -259,7 +259,7 @@
 								<h2 class="accordion-header" id="headingFour">
 									<button class="accordion-button collapsed" type="button" (click)="selectedMenu(4)"
 										data-bs-toggle="collapse" data-bs-target="#collapseFour"
-										aria-expanded="false" aria-controls="collapseFour" [style.background-color]="(selectedFilterMenu == '4') ? '#0b3e53' : '#0c2840'">
+										aria-expanded="false" aria-controls="collapseFour" [style.background-color]="(selectedFilterMenu == '4') ? '#0d233c' : '#133256'">
 										<h6 class="m-0 user-rating">Exercise Type</h6>
 									</button>
 								</h2>
@@ -279,7 +279,7 @@
 							</div>
 						</div>
 						<div class="filters">
-							<button class="clear-btn" (click)="resetForm();$event.stopPropagation()">Clear Filter</button>
+							<span class="clear-btn" (click)="resetForm();$event.stopPropagation()">Clear all filters</span>
 							<button class="btn-done">Done</button>
 						</div>
    
@@ -351,7 +351,7 @@
 			<div class="user-rate ml-4" *ngIf="exefilterfrm.value.teaming.length">
 				<span>Teaming:</span>
 				<p>&nbsp; <ng-container *ngFor="let items of exefilterfrm.value.teaming">
-					<fa-icon [icon]="faCircle" style="color: {{items}} "></fa-icon>
+					<fa-icon [icon]="faCircle"  [ngStyle]="{'color': items }" ></fa-icon>
 					{{items}}
 					&nbsp;</ng-container></p>
 			</div>
@@ -433,14 +433,34 @@
 				<div class="minheight800">
 					<div class="row">
 		
-						<div *ngFor="let ex of exerciseData; let i = index" class="col-lg-3 col-md-6">					
-							<div class="exercise-bgwhite">
+						<div *ngFor="let ex of exerciseData; let i = index" class="col-lg-3 col-md-6 mainDiv" >					
+							<div class=" exercise-bgwhite wow animate__animated animate__slideInUp " [ngStyle]="{'animation-duration': ex.duration }">
 								<div class="ex_relative">
+									
 									<a routerLink="/exercise-description/{{ex.alias}}">
 										<div class="eimg">
-											<img *ngIf="ex.thumb_image!=null" src="{{server_url}}media/exercise-image/{{ex.thumb_image}}" class="img-fluid">										
-											<img *ngIf="ex.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid">
-										</div>				
+											<img *ngIf="ex.thumb_image!=null" src="{{server_url}}media/exercise-image/{{ex.thumb_image}}" class="img-fluid img-fluid-card">										
+											<img *ngIf="ex.thumb_image==null" src="{{server_url}}media/exercise-image/default-exe.jpg" class="img-fluid img-fluid-card">
+										</div>	
+										<div class="card-rating">
+											<div class="card-rating-count">
+												<span placement="right" class="d-flex" >
+													<div *ngFor="let item of reting(ex.rating)">
+														<fa-icon  [icon]="faStar" class="starc"></fa-icon> 
+													</div>
+												</span>
+											</div>
+											<div class="card-rating-user">
+												<span>
+													<fa-icon [icon]="faUserCircle" placement="top"  class="usercircle mr-1"></fa-icon>
+													<span placement="top" ngbTooltip="Running Subscribers: {{ex.total_running}}">{{ex.total_running}}/</span>
+													<span placement="top" ngbTooltip="Total Subscribers: {{ex.total_exercise}}" class="mr-2">{{ex.total_exercise}}</span> 
+												</span> 
+											</div>
+											<div class="card-rating-status">
+												<span placement="left"><fa-icon [icon]="faCircle" class="{{ex.difficulty_level}}"></fa-icon> {{ex.difficulty_level}}</span>
+											</div>
+										</div>			
 									</a>
 									<!-- <div class="ex_absolute">
 										<div class="row ratting cursor-menu">
@@ -470,16 +490,25 @@
 											</div>
 											<ng-container *ngIf="ex.credits==null; else addBasket">
 												<div>
+													<div class="button-bg-broder">
+														<button class="button-bg">Add To Basket</button>
+													</div>
 													<button class="add-to-basket-button disable-cls" [icon]="faCartPlus">Add To Basket</button>
 													<img style="margin-left: 9px;" src="../../../assets/images/home/exercise-Vector.svg" alt="" *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" placement="top" ngbTooltip="{{ex.key_words}}">
 												</div>
 											</ng-container>
 											<ng-template #addBasket>
 												<div *ngIf="added_basket | filterPipe : ex.id; else added">
+													<div class="button-bg-broder">
+													<button class="button-bg">Add To Basket</button>
+													</div>
 													<button class="add-to-basket-button" (click)="head.addToBasket(ex.id,ex.credits);" [icon]="faShoppingCart">Add To Basket</button>
 													<img style="margin-left: 9px;" src="../../../assets/images/home/exercise-Vector.svg" alt="" *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" placement="top" ngbTooltip="{{ex.key_words}}">
 												</div>
 												<ng-template #added>
+													<div class="button-bg-broder">
+													<button class="button-bg">Add To Basket</button>
+													</div>
 													<button class="add-to-basket-button" [icon]="faCartPlus">Add To Basket</button>
 													<img style="margin-left: 9px;" src="../../../assets/images/home/exercise-Vector.svg" alt="" *ngIf="ex.key_words!=null" [icon]="faQuestionCircle" placement="top" ngbTooltip="{{ex.key_words}}">
 												</ng-template>
@@ -531,7 +560,3 @@
 </div>
 
 <app-candidatefooter></app-candidatefooter>
-
-
-<!-- <div class="col-md-12 report-page maxf-width">
-</div> -->

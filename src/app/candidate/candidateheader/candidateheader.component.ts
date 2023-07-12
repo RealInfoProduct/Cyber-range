@@ -682,4 +682,7 @@ export class CandidateheaderComponent implements OnInit {
     this.ds.sendData(array);
   }
 
+  offerCose() {
+    document.getElementById("offer").style.display = "none";
+  }
 }

@@ -67,6 +67,9 @@
   border-bottom: 1px solid #00FFFA;
   margin: 0px 50px;
 }
+.borderbottom{
+    list-style: none;
+}
 
 .footer-all-section{
     /* background-image: url('./../../../assets/images/home/footer-bg.jpg');
@@ -265,6 +268,7 @@
     margin-top: 0;
     padding: 0;
     margin-bottom: 2rem;
+    list-style: none;
 }
 .footer-ui-help{
     margin-top: 0;
@@ -308,7 +312,8 @@
     width: 50%;
 }
 .footer-all-section{
-    background: #111c2f;
+    border: 1px solid #000;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.00) 100%);
 }
 
 @media only screen and (max-width: 450px) {

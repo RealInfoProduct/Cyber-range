@@ -344,12 +344,11 @@
             <div class="row banner-details">
                 <div class="col-md-12 col-sm-12 col-xs-12" style="display: flex; justify-content: center;">
                     <div class="banner-text">
-                        <div class="typewriter">
-                            <!-- <p class="typing-erase" >Secure Skills:</p> -->
-                            <p class="line-1 anim-typewriter">Secure Skills:</p>
-                        </div>
-                        <span>Your One-Stop <br/>Cybersecurity Skill Development Platform</span>
-                        <p>we offers a range of courses and training programs designed to cater to every skill level, from novice to expert. With CyberRange, you can gain practical knowledge and hands-on  experience in the field of cybersecurity, ensuring that you stay up-to-date with the latest  trends and technologies.</p>
+                            <div class="typing-demo" style="color: aqua;">
+                                Skyvirt Cyber Range:
+                            </div>
+                        <span>One-Stop<br/>Cybersecurity Skill Enhancement Platform</span>
+                        <p>we offers a range of courses and training programs designed to cater to every skill level, from novice to expert. With CyberRange, you can gain practical knowledge and hands-on experience in the field of cybersecurity, ensuring that you stay up-to-date with the latest trends and technologies.</p>
                         <div class="features-option">
                             <div class="row wow animate__animated animate__fadeInLeftBig  animate__slow">
                                 <div class="col-md-3">
@@ -391,7 +390,7 @@
                         <!-- <button class="show-demo">REQUEST DEMO</button> -->
                         <!-- <button class="sign-btn show-demo wow animate__animated animate__fadeInRightBig  animate__slow" (click)="openmodal()">SHOW DEMO</button> -->
                         <div class="glass-effects">
-                            <button class="glassIco show-demo wow animate__animated animate__fadeInRightBig animate__slow" (click)="openmodal()">SHOW DEMO</button>
+                            <button class="glassIco show-demo wow animate__animated animate__fadeInRightBig animate__slow" (click)="openmodal()">GET A DEMO</button>
                         </div>
                             <div class="background">
                             <div class="ball motion-blur"> <img src="../../assets/images/home/Ellipse-5.svg" alt=""></div>
@@ -464,7 +463,7 @@
                 </div>
                 <div class="col-md-6 col-sm-12 col-xs-12 cyber-text wow animate__animated animate__fadeInRightBig animate__slow ">
                     <div class="about-cyberRange ">
-                        <label>About CyberRange</label><br />
+                        <!-- <label>About CyberRange</label><br /> -->
                         <span>CyberRange: Empowering You with Cybersecurity Skills</span>
                         <p>we empower you with the cybersecurity skills needed to protect yourself and your organization from cyber threats. Our platform offers a comprehensive range of courses and training programs, designed to cater to individuals and organizations of all skill levels. Our expert instructors provide in-depth knowledge and practical experience in the field of cybersecurity, covering topics such as threat intelligence, risk management, incident response, and much more.</p>
                         <p>Our platform also offers hands-on training through simulations and real-world scenarios to help you develop practical skills that are in high demand by today's employers. With CyberRange Academy, you can be assured of building a robust and reliable cybersecurity skillset that will help you secure your organization's critical assets and stay ahead in your career.</p>
@@ -484,7 +483,7 @@
                             <img src="{{item.ourclientPic}}" />
                         </div>
                         <div class="cyber-project client">
-                            <span  class="count" [@countAnimation]="item.ourclientNumber">{{item.ourclientNumber}}{{item.key}}</span>
+                            <span  class="count" [@countAnimation]="item.ourclientNumber">{{item.ourclientNumber > 99 ? item.ourclientNumber : '0' + item.ourclientNumber}}{{item.key}}</span>
                             <p>{{item.ourclientDetails}}</p>
                         </div>
                     </div>

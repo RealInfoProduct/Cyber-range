@@ -121,6 +121,7 @@ div.ex_absolute {
 }
 .bgwhite_padding {
     padding: 13px;
+	background: rgba(33, 103, 163, 0.30);
 }
 .bgwhite .heading{ 
 	margin-bottom: 0;
@@ -318,6 +319,7 @@ a.sra {
 	width: 100%;
 	height: 100%;
 }
+
 @media only screen and (min-width: 1280px)
 {
 	.ex_relative a .eimg {
@@ -424,7 +426,8 @@ a.sra {
 
 /* New Version*/
 .exercise{
-	background: url(../../../assets/images/home/Exercises-Bg.svg) #020920;
+	/* background: url(../../../assets/images/home/Exercises-Bg.svg) #020920; */
+	background: linear-gradient(90deg, #193363 0%, rgba(8, 19, 39, 0.00) 100%), #081327;
 	background-repeat: no-repeat;
 	/* background-position: center; */
 	background-size: cover;
@@ -472,9 +475,8 @@ a.sra {
 }
 
 .exercise-bgwhite{
-	background: rgba(33, 103, 163, 0.31);
-    border: 1px solid #22619E;
-    backdrop-filter: blur(2px);
+	border-radius: 12px;
+	border: 1px solid #22619E;
 	margin-bottom: 28px;
 }
 
@@ -487,16 +489,33 @@ a.sra {
     font-size: 16px;
     line-height: 21px;
     letter-spacing: 0.308088px;
-    color: #00FFFA;
+    color: #FFF;
 }
 
+.img-fluid-card {
+	border-radius: 12px 12px 0 0;
+}
+
+.card-rating{
+	display: flex;
+	justify-content: space-around;
+	background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(2px);
+    padding: 5px 0;
+}
+.card-rating-user{
+	color: #FFF;
+    font-family: Chakra Petch;
+    font-size: 14px;
+    font-weight: 600;
+}
 .bgwhite_padding .exercise-authorby {
 	font-family: 'Chakra Petch';
 	font-weight: 400;
 	font-size: 14px;
 	line-height: 18px;
 	letter-spacing: 0.308088px;
-	color: #00FFFA;
+	color: #AEAEAE;
 	
 }
 
@@ -511,13 +530,14 @@ a.sra {
 }
 
 .add-to-basket-button{
-    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 86% 100%, 86% 91%, 65% 91%, 65% 100%, 13% 100%, 0 71%, 0 0);
     color: #fff;
     border: none;
     font-size: 16px;
     font-weight: 500;
     padding: 12px 20px;
-    background: rgba(33, 103, 163, 0.31);
+    /* background: rgba(33, 103, 163, 0.31); */
+    background: #193d6b;
 	position: relative;
 
 	/* --grad: transparent 99%,rgb(72, 250, 72) 50%;
@@ -529,11 +549,6 @@ a.sra {
     border: 2px solid #0cc7b3; */
 }
 
-.add-to-basket-button:hover {
-	color: #000;
-	background: #00FFFA;
-	transition: all 0.5s ease-in-out;
-}
 
 .addBasket {
 	position: absolute;
@@ -555,7 +570,7 @@ font-family: 'Chakra Petch';
 font-weight: 600;
 font-size: 20px;
 line-height: 26px;
-color: #00FFFA;
+color: #FFF;
 }
 
 ::ng-deep .ngx-slider .ngx-slider-pointer {
@@ -582,28 +597,28 @@ color: #00FFFA;
 }
 
 .btn-filter {
-	border: 1px solid #00FFFA;
+	border: 1px solid #133256;
     font-size: 16px;
     font-family: 'Chakra Petch';
     font-weight: 600;
     letter-spacing: 0.4px;
-    background: transparent;
-    color: #00FFFA;
+    background: #133256;
+    color: #FFF;
     padding: 5px 50px;
     border-radius: 5px;
 }
 
 .repo-input {
-	background: #00403f;
-    border: none;
+	background: transparent;
+	border: 1px solid #133256;
     margin-right: 20px;
     width: 250px;
-	color: #00FFFA;
+	color: #8B9AB1;
     font-family: 'Chakra Petch';
 }
 
 .repo-input::placeholder {
-	color: #00FFFA;
+	color: #8B9AB1;
     font-family: 'Chakra Petch';
 }
 
@@ -614,8 +629,8 @@ color: #00FFFA;
 }
 
 .accordion {
-	padding: 10px;
-    background-color: #0c2840;
+	padding: 9px;
+    background-color: #133256;
 }
 
 .accordion .accordion-item {
@@ -624,9 +639,17 @@ color: #00FFFA;
 }
 
 .accordion-button {
-	background: #0c2840;
-    border-radius: 0;
+	background: #133256;
+    border-radius: 10px;
 	padding: 20px 15px;
+}
+
+.accordion-item:first-of-type .accordion-button {
+    border-top-left-radius: calc(10px - 0px);
+    border-top-right-radius: calc(10px - 0px);
+}
+.accordion-header{
+	background: #133256;
 }
 
 .accordion-button:not(.collapsed)::after {
@@ -649,7 +672,7 @@ color: #00FFFA;
 }
 
 .accordion-body {
-	background: #0c2840;
+	background: #133256;
 	color: #fff;
 }
 
@@ -660,8 +683,10 @@ color: #00FFFA;
 .filters {
 	display: flex;
 	justify-content: space-between;
-	background: #243e53;
+    background: #141922;
+    box-shadow: 0px -4px 7px 0px rgba(0, 0, 0, 0.15);
 	padding: 20px 22px;
+	align-items: center;
 }
 
 .accordion-body .user-rating-star {
@@ -683,7 +708,7 @@ color: #00FFFA;
 }
 
 .clear-rating {
-	color: #FF8B89;
+	color: #EB4636;
     font-family: 'Chakra Petch';
     font-size: 14px;
 	letter-spacing: 0.4px;
@@ -692,30 +717,30 @@ color: #00FFFA;
 }
 
 .filters .clear-btn {
-	color: #00FFFA;
-    background: transparent;
-    border: 2px solid #00FFFA;
-    border-radius: 5px;
-    padding: 7px 20px;
-    font-family: Chakra Petch;
-    font-weight: 600;
-    letter-spacing: 0.4px;
+	color: #EB4636;
+	font-family: Chakra Petch;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	cursor: pointer;
 }
 
 .filters .btn-done {
-	color: #0b556b;
-    background: #00FFFA;
-    border: 2px solid #00FFFA;
+
+    color: #FFF;
+    background: #1C2331;
     border-radius: 5px;
-    padding: 7px 20px;
+    padding: 8px 36px;
+    border: none;
     font-family: Chakra Petch;
     font-weight: 600;
     letter-spacing: 0.4px;
+
 }
 
 .filters-title {
-	background: #0c2840;
-    border-bottom: 3px solid #000000;
+	background: #133256;
+    border-bottom: 3px solid #3E3E3E;
     padding: 16px 25px;
 	display: flex;
     justify-content: space-between;
@@ -804,13 +829,76 @@ color: #00FFFA;
 	font-family: 'Chakra Petch';
 	letter-spacing: 0.4px;
 	display: flex;
-    background-color: #4B4B4B;
     align-items: center;
 	padding: 8px 15px;
-    border-radius: 5px;
+	border-radius: 5px;
+	background: rgba(0, 0, 0, 0.30);
 }
 
 .user-rate p {
 	margin: 0;
 	font-family: 'Chakra Petch';
+}
+.mainDiv {
+	    border-radius: 0 0 12px 12px;
+}
+.mainDiv :hover {
+	.add-to-basket-button{
+		color: #000;
+		background: #00FFFA;
+		/* transition: all 0.5s ease-in-out; */
+	}
+	.eimg img{
+		transform: scale(1.15);
+		transition: all 0.5s ease-out;
+
+	}
+	.card-rating {
+		background: black;
+
+	}
+	.mainDiv {
+	    border-radius: 12px;
+	}
+	.bgwhite_padding{
+		background: #1a4879;
+
+
+	}
+}
+.bgwhite_padding{
+	border-radius:  0 0 12px 12px;
+
+}
+
+.eimg {
+	overflow: hidden;
+	border-radius: 12px 12px 0 0;
+}
+
+.button-bg-broder .button-bg{
+	clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 14px 22px;
+    background: #00fffa;
+	position: absolute;
+    right: 31px;
+    top: 32px;
+}
+
+
+
+.form-check-input {
+    border: 2px solid rgba(199, 199, 199, 0.30);
+    background: #133256;
+	box-shadow: none;
+}
+.form-check-input:checked[type=radio]{
+	border: 2px solid #FFF;
+}
+.accordion-button:focus {
+	box-shadow: none;
 }

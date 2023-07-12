@@ -286,10 +286,6 @@
     letter-spacing: 0.4px;
 }
 
-.partner,.client {
-    /* margin-top: 10px; */
-}
-
 .partner span {
     font-size: 22px;
 }
@@ -904,56 +900,28 @@
         text-align: center;
     }
 
-
-    .client.ng-enter {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-
-    .client.ng-enter-active {
-        opacity: 1;
-        transform: translateY(0);
-        transition: opacity 1s, transform 1s;
-    }
-
-    .line-1 {
+    .typing-demo {
         width: 100%;
-        margin: 0 auto;
-        color: #fff;
-        text-align: center;
+        animation: typing 8s steps(100) 2s 1 normal both;
         white-space: nowrap;
+        overflow: hidden;
         font-family: 'Chakra Petch';
         font-size: 20px;
+        margin: 0 auto;
         font-weight: 500;
-        letter-spacing: 0.4px;
-        line-height: 33px;
-    }
-
-    .anim-typewriter {
-        animation: typewriter 25s steps(100) 2s 1 normal both;
-        overflow: hidden;
-        word-break: break-word;
-    }
-
-    @keyframes typewriter {
+      }
+      
+      @keyframes typing {
         from {
-            width: 0;
+          width: 0
         }
-
-        to {
-            width: 50em;
+      }
+          
+      @keyframes blink {
+        50% {
+          border-color: transparent
         }
-    }
-
-    @keyframes blinkTextCursor {
-        from {
-            border-right-color: rgba(255, 255, 255, .75);
-        }
-
-        to {
-            border-right-color: transparent;
-        }
-    }
+      }
 
     .image {
         -webkit-animation: mover 2s infinite  alternate;
@@ -972,23 +940,11 @@
 
 
   .typewriter p {
-      /* width: 0;
-      max-width: max-content;
-      overflow: hidden;
-      border-right: .05em solid #464545; */
-      /* white-space: nowrap;
-      margin: 0; */
       color: #00FFFA;
       font-size: 28px;
       font-family: 'Chakra Petch';
       font-weight: 600;
   }
-
-  /* .typing-erase {
-      animation:
-          2s typing-erase 4s steps(50, end) infinite,
-          blink-caret .5s step-end infinite;
-  } */
 
   @keyframes typing-erase {
       0% {
@@ -1388,7 +1344,7 @@
     background: #00FFFA;
     font-weight: 600;
     margin-top: 40px;
-    padding: 12px 25px;
+    padding: 9px 25px;
     margin-left: 0px !important;
 
     &:before {
@@ -1439,7 +1395,7 @@
     }
     .category{
         margin: 0 !important;
-        margin-top: 0 !important;
+        margin-top: 30px !important;
     }
     .about_card {
         margin: 0 !important;
@@ -1462,5 +1418,20 @@
     .typewriter {
         width: 100%;
         overflow: hidden;
+    }
+    .about-cyberRange{
+        margin-top: 30px;
+    }
+    .video_section {
+        margin: 0;
+    }
+    .glass-effects{
+        margin-bottom: 30px;
+    }
+    .banner-text{
+        padding: 0;
+    }
+    .video_section {
+        padding: 10px;
     }
 }

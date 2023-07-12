@@ -555,18 +555,16 @@ textarea {
     /* height: 100px; */
     backdrop-filter: blur(2px);
     /* text-decoration: none; */
-    background: #00fffa;
     clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-family: 'Chakra Petch';
     border: none;
     background: #00FFFA;
     font-weight: 600;
-    padding: 12px 25px;
+    padding: 9px 25px;
 
     &:before {
         content: "";

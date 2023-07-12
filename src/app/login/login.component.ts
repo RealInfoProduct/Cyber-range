@@ -105,7 +105,8 @@ export class LoginComponent implements OnInit {
     pullDrag: false,
     dots: true,
     nav: false,
-    navSpeed: 700,
+    navSpeed: 300,
+    animateOut: 'fadeOut',
     navText: ['', ''],
     responsive: {
       0: {

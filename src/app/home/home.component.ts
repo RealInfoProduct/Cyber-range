@@ -109,19 +109,19 @@ export class HomeComponent implements OnInit {
       ourclientPic : "../../assets/images/home/our-client-1.svg",
       ourclientNumber : 0,
       ourclientDetails : "Cyber Security Projects",
-      key : '+'
+      key : ''
     } ,
     {
       ourclientPic : "../../assets/images/home/our-client-2.svg",
       ourclientNumber : 0,
       ourclientDetails : "Students Globally",
-      key : 'k+'
+      key : 'k'
     } ,
     {
       ourclientPic : "../../assets/images/home/our-client-3.svg",
       ourclientNumber : 0,
       ourclientDetails : "Cyber Security Expersts",
-      key : '+'
+      key : ''
     } ,
     {
       ourclientPic : "../../assets/images/home/our-client-4.svg",
@@ -253,7 +253,7 @@ export class HomeComponent implements OnInit {
 
   incrementClient(index: number) {
     const increment = 1;
-    const arr = [750, 13, 150, 150]
+    const arr = [185, 5, 99, 99]
     const finalCount = arr[index];
 
     const timer = setInterval(() => {

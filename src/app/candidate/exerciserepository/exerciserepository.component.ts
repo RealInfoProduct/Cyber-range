@@ -11,6 +11,7 @@ import { faStar, faCircle, faQuestion, faQuestionCircle, faPowerOff, faTrash, fa
 import { FormGroup,  FormBuilder, FormArray, FormControl, Validators  } from '@angular/forms';
 import {FilterPipe} from '../../modal/filter.pipe';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-exerciserepository',
@@ -157,7 +158,6 @@ export class ExerciserepositoryComponent implements OnInit {
 	}
 	
 	ngOnInit(): void {
-
 		/*breadcrumbs array */
 		this.current_url_array = [
 			{'slug':"",'label':'Exercises'}
@@ -179,7 +179,7 @@ export class ExerciserepositoryComponent implements OnInit {
 		  else{
 			this.isShow = false;
 		}	
-		this.loadSubcData();	  
+		this.loadSubcData();	 
 	}
 
 	loadSubcData()
@@ -217,10 +217,14 @@ export class ExerciserepositoryComponent implements OnInit {
 				res.forEach((myObject:any, index:any) => {
 					this.exerciseData.push(res[index]);
 				});
-				console.log(this.exerciseData , "exerciseData------------");
+				this.exerciseData.forEach((element, index ) => {
+					if (index === 0) {
+						element.duration = `700ms`
+					} else {
+						element.duration = `${index * 1000 }ms`
+					}
+				})
 				
-				//console.log(this.exerciseData);
-				//alert();
 				if(res.length>=16)
 				{
 					this.load_more_btn = true;
@@ -229,6 +233,7 @@ export class ExerciserepositoryComponent implements OnInit {
 					this.load_more_btn = false;
 				}
 			});
+
 	}
 
 	// on rating change
@@ -355,5 +360,10 @@ export class ExerciserepositoryComponent implements OnInit {
 
 	selectedMenu(index){
 		this.selectedFilterMenu = index;
+	}
+
+
+	reting(reting){
+		return new Array(Number(reting))
 	}
 }

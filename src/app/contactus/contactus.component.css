@@ -444,7 +444,7 @@
     border: none;
     background: #00FFFA;
     font-weight: 600;
-    padding: 12px 25px;
+    padding: 9px 25px;
 
     &:before {
         content: "";

@@ -474,6 +474,10 @@ button:focus {
 	.navbar {
 		font-size: 12px !important;
 	} 
+
+	.icons{
+		padding-right: 15px;
+	}
 }
 
 .container-fluid {
@@ -591,7 +595,7 @@ button:focus {
     background: #00FFFA;
     font-weight: 600;
 	margin-left: 30px;
-    padding: 12px 25px;
+    padding: 9px 25px;
 
     &:before {
         content: "";
@@ -621,4 +625,23 @@ button:focus {
         box-sizing: border-box;
         transition: 300ms;
     }
+}
+.offer-strip {
+	display: flex;
+	padding: 10px 0px;
+	justify-content: space-around;
+	align-items: center;
+	gap: 9.6px;
+	background: linear-gradient(90deg, #00FFFA 0%, #FFCE1F 100%);
+}
+
+.card-offer {
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card-offer span {
+	color: #0E2E4A;
+	font-family: Chakra Petch;
+	padding: 5px;
 }
