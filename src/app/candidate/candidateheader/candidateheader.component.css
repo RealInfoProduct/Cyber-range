@@ -546,6 +546,8 @@ button:focus {
     font-weight: 500;
     margin-left: 5px;
     color: #fff;
+	display: flex;
+    align-items: center;
 }
 
 .sign-btn {

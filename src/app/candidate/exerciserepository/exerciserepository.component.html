@@ -265,10 +265,10 @@
 								</h2>
 								<div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
 									data-bs-parent="#accordionExample">
-									<div class="accordion-body">
+									<div class="accordion-body" style="padding: 1rem 2.25rem;">
 										<div *ngFor="let et of exe_type; let i = index">
 											<label class="point-icon" for="exe-type-{{i}}">
-												<input (change)="onExTypeChange($event.target.value)" type="radio" class="" id="exe-type-{{i}}"
+												<input (change)="onExTypeChange($event.target.value)" type="radio" class="form-check-input" id="exe-type-{{i}}"
 													name="exe_type[]" value="{{i+1}}">
 												<span class="sidec sp-exe-type-{{i}}">{{exe_type[i]}}</span>
 											</label>
