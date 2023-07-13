@@ -536,17 +536,8 @@ a.sra {
     font-size: 16px;
     font-weight: 500;
     padding: 12px 20px;
-    /* background: rgba(33, 103, 163, 0.31); */
     background: #193d6b;
 	position: relative;
-
-	/* --grad: transparent 99%,rgb(72, 250, 72) 50%;
-    background: linear-gradient(to top right ,var(--grad)) top right,
-				linear-gradient(to top left ,var(--grad)) top left,
-				linear-gradient(to bottom right,var(--grad)) bottom right,
-				linear-gradient(to bottom left ,var(--grad)) bottom left, rgba(33, 103, 163, 0.31);
-    cursor: pointer;
-    border: 2px solid #0cc7b3; */
 }
 
 
@@ -901,4 +892,54 @@ color: #FFF;
 }
 .accordion-button:focus {
 	box-shadow: none;
+}
+
+
+
+&:before {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.add-to-basket-button {
+    --width: 100px;
+	clip-path: polygon(85% 0, 100% 31%, 100% 100%, 86% 100%, 86% 91%, 65% 91%, 65% 100%, 13% 100%, 0 71%, 0 0);
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 20px;
+    /* background: rgba(33, 103, 163, 0.31); */
+    background: #193d6b;
+
+    &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 20%;
+        height: 100%;
+        background: #FFFFFF;
+        filter: blur(0px);
+        transition: 0.7s;
+        transform: skewX(35deg) translateX(calc(var(--width) + 20%));
+		top: 0;
+		left: 45px;
+    }
+
+
+    &:hover {
+
+        &:before {
+            transform: skewX(35deg) translateX(calc(var(--width) * -1 - 20%))
+        }
+    }
+
+    &>* {
+        opacity: 0.8;
+    }
+
+    & * {
+        box-sizing: border-box;
+        transition: 300ms;
+    }
 }
