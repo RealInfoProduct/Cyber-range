@@ -585,6 +585,7 @@ color: #FFF;
     color: #00FFFA;
     font-family: 'Chakra Petch';
 	font-weight: 600;
+	text-shadow: #00FFFA 0px 0 5px;
 }
 
 .btn-filter {
@@ -595,8 +596,23 @@ color: #FFF;
     letter-spacing: 0.4px;
     background: #133256;
     color: #FFF;
-    padding: 5px 50px;
-    border-radius: 5px;
+    padding: 5px 40px;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+	
+}
+.btn-filter-bg{
+	border: 1px solid #133256;
+    font-size: 16px;
+    font-family: 'Chakra Petch';
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    background: rgba(0, 255, 250, 0.20);;
+    color: #FFF;
+    padding: 8px 43px;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 82% 100%, 80% 93%, 68% 94%, 66% 100%, 13% 100%, 0 71%, 0 0);
+	position: absolute;
+    left: -3px;
+    top: -3px;
 }
 
 .repo-input {
@@ -617,6 +633,8 @@ color: #FFF;
     margin: 20px 0px !important;
     padding: 0;
     width: 340px;
+	background: #133359;
+    border: 2px solid rgba(0, 255, 250, 0.30)
 }
 
 .accordion {
@@ -680,6 +698,7 @@ color: #FFF;
 	align-items: center;
 }
 
+
 .accordion-body .user-rating-star {
     line-height: 40px;
 }
@@ -718,20 +737,37 @@ color: #FFF;
 
 .filters .btn-done {
 
-    color: #FFF;
-    background: #1C2331;
-    border-radius: 5px;
-    padding: 8px 36px;
-    border: none;
-    font-family: Chakra Petch;
+	border: 1px solid #133256;
+    font-size: 16px;
+    font-family: 'Chakra Petch';
     font-weight: 600;
     letter-spacing: 0.4px;
+    background: #133256;
+    color: #FFF;
+    padding: 5px 40px;
+    clip-path: polygon(85% 0, 100% 31%, 100% 100%, 84% 100%, 84% 93%, 66% 93%, 66% 100%, 13% 100%, 0 71%, 0 0);
+	position: relative;
+    z-index: 10;
 
+}
+
+.btn-done-bg{
+	border: 1px solid #133256;
+	font-size: 16px;
+	font-family: 'Chakra Petch';
+	font-weight: 600;
+	letter-spacing: 0.4px;
+	background: rgba(0, 255, 250, 0.20);;
+	color: #FFF;
+	padding: 8px 43px;
+	clip-path: polygon(85% 0, 100% 31%, 100% 100%, 82% 100%, 80% 93%, 68% 94%, 66% 100%, 13% 100%, 0 71%, 0 0);
+	position: absolute;
+	right: 19px;
 }
 
 .filters-title {
 	background: #133256;
-    border-bottom: 3px solid #3E3E3E;
+    border-bottom: 2px solid rgba(0, 255, 250, 0.30);
     padding: 16px 25px;
 	display: flex;
     justify-content: space-between;
@@ -789,8 +825,30 @@ color: #FFF;
     .search_exercises .repo-input {
         width: 190px;
     }
+
+	.btn-filter-bg{
+		padding: 8px 23px;
+	}
 }
 
+@media only screen and (max-width: 450px) {
+
+	.exercises-repo {
+		flex-direction: column;
+	}
+
+	.search_exercises {
+		padding: 20px 0;
+	}
+
+	.filter-by {
+		flex-direction: column;
+	}
+
+	.user-rate {
+		margin-top: 10px;
+	}
+}
 .searchinput{
 	padding-left: 35px;
 }
@@ -942,4 +1000,10 @@ color: #FFF;
         box-sizing: border-box;
         transition: 300ms;
     }
+}
+
+.close-icon-filter{
+	
+    padding-left: 10px;
+
 }

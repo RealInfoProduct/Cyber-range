@@ -175,6 +175,7 @@
 				</div>
 				<input type="text" (keyup)="onKeyUpEvent(exefilterfrm.value)" (keyup.enter)="search(exefilterfrm.value);" class="form-control fortextbox repo-input searchinput" id="search" name="search" value="" placeholder="Search Exercise"  formControlName="search" placement="top" ngbTooltip="Please Enter Exercise Name & Press Enter"> 					
 				<div class="dropdown">
+					<button class="btn-filter-bg">Filter</button>
 					<button class="btn-filter" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 						<div class="filters-title" (click)="$event.stopPropagation()">
@@ -194,8 +195,8 @@
 									data-bs-parent="#accordionExample">
 									<div class="accordion-body">
 										<div class="user-rating-star">
-											<div class="form-check" *ngFor="let item of userRatingArr; let i = index" (change)="userRatingChange($event,item)">
-												<input class="form-check-input rating-radio" checked type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+											<div class="form-check" *ngFor="let item of userRatingArr; let i = index" (change)="userRatingChange(item ,false)">
+												<input class="form-check-input rating-radio" type="radio" name="flexRadioDefault" checked id="flexRadioDefault1">
 												<label class="form-check-label rating-label" for="flexRadioDefault1">
 												  {{item.value}} star rating
 												</label>
@@ -218,14 +219,14 @@
 								</h2>
 								<div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
 									data-bs-parent="#accordionExample">
-									<div class="accordion-body">
+									<div class="accordion-body"> 
 										<div *ngFor="let tm of teamingList; let i = index">
 											<label class="point-icon" for="teaming-{{i}}">
-												<input (change)="onChange(teamingList[i], $event.target.checked)" type="checkbox" class=""
-													id="teaming-{{i}}" name="teaming[]" value="{{teamingList[i]}}">
+												<input (change)="onChange(teamingList[i].colorName, $event.target.checked)" type="checkbox" class=""
+													id="teaming-{{i}}" name="teaming[]" value="{{teamingList[i].colorName}}" [checked]="teamingList[i].isChecked">
 												<span class="sidec sp-teaming-{{i}}"><fa-icon [icon]="faCircle"
-													[ngStyle]="{'color': teamingList[i] }" class="{{teamingList[i]}}"></fa-icon>
-													{{teamingList[i]}}</span>
+													[ngStyle]="{'color': teamingList[i].colorName }" class="{{teamingList[i].colorName}}"></fa-icon>
+													{{teamingList[i].colorName}}</span>
 											</label>
 											<br />
 										</div>
@@ -245,10 +246,10 @@
 									<div class="accordion-body">
 										<div *ngFor="let dfty of difficultyList; let i = index">
 											<label class="point-icon" for="difficulty-{{i}}">
-												<input (change)="onDiffChange(difficultyList[i], $event.target.checked)" type="checkbox"
-													class="" id="difficulty-{{i}}" name="difficulty[]" value="{{difficultyList[i]}}">
+												<input (change)="onDiffChange(difficultyList[i].difficultyName, $event.target.checked)" type="checkbox"
+													class="" id="difficulty-{{i}}" name="difficulty[]" value="{{difficultyList[i].difficultyName}}" [checked]="difficultyList[i].isChecked">
 												<span class="sidec sp-difficulty-{{i}}"><fa-icon [icon]="faCircle"
-														class="{{difficultyClass[i]}}"></fa-icon> {{difficultyList[i]}}</span>
+														class="{{difficultyClass[i]}}"></fa-icon> {{difficultyList[i].difficultyName}}</span>
 											</label>
 											<br />
 										</div>
@@ -269,7 +270,7 @@
 										<div *ngFor="let et of exe_type; let i = index">
 											<label class="point-icon" for="exe-type-{{i}}">
 												<input (change)="onExTypeChange($event.target.value)" type="radio" class="form-check-input" id="exe-type-{{i}}"
-													name="exe_type[]" value="{{i+1}}">
+													name="exe_type[]" value="{{i+1}}" [(ngModel)]="exe_val" [ngModelOptions]="{standalone: true}">
 												<span class="sidec sp-exe-type-{{i}}">{{exe_type[i]}}</span>
 											</label>
 											<br />
@@ -281,6 +282,7 @@
 						<div class="filters">
 							<span class="clear-btn" (click)="resetForm();$event.stopPropagation()">Clear all filters</span>
 							<button class="btn-done">Done</button>
+							<button class="btn-done-bg">Done</button>
 						</div>
    
 						<!-- <div>		
@@ -347,13 +349,20 @@
 			<div class="user-rate">
 				<span>User Rating:</span>
 				<p>&nbsp;{{maxValue}} star rating</p>
+				<div class="close-icon-filter">
+					<!-- (click)="userRatingChange(maxValue, true )" -->
+					<img src="../../../assets/images/home/closeicon.svg" alt="">
+				</div>
 			</div>
 			<div class="user-rate ml-4" *ngIf="exefilterfrm.value.teaming.length">
 				<span>Teaming:</span>
 				<p>&nbsp; <ng-container *ngFor="let items of exefilterfrm.value.teaming">
-					<fa-icon [icon]="faCircle"  [ngStyle]="{'color': items }" ></fa-icon>
+					<fa-icon [icon]="faCircle"  [ngStyle]="{'color': items }"  ></fa-icon>
 					{{items}}
 					&nbsp;</ng-container></p>
+					<div class="close-icon-filter" (click)="onChange( exefilterfrm.value.teaming[0], false)">
+						<img src="../../../assets/images/home/closeicon.svg" alt="">
+					</div>
 			</div>
 			<div class="user-rate ml-4" *ngIf="exefilterfrm.value.difficulty.length">
 				<span>Diffculty Level:</span>
@@ -361,10 +370,16 @@
 					<fa-icon [icon]="faCircle" class="{{items}}"></fa-icon>
 					{{items}}
 					&nbsp;</ng-container></p>
+					<div class="close-icon-filter" (click)="onDiffChange(difficultyList[0].difficultyName, false)">
+						<img src="../../../assets/images/home/closeicon.svg" alt="">
+					</div>
 			</div>
 			<div class="user-rate ml-4" *ngIf="exe_val">
 				<span>Exercise Type:</span>
 				<p>&nbsp;{{exe_val == '1' ? 'Instructor-Led' : 'Self-Paced'}}</p>
+				<div class="close-icon-filter" (click)="onExTypeChange(exe_val == '1' ? 'Instructor-Led' : 'Self-Paced', true)">
+					<img src="../../../assets/images/home/closeicon.svg" alt="">
+				</div>
 			</div>
 		</div>
 		<div class="row" [formGroup]="exefilterfrm" >
@@ -432,7 +447,6 @@
 			<div class="col-lg-12 col-md-12">
 				<div class="minheight800">
 					<div class="row">
-		
 						<div *ngFor="let ex of exerciseData; let i = index" class="col-lg-3 col-md-6 mainDiv" >					
 							<div class=" exercise-bgwhite wow animate__animated animate__slideInUp " [ngStyle]="{'animation-duration': ex.duration }">
 								<div class="ex_relative">
@@ -452,7 +466,8 @@
 											</div>
 											<div class="card-rating-user">
 												<span>
-													<fa-icon [icon]="faUserCircle" placement="top"  class="usercircle mr-1"></fa-icon>
+													<!-- <fa-icon [icon]="faUserCircle" placement="top"  class="usercircle mr-1"></fa-icon> -->
+													<img src="../../../assets/images/home/usericon.svg" style="padding-right: 5px;" alt="">
 													<span placement="top" ngbTooltip="Running Subscribers: {{ex.total_running}}">{{ex.total_running}}/</span>
 													<span placement="top" ngbTooltip="Total Subscribers: {{ex.total_exercise}}" class="mr-2">{{ex.total_exercise}}</span> 
 												</span> 

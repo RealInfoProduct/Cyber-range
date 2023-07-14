@@ -44,12 +44,27 @@ export class ExerciserepositoryComponent implements OnInit {
 	faMoneyBillWave = faMoneyBillWave;
 	faUserCircle = faUserCircle;
 	subscription: Subscription;
+	selectedExType = ''
 
 	
 	//store teaming
 	search_keyword:string = '';
 	teamingList = [];
-	difficultyList = ['Low','Medium','High'];
+	// difficultyList = ['Low','Medium','High'];
+	difficultyList = [ 
+		{
+			difficultyName : "Low",
+			isChecked: false
+		},
+		{
+			difficultyName : "Medium",
+			isChecked: false
+		},
+		{
+			difficultyName : "High",
+			isChecked: false
+		}
+	];
 	difficultyClass = ['lowc','mediumc','highc'];
 	exe_type = ['Instructor-Led','Self-Paced'];
 	exe_val:string = '';
@@ -104,6 +119,7 @@ export class ExerciserepositoryComponent implements OnInit {
 			checked: true
 		}
 	]
+	userRatingdefalt : any
 	toggleDisplay() {
 		this.isShow = !this.isShow;
 		if(this.toggletxt =='Show Filter'){
@@ -144,7 +160,24 @@ export class ExerciserepositoryComponent implements OnInit {
 		}
         //Here get teaming list
 		this.BackenddbService.getTeamingList().subscribe((data:any) => {
-			this.teamingList = Array.from(Object.keys(data), k=>data[k]);
+			// this.teamingList = Array.from(Object.keys(data), k=>data[k]);
+			// const dataArray = this.teamingList
+			// dataArray.map((ele :any) =>  ele = {colorName : ele, isChecked : false} )
+			// console.log(dataArray ,"vc=========");
+
+			const inputObject = data
+			const outputArray = [];
+			  for (const key in inputObject) {
+				if (Object.hasOwnProperty.call(inputObject, key)) {
+				  outputArray.push({
+					colorName: inputObject[key],
+					isChecked: false
+				  });
+				}
+			  }
+			  outputArray.pop(); // Remove the last element since it doesn't exist in the desired output
+			  this.teamingList = outputArray
+			  
 		});	
 
 		//Here get news	
@@ -246,7 +279,9 @@ export class ExerciserepositoryComponent implements OnInit {
 	// on teaming change
 	onChange(team:string, isChecked: boolean)
 	{
-    	const teamFormArray = <FormArray>this.exefilterfrm.controls.teaming;
+ 		const index = this.teamingList.findIndex(id => id.colorName === team)
+ 		this.teamingList[index].isChecked = !this.teamingList[index].isChecked
+		const teamFormArray = <FormArray>this.exefilterfrm.controls.teaming;
     	if (isChecked) {
 			teamFormArray.push(new FormControl(team));
 		} else {
@@ -254,13 +289,15 @@ export class ExerciserepositoryComponent implements OnInit {
 		  teamFormArray.removeAt(index);
 		}
 		this.exerciseData = [];
-		this.start_limit = 0;
+		this.start_limit = 0;	
 		this.loadExerciseRepository();
 	  }
 
 	// on difficulty level change
 	  onDiffChange(diffy:string, isChecked: boolean)
 	  {
+		const index = this.difficultyList.findIndex(id => id.difficultyName === diffy)
+ 		this.difficultyList[index].isChecked = !this.difficultyList[index].isChecked
 		const diffyFormArray = <FormArray>this.exefilterfrm.controls.difficulty;
 		if (isChecked) {
 			diffyFormArray.push(new FormControl(diffy));
@@ -272,14 +309,17 @@ export class ExerciserepositoryComponent implements OnInit {
 		this.start_limit = 0;
 		this.loadExerciseRepository();
 	  }
-	  onExTypeChange(diffy:string)
-	  {
-		debugger
-		this.exe_val = diffy
+
+	onExTypeChange(diffy: string, isCloseClicked?: boolean) {
+		if (isCloseClicked) {
+			this.exe_val = ''
+		}
+		console.log("exe_val========>",this.exe_val);
+		
 		this.exerciseData = [];
 		this.start_limit = 0;
 		this.loadExerciseRepository();
-	  }
+	}
 
 	  
 
@@ -351,8 +391,13 @@ export class ExerciserepositoryComponent implements OnInit {
 		this.isFilterOption = !this.isFilterOption
 	}
 
-	userRatingChange(event,item){
-		this.maxValue = item.value
+	userRatingChange(item :any, close ?: any){
+		if(close){
+			var index = this.userRatingArr[4]
+ 		// this.userRatingArr[4].checked = !this.userRatingArr[4].checked
+
+		}
+		this.maxValue = close == false ? item.value : index.value
 		this.exerciseData = [];
 		this.start_limit = 0;
 		this.loadExerciseRepository();
