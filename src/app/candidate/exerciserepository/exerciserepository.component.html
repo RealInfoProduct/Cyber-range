@@ -196,7 +196,7 @@
 									<div class="accordion-body">
 										<div class="user-rating-star">
 											<div class="form-check" *ngFor="let item of userRatingArr; let i = index" (change)="userRatingChange(item ,false)">
-												<input class="form-check-input rating-radio" type="radio" name="flexRadioDefault" checked id="flexRadioDefault1">
+												<input class="form-check-input rating-radio" type="radio" name="flexRadioDefault" [checked]="item.checked" id="flexRadioDefault1">
 												<label class="form-check-label rating-label" for="flexRadioDefault1">
 												  {{item.value}} star rating
 												</label>
@@ -349,8 +349,7 @@
 			<div class="user-rate">
 				<span>User Rating:</span>
 				<p>&nbsp;{{maxValue}} star rating</p>
-				<div class="close-icon-filter">
-					<!-- (click)="userRatingChange(maxValue, true )" -->
+				<div class="close-icon-filter" (click)="userRatingChange(maxValue, true )">
 					<img src="../../../assets/images/home/closeicon.svg" alt="">
 				</div>
 			</div>

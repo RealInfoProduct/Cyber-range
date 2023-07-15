@@ -119,7 +119,6 @@ export class ExerciserepositoryComponent implements OnInit {
 			checked: true
 		}
 	]
-	userRatingdefalt : any
 	toggleDisplay() {
 		this.isShow = !this.isShow;
 		if(this.toggletxt =='Show Filter'){
@@ -392,12 +391,16 @@ export class ExerciserepositoryComponent implements OnInit {
 	}
 
 	userRatingChange(item :any, close ?: any){
-		if(close){
-			var index = this.userRatingArr[4]
- 		// this.userRatingArr[4].checked = !this.userRatingArr[4].checked
-
-		}
-		this.maxValue = close == false ? item.value : index.value
+		this.userRatingArr.forEach((element, index) => {
+			if (element.value === item.value) {
+				element.checked = true
+			} else if (close && index == 4) {
+				element.checked = true
+			} else {
+				element.checked = false
+			}
+		})
+		this.maxValue = close == false ? item.value : this.userRatingArr[4].value
 		this.exerciseData = [];
 		this.start_limit = 0;
 		this.loadExerciseRepository();
