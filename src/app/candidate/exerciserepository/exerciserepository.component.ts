@@ -185,8 +185,6 @@ export class ExerciserepositoryComponent implements OnInit {
 			res => {
 				this.newsList = Array.from(Object.keys(res), k=>res[k]);
 			});
-
-			console.log(this.exe_type);
 	}
 	
 	ngOnInit(): void {
